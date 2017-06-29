@@ -1,0 +1,309 @@
+        {
+        "wordgroups": [
+        {
+
+        "name" : "Default Word Group",
+        "groupid" : "X@#%^:>?",
+        "key" : ")(*&$%3387::",
+        "words" : [
+        {
+        "prefix": "EGG",
+        "link": "CUP",
+        "suffix": "CAKE",
+        "level": 0 
+        },
+        {
+        "prefix": "FULL",
+        "link": "STOP",
+        "suffix": "LIGHT",
+        "level": 0
+        },
+        {
+        "prefix": "PASS",
+        "link": "BOOK",
+        "suffix": "WORM",
+        "level": 0
+        },
+        {
+        "prefix": "FULL",
+        "link": "MOON",
+        "suffix": "LIGHT",
+        "level": 0
+        },
+        {
+        "prefix": "SUN",
+        "link": "LIGHT",
+        "suffix": "HOUSE",
+        "level": 0
+        },
+        {
+        "prefix": "WEDDING",
+        "link": "RING",
+        "suffix": "ROAD",
+        "level": 0
+        },
+        {
+        "prefix": "LEFT",
+        "link": "WING",
+        "suffix": "SPAN",
+        "level": 0
+        },
+        {
+        "prefix": "RIGHT",
+        "link": "BACK",
+        "suffix": "YARD",
+        "level": 0
+        },
+        {
+        "prefix": "BRAVE",
+        "link": "HEART",
+        "suffix": "BEAT",
+        "level": 0
+        },
+        {
+        "prefix": "FIRE",
+        "link": "MAN",
+        "suffix": "HUNT",
+        "level": 0
+        },
+        {
+        "prefix": "FREE",
+        "link": "FALL",
+        "suffix": "DOWN",
+        "level": 0
+        },
+        {
+        "prefix": "BACK",
+        "link": "ROAD",
+        "suffix": "RAGE",
+        "level": 0
+        },
+        {
+        "prefix": "SUGAR",
+        "link": "PLUM",
+        "suffix": "CAKE",
+        "level": 0
+        },
+        {
+        "prefix": "FIRST",
+        "link": "LIGHT",
+        "suffix": "SHIP",
+        "level": 0
+        },
+        {
+        "prefix": "AWAY",
+        "link": "DAY",
+        "suffix": "BREAK",
+        "level": 0
+        },
+        {
+        "prefix": "GINGER",
+        "link": "BREAD",
+        "suffix": "BASKET",
+        "level": 0
+        },
+        {
+        "prefix": "SUMMER",
+        "link": "FRUIT",
+        "suffix": "COCKTAIL",
+        "level": 0
+        },
+        {
+        "prefix": "PALM",
+        "link": "TREE",
+        "suffix": "NUT",
+        "level": 0
+        },
+        {
+        "prefix": "SWEET",
+        "link": "CORN",
+        "suffix": "BEEF",
+        "level": 0
+        },
+        {
+        "prefix": "BEST",
+        "link": "FRIEND",
+        "suffix": "SHIP",
+        "level": 0
+        },
+        {
+        "prefix": "HIP",
+        "link": "HOP",
+        "suffix": "SCOTCH",
+        "level": 0
+        }
+        ,
+        {
+        "prefix": "BUTTER",
+        "link": "BALL",
+        "suffix": "BEARING",
+        "level": 0
+        }
+        ,
+        {
+        "prefix": "DAY",
+        "link": "BED",
+        "suffix": "ROOM",
+        "level": 0
+        },
+        {
+        "prefix": "BALL",
+        "link": "BOY",
+        "suffix": "HOOD",
+        "level": 0
+        },
+        {
+        "prefix": "HORSE",
+        "link": "RIDING",
+        "suffix": "BOOT",
+        "level": 0
+        },
+        {
+        "prefix": "GHOST",
+        "link": "STORY",
+        "suffix": "BOARD",
+        "level": 0
+        },
+        {
+        "prefix": "GIRL",
+        "link": "FRIEND",
+        "suffix": "SHIP",
+        "level": 0
+        },
+        {
+        "prefix": "APPLE",
+        "link": "PIE",
+        "suffix": "PLATE",
+        "level": 0
+        },
+        {
+        "prefix": "QUICK",
+        "link": "STEP",
+        "suffix": "SON",
+        "level": 0
+        },
+        {
+        "prefix": "LAST",
+        "link": "DANCE",
+        "suffix": "STUDIO",
+        "level": 0
+        },
+        {
+        "prefix": "BED",
+        "link": "BUG",
+        "suffix": "BEAR",
+        "level": 0
+        },
+        {
+        "prefix": "IRON",
+        "link": "BRIDGE",
+        "suffix": "TOLL",
+        "level": 0
+        },
+        {
+        "prefix": "RED",
+        "link": "EARTH",
+        "suffix": "WORKS",
+        "level": 0
+        },
+        {
+        "prefix": "DOVE",
+        "link": "TAIL",
+        "suffix": "COAT",
+        "level": 0
+        },
+        {
+        "prefix": "BLUE",
+        "link": "INK",
+        "suffix": "SPOT",
+        "level": 0
+        },
+        {
+        "prefix": "DAY",
+        "link": "JOB",
+        "suffix": "LOT",
+        "level": 0
+        },
+        {
+        "prefix": "BUS",
+        "link": "RIDE",
+        "suffix": "SHARE",
+        "level": 0
+        },
+        {
+        "prefix": "GUMMY",
+        "link": "BEAR",
+        "suffix": "HUG",
+        "level": 0
+        },
+        {
+        "prefix": "JELLY",
+        "link": "BEAN",
+        "suffix": "SOUP",
+        "level": 0
+        },
+        {
+        "prefix": "TOM",
+        "link": "THUMB",
+        "suffix": "NAIL",
+        "level": 0
+        },
+        {
+        "prefix": "NORTH",
+        "link": "POLE",
+        "suffix": "VAULT",
+        "level": 0
+        },
+        {
+        "prefix": "QUICK",
+        "link": "SILVER",
+        "suffix": "SMITH",
+        "level": 0
+        },
+        {
+        "prefix": "FAST",
+        "link": "FORWARD",
+        "suffix": "GROUP",
+        "level": 0
+        },
+        {
+        "prefix": "MAIN",
+        "link": "FLOOR",
+        "suffix": "COVER",
+        "level": 0
+        },
+        {
+        "prefix": "CAR",
+        "link": "PET",
+        "suffix": "SHOP",
+        "level": 0
+        },
+        {
+        "prefix": "SUMMER",
+        "link": "TIME",
+        "suffix": "SHARE",
+        "level": 0
+        },
+        {
+        "prefix": "SHOUT",
+        "link": "OUT",
+        "suffix": "LAST",
+        "level": 0
+        },
+        {
+        "prefix": "MORE",
+        "link": "TIME",
+        "suffix": "LESS",
+        "level": 0
+        },
+        {
+        "prefix": "PIXIE",
+        "link": "DUST",
+        "suffix": "BIN",
+        "level": 0
+        }
+        ]
+        }
+        ]
+        }
+

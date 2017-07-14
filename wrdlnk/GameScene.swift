@@ -9,18 +9,22 @@
 import SpriteKit
 import GameplayKit
 
-
 class GameScene: BaseScene {
     var entities = [GKEntity()]
     var graphs = [String:GKGraph]()
     var wordList = WordList()
+    var lastSpriteClick: SKSpriteNode? = nil
     
     var counters = VowelCount()
+    
+    var statData = StatData()
     
     let nodeMap = [ViewElement.main.rawValue, ViewElement.board.rawValue,
                    ViewElement.control.rawValue, ViewElement.buttons.rawValue]
     
-    var spriteNodeList:[SKSpriteNode] = []
+    var spriteNodeList: [SKSpriteNode] = []
+    
+    var matchList: [String] = []
     
     struct initialize {
         static var doOnce: Bool = false
@@ -32,6 +36,7 @@ class GameScene: BaseScene {
         entities.removeAll()
         graphs.removeAll()
         spriteNodeList.removeAll()
+        matchList.removeAll()
         self.removeFromParent()
         self.view?.presentScene(nil)
     }
@@ -62,7 +67,7 @@ class GameScene: BaseScene {
             setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
             initComplete()
         }
-        
+        wordList.setSelectedRow(row: nil)
     }
     
     override func transitionReloadScene(scene: SKScene) {
@@ -111,11 +116,21 @@ class GameScene: BaseScene {
        
     }
     
+    func checkIfNodeProcessed(location: CGPoint, nodesAtPoint: [SKNode]) -> Bool {
+        for node in nodesAtPoint {
+            let labelNode = node as? SKLabelNode
+            if labelNode?.contains(location) != nil {
+                if (labelNode?.alpha)! < CGFloat(1) { return false }
+            }
+        }
+        return false
+    }
+    
     func getTileMap(location: CGPoint, nodesAtPoint: [SKNode]) -> (tilemap: SKTileMapNode?, name: String?) {
         for node in nodesAtPoint {
             print("node in list: \((node.name)!)")
             let tileMapNode = node as? SKTileMapNode
-            if (tileMapNode?.contains(location)) != nil {
+            if tileMapNode != nil && (tileMapNode?.contains(location)) != nil {
                 print("point found at: \((tileMapNode?.name)!)")
                 return (tileMapNode, (tileMapNode?.name)!)
             }
@@ -137,7 +152,13 @@ class GameScene: BaseScene {
         print("Performance for word link")
         print("Word: \(counters.wordphrase())")
         print("Number of click attempts: \(counters.totalClicks())")
-        print("Accuracy nearer to 1.0 is: \(counters.accuracy())")
+        print("Accuracy nearer to 1.0 is: " + String(format:"%.2f", counters.accuracy()))
+        print("Percentage is: " + String(format:"%.2f", counters.percentage()))
+        while statData.count() > VisibleStateCount {
+            _ = statData.pop()
+        }
+        statData.push(element: Stats(phrase: counters.wordphrase(), accuracy: counters.accuracy(),
+                                    percentage: counters.percentage()))
     }
     
     // MARK: - Gesture recognizer
@@ -157,20 +178,58 @@ class GameScene: BaseScene {
         
         guard let tileSprite = tileMap.getSpriteNode(nodesAtPoint: nodesAtPoint) else { return }
         
-        countClick(tileMap: tileMap)
+        if isSameCellClicked(sprite: tileSprite) { return }
         
-        processTileSprite(sprite: tileSprite)
+        countClick(sprite: tileSprite)
         
-        //refreshTileMap(tileMap: tileMap)
+        processTileSprite(sprite: tileSprite, handler: wordRowSelected(name:))
     }
     
-    func processTileSprite(sprite: SKSpriteNode?) {
+    func isSameCellClicked(sprite: SKSpriteNode) -> Bool {
+        if lastSpriteClick != nil && lastSpriteClick?.name == sprite.name {
+            return true
+        } else {
+            lastSpriteClick = sprite
+        }
+        return false
+    }
+    
+    func wordRowSelected(name: String) {
+        print("word row name is: \(name)")
+        let parts = name.characters.split{$0 == "_"}.map(String.init)
+        let column = Int(parts[parts.count - 1])!
+        print("extract column is: \(column)")
+        wordList.setSelectedRow(row: VowelRow(rawValue: column)!)
+    }
+    
+    func matchListAdd(list: [SKSpriteNode]) {
+        for (index, _) in list.enumerated() {
+            if !(list[index].parent?.name?.hasPrefix("board"))! { continue }
+            if !matchList.contains(list[index].name!) {
+                matchList.append(list[index].name!)
+            }
+        }
+    }
+    
+    func inMatchList(list: [SKSpriteNode]) ->Bool {
+        var count = 0
+        for (index, _) in list.enumerated() {
+            if matchList.contains(list[index].name!) {
+                count += 1
+            }
+        }
+        return count > 0
+    }
+    
+    func processTileSprite(sprite: SKSpriteNode?, handler:(String)->Void) {
         let index = uniqueSpriteList(name: (sprite?.parent?.name)!)
         if index != nil {
             let lastSprite = spriteNodeList.remove(at: index!)
             lastSprite.unhighlight(spriteName: lastSprite.name!)
         }
+        if (inMatchList(list: spriteNodeList + [sprite!])) { return }
         sprite?.highlight(spriteName: (sprite?.name)!)
+        handler((sprite?.name)!)
         spriteNodeList.append(sprite!)
         checkForSpriteMatch()
     }
@@ -186,6 +245,8 @@ class GameScene: BaseScene {
         if spriteNodeList.count > 1 {
             if spriteNodeList.first?.getLabelTextForSprite() == spriteNodeList.last?.getLabelTextForSprite() {
                 print("Match found between tile map character buttons character")
+                if (inMatchList(list: spriteNodeList)) { return }
+                matchListAdd(list: spriteNodeList)
                 counters.clickMatch()
                 unhighlightAll()
                 checkForAllMatches()
@@ -225,9 +286,11 @@ class GameScene: BaseScene {
         }
     }
     
-    func countClick(tileMap: SKTileMapNode) {
-        if (tileMap.name?.contains(boardTileMap))! {
+    func countClick(sprite: SKSpriteNode) {
+        if (sprite.name?.hasPrefix(tileNodeName))!
+            && (sprite.userData?.value(forKeyPath: tileUserDataClickName) as? Bool)!  {
             counters.clickAttempt()
+            print("click count: \(counters.totalClicks())")
         }
     }
     

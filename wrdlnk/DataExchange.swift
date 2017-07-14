@@ -117,9 +117,11 @@ struct Word {
 struct WordList {
     
     fileprivate struct info {
+        static var previous: Int = 0
         static var index: Int = 0
         static var initialize: Bool = false
         static var wordBank: [Word] = []
+        static var selectedRow: VowelRow? = nil
     }
     
     init() {
@@ -184,6 +186,19 @@ extension WordList {
             info.wordBank.append(Word(prefix: "SHOUT", link: "OUT", suffix: "LAST"))
             info.wordBank.append(Word(prefix: "MORE", link: "TIME", suffix: "LESS"))
             info.wordBank.append(Word(prefix: "PIXIE", link: "DUST", suffix: "BIN"))
+            info.wordBank.append(Word(prefix: "WET", link: "RAG", suffix: "DOLL"))
+            info.wordBank.append(Word(prefix: "START", link: "UP", suffix: "STAIRS"))
+            info.wordBank.append(Word(prefix: "UNDER", link: "ARM", suffix: "WRESTLE"))
+            info.wordBank.append(Word(prefix: "TWO", link: "FOR", suffix: "TEA"))
+            info.wordBank.append(Word(prefix: "GRAND", link: "MASTER", suffix: "MIND"))
+            info.wordBank.append(Word(prefix: "RED", link: "BLOOD", suffix: "BANK"))
+            info.wordBank.append(Word(prefix: "EURO", link: "DOLLAR", suffix: "BILL"))
+            info.wordBank.append(Word(prefix: "DRIED", link: "DATE", suffix: "PALM"))
+            info.wordBank.append(Word(prefix: "RIPE", link: "FIG", suffix: "TREE"))
+            info.wordBank.append(Word(prefix: "GREEN", link: "COMMON", suffix: "SENSE"))
+            info.wordBank.append(Word(prefix: "FRONT", link: "TOOTH", suffix: "PASTE"))
+            info.wordBank.append(Word(prefix: "OPEN", link: "MOUTH", suffix: "WASH"))
+            info.wordBank.append(Word(prefix: "CARD", link: "BOARD", suffix: "ROOM"))
         }
     }
     
@@ -193,6 +208,7 @@ extension WordList {
             info.initialize = true
         }
         else {
+            info.previous = info.index
             info.index = info.index + 1
             info.index = info.index % info.wordBank.count
         }
@@ -204,4 +220,15 @@ extension WordList {
         return isEmpty() ? nil : info.wordBank[info.index]
     }
     
+    mutating func setSelectedRow(row: VowelRow?) {
+        info.selectedRow = row
+    }
+    
+    func getSelectedRow() -> VowelRow? {
+        return info.selectedRow
+    }
+    
+    mutating func alignIndex() {
+        info.index = info.previous
+    }
  }

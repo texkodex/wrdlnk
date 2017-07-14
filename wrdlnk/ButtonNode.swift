@@ -49,10 +49,10 @@ class ButtonNode: SKSpriteNode {
             guard oldValue != isHighlighted else { return }
             removeAllActions()
             
-            let newScale: CGFloat = isHighlighted ? 0.99 : 1.01
+            let newScale: CGFloat = isHighlighted ? CGFloat(0.99) : CGFloat(1.01)
             let scaleAction = SKAction.scale(by: newScale, duration: 0.15)
             
-            let newColorBlendFactor: CGFloat = isHighlighted ? 1.0 : 0.0
+            let newColorBlendFactor: CGFloat = isHighlighted ? CGFloat(1.0) : CGFloat(0.0)
             let colorBlendAction = SKAction.colorize(withColorBlendFactor: newColorBlendFactor, duration: 0.15)
             
             run(SKAction.group([scaleAction, colorBlendAction]))

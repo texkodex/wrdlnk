@@ -27,11 +27,11 @@ extension SKScene {
         
         switch destination {
         case .GameScene:
-            scene = GameStatusScene(fileNamed: "GameScene")!
+            scene = GameScene(fileNamed: "GameScene")!
         case .GameStatus:
             scene = GameStatusScene(fileNamed: "GameStatusScene")!
         case .Definition:
-            scene = GameStatusScene(fileNamed: "DefinitionScene")!
+            scene = DefinitionScene(fileNamed: "DefinitionScene")!
         }
         
         // Adjust scene size to view bounds
@@ -56,6 +56,13 @@ extension SKScene {
                             let currentNode = mainChildElement as! SKTileMapNode
                             completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
                         }
+                    }
+                    
+                    if sceneSubElement.children.count == 0 {
+                        let currentElement = "\((sceneSubElement.name!))"
+                        print("child element \(currentElement)")
+                        let currentNode = sceneSubElement as! SKTileMapNode
+                        completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
                     }
                 }
             }
@@ -117,11 +124,12 @@ extension SKTileMapNode {
             for row in 0..<numberOfRows {
                 if hideEmptyRowTile(row: row) { continue }
                 let tileNode = createSpriteNode(tileElement: tileElement, width: tileWidthLess2, height: tileHeightLess2)
-                tileNode.name = "tileNode_\(col)_\(row)"
+                tileNode.name = nodeName(node: self, col: col, row: row)
+                tileNode.userData = [tileUserDataClickName : false]
                 tileNode.size = CGSize(width: tileWidthLess2, height: tileHeightLess2)
                 let point = self.centerOfTile(atColumn: col, row: row)
                 tileNode.position = point
-                tileNode.alpha = 0
+                tileNode.alpha = CGFloat(0.0)
                 self.addChild(tileNode)
             }
         }
@@ -129,9 +137,9 @@ extension SKTileMapNode {
     
     func getLabelNode(nodesAtPoint: [SKNode]) -> SKLabelNode? {
         for mapNode in nodesAtPoint {
-            if (mapNode.name?.contains("tileNode_"))! {
+            if (mapNode.name?.hasPrefix(tileNodeName))! {
                 for child in mapNode.children {
-                    if (child.name?.contains("letter_"))! {
+                    if (child.name?.hasPrefix(letterNodeName))! {
                         return child as? SKLabelNode
                     }
                 }
@@ -142,7 +150,7 @@ extension SKTileMapNode {
     
     func getSpriteNode(nodesAtPoint: [SKNode]) -> SKSpriteNode? {
         for mapNode in nodesAtPoint {
-            if (mapNode.name?.contains("tileNode_"))! {
+            if (mapNode.name?.hasPrefix(tileNodeName))! {
                  return mapNode as? SKSpriteNode
             }
         }
@@ -152,7 +160,7 @@ extension SKTileMapNode {
     func  isFreeVowelCell(text: Character, visible: CGFloat) -> Bool {
         
         if VowelCharacter(rawValue: text)?.rawValue == text
-            && visible < 0.1 {
+            && visible < CGFloat(0.1) {
             return true
         }
       
@@ -161,9 +169,9 @@ extension SKTileMapNode {
     
     func vowelLabelNode(nodesAtPoint: [SKNode]) -> Bool? {
         for mapNode in nodesAtPoint {
-            if (mapNode.name?.contains("tileNode_"))! {
+            if (mapNode.name?.hasPrefix(tileNodeName))! {
                 for child in mapNode.children {
-                    if (child.name?.contains("letter_"))! {
+                    if (child.name?.hasPrefix(letterNodeName))! {
                         let labelChar = (child as! SKLabelNode).text?.characters.first
                         let visible = (child as! SKLabelNode).alpha
                         return isFreeVowelCell(text: labelChar!, visible: visible)
@@ -184,17 +192,20 @@ extension SKTileMapNode {
     
     // To place words in center of screen
     func placeWord(word: String, row: Int, adjust: Bool = false) {
-        
         for (rawIndex, letter) in word.characters.enumerated() {
             let index = rawIndex + offsetInRow(word: word, adjust: adjust)
-            let tileNode = self.childNode(withName: "tileNode_\(index)_\(row)") as! SKSpriteNode
+            let tileNode = self.childNode(withName: nodeName(node: self, col: index, row: row)) as! SKSpriteNode
             tileNode.color = VowelCharacter(rawValue: letter)?.rawValue == letter ? yellowTile : blueTile
-            tileNode.alpha = 1
+            if tileNode.color == yellowTile {
+                tileNode.userData = [tileUserDataClickName : true]
+            }
+            tileNode.alpha = CGFloat(1.0)
+            tileNode.removeAllChildren()
             let label = SKLabelNode(fontNamed: "Arial")
             label.text = "\(letter)"
-            label.name = "letter_\(index)_\(row)"
+            label.name = String(format:letterNodeColRow, index, row)
             label.fontColor = VowelCharacter(rawValue: letter)?.rawValue == letter ? UIColor.red : UIColor.white
-            label.alpha = VowelCharacter(rawValue: letter)?.rawValue == letter ? 0 : 1
+            label.alpha = VowelCharacter(rawValue: letter)?.rawValue == letter ? CGFloat(0.0) : CGFloat(1.0)
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             tileNode.addChild(label)
@@ -212,7 +223,7 @@ extension SKTileMapNode {
         let texture = SKTexture(imageNamed: "ControlPad")
         let sprite = SKSpriteNode()
         sprite.name = "highlight_\((spriteNode.name)!)"
-        sprite.alpha = 0
+        sprite.alpha = CGFloat(0.0)
         sprite.size = CGSize(width: CGFloat(tileWidth), height: CGFloat(tileHeight))
         sprite.run(SKAction.setTexture(texture))
         spriteNode.addChild(sprite)
@@ -252,7 +263,7 @@ extension SKTileMapNode {
     func clearWords() {
         for tile in self.children {
             for child in tile.children {
-                if (child.name?.contains("letter_"))! {
+                if (child.name?.hasPrefix(letterNodeName))! {
                     let labelNode = child as! SKLabelNode
                     labelNode.text = ""
                 }
@@ -260,26 +271,35 @@ extension SKTileMapNode {
         }
     }
     
+    func nodeName(node: SKTileMapNode, col: Int, row: Int) -> String {
+        print("node.name is: \(String(describing: node.name))")
+        print("node.parent?.name is: \(String(describing: node.parent?.name))")
+        let name = ((node.name?.contains(boardTileMap))! ? boardTileMap : buttonsTileMap)
+        return String(format:tileNodeNameColRow, name, col, row)
+    }
+    
     func addButtonLetter() {
         let row = 0
         for index in 0..<VowelCharacter.types.count {
-            let tileNode = self.childNode(withName: "tileNode_\(index)_\(row)") as! SKSpriteNode
-            tileNode.alpha = 1
+            let tileNode = self.childNode(withName: nodeName(node: self, col: index, row: row)) as! SKSpriteNode
+            tileNode.alpha = CGFloat(1.0)
+            tileNode.userData = [tileUserDataClickName : true]
+            tileNode.removeAllChildren()
             let label = SKLabelNode(fontNamed: "Arial")
             label.text = "\(VowelCharacter.types[index].rawValue)"
-            label.name = "letter_\(index)_\(row)"
+            label.name = String(format:letterNodeColRow, index, row)
             label.fontColor = UIColor.red
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             tileNode.addChild(label)
-            addHighlightForSprite(spriteNode: tileNode)
+            prepareHighlightForCharacter(tileNode: tileNode, letter: VowelCharacter.types[index].rawValue)
         }
     }
     
     func unfoundLetters() -> Bool {
         for tile in self.children {
             for child in tile.children {
-                if (child.name?.contains("letter_"))! {
+                if (child.name?.hasPrefix(letterNodeName))! {
                     let labelChar = (child as! SKLabelNode).text?.characters.first
                     let visible = (child as! SKLabelNode).alpha
                     return isFreeVowelCell(text: labelChar!, visible: visible)
@@ -290,13 +310,79 @@ extension SKTileMapNode {
     }
 }
 
+// MARK: - GameStatus
+extension SKTileMapNode {
+    
+    func graphBackground() -> SKShapeNode {
+        let shape = SKShapeNode()
+        shape.path = UIBezierPath(roundedRect: CGRect(x: self.frame.minX, y: self.frame.minY, width: self.frame.width, height: self.frame.height), cornerRadius: self.frame.width / 64).cgPath
+        shape.position = CGPoint(x: self.frame.midX, y: self.frame.midY) // does not do anything?
+        shape.fillColor = greenTile
+        shape.strokeColor = blueTile
+        shape.lineWidth = 3
+        return shape
+    }
+    
+    func graphText(name: String, text: String, position: CGPoint, fontSize: CGFloat = 14) -> SKLabelNode {
+        let label = SKLabelNode(fontNamed: "Arial")
+        label.name = name
+        label.text = "\(text)"
+        label.fontSize = fontSize
+        label.position = position
+        return label
+    }
+    
+    func graphLine(index: Int, accuracy: Float, percentage: Float) -> SKShapeNode {
+        let shape = SKShapeNode()
+        let rowWidth = self.frame.width / CGFloat(numberOfColumns) * 2
+        let xPos = (self.frame.minX + rowWidth) + CGFloat(index) * rowWidth
+        let yPos = self.frame.minY + self.frame.height / CGFloat(numberOfRows)
+        let rowHeight = self.frame.height / CGFloat(numberOfRows)
+        let maxHeight = self.frame.height - rowHeight * 2
+        let xWidth = CGFloat(2)
+        let yHeight = maxHeight * CGFloat(accuracy)
+        let cornerRadius = CGFloat(0)
+        
+        let fillColor = redTile
+        let fillStroke = redTile
+        let lineWidth = CGFloat(3)
+        
+        shape.path = UIBezierPath(roundedRect: CGRect(x: xPos, y: yPos, width: xWidth, height: yHeight),
+                                  cornerRadius: cornerRadius).cgPath
+        shape.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        shape.fillColor = fillColor
+        shape.strokeColor = fillStroke
+        shape.lineWidth = lineWidth
+        let label = graphText(name: "label_\(index)", text: "\(Int(percentage))%", position: CGPoint(x: xPos, y: -120))
+        shape.addChild(label)
+        return shape
+    }
+    
+    func showProgressGraph(stats: StatData) {
+        self.removeAllChildren()
+        let shape = graphBackground()
+        self.addChild(shape)
+        
+        for (index, value) in stats.elements().enumerated() {
+            print("index: \(index), with value: \(value.percentage)")
+            self.addChild(graphLine(index: index, accuracy: value.accuracy, percentage: value.percentage))
+        }
+        
+        let label = graphText(name: "label_graph_title", text: "Most Recent Performance",
+                              position: CGPoint(x: self.frame.midX, y: -150), fontSize: 24)
+        self.addChild(label)
+    }
+ 
+}
+
 extension SKSpriteNode {
+    
     func highlight(spriteName: String) {
         let name = "highlight_\(spriteName)"
         print("Spritename for highlight \(name)")
         for node in self.children {
             if node.name == name {
-                node.alpha = 1
+                node.alpha = CGFloat(1.0)
                 return
             }
         }
@@ -307,7 +393,7 @@ extension SKSpriteNode {
         print("Spritename for unhighlight \(name)")
         for node in self.children {
             if node.name == name {
-                node.alpha = 0
+                node.alpha = CGFloat(0.0)
                 return
             }
         }
@@ -315,7 +401,7 @@ extension SKSpriteNode {
     
     func getLabelFromSprite() -> SKLabelNode? {
         for child in self.children {
-            if (child.name?.contains("letter_"))! {
+            if (child.name?.hasPrefix(letterNodeName))! {
                 return child as? SKLabelNode
             }
         }
@@ -324,14 +410,13 @@ extension SKSpriteNode {
     
     func getLabelTextForSprite() -> Character? {
         for child in self.children {
-            if (child.name?.contains("letter_"))! {
+            if (child.name?.hasPrefix(letterNodeName))! {
                 let label = child as? SKLabelNode
                 return label?.text?.characters.first
             }
         }
         return nil
     }
-
 }
 
 extension SKLabelNode {
@@ -341,26 +426,33 @@ extension SKLabelNode {
     }
     
     func vowelSet() {
-        self.alpha = 1
+        self.alpha = CGFloat(1.0)
     }
     
     func vowelEqual(label: SKLabelNode?) -> Bool {
         return (label!.text != nil && self.text == label!.text) ? true : false
     }
     
-    func setLabelText(element: ViewElement, words: Word) {
+    func setLabelText(element: ViewElement?, words: Word, row: VowelRow?) {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        switch element {
+        
+        guard (row != nil) else { return }
+        
+        switch element! {
         case .prefixMeaning:
-            self.text = words.prefix
+            switch row! {
+            case .prefix:
+                self.text = words.prefix
+                break
+            case .link:
+                self.text = words.link
+                break
+            case .suffix:
+                self.text = words.suffix
+                break
+           
+            }
             break
-        case .linkMeaning:
-            self.text = words.link
-            break
-        case .suffixMeaning:
-            self.text = words.suffix
-            break
-
         default:
             return
         }

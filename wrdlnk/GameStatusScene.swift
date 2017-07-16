@@ -52,6 +52,8 @@ class GameStatusScene: SKScene {
                 node.showProgressGraph(stats: statData)
             }
             wordList.alignIndex()
+            UserDefaults.standard.set(wordList.currentIndex(), forKey: preferenceWordListKey)
+            UserDefaults.standard.synchronize()
             break
         default:
             return

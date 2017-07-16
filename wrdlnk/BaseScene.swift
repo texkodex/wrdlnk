@@ -10,6 +10,14 @@ import UIKit
 import SpriteKit
 
 class BaseScene: SKScene {
+    var backgroundNodeOne: SKNode? {
+        return nil
+    }
+    
+    var backgroundNodeTwo: SKNode? {
+        return nil
+    }
+    
     var buttons = [ButtonNode]()
     
     override func didMove(to view: SKView) {

@@ -17,19 +17,29 @@ enum ButtonIdentifier: String {
     case home = "Home"
     case proceedToNextScene = "ProceedToNextScene"
     case provideMeaning = "ProvideMeaning"
+    case showGraph = "ShowGraph"
     case cancel = "Cancel"
     case moreInfo = "MoreInfo"
     
+    
     static let allButtonIdentifiers: [ButtonIdentifier] = [
-        .home, .proceedToNextScene, .provideMeaning, .cancel, .moreInfo
+        .home, .proceedToNextScene, .provideMeaning, .showGraph, .cancel, .moreInfo
     ]
     
     var selectedTextureName: String? {
         switch self {
+        case .home:
+            return "Home"
+        case .proceedToNextScene:
+            return "ProceedToNextScene"
+        case .provideMeaning:
+            return "questionButton"
+        case .showGraph:
+            return "graphButton"
+        case .cancel:
+            return "Cancel"
         case .moreInfo:
-            return "ButtonMoreInfo"
-        default:
-            return nil
+            return "MoreInfo"
         }
     }
 }
@@ -71,7 +81,7 @@ class ButtonNode: SKSpriteNode {
     var isFocused = false {
         didSet {
             if isFocused {
-                run(SKAction.scale(to: 1.08, duration: 0.20))
+                run(SKAction.scale(to: 1.0, duration: 0.20))
                 
                 focusRing.alpha = 0.0
                 focusRing.isHidden = false
@@ -128,7 +138,7 @@ class ButtonNode: SKSpriteNode {
         }
     }
     
-    // MARK: Responder
+    // MARK:- Responder
     
     /// UIResponder touch handling.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

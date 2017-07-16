@@ -10,8 +10,45 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: BaseScene {
+    
+    // MARK:- Buttons
+    override var backgroundNodeOne: SKNode? {
+        return childNode(withName: meaningNodePath)!
+    }
+    
+    override var backgroundNodeTwo: SKNode? {
+        return childNode(withName: graphNodePath)!
+    }
+    
+    var definitionButton: ButtonNode? {
+        return backgroundNodeOne?.childNode(withName: ButtonIdentifier.provideMeaning.rawValue) as? ButtonNode
+    }
+
+    var graphButton: ButtonNode? {
+        return backgroundNodeTwo?.childNode(withName: ButtonIdentifier.showGraph.rawValue) as? ButtonNode
+    }
+    
+    var definitionOff = false {
+        didSet {
+            let imageName = definitionOff ? "questionInactiveButton" : "questionButton"
+            definitionButton?.selectedTexture = SKTexture(imageNamed: imageName)
+        }
+    }
+    
+    var graphOff = false {
+        didSet {
+            let imageName = graphOff ? "graphInactiveButton" : "graphButton"
+            graphButton?.selectedTexture = SKTexture(imageNamed: imageName)
+    
+            UserDefaults.standard.set(graphOff, forKey: preferenceShowGraphKey)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    // MARK:- Data structures
     var entities = [GKEntity()]
     var graphs = [String:GKGraph]()
+    
     var wordList = WordList()
     var lastSpriteClick: SKSpriteNode? = nil
     
@@ -25,7 +62,7 @@ class GameScene: BaseScene {
     var spriteNodeList: [SKSpriteNode] = []
     
     var matchList: [String] = []
-    
+
     struct initialize {
         static var doOnce: Bool = false
     }
@@ -42,11 +79,25 @@ class GameScene: BaseScene {
     }
     
     override func didMove(to view: SKView) {
+        super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
+        
         let tapBoardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapFrom(recognizer:)))
         tapBoardGestureRecognizer.numberOfTapsRequired = 1
         view.addGestureRecognizer(tapBoardGestureRecognizer)
+     }
     
+    func disableButton(button: ButtonNode?) {
+        button?.alpha = 0.0
+        button?.isUserInteractionEnabled = false
+        button?.focusRing.isHidden = true
+    }
+    
+    func enableButton(button: ButtonNode?) {
+        button?.alpha = 1.0
+        button?.isUserInteractionEnabled = true
+        button?.isSelected = true
+        button?.focusRing.isHidden = false
     }
     
     func readyForInit() {
@@ -62,12 +113,21 @@ class GameScene: BaseScene {
     }
     
     override func sceneDidLoad() {
+        super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
         if testIfInit() {
             setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
             initComplete()
         }
         wordList.setSelectedRow(row: nil)
+        
+        // Enable buttons if data available
+        initializeScreenButtons()
+    }
+    
+    func initializeScreenButtons() {
+        disableButton(button: definitionButton)
+        wordList.currentIndex()! > 0  ? enableButton(button: graphButton) : disableButton(button: graphButton)
     }
     
     override func transitionReloadScene(scene: SKScene) {
@@ -171,6 +231,7 @@ class GameScene: BaseScene {
         
         let recognizorLocation = recognizer.location(in: self.scene?.view)
         let location = self.convertPoint(fromView: recognizorLocation)
+        
         let nodesAtPoint = self.nodes(at: location)
         
         let nodeData = getTileMap(location: location, nodesAtPoint: nodesAtPoint)
@@ -200,6 +261,10 @@ class GameScene: BaseScene {
         let column = Int(parts[parts.count - 1])!
         print("extract column is: \(column)")
         wordList.setSelectedRow(row: VowelRow(rawValue: column)!)
+        
+        if (name.contains(boardTileMap)) {
+            counters.boardClickAttempt()
+        }
     }
     
     func matchListAdd(list: [SKSpriteNode]) {
@@ -232,6 +297,7 @@ class GameScene: BaseScene {
         handler((sprite?.name)!)
         spriteNodeList.append(sprite!)
         checkForSpriteMatch()
+        showDefinitionButton()
     }
     
     func uniqueSpriteList(name: String) -> Int? {
@@ -279,11 +345,23 @@ class GameScene: BaseScene {
 
     func checkForAllMatches() {
         if counters.matchComplete() {
+            playSoundForEvent(soundEvent: .good)
             progressSummary()
+            enableGraphDisplay()
             readyForInit()
             transitionReloadScene(scene: self)
             return
+        } else {
+            playSoundForEvent(soundEvent: .yes)
         }
+    }
+    
+    func enableGraphDisplay() {
+        if !UserDefaults.standard.bool(forKey: preferenceShowGraphKey) {
+            UserDefaults.standard.set(true, forKey: preferenceShowGraphKey)
+        }
+        UserDefaults.standard.set(wordList.currentIndex(), forKey: preferenceWordListKey)
+        UserDefaults.standard.synchronize()
     }
     
     func countClick(sprite: SKSpriteNode) {
@@ -297,6 +375,12 @@ class GameScene: BaseScene {
     func refreshTileMap(tileMap: SKTileMapNode) {
         if counters.matchComplete() {
             reloadTileMap(node: tileMap)
+        }
+    }
+    
+    func showDefinitionButton() {
+        if counters.totalBoardTileClicks() > minClickToSeeDefinition {
+            enableButton(button: definitionButton)
         }
     }
 }

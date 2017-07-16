@@ -125,6 +125,12 @@ struct WordList {
     }
     
     init() {
+        if UserDefaults.standard.keyExist(key: preferenceWordListKey) {
+            let index: Int  = UserDefaults.standard.integer(forKey: preferenceWordListKey)
+            if index > 0 {
+                info.index = index
+            }
+        }
     }
 }
 
@@ -211,6 +217,7 @@ extension WordList {
             info.previous = info.index
             info.index = info.index + 1
             info.index = info.index % info.wordBank.count
+            UserDefaults.standard.set(info.index, forKey: preferenceWordListKey)
         }
         
         return info.wordBank.count > 0 ? info.wordBank[info.index] : nil
@@ -230,5 +237,9 @@ extension WordList {
     
     mutating func alignIndex() {
         info.index = info.previous
+    }
+    
+    func currentIndex() -> Int? {
+        return isEmpty() ? nil : info.index
     }
  }

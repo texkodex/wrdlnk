@@ -17,11 +17,12 @@ extension BaseScene: ButtonNodeResponderType {
     }
     
     func buttonTriggered(button: ButtonNode) {
-        switch button.buttonIdentifier.hashValue {
-            case SceneType.GameStatus.hashValue:
+        print("button.buttonIdentifier!: \(button.buttonIdentifier!)")
+        switch button.buttonIdentifier! {
+            case .showGraph:
                 transitionToScene(destination: SceneType.GameStatus, sendingScene: self)
             break
-            case SceneType.Definition.hashValue:
+            case .provideMeaning:
                 transitionToScene(destination: SceneType.Definition, sendingScene: self)
             break
         default:

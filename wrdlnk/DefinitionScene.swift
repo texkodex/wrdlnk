@@ -30,16 +30,26 @@ class DefinitionScene: SKScene {
     }
     
     override func sceneDidLoad() {
+        super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
         setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
     }
     
-    func checkWord(word: String) -> String {
-        if UIReferenceLibraryViewController.dictionaryHasDefinition(forTerm: word) {
-            //let _: UIReferenceLibraryViewController = UIReferenceLibraryViewController(term: word)
-            //self.presentViewController(ref, animated: true, completion: nil)
+    func checkWord(word: String) -> String? {
+        let textChecker = UITextChecker()
+        
+        let misspelledRange = textChecker.rangeOfMisspelledWord(in: word, range: NSRange(0..<word.utf16.count),
+            startingAt: 0, wrap: false, language: "en_US")
+        
+        if misspelledRange.location != NSNotFound,
+            let guesses = textChecker.guesses(forWordRange: misspelledRange, in: word, language: "en_US")
+        {
+            print("First guess: \(String(describing: guesses.first))")
+            return guesses.first
+        } else {
+            print("Not found")
         }
-        return "Definition"
+        return nil
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -51,10 +61,11 @@ class DefinitionScene: SKScene {
         switch element {
         case .prefixMeaning, .linkMeaning, .suffixMeaning:
             let selectedRow = wordList.getSelectedRow()
-            node.setLabelText(element: element, words: wordList.getCurrentWords()!, row: selectedRow)
+            guard let selectedText = node.setLabelText(element: element, words: wordList.getCurrentWords()!, row: selectedRow) else { return }
             if selectedRow == nil {
                 wordList.alignIndex()
             }
+            _ = checkWord(word: selectedText)
             break
         default:
             return

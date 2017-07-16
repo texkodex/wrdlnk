@@ -31,6 +31,7 @@ extension BaseScene {
         return [
             .home,
             .proceedToNextScene,
+            .showGraph,
             .provideMeaning,
             .cancel,
             .moreInfo

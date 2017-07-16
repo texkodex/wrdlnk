@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SpriteKit
 
+// MARK:- Defines
 let tileWidth: CGFloat = 44
 let tileHeight: CGFloat = 44
 
@@ -27,6 +28,12 @@ let tileUserDataClickName = "clickable"
 let letterNodeName = "letter_"
 let letterNodeColRow = "letter_%d_%d"
 
+let meaningNodePath = "//world/meaning"
+let graphNodePath = "//world/change"
+
+let preferenceWordListKey = "preference_wordlist_index"
+let preferenceShowGraphKey = "preference_graph"
+let minClickToSeeDefinition = 5
 
 let grayTile = UIColor(colorLiteralRed: 192 / 255, green: 192 / 255, blue: 192 / 255, alpha: 1)
 let blueTile = UIColor(colorLiteralRed: 77 / 255, green: 146 / 255, blue: 223 / 255, alpha: 1)
@@ -40,6 +47,7 @@ struct viewNode {
     let visible: Bool
 }
 
+// MARK:- Enums
 enum ViewElement:String {
     case top = "top"
     case main = "main"
@@ -48,6 +56,7 @@ enum ViewElement:String {
     case buttons = "buttons"
     case footer = "footer"
     case meaning = "meaning"
+    case change = "change"
     case prefixMeaning = "prefixMeaning"
     case linkMeaning = "linkMeaning"
     case suffixMeaning = "suffixMeaning"
@@ -55,7 +64,7 @@ enum ViewElement:String {
     case progressGraph = "progressGraph"
     
     static let types = [top, main, board, control, buttons, footer,
-                        meaning, prefixMeaning, linkMeaning, suffixMeaning, graph, progressGraph]
+                        meaning, change, prefixMeaning, linkMeaning, suffixMeaning, graph, progressGraph]
 }
 
 enum TileElement:String {
@@ -90,6 +99,28 @@ enum VowelRow: Int {
     static let types = [prefix, link, suffix]
 }
 
+enum SoundEvent:String {
+    case awake = "awake"
+    case beep = "beep"
+    case beepbeep = "beepbeep"
+    case bang = "bang"
+    case biff = "biff"
+    case yes = "yes"
+    case no = "no"
+    case error = "error"
+    case warning = "warning"
+    case great = "great"
+    case good = "good"
+    case again = "again"
+    case end = "end"
+    case upgrade = "upgrade"
+    
+    static let types = [awake, beep, beepbeep, bang, biff, yes, no, error,
+                        warning, great, good, again,
+                        end, upgrade]
+}
+
+// MARK:- Structs
 struct VowelData {
     let id : Int
     var count : Int = 0
@@ -110,6 +141,7 @@ struct VowelCount {
     var suffix: VowelData
     let total: Int
     var clicks: Int = 0
+    var boardTileClick: Int = 0
     var match: Int = 0
     var setTotal: Int = 0
     let minimumClicks: Int
@@ -156,6 +188,10 @@ struct VowelCount {
         return clicks
     }
     
+    func totalBoardTileClicks() -> Int {
+        return boardTileClick
+    }
+    
     func minClicks() -> Int {
         return minimumClicks
     }
@@ -180,6 +216,10 @@ struct VowelCount {
     
     mutating func clickAttempt() {
         clicks += 1
+    }
+    
+    mutating func boardClickAttempt() {
+        boardTileClick += 1
     }
     
     mutating func clickMatch() {

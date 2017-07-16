@@ -31,12 +31,9 @@ class GameStatusScene: SKScene {
     }
     
     override func sceneDidLoad() {
+        super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
         setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
-    }
-    
-    override func didMove(to view: SKView) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
     }
     
     func checkWord(word: String) -> String {

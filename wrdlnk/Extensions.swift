@@ -433,10 +433,10 @@ extension SKLabelNode {
         return (label!.text != nil && self.text == label!.text) ? true : false
     }
     
-    func setLabelText(element: ViewElement?, words: Word, row: VowelRow?) {
+    func setLabelText(element: ViewElement?, words: Word, row: VowelRow?) -> String? {
         print("Entering \(#file):: \(#function) at line \(#line)")
         
-        guard (row != nil) else { return }
+        guard (row != nil) else { return nil }
         
         switch element! {
         case .prefixMeaning:
@@ -454,7 +454,14 @@ extension SKLabelNode {
             }
             break
         default:
-            return
+            return nil
         }
+        return self.text
+    }
+}
+
+extension UserDefaults {
+    func keyExist(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
     }
 }

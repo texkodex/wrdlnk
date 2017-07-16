@@ -2,6 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "questionButton.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
       "filename" : "questionButton@2x.png",
       "scale" : "2x"
     },

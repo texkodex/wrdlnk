@@ -15,9 +15,9 @@ class GameStatusScene: SKScene {
     
     var nodes = [SKNode]()
     
-    var wordList = WordList()
+    var wordList = WordList.sharedInstance
     
-    var statData = StatData()
+    var statData = StatData.sharedInstance
     
     let nodeMap = [ViewElement.graph.rawValue, ViewElement.progressGraph.rawValue]
 
@@ -36,6 +36,8 @@ class GameStatusScene: SKScene {
         setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
     }
     
+ 
+    
     func checkWord(word: String) -> String {
         if UIReferenceLibraryViewController.dictionaryHasDefinition(forTerm: word) {
             //let _: UIReferenceLibraryViewController = UIReferenceLibraryViewController(term: word)
@@ -48,17 +50,25 @@ class GameStatusScene: SKScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
         switch element {
         case .progressGraph:
-            if !statData.isEmpty() {
+            if statData.elements().count > 0 {
                 node.showProgressGraph(stats: statData)
+                preserveDefaults(stats: statData)
             }
             wordList.alignIndex()
-            UserDefaults.standard.set(wordList.currentIndex(), forKey: preferenceWordListKey)
-            UserDefaults.standard.synchronize()
             break
         default:
             return
         }
         
+    }
+    
+    func preserveDefaults(stats: StatData) {
+        UserDefaults.standard.set(wordList.currentIndex(), forKey: preferenceWordListKey)
+        
+        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: stats.elements())
+        UserDefaults.standard.set(encodedData, forKey: preferenceGameStatKey)
+        
+        UserDefaults.standard.synchronize()
     }
     
     override func update(_ currentTime: TimeInterval) {

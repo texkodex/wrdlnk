@@ -15,7 +15,7 @@ class DefinitionScene: SKScene {
     
     var nodes = [SKNode]()
     
-    var wordList = WordList()
+    var wordList = WordList.sharedInstance
     
     let nodeMap = [ViewElement.meaning.rawValue, ViewElement.prefixMeaning.rawValue,
                    ViewElement.linkMeaning.rawValue, ViewElement.suffixMeaning.rawValue]
@@ -98,6 +98,7 @@ class DefinitionScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+        self.removeFromParent()
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

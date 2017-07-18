@@ -24,7 +24,6 @@ extension SKScene {
         
         unowned var scene = SKScene()
        
-        
         switch destination {
         case .GameScene:
             scene = GameScene(fileNamed: "GameScene")!
@@ -39,20 +38,21 @@ extension SKScene {
         
         scene.scaleMode = SKSceneScaleMode.aspectFill
         sendingScene.view!.presentScene(scene, transition: transition)
+        sendingScene.removeFromParent()
     }
     
     func setup(nodeMap: [String], completionHandler: (ViewElement, SKTileMapNode)->Void) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         for sceneElement in self.children {
-            print("element: \((sceneElement.name)!) - number: \(self.children.count)")
+            if debugInfo { print("element: \((sceneElement.name)!) - number: \(self.children.count)") }
             for sceneSubElement in sceneElement.children {
-                print("sub element: \((sceneSubElement.name)!) - number: \(sceneElement.children.count)")
+                if debugInfo { print("sub element: \((sceneSubElement.name)!) - number: \(sceneElement.children.count)") }
                 if (nodeMap.contains((sceneSubElement.name)!)) {
-                    print ("Found \((sceneSubElement.name)!)")
+                    if debugInfo { print ("Found \((sceneSubElement.name)!)") }
                     for mainChildElement in sceneSubElement.children {
                         if (nodeMap.contains((mainChildElement.name)!)) {
                             let currentElement = "\((mainChildElement.name!))"
-                            print("child element \(currentElement)")
+                            if debugInfo { print("child element \(currentElement)") }
                             let currentNode = mainChildElement as! SKTileMapNode
                             completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
                         }
@@ -60,7 +60,7 @@ extension SKScene {
                     
                     if sceneSubElement.children.count == 0 {
                         let currentElement = "\((sceneSubElement.name!))"
-                        print("child element \(currentElement)")
+                        if debugInfo { print("child element \(currentElement)") }
                         let currentNode = sceneSubElement as! SKTileMapNode
                         completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
                     }
@@ -72,13 +72,13 @@ extension SKScene {
     func setup(nodeMap: [String], completionHandler: (ViewElement, SKLabelNode)->Void) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         for sceneElement in self.children {
-            print("element: \((sceneElement.name)!) - number: \(self.children.count)")
+            if debugInfo { print("element: \((sceneElement.name)!) - number: \(self.children.count)") }
             for sceneSubElement in sceneElement.children {
-                print("sub element: \((sceneSubElement.name)!) - number: \(sceneElement.children.count)")
+                if debugInfo { print("sub element: \((sceneSubElement.name)!) - number: \(sceneElement.children.count)") }
                 if (nodeMap.contains((sceneSubElement.name)!)) {
                     let currentElement = "\((sceneSubElement.name!))"
-                    print("child element \(currentElement)")
-                    print("In completionHandler for SKLabelNode")
+                    if debugInfo { print("child element \(currentElement)")
+                        print("In completionHandler for SKLabelNode") }
                     let currentNode = sceneSubElement as! SKLabelNode
                     completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
                 }
@@ -272,8 +272,10 @@ extension SKTileMapNode {
     }
     
     func nodeName(node: SKTileMapNode, col: Int, row: Int) -> String {
-        print("node.name is: \(String(describing: node.name))")
-        print("node.parent?.name is: \(String(describing: node.parent?.name))")
+        if debugInfo {
+            print("node.name is: \(String(describing: node.name))")
+            print("node.parent?.name is: \(String(describing: node.parent?.name))")
+        }
         let name = ((node.name?.contains(boardTileMap))! ? boardTileMap : buttonsTileMap)
         return String(format:tileNodeNameColRow, name, col, row)
     }
@@ -463,5 +465,19 @@ extension SKLabelNode {
 extension UserDefaults {
     func keyExist(key: String) -> Bool {
         return UserDefaults.standard.object(forKey: key) != nil
+        UserDefaults.standard.synchronize()
+    }
+    
+    func purgeAll() {
+        let appDomain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: appDomain)
+        UserDefaults.standard.synchronize()
     }
 }
+
+extension Array where Element : Hashable {
+    var unique: [Element] {
+        return Array(Set(self))
+    }
+}
+

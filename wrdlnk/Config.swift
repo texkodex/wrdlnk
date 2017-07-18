@@ -11,6 +11,8 @@ import UIKit
 import SpriteKit
 
 // MARK:- Defines
+let debugInfo = false
+
 let tileWidth: CGFloat = 44
 let tileHeight: CGFloat = 44
 
@@ -33,6 +35,8 @@ let graphNodePath = "//world/change"
 
 let preferenceWordListKey = "preference_wordlist_index"
 let preferenceShowGraphKey = "preference_graph"
+let preferenceGameStatKey = "preference_game_stat"
+
 let minClickToSeeDefinition = 5
 
 let grayTile = UIColor(colorLiteralRed: 192 / 255, green: 192 / 255, blue: 192 / 255, alpha: 1)
@@ -240,17 +244,80 @@ struct VowelCount {
     }
 }
 
-struct Stats {
-    let phrase: String?
-    let accuracy: Float
-    let percentage: Float
-    let timeSpan: TimeInterval
+class Stat: NSObject, NSCoding {
+    
+    struct Keys {
+        static let phrase = "phrase"
+        static let accuracy = "accuracy"
+        static let percentage = "percentage"
+        static let timeSpan = "timeSpan"
+    }
+    
+    private var _phrase: String? = ""
+    private var _accuracy: Float = 0
+    private var _percentage: Float = 0
+    private var _timeSpan: TimeInterval = 0
+    
+    override init() {}
     
     init(phrase: String?, accuracy: Float, percentage: Float, timeSpan: TimeInterval = 0) {
-        self.phrase = phrase
-        self.accuracy = accuracy
-        self.percentage = percentage
-        self.timeSpan = timeSpan
+        self._phrase = phrase
+        self._accuracy = accuracy
+        self._percentage = percentage
+        self._timeSpan = timeSpan
+    }
+    
+    required convenience init(coder decoder: NSCoder) {
+        // Retrieve data
+        self.init()
+        _phrase = decoder.decodeObject(forKey: Keys.phrase) as? String
+        _accuracy = decoder.decodeFloat(forKey: Keys.accuracy)
+        _percentage = decoder.decodeFloat(forKey: Keys.percentage)
+        _timeSpan = decoder.decodeDouble(forKey: Keys.timeSpan)
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(_phrase, forKey: "phrase")
+        coder.encode(_accuracy, forKey: "accuracy")
+        coder.encode(_percentage, forKey: "percentage")
+        coder.encode(_timeSpan, forKey: "timeSpan")
+    }
+    
+    
+    var phrase: String? {
+        get {
+            return _phrase
+        }
+        set {
+            _phrase = newValue
+        }
+    }
+    
+    var accuracy: Float {
+        get {
+            return _accuracy
+        }
+        set {
+            _accuracy = newValue
+        }
+    }
+    
+    var percentage: Float {
+        get {
+            return _percentage
+        }
+        set {
+            _percentage = newValue
+        }
+    }
+
+    var timeSpan: TimeInterval {
+        get {
+            return _timeSpan
+        }
+        set {
+            _timeSpan = newValue
+        }
     }
 }
 
@@ -259,6 +326,7 @@ public struct Queue<T>: ExpressibleByArrayLiteral {
     public mutating func push(value: T) { elements.append(value) }
     public mutating func pop() -> T { return elements.removeFirst() }
     public var isEmpty: Bool { return elements.isEmpty }
+    public var isThreshold: Bool { return elements.count > VisibleStateCount }
     public var count: Int { return elements.count }
     public init(arrayLiteral elements: T...) { self.elements = elements }
 }
@@ -266,32 +334,64 @@ public struct Queue<T>: ExpressibleByArrayLiteral {
 struct StatData {
     
     fileprivate struct info {
-        static var statQueue = Queue<Stats>()
+        static var statQueue = Queue<Stat>()
     }
     
-    init() {
+    static let sharedInstance = StatData()
+    private init() {
+        if debugInfo {
+            self.purge()
+            UserDefaults.standard.purgeAll()
+        }
+        if UserDefaults.standard.keyExist(key: preferenceGameStatKey) {
+            let decoded  = UserDefaults.standard.object(forKey: preferenceGameStatKey) as! Data
+            let decodedStats = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Stat]
+            for stat in decodedStats {
+                print("reloaded phrase: \(String(describing: stat.phrase))")
+                self.push(element: Stat(phrase: stat.phrase, accuracy: stat.accuracy, percentage: stat.percentage))
+            }
+        }
     }
 }
 
 extension StatData {
     
     func isEmpty() -> Bool {
-        return info.statQueue.isEmpty
+        return info.statQueue.elements.count == 0
     }
     
     func count() -> Int {
        return info.statQueue.count
     }
     
-    func elements() -> [Stats] {
+    func elements() -> [Stat] {
         return info.statQueue.elements
     }
     
-    mutating func push(element: Stats) {
+    func push(element: Stat) {
+        prune()
+        unique()
         info.statQueue.push(value: element)
     }
     
-    mutating func pop() -> Stats? {
+    func pop() -> Stat? {
         return info.statQueue.pop()
     }
+    
+    func prune() {
+        while info.statQueue.isThreshold {
+            _ = pop()
+        }
+    }
+    
+    func purge() {
+        while !isEmpty() {
+            _ = pop()
+        }
+    }
+    
+    func unique() {
+        print("To implement unique() method.")
+    }
+
 }

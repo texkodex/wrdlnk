@@ -17,6 +17,7 @@
 		CC7202BC1F19744C003394A0 /* biff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202BB1F19744C003394A0 /* biff.mp3 */; };
 		CC7202BE1F19745B003394A0 /* beepbeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202BD1F19745B003394A0 /* beepbeep.mp3 */; };
 		CC7202C01F1AAC95003394A0 /* yes.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202BF1F1AAC95003394A0 /* yes.mp3 */; };
+		CC7202C21F1D5D7D003394A0 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7202C11F1D5D7D003394A0 /* DataStore.swift */; };
 		CC8BE4131EEB2D7100CDB4BB /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4121EEB2D7100CDB4BB /* ButtonNode.swift */; };
 		CC8BE4151EEB47F700CDB4BB /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4141EEB47F700CDB4BB /* BaseScene.swift */; };
 		CC8BE4171EEB494900CDB4BB /* BaseScene+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4161EEB494900CDB4BB /* BaseScene+Buttons.swift */; };
@@ -66,6 +67,7 @@
 		CC7202BB1F19744C003394A0 /* biff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = biff.mp3; sourceTree = "<group>"; };
 		CC7202BD1F19745B003394A0 /* beepbeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beepbeep.mp3; sourceTree = "<group>"; };
 		CC7202BF1F1AAC95003394A0 /* yes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = yes.mp3; sourceTree = "<group>"; };
+		CC7202C11F1D5D7D003394A0 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		CC8BE4121EEB2D7100CDB4BB /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		CC8BE4141EEB47F700CDB4BB /* BaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
 		CC8BE4161EEB494900CDB4BB /* BaseScene+Buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseScene+Buttons.swift"; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				CCF8474D1EE9DD1600468E0B /* Config.swift */,
 				CC8BE4121EEB2D7100CDB4BB /* ButtonNode.swift */,
 				CC8BE4221EF22F0E00CDB4BB /* DataExchange.swift */,
+				CC7202C11F1D5D7D003394A0 /* DataStore.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				CC8BE4171EEB494900CDB4BB /* BaseScene+Buttons.swift in Sources */,
 				CCAD361D1EE0CAE3001C6AFE /* GameScene.swift in Sources */,
 				CCAD361F1EE0CAE3001C6AFE /* GameViewController.swift in Sources */,
+				CC7202C21F1D5D7D003394A0 /* DataStore.swift in Sources */,
 				CCAD36171EE0CAE3001C6AFE /* AppDelegate.swift in Sources */,
 				CC8BE4191EEB4AA600CDB4BB /* BaseScene+Focus.swift in Sources */,
 				CC8BE4131EEB2D7100CDB4BB /* ButtonNode.swift in Sources */,

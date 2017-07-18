@@ -15,6 +15,15 @@ class GameViewController: UIViewController {
     
     var wordList: [Word]?
     
+    var store = DataStore.sharedInstance
+    
+    var filePath: String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        print("The url path in the document directory \(String(describing: url))")
+        return(url!.appendingPathComponent("Data").path)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Load words from remote site
@@ -24,7 +33,18 @@ class GameViewController: UIViewController {
             self.setup()
         }
     }
+    
+    private func saveData(stat: Stat) {
+        self.store.statDataItems.append(stat)
+        NSKeyedArchiver.archiveRootObject(self.store.statDataItems, toFile: filePath)
+    }
 
+    private func loadData() {
+        if let statData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [Stat] {
+            self.store.statDataItems = statData
+        }
+    }
+    
     func setup() {
         // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
         // including entities and graphs.
@@ -37,7 +57,6 @@ class GameViewController: UIViewController {
                 sceneNode.entities = scene.entities
                 sceneNode.graphs = scene.graphs
                 //sceneNode.wordList = self.wordList!
-                
                 // Set the scale mode to scale to fit the window
                 sceneNode.scaleMode = .aspectFill
                 
@@ -56,6 +75,8 @@ class GameViewController: UIViewController {
             }
         }
     }
+    
+    
     
     override var shouldAutorotate: Bool {
         return true

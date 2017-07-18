@@ -49,12 +49,13 @@ class GameScene: BaseScene {
     var entities = [GKEntity()]
     var graphs = [String:GKGraph]()
     
-    var wordList = WordList()
+    var wordList = WordList.sharedInstance
+    
     var lastSpriteClick: SKSpriteNode? = nil
     
     var counters = VowelCount()
     
-    var statData = StatData()
+    var statData = StatData.sharedInstance
     
     let nodeMap = [ViewElement.main.rawValue, ViewElement.board.rawValue,
                    ViewElement.control.rawValue, ViewElement.buttons.rawValue]
@@ -74,6 +75,7 @@ class GameScene: BaseScene {
         graphs.removeAll()
         spriteNodeList.removeAll()
         matchList.removeAll()
+        stopAudio()
         self.removeFromParent()
         self.view?.presentScene(nil)
     }
@@ -188,10 +190,10 @@ class GameScene: BaseScene {
     
     func getTileMap(location: CGPoint, nodesAtPoint: [SKNode]) -> (tilemap: SKTileMapNode?, name: String?) {
         for node in nodesAtPoint {
-            print("node in list: \((node.name)!)")
+            if debugInfo { print("node in list: \((node.name)!)") }
             let tileMapNode = node as? SKTileMapNode
             if tileMapNode != nil && (tileMapNode?.contains(location)) != nil {
-                print("point found at: \((tileMapNode?.name)!)")
+                if debugInfo { print("point found at: \((tileMapNode?.name)!)") }
                 return (tileMapNode, (tileMapNode?.name)!)
             }
         }
@@ -214,10 +216,7 @@ class GameScene: BaseScene {
         print("Number of click attempts: \(counters.totalClicks())")
         print("Accuracy nearer to 1.0 is: " + String(format:"%.2f", counters.accuracy()))
         print("Percentage is: " + String(format:"%.2f", counters.percentage()))
-        while statData.count() > VisibleStateCount {
-            _ = statData.pop()
-        }
-        statData.push(element: Stats(phrase: counters.wordphrase(), accuracy: counters.accuracy(),
+        statData.push(element: Stat(phrase: counters.wordphrase(), accuracy: counters.accuracy(),
                                     percentage: counters.percentage()))
     }
     

@@ -48,7 +48,7 @@ class DataExchange: NSObject {
                 for outer in json["wordgroups"] as! [[String: Any]] {
                     
                     for dict in outer["words"] as! [[String: Any]] {
-                        print(dict)
+                        if debugInfo { print(dict) }
                         
                         let word = Word(prefix: dict["prefix"] as! String, link: dict["link"] as! String, suffix: dict["suffix"] as! String)
                         wordGroup.append(word)
@@ -123,8 +123,12 @@ struct WordList {
         static var wordBank: [Word] = []
         static var selectedRow: VowelRow? = nil
     }
-    
-    init() {
+    static var sharedInstance = WordList()
+    private init() {
+        if debugInfo {
+            UserDefaults.standard.set(0, forKey: preferenceWordListKey)
+            UserDefaults.standard.purgeAll()
+        }
         if UserDefaults.standard.keyExist(key: preferenceWordListKey) {
             let index: Int  = UserDefaults.standard.integer(forKey: preferenceWordListKey)
             if index > 0 {
@@ -212,6 +216,7 @@ extension WordList {
         if isEmpty() {
             setupWords()
             info.initialize = true
+            UserDefaults.standard.set(0, forKey: preferenceWordListKey)
         }
         else {
             info.previous = info.index

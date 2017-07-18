@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "yellow_tile.pdf",
+      "filename" : "yellow_tile.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "yellow_tile@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "yellow_tile@3x.png",
       "scale" : "3x"
     }
   ],

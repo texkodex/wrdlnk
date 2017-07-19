@@ -41,7 +41,8 @@ extension SKScene {
         sendingScene.removeFromParent()
     }
     
-    func setup(nodeMap: [String], completionHandler: (ViewElement, SKTileMapNode)->Void) {
+    //func setup(nodeMap: [String], completionHandler: (ViewElement, SKTileMapNode, StatData, WordList)->Void) {
+    func setup(nodeMap: [String], completionHandler: (MakeVisibleParams)->Void) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         for sceneElement in self.children {
             if debugInfo { print("element: \((sceneElement.name)!) - number: \(self.children.count)") }
@@ -54,7 +55,9 @@ extension SKScene {
                             let currentElement = "\((mainChildElement.name!))"
                             if debugInfo { print("child element \(currentElement)") }
                             let currentNode = mainChildElement as! SKTileMapNode
-                            completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
+                            //completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
+                            let params = MakeVisibleParams(viewElement: ViewElement(rawValue: currentElement)!, nodeTile:currentNode, nodeLabel: nil, stats: nil)
+                            completionHandler(params)
                         }
                     }
                     
@@ -62,7 +65,10 @@ extension SKScene {
                         let currentElement = "\((sceneSubElement.name!))"
                         if debugInfo { print("child element \(currentElement)") }
                         let currentNode = sceneSubElement as! SKTileMapNode
-                        completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
+                        let params = MakeVisibleParams(viewElement: ViewElement(rawValue: currentElement)!, nodeTile:currentNode, nodeLabel: nil, stats: nil)
+                        //completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
+                        completionHandler(params)
+
                     }
                 }
             }
@@ -158,7 +164,6 @@ extension SKTileMapNode {
     }
     
     func  isFreeVowelCell(text: Character, visible: CGFloat) -> Bool {
-        
         if VowelCharacter(rawValue: text)?.rawValue == text
             && visible < CGFloat(0.1) {
             return true
@@ -227,7 +232,6 @@ extension SKTileMapNode {
         sprite.size = CGSize(width: CGFloat(tileWidth), height: CGFloat(tileHeight))
         sprite.run(SKAction.setTexture(texture))
         spriteNode.addChild(sprite)
-        
     }
 
     func addWords(word: Word) -> VowelCount {
@@ -465,7 +469,6 @@ extension SKLabelNode {
 extension UserDefaults {
     func keyExist(key: String) -> Bool {
         return UserDefaults.standard.object(forKey: key) != nil
-        UserDefaults.standard.synchronize()
     }
     
     func purgeAll() {

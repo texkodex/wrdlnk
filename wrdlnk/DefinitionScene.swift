@@ -9,6 +9,21 @@
 import SpriteKit
 import GameplayKit
 
+struct MakeVisibleParams {
+    var viewElement: ViewElement? = nil
+    var nodeTile: SKTileMapNode? = nil
+    var nodeLabel: SKLabelNode? = nil
+    var stats: StatData? = nil
+    var wordList = WordList.sharedInstance
+    
+    init(viewElement: ViewElement?, nodeTile: SKTileMapNode?, nodeLabel: SKLabelNode?, stats: StatData?) {
+        self.viewElement = viewElement
+        self.nodeTile = nodeTile
+        self.nodeLabel = nodeLabel
+        self.stats = stats
+    }
+}
+
 class DefinitionScene: SKScene {
     var entities = [GKEntity()]
     var graphs = [String:GKGraph]()
@@ -62,9 +77,6 @@ class DefinitionScene: SKScene {
         case .prefixMeaning, .linkMeaning, .suffixMeaning:
             let selectedRow = wordList.getSelectedRow()
             guard let selectedText = node.setLabelText(element: element, words: wordList.getCurrentWords()!, row: selectedRow) else { return }
-            if selectedRow == nil {
-                wordList.alignIndex()
-            }
             _ = checkWord(word: selectedText)
             break
         default:

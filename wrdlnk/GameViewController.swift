@@ -13,8 +13,7 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
-    var wordList: [Word]?
-    
+    var wordList = WordList.sharedInstance
     var store = DataStore.sharedInstance
     
     var filePath: String {
@@ -28,7 +27,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         // Load words from remote site
         DataExchange.fetchWordList { (wordGroup) -> () in
-            self.wordList = wordGroup
+            //self.wordList = wordGroup
+            self.wordList.networkLoad(wordList: wordGroup)
             print("wordList retrieved")
             self.setup()
         }

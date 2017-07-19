@@ -117,11 +117,11 @@ struct Word {
 struct WordList {
     
     fileprivate struct info {
-        static var previous: Int = 0
         static var index: Int = 0
         static var initialize: Bool = false
         static var wordBank: [Word] = []
         static var selectedRow: VowelRow? = nil
+        static var matchCondition: Bool? = nil
     }
     static var sharedInstance = WordList()
     private init() {
@@ -209,23 +209,29 @@ extension WordList {
             info.wordBank.append(Word(prefix: "FRONT", link: "TOOTH", suffix: "PASTE"))
             info.wordBank.append(Word(prefix: "OPEN", link: "MOUTH", suffix: "WASH"))
             info.wordBank.append(Word(prefix: "CARD", link: "BOARD", suffix: "ROOM"))
+            info.initialize = true
+        }
+    }
+    
+    mutating func networkLoad(wordList: [Word]) {
+        if isEmpty() {
+            for wordItem in wordList {
+                info.wordBank.append(wordItem)
+                info.initialize = true
+            }
         }
     }
     
     mutating func getWords() -> Word? {
         if isEmpty() {
             setupWords()
-            info.initialize = true
-            UserDefaults.standard.set(0, forKey: preferenceWordListKey)
-        }
-        else {
-            info.previous = info.index
-            info.index = info.index + 1
-            info.index = info.index % info.wordBank.count
-            UserDefaults.standard.set(info.index, forKey: preferenceWordListKey)
         }
         
-        return info.wordBank.count > 0 ? info.wordBank[info.index] : nil
+        if let match = info.matchCondition, match == true {
+            info.index += 1
+            info.index = info.index % info.wordBank.count
+        }
+        return info.wordBank[info.index]
     }
    
     func getCurrentWords() -> Word? {
@@ -240,11 +246,23 @@ extension WordList {
         return info.selectedRow
     }
     
-    mutating func alignIndex() {
-        info.index = info.previous
-    }
-    
     func currentIndex() -> Int? {
         return isEmpty() ? nil : info.index
+    }
+    
+    mutating func setMatchCondition() {
+        info.matchCondition = true
+    }
+    
+    mutating func handledMatchCondition() {
+        if let match = info.matchCondition, match == true {
+            let newIndex = (info.index + 1) % info.wordBank.count
+            UserDefaults.standard.set(newIndex, forKey: preferenceWordListKey)
+            info.matchCondition = nil
+        }
+    }
+    
+    func getMatchCondition() -> Bool {
+        return info.matchCondition == true
     }
  }

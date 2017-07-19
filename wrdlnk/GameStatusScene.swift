@@ -33,7 +33,8 @@ class GameStatusScene: SKScene {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
-        setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
+        //setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:stats:wordList:))
+        setup(nodeMap: nodeMap, completionHandler: makeVisible(params:))
     }
     
  
@@ -46,15 +47,19 @@ class GameStatusScene: SKScene {
         return "Definition"
     }
 
-    func makeVisible (element: ViewElement, node: SKTileMapNode){
+    func makeVisible (params: MakeVisibleParams){
         print("Entering \(#file):: \(#function) at line \(#line)")
-        switch element {
+        switch params.viewElement! {
         case .progressGraph:
             if statData.elements().count > 0 {
-                node.showProgressGraph(stats: statData)
-                preserveDefaults(stats: statData)
+                params.nodeTile?.showProgressGraph(stats: statData)
             }
-            wordList.alignIndex()
+            
+            if wordList.getMatchCondition() {
+                preserveDefaults(stats: statData)
+                wordList.handledMatchCondition()
+            } 
+            
             break
         default:
             return
@@ -62,13 +67,9 @@ class GameStatusScene: SKScene {
         
     }
     
-    func preserveDefaults(stats: StatData) {
-        UserDefaults.standard.set(wordList.currentIndex(), forKey: preferenceWordListKey)
-        
-        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: stats.elements())
+    func preserveDefaults(stats: StatData?) {
+        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: stats!.elements())
         UserDefaults.standard.set(encodedData, forKey: preferenceGameStatKey)
-        
-        UserDefaults.standard.synchronize()
     }
     
     override func update(_ currentTime: TimeInterval) {

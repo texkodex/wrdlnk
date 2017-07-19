@@ -118,7 +118,7 @@ class GameScene: BaseScene {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
         if testIfInit() {
-            setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
+            setup(nodeMap: nodeMap, completionHandler: makeVisible(params:))
             initComplete()
         }
         wordList.setSelectedRow(row: nil)
@@ -136,18 +136,18 @@ class GameScene: BaseScene {
         transitionToScene(destination: SceneType.GameScene, sendingScene: scene)
     }
     
-    func makeVisible (element: ViewElement, node: SKTileMapNode){
+    func makeVisible (params: MakeVisibleParams){
         print("Entering \(#file):: \(#function) at line \(#line)")
-        switch element {
+        switch params.viewElement! {
         case .top: break
         case .main: break
         case .board:
-            node.setTileTexture(tileElement: TileElement(rawValue: "blue_tile")!)
-            counters = node.addWords(word: wordList.getWords()!)
+            params.nodeTile?.setTileTexture(tileElement: TileElement(rawValue: "blue_tile")!)
+            counters = params.nodeTile!.addWords(word: wordList.getWords()!)
             break
         case .buttons:
-            node.setTileTexture(tileElement: TileElement(rawValue: "yellow_tile")!)
-            node.addButtonLetter()
+            params.nodeTile?.setTileTexture(tileElement: TileElement(rawValue: "yellow_tile")!)
+            params.nodeTile?.addButtonLetter()
             break
         case .control: break
         case .footer: break
@@ -156,12 +156,7 @@ class GameScene: BaseScene {
         }
         
     }
-    
-    func reloadTileMap(node: SKTileMapNode) {
-        node.clearWords()
-        counters = node.addWords(word: wordList.getWords()!)
-    }
-    
+        
     func tileColor(node: SKTileMapNode) {
         node.getTileColor(completionClosure: { (row, col, color) in
             print("color: \(color) at row: \(row) col: \(col)")
@@ -345,6 +340,7 @@ class GameScene: BaseScene {
     func checkForAllMatches() {
         if counters.matchComplete() {
             playSoundForEvent(soundEvent: .good)
+            wordList.setMatchCondition()
             progressSummary()
             enableGraphDisplay()
             readyForInit()
@@ -359,8 +355,8 @@ class GameScene: BaseScene {
         if !UserDefaults.standard.bool(forKey: preferenceShowGraphKey) {
             UserDefaults.standard.set(true, forKey: preferenceShowGraphKey)
         }
-        UserDefaults.standard.set(wordList.currentIndex(), forKey: preferenceWordListKey)
-        UserDefaults.standard.synchronize()
+//        UserDefaults.standard.set(wordList.currentIndex(), forKey: preferenceWordListKey)
+//        UserDefaults.standard.synchronize()
     }
     
     func countClick(sprite: SKSpriteNode) {
@@ -368,12 +364,6 @@ class GameScene: BaseScene {
             && (sprite.userData?.value(forKeyPath: tileUserDataClickName) as? Bool)!  {
             counters.clickAttempt()
             print("click count: \(counters.totalClicks())")
-        }
-    }
-    
-    func refreshTileMap(tileMap: SKTileMapNode) {
-        if counters.matchComplete() {
-            reloadTileMap(node: tileMap)
         }
     }
     

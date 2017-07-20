@@ -20,12 +20,20 @@ class GameScene: BaseScene {
         return childNode(withName: graphNodePath)!
     }
     
+    override var backgroundNodeThree: SKNode? {
+        return childNode(withName: settingsNodePath)!
+    }
+    
     var definitionButton: ButtonNode? {
         return backgroundNodeOne?.childNode(withName: ButtonIdentifier.provideMeaning.rawValue) as? ButtonNode
     }
 
     var graphButton: ButtonNode? {
         return backgroundNodeTwo?.childNode(withName: ButtonIdentifier.showGraph.rawValue) as? ButtonNode
+    }
+    
+    var settingsButton: ButtonNode? {
+        return backgroundNodeThree?.childNode(withName: ButtonIdentifier.appSettings.rawValue) as? ButtonNode
     }
     
     var definitionOff = false {
@@ -42,6 +50,13 @@ class GameScene: BaseScene {
     
             UserDefaults.standard.set(graphOff, forKey: preferenceShowGraphKey)
             UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var settingsOff = false {
+        didSet {
+            let imageName = settingsOff ? "settingsButton" : "settingsOnButton"
+            settingsButton?.selectedTexture = SKTexture(imageNamed: imageName)
         }
     }
     
@@ -130,6 +145,7 @@ class GameScene: BaseScene {
     func initializeScreenButtons() {
         disableButton(button: definitionButton)
         wordList.currentIndex()! > 0  ? enableButton(button: graphButton) : disableButton(button: graphButton)
+        enableButton(button: settingsButton)
     }
     
     override func transitionReloadScene(scene: SKScene) {
@@ -355,8 +371,6 @@ class GameScene: BaseScene {
         if !UserDefaults.standard.bool(forKey: preferenceShowGraphKey) {
             UserDefaults.standard.set(true, forKey: preferenceShowGraphKey)
         }
-//        UserDefaults.standard.set(wordList.currentIndex(), forKey: preferenceWordListKey)
-//        UserDefaults.standard.synchronize()
     }
     
     func countClick(sprite: SKSpriteNode) {

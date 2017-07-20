@@ -31,10 +31,12 @@ extension BaseScene {
         return [
             .home,
             .proceedToNextScene,
-            .showGraph,
             .provideMeaning,
+            .appSettings,
+            .showGraph,
             .cancel,
             .moreInfo
+            
         ]
     }
     

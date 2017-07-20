@@ -14,6 +14,7 @@ enum SceneType {
     case GameScene
     case GameStatus
     case Definition
+    case Menu
 }
 
 extension SKScene {
@@ -31,6 +32,8 @@ extension SKScene {
             scene = GameStatusScene(fileNamed: "GameStatusScene")!
         case .Definition:
             scene = DefinitionScene(fileNamed: "DefinitionScene")!
+        case .Menu:
+            scene = MenuScene(fileNamed: "MenuScene")!
         }
         
         // Adjust scene size to view bounds
@@ -41,7 +44,6 @@ extension SKScene {
         sendingScene.removeFromParent()
     }
     
-    //func setup(nodeMap: [String], completionHandler: (ViewElement, SKTileMapNode, StatData, WordList)->Void) {
     func setup(nodeMap: [String], completionHandler: (MakeVisibleParams)->Void) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         for sceneElement in self.children {
@@ -55,7 +57,7 @@ extension SKScene {
                             let currentElement = "\((mainChildElement.name!))"
                             if debugInfo { print("child element \(currentElement)") }
                             let currentNode = mainChildElement as! SKTileMapNode
-                            //completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
+                            
                             let params = MakeVisibleParams(viewElement: ViewElement(rawValue: currentElement)!, nodeTile:currentNode, nodeLabel: nil, stats: nil)
                             completionHandler(params)
                         }
@@ -66,7 +68,7 @@ extension SKScene {
                         if debugInfo { print("child element \(currentElement)") }
                         let currentNode = sceneSubElement as! SKTileMapNode
                         let params = MakeVisibleParams(viewElement: ViewElement(rawValue: currentElement)!, nodeTile:currentNode, nodeLabel: nil, stats: nil)
-                        //completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
+                    
                         completionHandler(params)
 
                     }
@@ -87,6 +89,29 @@ extension SKScene {
                         print("In completionHandler for SKLabelNode") }
                     let currentNode = sceneSubElement as! SKLabelNode
                     completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
+                }
+            }
+        }
+    }
+    
+    func setup(nodeMap: [String], completionHandler: (ViewElement, SKSpriteNode)->Void) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        for sceneElement in self.children {
+            if debugInfo { print("element: \((sceneElement.name)!) - number: \(self.children.count)") }
+            for sceneSubElement in sceneElement.children {
+                if debugInfo { print("sub element: \((sceneSubElement.name)!) - number: \(sceneElement.children.count)") }
+                for mainChildElement in sceneSubElement.children {
+                    if (nodeMap.contains((mainChildElement.name)!)) {
+                        for innerChild in mainChildElement.children {
+                        if (nodeMap.contains((innerChild.name)!)) {
+                            let currentElement = "\((innerChild.name!))"
+                            if debugInfo { print("child element \(currentElement)")
+                                print("In completionHandler for SKSpriteNode") }
+                            let currentNode = innerChild as! SKSpriteNode
+                            completionHandler(ViewElement(rawValue: currentElement)!, currentNode)
+                        }
+                        }
+                    }
                 }
             }
         }

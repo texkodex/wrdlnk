@@ -18,12 +18,20 @@ enum ButtonIdentifier: String {
     case proceedToNextScene = "ProceedToNextScene"
     case provideMeaning = "ProvideMeaning"
     case showGraph = "ShowGraph"
+    case appSettings = "AppSettings"
     case cancel = "Cancel"
     case moreInfo = "MoreInfo"
+    case soundSwitch = "SoundSwitch"
+    case scoreSwitch = "ScoreSwitch"
+    case timerSwitch = "TimerSwitch"
+    case enterGame = "EnterGame"
     
-    
-    static let allButtonIdentifiers: [ButtonIdentifier] = [
-        .home, .proceedToNextScene, .provideMeaning, .showGraph, .cancel, .moreInfo
+    static let allButtonIdentifiers: [ButtonIdentifier]
+        = [ .home, .proceedToNextScene, .provideMeaning,
+            .showGraph, .appSettings,
+            .cancel, .moreInfo,
+            .soundSwitch, .scoreSwitch, .timerSwitch,
+            .enterGame
     ]
     
     var selectedTextureName: String? {
@@ -36,10 +44,20 @@ enum ButtonIdentifier: String {
             return "questionButton"
         case .showGraph:
             return "graphButton"
+        case .appSettings:
+            return "settingsButton"
         case .cancel:
             return "Cancel"
         case .moreInfo:
             return "MoreInfo"
+        case .soundSwitch:
+            return "SoundOff"
+        case .scoreSwitch:
+            return "ScoreSwitch"
+        case .timerSwitch:
+            return "TimerOff"
+        case .enterGame:
+            return "EnterGame"
         }
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 import SpriteKit
 
 // MARK:- Defines
-let debugInfo = false
+let debugInfo = true
 
 let tileWidth: CGFloat = 44
 let tileHeight: CGFloat = 44
@@ -32,6 +32,7 @@ let letterNodeColRow = "letter_%d_%d"
 
 let meaningNodePath = "//world/meaning"
 let graphNodePath = "//world/change"
+let settingsNodePath = "//world/config"
 
 let preferenceWordListKey = "preference_wordlist_index"
 let preferenceShowGraphKey = "preference_graph"
@@ -67,8 +68,27 @@ enum ViewElement:String {
     case graph = "graph"
     case progressGraph = "progressGraph"
     
-    static let types = [top, main, board, control, buttons, footer,
-                        meaning, change, prefixMeaning, linkMeaning, suffixMeaning, graph, progressGraph]
+    case switches = "switches"
+    case sound = "sound"
+    case soundSwitch = "SoundSwitch"
+    case score = "score"
+    case scoreSwitch = "ScoreSwitch"
+    case timer = "timer"
+    case timerSwitch = "TimerSwitch"
+    case enter = "enter"
+    case enterGame = "EnterGame"
+    
+    
+    static let types = [ top, main, board, control, buttons, footer,
+                         meaning, change,
+                         prefixMeaning, linkMeaning, suffixMeaning,
+                         graph, progressGraph,
+                         switches,
+                         sound, soundSwitch,
+                         score, scoreSwitch,
+                         timer, timerSwitch,
+                         enter, enterGame
+                        ]
 }
 
 enum TileElement:String {

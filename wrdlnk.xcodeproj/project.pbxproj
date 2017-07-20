@@ -35,6 +35,8 @@
 		CCAD36271EE0CAE3001C6AFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCAD36251EE0CAE3001C6AFE /* LaunchScreen.storyboard */; };
 		CCAD36321EE0CAE3001C6AFE /* wrdlnkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAD36311EE0CAE3001C6AFE /* wrdlnkTests.swift */; };
 		CCAD363D1EE0CAE3001C6AFE /* wrdlnkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAD363C1EE0CAE3001C6AFE /* wrdlnkUITests.swift */; };
+		CCDC23711F200DCE00371F1F /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCDC23701F200DCE00371F1F /* MenuScene.sks */; };
+		CCDC23731F200E3700371F1F /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC23721F200E3700371F1F /* MenuScene.swift */; };
 		CCF8474C1EE9DC6D00468E0B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474B1EE9DC6D00468E0B /* Extensions.swift */; };
 		CCF8474E1EE9DD1600468E0B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474D1EE9DD1600468E0B /* Config.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +93,8 @@
 		CCAD36381EE0CAE3001C6AFE /* wrdlnkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wrdlnkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCAD363C1EE0CAE3001C6AFE /* wrdlnkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wrdlnkUITests.swift; sourceTree = "<group>"; };
 		CCAD363E1EE0CAE3001C6AFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCDC23701F200DCE00371F1F /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
+		CCDC23721F200E3700371F1F /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		CCF8474B1EE9DC6D00468E0B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CCF8474D1EE9DD1600468E0B /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -241,6 +245,8 @@
 				CC8BE4141EEB47F700CDB4BB /* BaseScene.swift */,
 				CC8BE4161EEB494900CDB4BB /* BaseScene+Buttons.swift */,
 				CC8BE4181EEB4AA600CDB4BB /* BaseScene+Focus.swift */,
+				CCDC23701F200DCE00371F1F /* MenuScene.sks */,
+				CCDC23721F200E3700371F1F /* MenuScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -376,6 +382,7 @@
 				CC7202B81F197421003394A0 /* great.mp3 in Resources */,
 				CC7202B41F1973F1003394A0 /* awake.mp3 in Resources */,
 				CC7202C01F1AAC95003394A0 /* yes.mp3 in Resources */,
+				CCDC23711F200DCE00371F1F /* MenuScene.sks in Resources */,
 				AE39F6A91EE10C6B00D362C1 /* GameStatusScene.sks in Resources */,
 				CC8BE42D1F04481900CDB4BB /* DefinitionScene.sks in Resources */,
 				CC8BE4251EF310CC00CDB4BB /* wlink_default.json in Resources */,
@@ -420,6 +427,7 @@
 				CCAD361F1EE0CAE3001C6AFE /* GameViewController.swift in Sources */,
 				CC7202C21F1D5D7D003394A0 /* DataStore.swift in Sources */,
 				CCAD36171EE0CAE3001C6AFE /* AppDelegate.swift in Sources */,
+				CCDC23731F200E3700371F1F /* MenuScene.swift in Sources */,
 				CC8BE4191EEB4AA600CDB4BB /* BaseScene+Focus.swift in Sources */,
 				CC8BE4131EEB2D7100CDB4BB /* ButtonNode.swift in Sources */,
 				CC8BE4231EF22F0E00CDB4BB /* DataExchange.swift in Sources */,

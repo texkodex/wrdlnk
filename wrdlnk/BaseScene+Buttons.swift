@@ -25,6 +25,9 @@ extension BaseScene: ButtonNodeResponderType {
             case .provideMeaning:
                 transitionToScene(destination: SceneType.Definition, sendingScene: self)
             break
+            case .appSettings:
+                transitionToScene(destination: SceneType.Menu, sendingScene: self)
+                break
         default:
             return
         }

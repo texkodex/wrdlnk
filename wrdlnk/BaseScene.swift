@@ -18,6 +18,10 @@ class BaseScene: SKScene {
         return nil
     }
     
+    var backgroundNodeThree: SKNode? {
+        return nil
+    }
+    
     var buttons = [ButtonNode]()
     
     override func didMove(to view: SKView) {

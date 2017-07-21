@@ -33,6 +33,10 @@ extension BaseScene {
             .proceedToNextScene,
             .provideMeaning,
             .appSettings,
+            .soundSwitch,
+            .scoreSwitch,
+            .timerSwitch,
+            .enterGame,
             .showGraph,
             .cancel,
             .moreInfo

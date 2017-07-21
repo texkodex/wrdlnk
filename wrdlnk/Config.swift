@@ -11,7 +11,7 @@ import UIKit
 import SpriteKit
 
 // MARK:- Defines
-let debugInfo = true
+let debugInfo = false
 
 let tileWidth: CGFloat = 44
 let tileHeight: CGFloat = 44
@@ -33,6 +33,12 @@ let letterNodeColRow = "letter_%d_%d"
 let meaningNodePath = "//world/meaning"
 let graphNodePath = "//world/change"
 let settingsNodePath = "//world/config"
+
+let soundNodePath = "//world/sound"
+let scoreNodePath = "//world/score"
+let timerNodePath = "//world/timer"
+let enterNodePath = "//world/enter"
+
 
 let preferenceWordListKey = "preference_wordlist_index"
 let preferenceShowGraphKey = "preference_graph"

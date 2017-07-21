@@ -9,13 +9,61 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wrdlnk/Extensions.swift"
-            timestampString = "522273795.536804"
+            filePath = "wrdlnk/BaseScene+Focus.swift"
+            timestampString = "522295947.571782"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "setup(nodeMap:completionHandler:)"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "resetFocus()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wrdlnk.BaseScene.resetFocus () -&gt; ()"
+                  moduleName = "wrdlnk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sparkle/Documents/dev/code/swift/wrdlnk/wrdlnk/BaseScene+Focus.swift"
+                  timestampString = "522295947.672744"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wrdlnk.BaseScene.(resetFocus () -&gt; ()).(closure #1)"
+                  moduleName = "wrdlnk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sparkle/Documents/dev/code/swift/wrdlnk/wrdlnk/BaseScene+Focus.swift"
+                  timestampString = "522295947.675878"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wrdlnk/MenuScene.swift"
+            timestampString = "522280259.927056"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "makeVisible(element:node:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

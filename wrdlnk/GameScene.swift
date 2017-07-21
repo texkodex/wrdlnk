@@ -104,18 +104,7 @@ class GameScene: BaseScene {
         view.addGestureRecognizer(tapBoardGestureRecognizer)
      }
     
-    func disableButton(button: ButtonNode?) {
-        button?.alpha = 0.0
-        button?.isUserInteractionEnabled = false
-        button?.focusRing.isHidden = true
-    }
-    
-    func enableButton(button: ButtonNode?) {
-        button?.alpha = 1.0
-        button?.isUserInteractionEnabled = true
-        button?.isSelected = true
-        button?.focusRing.isHidden = false
-    }
+
     
     func readyForInit() {
         initialize.doOnce = false

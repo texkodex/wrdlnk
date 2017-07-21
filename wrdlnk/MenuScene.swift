@@ -10,7 +10,70 @@ import SpriteKit
 import GameplayKit
 
 
-class MenuScene: SKScene {
+class MenuScene: BaseScene {
+    
+    // MARK:- Buttons
+    
+    override var backgroundNodeOne: SKNode? {
+        return childNode(withName: soundNodePath)!
+    }
+    
+    var soundButton: ButtonNode? {
+        return backgroundNodeOne?.childNode(withName: ButtonIdentifier.soundSwitch.rawValue) as? ButtonNode
+    }
+    
+    var soundOff = false {
+        didSet {
+            let imageName = soundOff ? "soundOffButton" : "soundOnButton"
+            soundButton?.selectedTexture = SKTexture(imageNamed: imageName)
+        }
+    }
+  
+    override var backgroundNodeTwo: SKNode? {
+        return childNode(withName: scoreNodePath)!
+    }
+    
+    var scoreButton: ButtonNode? {
+        return backgroundNodeTwo?.childNode(withName: ButtonIdentifier.scoreSwitch.rawValue) as? ButtonNode
+    }
+    
+    var scoreOff = false {
+        didSet {
+            let imageName = scoreOff ? "scoreOffButton" : "scoreOnButton"
+            scoreButton?.selectedTexture = SKTexture(imageNamed: imageName)
+        }
+    }
+
+    override var backgroundNodeThree: SKNode? {
+        return childNode(withName: timerNodePath)!
+    }
+    
+    var timerButton: ButtonNode? {
+        return backgroundNodeOne?.childNode(withName: ButtonIdentifier.enterGame.rawValue) as? ButtonNode
+    }
+    
+    var timerOff = false {
+        didSet {
+            let imageName = timerOff ? "timerOffButton" : "timerOnButton"
+            enterButton?.selectedTexture = SKTexture(imageNamed: imageName)
+        }
+    }
+
+    override var backgroundNodeFour: SKNode? {
+        return childNode(withName: enterNodePath)!
+    }
+    
+    var enterButton: ButtonNode? {
+        return backgroundNodeFour?.childNode(withName: ButtonIdentifier.enterGame.rawValue) as? ButtonNode
+    }
+    
+    var enterOff = false {
+        didSet {
+            let imageName = enterOff ? "enterOffButton" : "enterOnButton"
+            enterButton?.selectedTexture = SKTexture(imageNamed: imageName)
+        }
+    }
+
     var entities = [GKEntity()]
     var graphs = [String:GKGraph]()
     
@@ -41,6 +104,12 @@ class MenuScene: SKScene {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
         setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
+        
+        initializeScreenButtons()
+    }
+    
+    func initializeScreenButtons() {
+        enableButton(button: enterButton)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -72,8 +141,8 @@ class MenuScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        transitionToScene(destination: SceneType.GameScene, sendingScene: self)
-        self.removeFromParent()
+        //transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+        //self.removeFromParent()
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

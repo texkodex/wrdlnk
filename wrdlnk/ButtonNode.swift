@@ -51,13 +51,13 @@ enum ButtonIdentifier: String {
         case .moreInfo:
             return "MoreInfo"
         case .soundSwitch:
-            return "SoundOff"
+            return "soundOffButton"
         case .scoreSwitch:
-            return "ScoreSwitch"
+            return "scoreOffButton"
         case .timerSwitch:
-            return "TimerOff"
+            return "timerOffButton"
         case .enterGame:
-            return "EnterGame"
+            return "enterOffButton"
         }
     }
 }

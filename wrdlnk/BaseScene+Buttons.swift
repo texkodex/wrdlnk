@@ -28,6 +28,9 @@ extension BaseScene: ButtonNodeResponderType {
             case .appSettings:
                 transitionToScene(destination: SceneType.Menu, sendingScene: self)
                 break
+            case .enterGame:
+                transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+            break
         default:
             return
         }

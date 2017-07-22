@@ -34,15 +34,21 @@ let meaningNodePath = "//world/meaning"
 let graphNodePath = "//world/change"
 let settingsNodePath = "//world/config"
 
-let soundNodePath = "//world/sound"
-let scoreNodePath = "//world/score"
-let timerNodePath = "//world/timer"
+let soundNodePath = "//world/switches/sound"
+let scoreNodePath = "//world/switches/score"
+let timerNodePath = "//world/switches/timer"
 let enterNodePath = "//world/enter"
 
+let focusRingName = "focusRing"
 
 let preferenceWordListKey = "preference_wordlist_index"
 let preferenceShowGraphKey = "preference_graph"
 let preferenceGameStatKey = "preference_game_stat"
+
+let preferenceSoundEnabledKey = "preference_sound_enabled"
+let preferenceScoreEnabledKey = "preference_score_enabled"
+let preferenceTimerEnabledKey = "preference_timer_enabled"
+
 
 let minClickToSeeDefinition = 5
 

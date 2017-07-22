@@ -49,7 +49,7 @@ class GameScene: BaseScene {
             graphButton?.selectedTexture = SKTexture(imageNamed: imageName)
     
             UserDefaults.standard.set(graphOff, forKey: preferenceShowGraphKey)
-            UserDefaults.standard.synchronize()
+
         }
     }
     

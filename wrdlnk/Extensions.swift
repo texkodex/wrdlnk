@@ -35,8 +35,7 @@ extension SKScene {
         case .Menu:
             scene = MenuScene(fileNamed: "MenuScene")!
         }
-        
-        // Adjust scene size to view bounds
+ 
         scene.size = (view?.bounds.size)!
         
         scene.scaleMode = SKSceneScaleMode.aspectFill
@@ -117,17 +116,66 @@ extension SKScene {
         }
     }
     
+
+}
+
+extension BaseScene {
+    var soundToggleEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: preferenceSoundEnabledKey)
+    }
+
+    var scoreToggleEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: preferenceScoreEnabledKey)
+    }
+    
+    var timerToggleEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey)
+    }
+    
+    func playAudioSound() {
+        guard soundToggleEnabled else { return }
+        
+    }
+    
+    func showGameScore() {
+        guard scoreToggleEnabled else { return }
+        
+    }
+    
+    func startGameTimer() {
+        guard timerToggleEnabled else { return }
+        
+    }
+    
     func disableButton(button: ButtonNode?) {
         button?.alpha = 0.0
         button?.isUserInteractionEnabled = false
         button?.focusRing.isHidden = true
     }
     
-    func enableButton(button: ButtonNode?) {
+    func enableButton(button: ButtonNode?, isSelected: Bool = true, focus: Bool = false) {
         button?.alpha = 1.0
         button?.isUserInteractionEnabled = true
-        button?.isSelected = true
-        button?.focusRing.isHidden = false
+        button?.isSelected = isSelected
+        button?.focusRing.isHidden = focus
+    }
+}
+
+extension ButtonNodeResponderType where Self: BaseScene {
+    func toggleAudioSound(button: ButtonNode) {
+        let state = UserDefaults.standard.bool(forKey: preferenceSoundEnabledKey)
+        button.isSelected = !state
+        UserDefaults.standard.set(button.isSelected, forKey: preferenceSoundEnabledKey)
+    }
+    
+    func toggleGameScore(button: ButtonNode) {
+        button.isSelected = !button.isSelected
+        UserDefaults.standard.set(button.isSelected, forKey: preferenceScoreEnabledKey)
+    }
+    
+    func toggleGameTimer(button: ButtonNode) {
+        button.isSelected = !button.isSelected
+        UserDefaults.standard.set(button.isSelected, forKey: preferenceTimerEnabledKey)
     }
 }
 

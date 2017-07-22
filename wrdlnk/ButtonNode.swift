@@ -45,19 +45,19 @@ enum ButtonIdentifier: String {
         case .showGraph:
             return "graphButton"
         case .appSettings:
-            return "settingsButton"
+            return "settingsOnButton"
         case .cancel:
             return "Cancel"
         case .moreInfo:
             return "MoreInfo"
         case .soundSwitch:
-            return "soundOffButton"
+            return "soundOnButton"
         case .scoreSwitch:
-            return "scoreOffButton"
+            return "scoreOnButton"
         case .timerSwitch:
-            return "timerOffButton"
+            return "timerOnButton"
         case .enterGame:
-            return "enterOffButton"
+            return "enterOnButton"
         }
     }
 }
@@ -113,7 +113,7 @@ class ButtonNode: SKSpriteNode {
         }
     }
 
-    lazy var focusRing: SKNode = self.childNode(withName: "focusRing")!
+    lazy var focusRing: SKNode = self.childNode(withName: focusRingName)!
     
     override init(texture: SKTexture?, color: SKColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)

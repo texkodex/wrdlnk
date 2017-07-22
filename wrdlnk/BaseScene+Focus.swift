@@ -29,15 +29,15 @@ extension BaseScene {
     
     private var buttonIdentifiersOrderedByInitialFocusPriority: [ButtonIdentifier] {
         return [
-            .home,
-            .proceedToNextScene,
-            .provideMeaning,
             .appSettings,
             .soundSwitch,
             .scoreSwitch,
             .timerSwitch,
             .enterGame,
+            .proceedToNextScene,
+            .provideMeaning,
             .showGraph,
+            .home,
             .cancel,
             .moreInfo
             

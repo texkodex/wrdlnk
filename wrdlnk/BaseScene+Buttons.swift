@@ -27,9 +27,18 @@ extension BaseScene: ButtonNodeResponderType {
             break
             case .appSettings:
                 transitionToScene(destination: SceneType.Menu, sendingScene: self)
-                break
+            break
             case .enterGame:
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+            break
+            case .soundSwitch:
+                toggleAudioSound(button: button)
+            break
+            case .scoreSwitch:
+                toggleGameScore(button: button)
+            break
+            case .timerSwitch:
+                toggleGameTimer(button: button)
             break
         default:
             return

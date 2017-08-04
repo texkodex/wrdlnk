@@ -105,7 +105,16 @@ class GameScene: BaseScene {
     
     var playerTimer = 0
     
-    var levelTime : Int = 0
+    var levelTime:Int  {
+        get {
+            return UserDefaults().integer(forKey: preferenceGameTimeKey)
+        }
+        set {
+            UserDefaults().set(newValue, forKey: preferenceGameTimeKey)
+        }
+    }
+
+    var startTime:Int = 0
     
     struct initialize {
         static var doOnce: Bool = false
@@ -118,7 +127,6 @@ class GameScene: BaseScene {
         graphs.removeAll()
         spriteNodeList.removeAll()
         matchList.removeAll()
-        stopAudio(delay: 1.0)
         self.removeFromParent()
         self.view?.presentScene(nil)
     }
@@ -380,13 +388,15 @@ class GameScene: BaseScene {
     }
 
     func checkForAllMatches() {
-        playerScore += 10
+        playerScore += matchLetterValue
         if counters.matchComplete() {
-            playSoundForEvent(soundEvent: .good)
+            playerScore += bonusPoints()
+            playSoundForEvent(soundEvent: .great)
             wordList.setMatchCondition()
             progressSummary()
             enableGraphDisplay()
             readyForInit()
+            //stopAudio(delay: 2.0)
             transitionReloadScene(scene: self)
             return
         } else {

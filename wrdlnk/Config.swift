@@ -59,6 +59,9 @@ let preferenceGameTimeKey = "preference_game_time"
 
 let minClickToSeeDefinition = 0
 
+let matchLetterValue = 2
+let maxMatchingTimeSec = 180
+
 let grayTile = UIColor(colorLiteralRed: 192 / 255, green: 192 / 255, blue: 192 / 255, alpha: 1)
 let blueTile = UIColor(colorLiteralRed: 77 / 255, green: 146 / 255, blue: 223 / 255, alpha: 1)
 let yellowTile = UIColor(colorLiteralRed: 241 / 255, green: 224 / 255, blue: 95 / 255, alpha: 1)

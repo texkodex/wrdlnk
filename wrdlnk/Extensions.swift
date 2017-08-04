@@ -19,6 +19,7 @@ enum SceneType {
 
 extension GameScene {
     func countTime() {
+        self.startTime = self.levelTime
         let wait = SKAction.wait(forDuration: 0.5) //change countdown speed here
         let block = SKAction.run({
             [unowned self] in
@@ -37,6 +38,24 @@ extension GameScene {
     private func countIndicator() {
         self.levelTime += 1
         self.playerTimerLabel?.text = String(format: "%02d:%02d", ((lround(Double(self.levelTime)) / 60) % 60), lround(Double(self.levelTime)) % 60)
+    }
+    
+    func bonusPoints() -> Int {
+        let timeDiff = self.levelTime - self.startTime
+        
+        if timeDiff > maxMatchingTimeSec {
+            return 0
+        }
+        
+        if timeDiff * 5 < maxMatchingTimeSec {
+            return 8
+        } else if timeDiff * 3 < maxMatchingTimeSec{
+            return 6
+        } else if timeDiff * 2 < maxMatchingTimeSec{
+            return 4
+        }
+        
+        return 2
     }
 }
 

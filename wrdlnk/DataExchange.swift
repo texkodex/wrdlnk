@@ -32,7 +32,7 @@ class DataExchange: NSObject {
     
     static func fetchWordList(completionnHander: @escaping ([Word]) -> ()) {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        let urlString = "http://www.owsys.com/wlink/api/wlink_default.json"
+        let urlString = remoteWordListSite
         let request = URLRequest(url:URL(string: urlString)!)
         URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error)  in
             
@@ -137,7 +137,7 @@ extension WordList {
    
     
     func isEmpty() -> Bool {
-        return info.wordBank.count == 0 || info.initialize == false
+        return info.wordBank.isEmpty
     }
     
     mutating func setupWords() {
@@ -259,7 +259,7 @@ extension WordList {
     mutating func handledMatchCondition() {
         if let match = info.matchCondition, match == true {
             let newIndex = UserDefaults.standard.integer(forKey: preferenceWordListKey)
-            UserDefaults.standard.set(newIndex + 1, forKey: preferenceWordListKey)
+            UserDefaults.standard.set((newIndex + 1) % info.wordBank.count, forKey: preferenceWordListKey)
             info.matchCondition = nil
         }
     }

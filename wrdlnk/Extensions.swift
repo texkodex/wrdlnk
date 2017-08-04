@@ -20,7 +20,7 @@ enum SceneType {
 extension GameScene {
     func countTime() {
         self.startTime = self.levelTime
-        let wait = SKAction.wait(forDuration: 0.5) //change countdown speed here
+        let wait = SKAction.wait(forDuration: 1.0) //change countdown speed here
         let block = SKAction.run({
             [unowned self] in
             
@@ -37,7 +37,14 @@ extension GameScene {
     
     private func countIndicator() {
         self.levelTime += 1
-        self.playerTimerLabel?.text = String(format: "%02d:%02d", ((lround(Double(self.levelTime)) / 60) % 60), lround(Double(self.levelTime)) % 60)
+        self.playerTimerLabel?.text = timerString()
+        if ((self.playerTimerLabel?.alpha)! < CGFloat(1.0)) {
+            self.playerTimerLabel?.alpha = 1
+        }
+    }
+    
+    func timerString() -> String? {
+        return String(format: "%02d:%02d", ((lround(Double(self.levelTime)) / 60) % 60), lround(Double(self.levelTime)) % 60)
     }
     
     func bonusPoints() -> Int {
@@ -452,8 +459,8 @@ extension SKTileMapNode {
         let shape = SKShapeNode()
         shape.path = UIBezierPath(roundedRect: CGRect(x: self.frame.minX, y: self.frame.minY, width: self.frame.width, height: self.frame.height), cornerRadius: self.frame.width / 256).cgPath
         shape.position = CGPoint(x: self.frame.midX, y: self.frame.midY) // does not do anything?
-        shape.fillColor = greenTile
-        shape.strokeColor = blueTile
+        shape.fillColor = grayTile
+        shape.strokeColor = grayTile
         shape.lineWidth = 1
         return shape
     }

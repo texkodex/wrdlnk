@@ -30,6 +30,7 @@ let tileUserDataClickName = "clickable"
 let letterNodeName = "letter_"
 let letterNodeColRow = "letter_%d_%d"
 
+let remoteWordListSite = "http://www.owsys.com/wlink/api/wlink_default.json"
 let meaningNodePath = "//world/meaning"
 let graphNodePath = "//world/change"
 let settingsNodePath = "//world/config"
@@ -39,6 +40,7 @@ let scoreNodePath = "//world/switches/score"
 let timerNodePath = "//world/switches/timer"
 let enterNodePath = "//world/enter"
 
+let statHighScoreNodePath = "//world/stat/highScore"
 let statScoreNodePath = "//world/stat/score"
 let statTimerNodePath = "//world/stat/timer"
 
@@ -56,6 +58,8 @@ let preferenceCurrentScoreKey = "preference_current_score"
 let preferenceHighScoreKey = "preference_high_score"
 
 let preferenceGameTimeKey = "preference_game_time"
+
+let preferenceRemoteDataSiteKey = "preference_remote_data_site"
 
 let minClickToSeeDefinition = 0
 

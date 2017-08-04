@@ -66,7 +66,7 @@ class GameScene: BaseScene {
     }
     
     var highScoreLabel: SKLabelNode? {
-        return backgroundNodeOne?.childNode(withName: "//world/highScoreLabel") as? SKLabelNode
+        return backgroundNodeOne?.childNode(withName: statHighScoreNodePath) as? SKLabelNode
     }
 
     var playerTimerLabel: SKLabelNode? {
@@ -140,10 +140,9 @@ class GameScene: BaseScene {
         view.addGestureRecognizer(tapBoardGestureRecognizer)
         
         // Start game timer
+        self.playerTimerLabel?.text = timerString()
         countTime()
      }
-    
-
     
     func readyForInit() {
         initialize.doOnce = false
@@ -360,6 +359,8 @@ class GameScene: BaseScene {
                 counters.clickMatch()
                 unhighlightAll()
                 checkForAllMatches()
+            } else {
+                playSoundForEvent(soundEvent: .error)
             }
         }
     }
@@ -396,8 +397,8 @@ class GameScene: BaseScene {
             progressSummary()
             enableGraphDisplay()
             readyForInit()
-            //stopAudio(delay: 2.0)
             transitionReloadScene(scene: self)
+            stopAudio(delay: 1.0)
             return
         } else {
             playSoundForEvent(soundEvent: .yes)

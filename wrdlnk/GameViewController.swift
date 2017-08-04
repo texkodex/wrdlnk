@@ -23,14 +23,26 @@ class GameViewController: UIViewController {
         return(url!.appendingPathComponent("Data").path)
     }
     
+    deinit {
+        print("deinit GameViewController")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Load words from remote site
-        DataExchange.fetchWordList { (wordGroup) -> () in
-            //self.wordList = wordGroup
-            self.wordList.networkLoad(wordList: wordGroup)
-            print("wordList retrieved")
-            self.setup()
+        if UserDefaults.standard.keyExist(key: preferenceRemoteDataSiteKey) {
+            // Load words from remote site
+            DataExchange.fetchWordList { (wordGroup) -> () in
+                //self.wordList = wordGroup
+                self.wordList.networkLoad(wordList: wordGroup)
+                print("wordList retrieved")
+                self.setup()
+            }
+        } else {
+            DataExchange.fileFetchWorldList { (wordGroup) -> () in
+                self.wordList.networkLoad(wordList: wordGroup)
+                print("wordList retrieved")
+                self.setup()
+            }
         }
     }
     
@@ -69,8 +81,8 @@ class GameViewController: UIViewController {
                     
                     view.ignoresSiblingOrder = true
                     
-                    view.showsFPS = true
-                    view.showsNodeCount = true
+                    //view.showsFPS = true
+                    //view.showsNodeCount = true
                 }
             }
         }

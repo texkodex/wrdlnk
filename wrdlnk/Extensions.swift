@@ -17,6 +17,29 @@ enum SceneType {
     case Menu
 }
 
+extension GameScene {
+    func countTime() {
+        let wait = SKAction.wait(forDuration: 0.5) //change countdown speed here
+        let block = SKAction.run({
+            [unowned self] in
+            
+            if self.levelTime >= 0 {
+                self.countIndicator()
+            }else{
+                self.removeAction(forKey: "counter")
+            }
+        })
+        let sequence = SKAction.sequence([wait,block])
+        
+        run(SKAction.repeatForever(sequence), withKey: "counter")
+    }
+    
+    private func countIndicator() {
+        self.levelTime += 1
+        self.playerTimerLabel?.text = String(format: "%02d:%02d", ((lround(Double(self.levelTime)) / 60) % 60), lround(Double(self.levelTime)) % 60)
+    }
+}
+
 extension SKScene {
     
     func transitionToScene(destination: SceneType, sendingScene: SKScene) {
@@ -116,7 +139,6 @@ extension SKScene {
         }
     }
     
-
 }
 
 extension BaseScene {
@@ -169,12 +191,14 @@ extension ButtonNodeResponderType where Self: BaseScene {
     }
     
     func toggleGameScore(button: ButtonNode) {
-        button.isSelected = !button.isSelected
+        let state = UserDefaults.standard.bool(forKey: preferenceScoreEnabledKey)
+        button.isSelected = !state
         UserDefaults.standard.set(button.isSelected, forKey: preferenceScoreEnabledKey)
     }
     
     func toggleGameTimer(button: ButtonNode) {
-        button.isSelected = !button.isSelected
+        let state = UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey)
+        button.isSelected = !state
         UserDefaults.standard.set(button.isSelected, forKey: preferenceTimerEnabledKey)
     }
 }
@@ -407,11 +431,11 @@ extension SKTileMapNode {
     
     func graphBackground() -> SKShapeNode {
         let shape = SKShapeNode()
-        shape.path = UIBezierPath(roundedRect: CGRect(x: self.frame.minX, y: self.frame.minY, width: self.frame.width, height: self.frame.height), cornerRadius: self.frame.width / 64).cgPath
+        shape.path = UIBezierPath(roundedRect: CGRect(x: self.frame.minX, y: self.frame.minY, width: self.frame.width, height: self.frame.height), cornerRadius: self.frame.width / 256).cgPath
         shape.position = CGPoint(x: self.frame.midX, y: self.frame.midY) // does not do anything?
         shape.fillColor = greenTile
         shape.strokeColor = blueTile
-        shape.lineWidth = 3
+        shape.lineWidth = 1
         return shape
     }
     
@@ -428,7 +452,7 @@ extension SKTileMapNode {
         let shape = SKShapeNode()
         let rowWidth = self.frame.width / CGFloat(numberOfColumns) * 2
         let xPos = (self.frame.minX + rowWidth) + CGFloat(index) * rowWidth
-        let yPos = self.frame.minY + self.frame.height / CGFloat(numberOfRows)
+        let yPos = self.frame.minY + self.frame.height / CGFloat(numberOfRows) + 3
         let rowHeight = self.frame.height / CGFloat(numberOfRows)
         let maxHeight = self.frame.height - rowHeight * 2
         let xWidth = CGFloat(2)
@@ -437,7 +461,7 @@ extension SKTileMapNode {
         
         let fillColor = redTile
         let fillStroke = redTile
-        let lineWidth = CGFloat(3)
+        let lineWidth = CGFloat(2)
         
         shape.path = UIBezierPath(roundedRect: CGRect(x: xPos, y: yPos, width: xWidth, height: yHeight),
                                   cornerRadius: cornerRadius).cgPath
@@ -445,7 +469,7 @@ extension SKTileMapNode {
         shape.fillColor = fillColor
         shape.strokeColor = fillStroke
         shape.lineWidth = lineWidth
-        let label = graphText(name: "label_\(index)", text: "\(Int(percentage))%", position: CGPoint(x: xPos, y: -120))
+        let label = graphText(name: "label_\(index)", text: "\(Int(percentage))%", position: CGPoint(x: xPos, y: yPos - 14))
         shape.addChild(label)
         return shape
     }

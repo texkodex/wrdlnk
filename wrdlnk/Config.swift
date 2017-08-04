@@ -39,6 +39,9 @@ let scoreNodePath = "//world/switches/score"
 let timerNodePath = "//world/switches/timer"
 let enterNodePath = "//world/enter"
 
+let statScoreNodePath = "//world/stat/score"
+let statTimerNodePath = "//world/stat/timer"
+
 let focusRingName = "focusRing"
 
 let preferenceWordListKey = "preference_wordlist_index"
@@ -49,8 +52,12 @@ let preferenceSoundEnabledKey = "preference_sound_enabled"
 let preferenceScoreEnabledKey = "preference_score_enabled"
 let preferenceTimerEnabledKey = "preference_timer_enabled"
 
+let preferenceCurrentScoreKey = "preference_current_score"
+let preferenceHighScoreKey = "preference_high_score"
 
-let minClickToSeeDefinition = 5
+let preferenceGameTimeKey = "preference_game_time"
+
+let minClickToSeeDefinition = 0
 
 let grayTile = UIColor(colorLiteralRed: 192 / 255, green: 192 / 255, blue: 192 / 255, alpha: 1)
 let blueTile = UIColor(colorLiteralRed: 77 / 255, green: 146 / 255, blue: 223 / 255, alpha: 1)

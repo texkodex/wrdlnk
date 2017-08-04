@@ -52,7 +52,15 @@ extension GameScene {
         
     }
     
-    func stopAudio() {
+    func stopAudio(delay: Double) {
+        let delayTime = (Double(NSEC_PER_SEC) * delay)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delayTime, execute: {
+            self.stop()
+        })
+        
+    }
+    
+    func stop() {
         if audioPlayer != nil {
             audioPlayer.stop()
             audioPlayer = nil

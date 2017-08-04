@@ -129,12 +129,7 @@ struct WordList {
             UserDefaults.standard.set(0, forKey: preferenceWordListKey)
             UserDefaults.standard.purgeAll()
         }
-        if UserDefaults.standard.keyExist(key: preferenceWordListKey) {
-            let index: Int  = UserDefaults.standard.integer(forKey: preferenceWordListKey)
-            if index > 0 {
-                info.index = index
-            }
-        }
+        info.index =  UserDefaults.standard.keyExist(key: preferenceWordListKey) ? UserDefaults.standard.integer(forKey: preferenceWordListKey) : 0
     }
 }
 
@@ -142,7 +137,7 @@ extension WordList {
    
     
     func isEmpty() -> Bool {
-        return info.initialize == false
+        return info.wordBank.count == 0 || info.initialize == false
     }
     
     mutating func setupWords() {
@@ -228,12 +223,19 @@ extension WordList {
         }
         
         if let match = info.matchCondition, match == true {
-            info.index += 1
-            info.index = info.index % info.wordBank.count
+            info.index = UserDefaults.standard.integer(forKey: preferenceWordListKey)
+            info.index = (info.index + 1) % info.wordBank.count
+            UserDefaults().set(info.index, forKey: preferenceWordListKey)
         }
         return info.wordBank[info.index]
     }
    
+    func skip() {
+        info.index = UserDefaults.standard.integer(forKey: preferenceWordListKey)
+        info.index = (info.index + 1) % info.wordBank.count
+        UserDefaults().set(info.index, forKey: preferenceWordListKey)
+    }
+    
     func getCurrentWords() -> Word? {
         return isEmpty() ? nil : info.wordBank[info.index]
     }
@@ -256,8 +258,8 @@ extension WordList {
     
     mutating func handledMatchCondition() {
         if let match = info.matchCondition, match == true {
-            let newIndex = (info.index + 1) % info.wordBank.count
-            UserDefaults.standard.set(newIndex, forKey: preferenceWordListKey)
+            let newIndex = UserDefaults.standard.integer(forKey: preferenceWordListKey)
+            UserDefaults.standard.set(newIndex + 1, forKey: preferenceWordListKey)
             info.matchCondition = nil
         }
     }

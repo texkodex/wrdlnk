@@ -45,13 +45,6 @@ class MenuScene: BaseScene {
         return backgroundNodeFour?.childNode(withName: ButtonIdentifier.enterGame.rawValue) as? ButtonNode
     }
     
-    var entities = [GKEntity()]
-    var graphs = [String:GKGraph]()
-    
-    var nodes = [SKNode]()
-    
-    var wordList = WordList.sharedInstance
-    
     let nodeMap = [ ViewElement.switches.rawValue,
                     ViewElement.sound.rawValue,
                     ViewElement.soundSwitch.rawValue,
@@ -64,9 +57,6 @@ class MenuScene: BaseScene {
     
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        entities.removeAll()
-        graphs.removeAll()
-        nodes.removeAll()
         self.removeFromParent()
         self.view?.presentScene(nil)
     }
@@ -75,19 +65,18 @@ class MenuScene: BaseScene {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
         initializeButtons()
-
     }
     
     func initializeButtons() {
         print("Entering \(#file):: \(#function) at line \(#line)")
         var state = UserDefaults.standard.bool(forKey: preferenceSoundEnabledKey)
-        state ? enableButton(button: soundButton, focus: true) : enableButton(button: soundButton, isSelected: false)
+        state ? enableButton(button: soundButton, isSelected: state, focus: true) : enableButton(button: soundButton, isSelected: state)
         
         state = UserDefaults.standard.bool(forKey: preferenceScoreEnabledKey)
-        state ? enableButton(button: scoreButton, focus: true) : enableButton(button: scoreButton, isSelected: false)
+        state ? enableButton(button: scoreButton, isSelected: state, focus: true) : enableButton(button: scoreButton, isSelected: state)
         
         state = UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey)
-        state ? enableButton(button: timerButton, focus: true) : enableButton(button: timerButton, isSelected: false)
+        state ? enableButton(button: timerButton, isSelected: state, focus: true) : enableButton(button: timerButton, isSelected: state)
     }
     
     override func sceneDidLoad() {
@@ -145,6 +134,5 @@ class MenuScene: BaseScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("Entering \(#file):: \(#function) at line \(#line)")
     }
-    
 }
 

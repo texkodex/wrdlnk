@@ -60,8 +60,22 @@ class GameScene: BaseScene {
         }
     }
     
+    // MARK:- SKLabelNode
+    var playerScoreLabel: SKLabelNode? {
+        return backgroundNodeOne?.childNode(withName: statScoreNodePath) as? SKLabelNode
+    }
+    
+    var highScoreLabel: SKLabelNode? {
+        return backgroundNodeOne?.childNode(withName: "//world/highScoreLabel") as? SKLabelNode
+    }
+
+    var playerTimerLabel: SKLabelNode? {
+        return backgroundNodeOne?.childNode(withName: statTimerNodePath) as? SKLabelNode
+    }
+
     // MARK:- Data structures
     var entities = [GKEntity()]
+    
     var graphs = [String:GKGraph]()
     
     var wordList = WordList.sharedInstance
@@ -79,6 +93,20 @@ class GameScene: BaseScene {
     
     var matchList: [String] = []
 
+    var playerScore:Int {
+        get {
+            return UserDefaults().integer(forKey: preferenceCurrentScoreKey)
+        }
+        set {
+            playerScoreLabel?.text = "\(newValue)"
+            UserDefaults().set(newValue, forKey: preferenceCurrentScoreKey)
+        }
+    }
+    
+    var playerTimer = 0
+    
+    var levelTime : Int = 0
+    
     struct initialize {
         static var doOnce: Bool = false
     }
@@ -90,7 +118,7 @@ class GameScene: BaseScene {
         graphs.removeAll()
         spriteNodeList.removeAll()
         matchList.removeAll()
-        stopAudio()
+        stopAudio(delay: 1.0)
         self.removeFromParent()
         self.view?.presentScene(nil)
     }
@@ -102,6 +130,9 @@ class GameScene: BaseScene {
         let tapBoardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapFrom(recognizer:)))
         tapBoardGestureRecognizer.numberOfTapsRequired = 1
         view.addGestureRecognizer(tapBoardGestureRecognizer)
+        
+        // Start game timer
+        countTime()
      }
     
 
@@ -129,6 +160,12 @@ class GameScene: BaseScene {
         
         // Enable buttons if data available
         initializeScreenButtons()
+        
+        // Update player score
+        playerScoreUpdate()
+        playerTimerUpdate()
+        // Set the high score
+        highScoreLabel?.text = "HighScore: " + UserDefaults().integer(forKey: "highscore").description
     }
     
     func initializeScreenButtons() {
@@ -343,6 +380,7 @@ class GameScene: BaseScene {
     }
 
     func checkForAllMatches() {
+        playerScore += 10
         if counters.matchComplete() {
             playSoundForEvent(soundEvent: .good)
             wordList.setMatchCondition()
@@ -373,6 +411,33 @@ class GameScene: BaseScene {
     func showDefinitionButton() {
         if counters.totalBoardTileClicks() > minClickToSeeDefinition {
             enableButton(button: definitionButton)
+        }
+    }
+    
+    // MARK:- High score
+    func playerScoreUpdate() {
+        if !UserDefaults.standard.bool(forKey: preferenceScoreEnabledKey) {
+            playerScoreLabel?.isHidden = true
+        }
+        else {
+            playerScoreLabel?.isHidden = false
+        }
+        
+        playerScore = UserDefaults().integer(forKey: preferenceCurrentScoreKey)
+        let highScore = UserDefaults().integer(forKey: preferenceHighScoreKey)
+        if playerScore > highScore {
+            UserDefaults().set(playerScore, forKey: preferenceHighScoreKey)
+        }
+        playerScoreLabel?.text = "\(playerScore)"
+        
+    }
+    
+    // MARK:- Timer
+    func playerTimerUpdate() {
+        if UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey) {
+            playerTimerLabel?.text = "\(playerTimer)"
+        } else {
+            playerTimerLabel?.isHidden = true
         }
     }
 }

@@ -35,6 +35,8 @@ class DefinitionScene: SKScene {
     let nodeMap = [ViewElement.meaning.rawValue, ViewElement.prefixMeaning.rawValue,
                    ViewElement.linkMeaning.rawValue, ViewElement.suffixMeaning.rawValue]
     
+    var someView: UIView!
+    
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
         entities.removeAll()
@@ -48,6 +50,36 @@ class DefinitionScene: SKScene {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
         setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
+    }
+    
+    // MARK: - Popover screen
+    func popUpTheDictionary() {
+        let term = "ball"
+        if UIReferenceLibraryViewController.dictionaryHasDefinition(forTerm: term) {
+            
+        
+        let dic = UIReferenceLibraryViewController(term: term as String)
+        dic.modalPresentationStyle = .popover
+        
+        let popover = dic.popoverPresentationController
+        popover?.sourceView = view
+        popover?.sourceRect = CGRect(x: 32, y: 32, width: 64, height: 64)
+        
+        //self.view?.presentScene((view?.scene)!, transition: SKTransition.fade(withDuration: 1.0))
+        /*
+            present(
+                UIReferenceLibraryViewController(term: term),
+                animated: true,
+                completion: nil
+            )
+        */
+        }
+    }
+
+    override func didMove(to view: SKView) {
+        popUpTheDictionary()
+        //someView = view
+        //view.addSubview(someView)
     }
     
     func checkWord(word: String) -> String? {
@@ -94,6 +126,7 @@ class DefinitionScene: SKScene {
         return misspelledRange.location == NSNotFound
     }
     
+    
     // MARK: - Touches
     func touchDown(atPoint pos : CGPoint) {
         print("Entering \(#file):: \(#function) at line \(#line)")
@@ -109,6 +142,7 @@ class DefinitionScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("Entering \(#file):: \(#function) at line \(#line)")
+        wordList.skip()
         transitionToScene(destination: SceneType.GameScene, sendingScene: self)
         self.removeFromParent()
     }

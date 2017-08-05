@@ -11,8 +11,8 @@ import Foundation
 extension BaseScene: ButtonNodeResponderType {
     
     func findAllButtonsInScene() -> [ButtonNode] {
-        return ButtonIdentifier.allButtonIdentifiers.flatMap { buttonIdentifier in
-            childNode(withName: "//\(buttonIdentifier.rawValue)") as? ButtonNode
+        return ButtonIdentifier.allButtonIdentifiers.flatMap { [unowned self] buttonIdentifier in
+            self.childNode(withName: "//\(buttonIdentifier.rawValue)") as? ButtonNode
         }
     }
     

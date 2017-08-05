@@ -31,14 +31,14 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         if UserDefaults.standard.keyExist(key: preferenceRemoteDataSiteKey) {
             // Load words from remote site
-            DataExchange.fetchWordList { (wordGroup) -> () in
+            DataExchange.fetchWordList { [unowned self] (wordGroup) -> () in
                 //self.wordList = wordGroup
                 self.wordList.networkLoad(wordList: wordGroup)
                 print("wordList retrieved")
                 self.setup()
             }
         } else {
-            DataExchange.fileFetchWorldList { (wordGroup) -> () in
+            DataExchange.fileFetchWorldList { [unowned self] (wordGroup) -> () in
                 self.wordList.networkLoad(wordList: wordGroup)
                 print("wordList retrieved")
                 self.setup()
@@ -68,7 +68,7 @@ class GameViewController: UIViewController {
                 // Copy gameplay related content over to the scene
                 sceneNode.entities = scene.entities
                 sceneNode.graphs = scene.graphs
-                //sceneNode.wordList = self.wordList!
+
                 // Set the scale mode to scale to fit the window
                 sceneNode.scaleMode = .aspectFill
                 

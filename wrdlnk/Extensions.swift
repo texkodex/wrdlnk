@@ -465,11 +465,12 @@ extension SKTileMapNode {
         return shape
     }
     
-    func graphText(name: String, text: String, position: CGPoint, fontSize: CGFloat = 14) -> SKLabelNode {
+    func graphText(name: String, text: String, position: CGPoint, fontSize: CGFloat = 14, fontColor: UIColor = .white) -> SKLabelNode {
         let label = SKLabelNode(fontNamed: "Arial")
         label.name = name
         label.text = "\(text)"
         label.fontSize = fontSize
+        label.fontColor = fontColor
         label.position = position
         return label
     }
@@ -511,7 +512,7 @@ extension SKTileMapNode {
         }
         
         let label = graphText(name: "label_graph_title", text: "Most Recent Performance",
-                              position: CGPoint(x: self.frame.midX, y: -150), fontSize: 24)
+                              position: CGPoint(x: self.frame.midX, y: -150), fontSize: 24, fontColor: grayTile)
         self.addChild(label)
     }
  

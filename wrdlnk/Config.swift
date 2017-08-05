@@ -61,7 +61,7 @@ let preferenceGameTimeKey = "preference_game_time"
 
 let preferenceRemoteDataSiteKey = "preference_remote_data_site"
 
-let minClickToSeeDefinition = 0
+let minClickToSeeDefinition = 100
 
 let matchLetterValue = 2
 let maxMatchingTimeSec = 180

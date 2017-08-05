@@ -398,7 +398,7 @@ class GameScene: BaseScene {
             enableGraphDisplay()
             readyForInit()
             transitionReloadScene(scene: self)
-            stopAudio(delay: 1.0)
+            stopAudio(delay: 0.5)
             return
         } else {
             playSoundForEvent(soundEvent: .yes)

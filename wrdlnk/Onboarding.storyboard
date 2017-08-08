@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eid-F9-rOG">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Walk Through Page View Controller-->
+        <scene sceneID="urv-TO-1Ji">
+            <objects>
+                <pageViewController storyboardIdentifier="WalkThroughPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" pageSpacing="4" navigationOrientation="horizontal" spineLocation="none" id="Eid-F9-rOG" customClass="WalkThroughPageViewController" customModule="wrdlnk" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zRe-pf-LBR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="561" y="2"/>
+        </scene>
+        <!--Walk Through One View Controller-->
+        <scene sceneID="T8X-Y0-wJ0">
+            <objects>
+                <viewController storyboardIdentifier="WalkThroughOneViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EtJ-TM-15M" customClass="WalkThroughOneViewController" customModule="wrdlnk" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gPE-hx-bYe"/>
+                        <viewControllerLayoutGuide type="bottom" id="WLG-mi-vFs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="j2x-dK-fin">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="YRS-7L-pie" userLabel="first_image_view">
+                                <rect key="frame" x="67" y="38" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Page One" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ea2-ws-Isf" userLabel="main_title_text_label">
+                                <rect key="frame" x="16" y="265" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8K-0y-qSK" userLabel="text_sub_title1_label">
+                                <rect key="frame" x="16" y="316" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4TF-e8-PZn" userLabel="horizontal_line_image">
+                                <rect key="frame" x="67" y="540" width="240" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eeh-TX-ZbD" userLabel="next_page_label">
+                                <rect key="frame" x="82" y="565" width="126" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNt-wL-fOP" userLabel="next_page_button">
+                                <rect key="frame" x="241" y="564" width="65" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="walkthrough-proceed-arrow"/>
+                                <connections>
+                                    <action selector="nextPageButtonWithSender:" destination="EtJ-TM-15M" eventType="touchUpInside" id="eGJ-5l-Uv8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="firstSubTitleLabel" destination="Y8K-0y-qSK" id="hgJ-zl-TQ7"/>
+                        <outlet property="horizontalLineImage" destination="4TF-e8-PZn" id="RAb-P2-KjS"/>
+                        <outlet property="mainTitleLabel" destination="ea2-ws-Isf" id="9yA-H1-J2J"/>
+                        <outlet property="nextPageLabel" destination="Eeh-TX-ZbD" id="M5k-2M-W1v"/>
+                        <outlet property="walkthroughImage" destination="YRS-7L-pie" id="DYb-EE-JB3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S9Z-oE-hA2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1288.8" y="1.3493253373313345"/>
+        </scene>
+        <!--Walk Through Two View Controller-->
+        <scene sceneID="1FB-Pf-IVj">
+            <objects>
+                <viewController storyboardIdentifier="WalkThroughTwoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wU5-a1-pRh" customClass="WalkThroughTwoViewController" customModule="wrdlnk" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FcV-ga-QoJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="VxA-LD-7E4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="WalkThroughTwoViewController" id="yX4-re-F8Y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="settingsButton" translatesAutoresizingMaskIntoConstraints="NO" id="FfQ-dq-Baf" userLabel="first_image_view">
+                                <rect key="frame" x="67" y="38" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Page Two" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B0J-8w-Zps" userLabel="main_title_text_label">
+                                <rect key="frame" x="16" y="265" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfZ-JH-1PA" userLabel="text_sub_title1_label">
+                                <rect key="frame" x="16" y="316" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CnD-FZ-48T" userLabel="horizontal_line_image">
+                                <rect key="frame" x="67" y="540" width="240" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGh-Ol-znD" userLabel="next_page_label">
+                                <rect key="frame" x="92" y="565" width="116" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xlu-99-mhp" userLabel="next_page_button">
+                                <rect key="frame" x="241" y="564" width="65" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="walkthrough-proceed-arrow"/>
+                                <connections>
+                                    <action selector="nextPageButtonWithSender:" destination="wU5-a1-pRh" eventType="touchUpInside" id="r2S-Za-X35"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="firstSubTitleLabel" destination="kfZ-JH-1PA" id="FOW-YX-KV7"/>
+                        <outlet property="horizontalLineImage" destination="CnD-FZ-48T" id="ryl-rn-o0V"/>
+                        <outlet property="mainTitleLabel" destination="B0J-8w-Zps" id="0nI-bY-fpz"/>
+                        <outlet property="nextPageLabel" destination="SGh-Ol-znD" id="YrS-Ez-DCx"/>
+                        <outlet property="walkthroughImage" destination="FfQ-dq-Baf" id="z3H-XQ-idb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YSl-JM-YGM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1968.8" y="5.8470764617691158"/>
+        </scene>
+        <!--Walk Through Three View Controller-->
+        <scene sceneID="w5i-ju-Wr3">
+            <objects>
+                <viewController storyboardIdentifier="WalkThroughThreeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Uni-EM-NlQ" customClass="WalkThroughThreeViewController" customModule="wrdlnk" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7vk-pm-zRH"/>
+                        <viewControllerLayoutGuide type="bottom" id="XXc-LY-5Qh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nCp-an-NhN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="graphButton" translatesAutoresizingMaskIntoConstraints="NO" id="bsY-Lf-WLr" userLabel="first_image_view">
+                                <rect key="frame" x="67" y="38" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Page Three" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49l-CQ-qY2" userLabel="main_title_text_label">
+                                <rect key="frame" x="16" y="265" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2L-XE-FOh" userLabel="text_sub_title1_label">
+                                <rect key="frame" x="16" y="316" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dly-9q-Cgi" userLabel="horizontal_line_image">
+                                <rect key="frame" x="67" y="540" width="240" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpm-xE-6oh" userLabel="next_page_label">
+                                <rect key="frame" x="102" y="565" width="106" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VT0-Dm-HXD" userLabel="next_page_button">
+                                <rect key="frame" x="241" y="564" width="65" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="walkthrough-proceed-arrow"/>
+                                <connections>
+                                    <action selector="nextPageButtonWithSender:" destination="Uni-EM-NlQ" eventType="touchUpInside" id="k2G-tk-vPW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="firstSubTitleLabel" destination="A2L-XE-FOh" id="NgE-Ks-VAI"/>
+                        <outlet property="horizontalLineImage" destination="Dly-9q-Cgi" id="UDR-7Z-ZI1"/>
+                        <outlet property="mainTitleLabel" destination="49l-CQ-qY2" id="keC-Ix-CZR"/>
+                        <outlet property="nextPageLabel" destination="wpm-xE-6oh" id="m3S-sN-rOg"/>
+                        <outlet property="walkthroughImage" destination="bsY-Lf-WLr" id="15Y-r8-zyL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dm2-wi-Mh2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2668" y="6.746626686656672"/>
+        </scene>
+        <!--Walk Through Last Page View Controller-->
+        <scene sceneID="MfK-6z-qmk">
+            <objects>
+                <viewController storyboardIdentifier="WalkThroughLastPageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kfk-cf-zqZ" customClass="WalkThroughLastPageViewController" customModule="wrdlnk" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pyW-Tc-rd1"/>
+                        <viewControllerLayoutGuide type="bottom" id="zfd-Vn-CWZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="177-2s-BTa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="hYA-68-HIF" userLabel="first_image_view">
+                                <rect key="frame" x="67" y="38" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Page Last" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Gl-Bv-zJF" userLabel="main_title_text_label">
+                                <rect key="frame" x="33" y="265" width="305" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gSx-Uy-0ck" userLabel="text_sub_title1_label">
+                                <rect key="frame" x="33" y="316" width="305" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKj-pA-QnF" userLabel="text_sub_title2_label">
+                                <rect key="frame" x="33" y="370" width="305" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QaP-nS-aEK" userLabel="horizontal_line_image">
+                                <rect key="frame" x="67" y="540" width="240" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OfZ-58-9lP" userLabel="next_page_label">
+                                <rect key="frame" x="93" y="565" width="140" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leB-Wr-cS9" userLabel="next_page_button">
+                                <rect key="frame" x="241" y="564" width="65" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="walkthrough-proceed-arrow"/>
+                                <connections>
+                                    <action selector="doneButtonTappedWithSender:" destination="kfk-cf-zqZ" eventType="touchUpInside" id="Mlg-LF-Wwm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="firstSubTitleLabel" destination="gSx-Uy-0ck" id="pXH-Pz-xSC"/>
+                        <outlet property="horizontalLineImage" destination="QaP-nS-aEK" id="piV-LW-lED"/>
+                        <outlet property="mainTitleLabel" destination="3Gl-Bv-zJF" id="5oU-e4-w9W"/>
+                        <outlet property="nextPageLabel" destination="OfZ-58-9lP" id="U56-my-uBF"/>
+                        <outlet property="secondSubTitleLabel" destination="VKj-pA-QnF" id="Mm1-yf-ocC"/>
+                        <outlet property="walkthroughImage" destination="hYA-68-HIF" id="3oA-rV-zBU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9qV-Uu-Lf5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3357.5999999999999" y="10.344827586206897"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="AppIcon" width="76" height="76"/>
+        <image name="graphButton" width="41" height="24"/>
+        <image name="settingsButton" width="43" height="44"/>
+        <image name="walkthrough-proceed-arrow" width="11" height="21"/>
+    </resources>
+</document>

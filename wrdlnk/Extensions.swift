@@ -17,6 +17,21 @@ enum SceneType {
     case Menu
 }
 
+extension UIViewController {
+    var className: String {
+        return NSStringFromClass(self.classForCoder).components(separatedBy: ".").last!;
+    }
+    
+    func launchFromStoryboard(name: String, controller: String) {
+        let storyboard:UIStoryboard? = UIStoryboard(name: name, bundle: nil)
+        if let vc = storyboard?.instantiateViewController(withIdentifier: controller) {
+            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+            appdelegate.window!.rootViewController = vc
+        }
+    }
+
+}
+
 extension GameScene {
     func countTime() {
         self.startTime = self.levelTime

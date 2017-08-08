@@ -15,7 +15,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        initialize()
+        
         return true
+    }
+    
+    
+    func initialize()
+    {
+        AppDefinition.defaults.register(
+            defaults: [AppDefinition.InitialDefaults: true,
+             AppDefinition.DefaultBackground: [105.0/255.0, 111.0/255.0, 120.0/255.0, 1.0]])
+        
+        AppDefinition.defaults.synchronize();
+        
+        let path = Bundle.main.path(forResource: AppDefinition.UserDefaultsTag, ofType: AppDefinition.PropertyList);
+        
+        if ((path) != nil)
+        {
+            let dict = NSDictionary(contentsOfFile: path!);
+            
+            AppDefinition.defaults.set(dict, forKey: AppDefinition.defaultsTag);
+        }
+        
+        UIPageControl().pageIndicatorTintColor = UIColor.lightGray
+        UIPageControl().currentPageIndicatorTintColor = UIColor.blue
     }
 }
 

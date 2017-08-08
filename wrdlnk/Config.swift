@@ -10,6 +10,24 @@ import Foundation
 import UIKit
 import SpriteKit
 
+// MARK:- Application Config
+struct AppDefinition {
+    static let defaults = UserDefaults.standard
+    static let MainStoryboard = "Main"
+    static let OnboardingStoryboard = "Onboarding"
+    static let UserDefaultsTag = "Settings"
+    static let PropertyList = "plist"
+    static let defaultsTag = "defaults"
+    static let InitialDefaults = "initialDefaults"
+    static let DefaultBackground = "BackgroundColor"
+    static let WalkthroughContent = "WalkThrough"
+}
+
+enum StoryboardName : String {
+    case Main = "Main"
+    case Onboarding = "Onboarding"
+}
+
 // MARK:- Defines
 let debugInfo = false
 

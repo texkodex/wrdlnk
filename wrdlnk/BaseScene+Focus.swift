@@ -37,6 +37,10 @@ extension BaseScene {
             .proceedToNextScene,
             .provideMeaning,
             .showGraph,
+            .startNewGame,
+            .continueGame,
+            .gameSettings,
+            .inAppPurchase,
             .home,
             .cancel,
             .moreInfo

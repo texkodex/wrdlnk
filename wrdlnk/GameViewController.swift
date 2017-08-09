@@ -46,6 +46,21 @@ class GameViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let skView = self.view as! SKView
+        if let scene = skView.scene {
+            var size = scene.size
+            let newHeight = skView.bounds.size.height / skView.bounds.width * size.width
+            if newHeight > size.height {
+                scene.anchorPoint = CGPoint(x: 0, y: (newHeight - scene.size.height) / 2.0 / newHeight)
+                size.height = newHeight
+                scene.size = size
+            }
+        }
+    }
+    
     private func saveData(stat: Stat) {
         self.store.statDataItems.append(stat)
         NSKeyedArchiver.archiveRootObject(self.store.statDataItems, toFile: filePath)
@@ -57,13 +72,17 @@ class GameViewController: UIViewController {
         }
     }
     
+    // GameScene width = 667 and height = 375
+    // Background width = 590 and height = 310
     func setup() {
         // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
         // including entities and graphs.
-        if let scene = GKScene(fileNamed: "GameScene") {
+        //if let scene = GKScene(fileNamed: "GameScene") {
+        if let scene = GKScene(fileNamed: "MainMenuScene") {
             
             // Get the SKScene from the loaded GKScene
-            if let sceneNode = scene.rootNode as! GameScene? {
+            //if let sceneNode = scene.rootNode as! GameScene? {
+            if let sceneNode = scene.rootNode as! MainMenuScene? {
                 
                 // Copy gameplay related content over to the scene
                 sceneNode.entities = scene.entities
@@ -95,11 +114,7 @@ class GameViewController: UIViewController {
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }
+        return .landscape
     }
 
     override func didReceiveMemoryWarning() {

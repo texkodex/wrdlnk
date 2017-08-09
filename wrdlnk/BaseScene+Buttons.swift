@@ -40,6 +40,18 @@ extension BaseScene: ButtonNodeResponderType {
             case .timerSwitch:
                 toggleGameTimer(button: button)
             break
+            case .startNewGame:
+                transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+            break
+            case .continueGame:
+                transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+            break
+            case .gameSettings:
+                transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+            break
+            case .inAppPurchase:
+                transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+            break
         default:
             return
         }

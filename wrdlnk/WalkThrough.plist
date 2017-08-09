@@ -9,6 +9,8 @@
 		<string>Welcome to WrdLnk</string>
 		<key>sub_title1_text</key>
 		<string>The app for word explorers</string>
+		<key>sub_title2_text</key>
+		<string>Fun with related words</string>
 		<key>next_page_text</key>
 		<string>Get Started</string>
 		<key>next_page_button</key>
@@ -28,7 +30,9 @@
 		<key>main_title_text</key>
 		<string>Monitor your performance</string>
 		<key>sub_title1_text</key>
-		<string>Control what you want to see</string>
+		<string>Set your own preferences</string>
+		<key>sub_title2_text</key>
+		<string>Decide what you see</string>
 		<key>next_page_text</key>
 		<string>Next</string>
 		<key>next_page_button</key>
@@ -36,7 +40,7 @@
 	</dict>
 	<dict>
 		<key>page_icon1</key>
-		<string>graphButton.png</string>
+		<string>walkthrough-heart-icon.png</string>
 		<key>main_title_text</key>
 		<string>Enjoy!</string>
 		<key>sub_title1_text</key>
@@ -50,13 +54,15 @@
 	</dict>
 	<dict>
 		<key>page_icon1</key>
-		<string>timerOnButton.png</string>
+		<string>walkthrough-heart-icon.png</string>
 		<key>main_title_text</key>
-		<string>Last page</string>
+		<string>Acknowledgements</string>
 		<key>sub_title1_text</key>
-		<string>Thanks to all who helped</string>
+		<string>This app wouldn&apos;t be the same without these people</string>
+		<key>sub_title2_text</key>
+		<string>Thank you very much</string>
 		<key>next_page_text</key>
-		<string>Enter App</string>
+		<string>Enter WrdLnk</string>
 		<key>next_page_button</key>
 		<string>walkthrough-proceed-arrow.png</string>
 	</dict>

@@ -51,6 +51,8 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
         if let firstVC = VCArray.first {
             self.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
+        
+       self.view.backgroundColor = .lightGray
     }
 
     func lastVC(currentVC: UIViewController) -> UIViewController {

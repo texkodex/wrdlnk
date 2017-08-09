@@ -1,60 +1,69 @@
 //
-//  MenuScene.swift
+//  MainMenuScene.swift
 //  wrdlnk
 //
-//  Created by sparkle on 7/19/17.
+//  Created by sparkle on 8/8/17.
 //  Copyright © 2017 teknowsys. All rights reserved.
 //
 
 import SpriteKit
 import GameplayKit
 
-class MenuScene: BaseScene {
+class MainMenuScene: BaseScene {
     
     // MARK:- Buttons
+//    let startNodePath
+//    let continueNodePath
+//    let settingsMainNodePath
+//    let purchaseNodePath
     
     override var backgroundNodeOne: SKNode? {
-        return childNode(withName: soundNodePath)!
+        return childNode(withName: startNodePath)!
     }
     
-    var soundButton: ButtonNode? {
-        return backgroundNodeOne?.childNode(withName: ButtonIdentifier.soundSwitch.rawValue) as? ButtonNode
+    var startGameButton: ButtonNode? {
+        return backgroundNodeOne?.childNode(withName: ButtonIdentifier.startNewGame.rawValue) as? ButtonNode
     }
-      
+    
     override var backgroundNodeTwo: SKNode? {
-        return childNode(withName: scoreNodePath)!
+        return childNode(withName: continueNodePath)!
     }
     
-    var scoreButton: ButtonNode? {
-        return backgroundNodeTwo?.childNode(withName: ButtonIdentifier.scoreSwitch.rawValue) as? ButtonNode
+    var continueGameButton: ButtonNode? {
+        return backgroundNodeTwo?.childNode(withName: ButtonIdentifier.continueGame.rawValue) as? ButtonNode
     }
-
+    
     override var backgroundNodeThree: SKNode? {
-        return childNode(withName: timerNodePath)!
+        return childNode(withName: settingsMainNodePath)!
     }
     
-    var timerButton: ButtonNode? {
-        return backgroundNodeThree?.childNode(withName: ButtonIdentifier.timerSwitch.rawValue) as? ButtonNode
+    var settingsMainButton: ButtonNode? {
+        return backgroundNodeThree?.childNode(withName: ButtonIdentifier.gameSettings.rawValue) as? ButtonNode
     }
-
+    
     override var backgroundNodeFour: SKNode? {
-        return childNode(withName: enterNodePath)!
+        return childNode(withName: purchaseNodePath)!
     }
     
-    var enterButton: ButtonNode? {
-        return backgroundNodeFour?.childNode(withName: ButtonIdentifier.enterGame.rawValue) as? ButtonNode
+    var inAppPurchaseButton: ButtonNode? {
+        return backgroundNodeFour?.childNode(withName: ButtonIdentifier.inAppPurchase.rawValue) as? ButtonNode
     }
     
     let nodeMap = [ ViewElement.switches.rawValue,
-                    ViewElement.sound.rawValue,
-                    ViewElement.soundSwitch.rawValue,
-                    ViewElement.score.rawValue,
-                    ViewElement.scoreSwitch.rawValue,
-                    ViewElement.timer.rawValue,
-                    ViewElement.timerSwitch.rawValue,
-                    ViewElement.enter.rawValue,
-                    ViewElement.enterGame.rawValue ]
-
+                    ViewElement.start.rawValue,
+                    ViewElement.startNewGame.rawValue,
+                    ViewElement.continueTag.rawValue,
+                    ViewElement.continueGame.rawValue,
+                    ViewElement.settings.rawValue,
+                    ViewElement.gameSettings.rawValue,
+                    ViewElement.purchase.rawValue,
+                    ViewElement.inAppPurchase.rawValue ]
+    
+    // MARK:- Data structures
+    var entities = [GKEntity()]
+    
+    var graphs = [String:GKGraph]()
+    
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
         self.removeFromParent()
@@ -70,13 +79,16 @@ class MenuScene: BaseScene {
     func initializeButtons() {
         print("Entering \(#file):: \(#function) at line \(#line)")
         var state = UserDefaults.standard.bool(forKey: preferenceSoundEnabledKey)
-        state ? enableButton(button: soundButton, isSelected: state, focus: true) : enableButton(button: soundButton, isSelected: state)
+        state ? enableButton(button: startGameButton, isSelected: state, focus: true) : enableButton(button: startGameButton, isSelected: state)
         
         state = UserDefaults.standard.bool(forKey: preferenceScoreEnabledKey)
-        state ? enableButton(button: scoreButton, isSelected: state, focus: true) : enableButton(button: scoreButton, isSelected: state)
+        state ? enableButton(button: continueGameButton, isSelected: state, focus: true) : enableButton(button: continueGameButton, isSelected: state)
         
         state = UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey)
-        state ? enableButton(button: timerButton, isSelected: state, focus: true) : enableButton(button: timerButton, isSelected: state)
+        state ? enableButton(button: settingsMainButton, isSelected: state, focus: true) : enableButton(button: settingsMainButton, isSelected: state)
+        
+        state = UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey)
+        state ? enableButton(button: inAppPurchaseButton, isSelected: state, focus: true) : enableButton(button: inAppPurchaseButton, isSelected: state)
     }
     
     override func sceneDidLoad() {
@@ -135,4 +147,5 @@ class MenuScene: BaseScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
     }
 }
+
 

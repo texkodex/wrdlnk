@@ -15,6 +15,7 @@ enum SceneType {
     case GameStatus
     case Definition
     case Menu
+    case MainMenu
 }
 
 extension UIViewController {
@@ -98,6 +99,8 @@ extension SKScene {
             scene = DefinitionScene(fileNamed: "DefinitionScene")!
         case .Menu:
             scene = MenuScene(fileNamed: "MenuScene")!
+        case .MainMenu:
+            scene = MainMenuScene(fileNamed: "MainMenuScene")!
         }
  
         scene.size = (view?.bounds.size)!

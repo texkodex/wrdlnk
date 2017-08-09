@@ -58,6 +58,11 @@ let scoreNodePath = "//world/switches/score"
 let timerNodePath = "//world/switches/timer"
 let enterNodePath = "//world/enter"
 
+let startNodePath = "//world/switches/start"
+let continueNodePath = "//world/switches/continue"
+let settingsMainNodePath = "//world/switches/settings"
+let purchaseNodePath = "//world/switches/purchase"
+
 let statHighScoreNodePath = "//world/stat/highScore"
 let statScoreNodePath = "//world/stat/score"
 let statTimerNodePath = "//world/stat/timer"
@@ -123,6 +128,15 @@ enum ViewElement:String {
     case enterGame = "EnterGame"
     
     
+    case start = "start"
+    case startNewGame = "StartNewGame"
+    case continueTag = "continue"
+    case continueGame = "ContinueGame"
+    case settings = "settings"
+    case gameSettings = "GameSettings"
+    case purchase = "purchase"
+    case inAppPurchase = "InAppPurchase"
+    
     static let types = [ top, main, board, control, buttons, footer,
                          meaning, change,
                          prefixMeaning, linkMeaning, suffixMeaning,
@@ -131,7 +145,12 @@ enum ViewElement:String {
                          sound, soundSwitch,
                          score, scoreSwitch,
                          timer, timerSwitch,
-                         enter, enterGame
+                         enter, enterGame,
+                         
+                         start, startNewGame,
+                         continueTag, continueGame,
+                         settings, gameSettings,
+                         purchase, inAppPurchase
                         ]
 }
 

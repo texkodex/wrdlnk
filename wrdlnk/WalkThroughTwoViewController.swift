@@ -16,6 +16,8 @@ class WalkThroughTwoViewController: UIViewController {
     
     @IBOutlet weak var firstSubTitleLabel: UILabel!
     
+    @IBOutlet weak var secondSubTitleLabel: UILabel!
+    
     @IBOutlet weak var horizontalLineImage: UIImageView!
     
     @IBOutlet weak var nextPageLabel: UILabel!
@@ -42,6 +44,7 @@ class WalkThroughTwoViewController: UIViewController {
         walkthroughImage.image = UIImage(named:self.imageFileName)
         self.mainTitleLabel.text = (self.keyViewDictionary["main_title_text"]!)
         self.firstSubTitleLabel.text = (self.keyViewDictionary["sub_title1_text"]!)
+        self.secondSubTitleLabel.text = (self.keyViewDictionary["sub_title2_text"]!)
         self.horizontalineImageFileName = "choose-location-dividing-line"
         horizontalLineImage.image = UIImage(named:self.horizontalineImageFileName)
         self.nextPageLabel.text = (self.keyViewDictionary["next_page_text"]!)

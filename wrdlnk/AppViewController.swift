@@ -16,9 +16,10 @@ class AppViewController: UIViewController {
         super.viewDidLoad()
         let loadedInitialDefaults = AppDefinition.defaults.value(forKey: AppDefinition.InitialDefaults) as! Bool
         
-        if (loadedInitialDefaults)
+        if (!loadedInitialDefaults)
         {
             launchFromStoryboard(name: StoryboardName.Onboarding.rawValue, controller: "WalkThroughPageViewController")
+             AppDefinition.defaults.set(true, forKey: AppDefinition.InitialDefaults)
         } else {
             launchFromStoryboard(name: StoryboardName.Main.rawValue, controller: "GameViewController")
         }

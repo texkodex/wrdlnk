@@ -10,6 +10,11 @@ import UIKit
 import SpriteKit
 
 class BaseScene: SKScene {
+    
+    var backgroundNode: SKNode? {
+        return nil
+    }
+    
     var backgroundNodeOne: SKNode? {
         return nil
     }

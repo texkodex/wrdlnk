@@ -14,7 +14,7 @@ protocol ButtonNodeResponderType: class {
 }
 
 enum ButtonIdentifier: String {
-    case home = "Home"
+    case titleImage = "titleImage"
     case proceedToNextScene = "ProceedToNextScene"
     case provideMeaning = "ProvideMeaning"
     case showGraph = "ShowGraph"
@@ -32,7 +32,7 @@ enum ButtonIdentifier: String {
     case inAppPurchase = "InAppPurchase"
     
     static let allButtonIdentifiers: [ButtonIdentifier]
-        = [ .home, .proceedToNextScene, .provideMeaning,
+        = [ .titleImage, .proceedToNextScene, .provideMeaning,
             .showGraph, .appSettings,
             .cancel, .moreInfo,
             .soundSwitch, .scoreSwitch, .timerSwitch,
@@ -44,8 +44,8 @@ enum ButtonIdentifier: String {
     
     var selectedTextureName: String? {
         switch self {
-        case .home:
-            return "Home"
+        case .titleImage:
+            return "AppIcon"
         case .proceedToNextScene:
             return "ProceedToNextScene"
         case .provideMeaning:
@@ -152,7 +152,7 @@ class ButtonNode: SKSpriteNode {
             selectedTexture = texture
         }
         
-        focusRing.isHidden = true
+        //focusRing.isHidden = true
         
         isUserInteractionEnabled = true
     }

@@ -30,7 +30,6 @@ extension UIViewController {
             appdelegate.window!.rootViewController = vc
         }
     }
-
 }
 
 extension GameScene {
@@ -84,6 +83,16 @@ extension GameScene {
 
 extension SKScene {
     
+    private func resetCountersPrecondition(destination: SceneType, sendingScene: SKScene) {
+        guard (sendingScene.name!.hasPrefix("MainMenu")) else {
+            return
+        }
+        
+        if destination == .GameScene {
+            (scene as! GameScene).resetCounters = true
+        }
+    }
+    
     func transitionToScene(destination: SceneType, sendingScene: SKScene) {
         let transDuration = 0.5
         let transition = SKTransition.fade(with: sendingScene.backgroundColor, duration: transDuration)
@@ -93,6 +102,7 @@ extension SKScene {
         switch destination {
         case .GameScene:
             scene = GameScene(fileNamed: "GameScene")!
+            //resetCountersPrecondition(destination: destination, sendingScene: sendingScene)
         case .GameStatus:
             scene = GameStatusScene(fileNamed: "GameStatusScene")!
         case .Definition:
@@ -197,7 +207,23 @@ extension BaseScene {
     var timerToggleEnabled: Bool {
         return UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey)
     }
+
+    var startNewGameToggleEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: preferenceStartGameEnabledKey)
+    }
     
+    var continueGameToggleEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: preferenceContinueGameEnabledKey)
+    }
+    
+    var gameSettingsToggleEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: preferenceSettingsMainEnabledKey)
+    }
+  
+    var inAppPurchaseToggleEnabled: Bool {
+        return UserDefaults.standard.bool(forKey: preferenceInAppPurchaseEnabledKey)
+    }
+
     func playAudioSound() {
         guard soundToggleEnabled else { return }
         
@@ -244,6 +270,30 @@ extension ButtonNodeResponderType where Self: BaseScene {
         let state = UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey)
         button.isSelected = !state
         UserDefaults.standard.set(button.isSelected, forKey: preferenceTimerEnabledKey)
+    }
+    
+    func toggleStartNewGame(button: ButtonNode) {
+        let state = UserDefaults.standard.bool(forKey: preferenceStartGameEnabledKey)
+        button.isSelected = !state
+        UserDefaults.standard.set(button.isSelected, forKey: preferenceStartGameEnabledKey)
+    }
+    
+    func toggleContinueGame(button: ButtonNode) {
+        let state = UserDefaults.standard.bool(forKey: preferenceContinueGameEnabledKey)
+        button.isSelected = !state
+        UserDefaults.standard.set(button.isSelected, forKey: preferenceContinueGameEnabledKey)
+    }
+    
+    func toggleGameSettings(button: ButtonNode) {
+        let state = UserDefaults.standard.bool(forKey: preferenceSettingsMainEnabledKey)
+        button.isSelected = !state
+        UserDefaults.standard.set(button.isSelected, forKey: preferenceSettingsMainEnabledKey)
+    }
+
+    func toggleInAppPurchase(button: ButtonNode) {
+        let state = UserDefaults.standard.bool(forKey: preferenceStartGameEnabledKey)
+        button.isSelected = !state
+        UserDefaults.standard.set(button.isSelected, forKey: preferenceInAppPurchaseEnabledKey)
     }
 }
 

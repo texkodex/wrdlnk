@@ -260,10 +260,10 @@
 			isa = PBXGroup;
 			children = (
 				CCAD36181EE0CAE3001C6AFE /* GameScene.sks */,
-				AE39F6A81EE10C6B00D362C1 /* GameStatusScene.sks */,
-				CC8BE42C1F04481800CDB4BB /* DefinitionScene.sks */,
 				CCAD361C1EE0CAE3001C6AFE /* GameScene.swift */,
+				AE39F6A81EE10C6B00D362C1 /* GameStatusScene.sks */,
 				AE39F6A61EE10AC300D362C1 /* GameStatusScene.swift */,
+				CC8BE42C1F04481800CDB4BB /* DefinitionScene.sks */,
 				CC8BE42E1F044CBE00CDB4BB /* DefinitionScene.swift */,
 				CC8BE4141EEB47F700CDB4BB /* BaseScene.swift */,
 				CC8BE4161EEB494900CDB4BB /* BaseScene+Buttons.swift */,

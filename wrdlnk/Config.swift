@@ -49,6 +49,8 @@ let letterNodeName = "letter_"
 let letterNodeColRow = "letter_%d_%d"
 
 let remoteWordListSite = "http://www.owsys.com/wlink/api/wlink_default.json"
+
+let titleNodePath = "//world/top"
 let meaningNodePath = "//world/meaning"
 let graphNodePath = "//world/change"
 let settingsNodePath = "//world/config"
@@ -77,6 +79,11 @@ let preferenceSoundEnabledKey = "preference_sound_enabled"
 let preferenceScoreEnabledKey = "preference_score_enabled"
 let preferenceTimerEnabledKey = "preference_timer_enabled"
 
+let preferenceStartGameEnabledKey = "preference_start_game_enabled"
+let preferenceContinueGameEnabledKey = "preference_continue_game_enabled"
+let preferenceSettingsMainEnabledKey = "preference_settings_main_enabled"
+let preferenceInAppPurchaseEnabledKey = "preference_inapp_purchase_enabled"
+
 let preferenceCurrentScoreKey = "preference_current_score"
 let preferenceHighScoreKey = "preference_high_score"
 
@@ -103,6 +110,7 @@ struct viewNode {
 
 // MARK:- Enums
 enum ViewElement:String {
+    case titleImage = "titleImage"
     case top = "top"
     case main = "main"
     case board = "board"
@@ -137,7 +145,7 @@ enum ViewElement:String {
     case purchase = "purchase"
     case inAppPurchase = "InAppPurchase"
     
-    static let types = [ top, main, board, control, buttons, footer,
+    static let types = [ titleImage, top, main, board, control, buttons, footer,
                          meaning, change,
                          prefixMeaning, linkMeaning, suffixMeaning,
                          graph, progressGraph,

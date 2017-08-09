@@ -10,13 +10,16 @@ import SpriteKit
 import GameplayKit
 
 class MainMenuScene: BaseScene {
+
     
-    // MARK:- Buttons
-//    let startNodePath
-//    let continueNodePath
-//    let settingsMainNodePath
-//    let purchaseNodePath
+    override var backgroundNode: SKNode? {
+        return childNode(withName: titleNodePath)!
+    }
     
+    var titleButton: ButtonNode? {
+        return backgroundNode?.childNode(withName: ButtonIdentifier.titleImage.rawValue) as? ButtonNode
+    }
+
     override var backgroundNodeOne: SKNode? {
         return childNode(withName: startNodePath)!
     }
@@ -49,7 +52,8 @@ class MainMenuScene: BaseScene {
         return backgroundNodeFour?.childNode(withName: ButtonIdentifier.inAppPurchase.rawValue) as? ButtonNode
     }
     
-    let nodeMap = [ ViewElement.switches.rawValue,
+    let nodeMap = [ ViewElement.titleImage.rawValue,
+                    ViewElement.switches.rawValue,
                     ViewElement.start.rawValue,
                     ViewElement.startNewGame.rawValue,
                     ViewElement.continueTag.rawValue,
@@ -75,19 +79,19 @@ class MainMenuScene: BaseScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
         initializeButtons()
     }
-    
+
     func initializeButtons() {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        var state = UserDefaults.standard.bool(forKey: preferenceSoundEnabledKey)
+        var state = UserDefaults.standard.bool(forKey: preferenceStartGameEnabledKey)
         state ? enableButton(button: startGameButton, isSelected: state, focus: true) : enableButton(button: startGameButton, isSelected: state)
         
-        state = UserDefaults.standard.bool(forKey: preferenceScoreEnabledKey)
+        state = UserDefaults.standard.bool(forKey: preferenceContinueGameEnabledKey)
         state ? enableButton(button: continueGameButton, isSelected: state, focus: true) : enableButton(button: continueGameButton, isSelected: state)
         
-        state = UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey)
+        state = UserDefaults.standard.bool(forKey: preferenceSettingsMainEnabledKey)
         state ? enableButton(button: settingsMainButton, isSelected: state, focus: true) : enableButton(button: settingsMainButton, isSelected: state)
         
-        state = UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey)
+        state = UserDefaults.standard.bool(forKey: preferenceInAppPurchaseEnabledKey)
         state ? enableButton(button: inAppPurchaseButton, isSelected: state, focus: true) : enableButton(button: inAppPurchaseButton, isSelected: state)
     }
     
@@ -103,14 +107,17 @@ class MainMenuScene: BaseScene {
     func makeVisible(element: ViewElement, node: SKSpriteNode){
         print("Entering \(#file):: \(#function) at line \(#line)")
         switch element {
-        case .soundSwitch:
-            print("soundSwitch visible")
+        case .startNewGame:
+            print("startNewGame visible")
             break
-        case .scoreSwitch:
-            print("scoreSwitch visible")
+        case .continueGame:
+            print("continueGame visible")
             break
-        case .timerSwitch:
-            print("timerSwitch visible")
+        case .gameSettings:
+            print("gameSettings visible")
+            break
+        case .inAppPurchase:
+            print("inAppPurchase visible")
             break
         default:
             return

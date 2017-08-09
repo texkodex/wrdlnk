@@ -93,8 +93,13 @@ class GameScene: BaseScene {
     
     var matchList: [String] = []
 
+    var resetCounters: Bool = false
+    
     var playerScore:Int {
         get {
+            if resetCounters {
+                UserDefaults().set(0, forKey: preferenceCurrentScoreKey)
+            }
             return UserDefaults().integer(forKey: preferenceCurrentScoreKey)
         }
         set {
@@ -107,6 +112,9 @@ class GameScene: BaseScene {
     
     var levelTime:Int  {
         get {
+            if resetCounters {
+                UserDefaults().set(0, forKey: preferenceGameTimeKey)
+            }
             return UserDefaults().integer(forKey: preferenceGameTimeKey)
         }
         set {

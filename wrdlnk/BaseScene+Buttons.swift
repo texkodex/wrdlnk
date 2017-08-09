@@ -19,6 +19,9 @@ extension BaseScene: ButtonNodeResponderType {
     func buttonTriggered(button: ButtonNode) {
         print("button.buttonIdentifier!: \(button.buttonIdentifier!)")
         switch button.buttonIdentifier! {
+            case .titleImage:
+                transitionToScene(destination: SceneType.MainMenu, sendingScene: self)
+            break
             case .showGraph:
                 transitionToScene(destination: SceneType.GameStatus, sendingScene: self)
             break
@@ -47,7 +50,7 @@ extension BaseScene: ButtonNodeResponderType {
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self)
             break
             case .gameSettings:
-                transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+                transitionToScene(destination: SceneType.Menu, sendingScene: self)
             break
             case .inAppPurchase:
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self)

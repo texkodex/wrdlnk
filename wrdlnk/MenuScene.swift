@@ -77,6 +77,7 @@ class MenuScene: BaseScene {
         
         state = UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey)
         state ? enableButton(button: timerButton, isSelected: state, focus: true) : enableButton(button: timerButton, isSelected: state)
+        
     }
     
     override func sceneDidLoad() {

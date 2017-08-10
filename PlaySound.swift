@@ -25,7 +25,7 @@ extension GameScene {
     }
     
     func playSoundForEvent(soundEvent: SoundEvent) {
-        let state = UserDefaults.standard.bool(forKey: preferenceSoundEnabledKey)
+        let state = AppDefinition.defaults.bool(forKey: preferenceSoundEnabledKey)
         if !state { return }
         switch soundEvent {
         case .beepbeep:

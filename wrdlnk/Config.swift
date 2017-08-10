@@ -79,8 +79,8 @@ let preferenceSoundEnabledKey = "preference_sound_enabled"
 let preferenceScoreEnabledKey = "preference_score_enabled"
 let preferenceTimerEnabledKey = "preference_timer_enabled"
 
-let preferenceStartGameEnabledKey = "preference_start_game_enabled"
 let preferenceContinueGameEnabledKey = "preference_continue_game_enabled"
+let preferenceStartGameEnabledKey = "preference_start_game_enabled"
 let preferenceSettingsMainEnabledKey = "preference_settings_main_enabled"
 let preferenceInAppPurchaseEnabledKey = "preference_inapp_purchase_enabled"
 
@@ -432,10 +432,10 @@ struct StatData {
     private init() {
         if debugInfo {
             self.purge()
-            UserDefaults.standard.purgeAll()
+            AppDefinition.defaults.purgeAll()
         }
-        if UserDefaults.standard.keyExist(key: preferenceGameStatKey) {
-            let decoded  = UserDefaults.standard.object(forKey: preferenceGameStatKey) as! Data
+        if AppDefinition.defaults.keyExist(key: preferenceGameStatKey) {
+            let decoded  = AppDefinition.defaults.object(forKey: preferenceGameStatKey) as! Data
             let decodedStats = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Stat]
             for stat in decodedStats {
                 print("reloaded phrase: \(String(describing: stat.phrase))")

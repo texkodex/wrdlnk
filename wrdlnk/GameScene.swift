@@ -48,14 +48,14 @@ class GameScene: BaseScene {
             let imageName = graphOff ? "graphInactiveButton" : "graphButton"
             graphButton?.selectedTexture = SKTexture(imageNamed: imageName)
     
-            UserDefaults.standard.set(graphOff, forKey: preferenceShowGraphKey)
+            AppDefinition.defaults.set(graphOff, forKey: preferenceShowGraphKey)
 
         }
     }
     
     var settingsOff = false {
         didSet {
-            let imageName = settingsOff ? "settingsButton" : "settingsOnButton"
+            let imageName = settingsOff ? "settingsOff" : "settingsOn"
             settingsButton?.selectedTexture = SKTexture(imageNamed: imageName)
         }
     }
@@ -93,13 +93,18 @@ class GameScene: BaseScene {
     
     var matchList: [String] = []
 
-    var resetCounters: Bool = false
+    var resetCounters:Bool {
+        get {
+            return UserDefaults().bool(forKey: preferenceStartGameEnabledKey)
+        }
+        set {
+            UserDefaults().set(newValue, forKey: preferenceStartGameEnabledKey)
+        }
+    }
+
     
     var playerScore:Int {
         get {
-            if resetCounters {
-                UserDefaults().set(0, forKey: preferenceCurrentScoreKey)
-            }
             return UserDefaults().integer(forKey: preferenceCurrentScoreKey)
         }
         set {
@@ -112,9 +117,7 @@ class GameScene: BaseScene {
     
     var levelTime:Int  {
         get {
-            if resetCounters {
-                UserDefaults().set(0, forKey: preferenceGameTimeKey)
-            }
+
             return UserDefaults().integer(forKey: preferenceGameTimeKey)
         }
         set {
@@ -130,6 +133,10 @@ class GameScene: BaseScene {
     
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
+        if counters.match < counters.total {
+            wordList.stay()
+        }
+        
         readyForInit()
         entities.removeAll()
         graphs.removeAll()
@@ -164,13 +171,26 @@ class GameScene: BaseScene {
         return !initialize.doOnce
     }
     
+    private func resetForNewGame() {
+        if resetCounters {
+            wordList.reset()
+            UserDefaults().set(false, forKey: preferenceGameTimeKey)
+            UserDefaults().set(0, forKey: preferenceCurrentScoreKey)
+            UserDefaults().set(0, forKey: preferenceGameTimeKey)
+        }
+    }
+    
     override func sceneDidLoad() {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
+        
+        resetForNewGame()
+        
         if testIfInit() {
             setup(nodeMap: nodeMap, completionHandler: makeVisible(params:))
             initComplete()
         }
+        
         wordList.setSelectedRow(row: nil)
         
         // Enable buttons if data available
@@ -414,8 +434,8 @@ class GameScene: BaseScene {
     }
     
     func enableGraphDisplay() {
-        if !UserDefaults.standard.bool(forKey: preferenceShowGraphKey) {
-            UserDefaults.standard.set(true, forKey: preferenceShowGraphKey)
+        if !AppDefinition.defaults.bool(forKey: preferenceShowGraphKey) {
+            AppDefinition.defaults.set(true, forKey: preferenceShowGraphKey)
         }
     }
     
@@ -435,7 +455,7 @@ class GameScene: BaseScene {
     
     // MARK:- High score
     func playerScoreUpdate() {
-        if !UserDefaults.standard.bool(forKey: preferenceScoreEnabledKey) {
+        if !AppDefinition.defaults.bool(forKey: preferenceScoreEnabledKey) {
             playerScoreLabel?.isHidden = true
         }
         else {
@@ -453,7 +473,7 @@ class GameScene: BaseScene {
     
     // MARK:- Timer
     func playerTimerUpdate() {
-        if UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey) {
+        if AppDefinition.defaults.bool(forKey: preferenceTimerEnabledKey) {
             playerTimerLabel?.text = "\(playerTimer)"
         } else {
             playerTimerLabel?.isHidden = true

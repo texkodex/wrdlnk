@@ -69,7 +69,7 @@ class GameStatusScene: SKScene {
     
     func preserveDefaults(stats: StatData?) {
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: stats!.elements())
-        UserDefaults.standard.set(encodedData, forKey: preferenceGameStatKey)
+        AppDefinition.defaults.set(encodedData, forKey: preferenceGameStatKey)
     }
     
     override func update(_ currentTime: TimeInterval) {

@@ -82,16 +82,16 @@ class MainMenuScene: BaseScene {
 
     func initializeButtons() {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        var state = UserDefaults.standard.bool(forKey: preferenceStartGameEnabledKey)
+        var state = AppDefinition.defaults.bool(forKey: preferenceStartGameEnabledKey)
         state ? enableButton(button: startGameButton, isSelected: state, focus: true) : enableButton(button: startGameButton, isSelected: state)
         
-        state = UserDefaults.standard.bool(forKey: preferenceContinueGameEnabledKey)
+        state = AppDefinition.defaults.bool(forKey: preferenceContinueGameEnabledKey)
         state ? enableButton(button: continueGameButton, isSelected: state, focus: true) : enableButton(button: continueGameButton, isSelected: state)
         
-        state = UserDefaults.standard.bool(forKey: preferenceSettingsMainEnabledKey)
+        state = AppDefinition.defaults.bool(forKey: preferenceSettingsMainEnabledKey)
         state ? enableButton(button: settingsMainButton, isSelected: state, focus: true) : enableButton(button: settingsMainButton, isSelected: state)
         
-        state = UserDefaults.standard.bool(forKey: preferenceInAppPurchaseEnabledKey)
+        state = AppDefinition.defaults.bool(forKey: preferenceInAppPurchaseEnabledKey)
         state ? enableButton(button: inAppPurchaseButton, isSelected: state, focus: true) : enableButton(button: inAppPurchaseButton, isSelected: state)
     }
     

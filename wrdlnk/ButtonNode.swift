@@ -53,27 +53,27 @@ enum ButtonIdentifier: String {
         case .showGraph:
             return "graphButton"
         case .appSettings:
-            return "settingsOnButton"
+            return "settingsOn"
         case .cancel:
             return "Cancel"
         case .moreInfo:
             return "MoreInfo"
         case .soundSwitch:
-            return "soundOnButton"
+            return "soundOn"
         case .scoreSwitch:
-            return "scoreOnButton"
+            return "scoreOn"
         case .timerSwitch:
-            return "timerOnButton"
+            return "timerOn"
         case .enterGame:
-            return "enterOnButton"
+            return "enterOn"
         case .startNewGame:
-            return "enterOnButton"
+            return "enterOn"
         case .continueGame:
-            return "enterOnButton"
+            return "enterOn"
         case .gameSettings:
-            return "enterOnButton"
+            return "enterOn"
         case .inAppPurchase:
-            return "enterOnButton"
+            return "enterOn"
         }
     }
 }
@@ -152,7 +152,7 @@ class ButtonNode: SKSpriteNode {
             selectedTexture = texture
         }
         
-        //focusRing.isHidden = true
+        focusRing.isHidden = true
         
         isUserInteractionEnabled = true
     }

@@ -18,13 +18,13 @@
 	</dict>
 	<dict>
 		<key>page_icon1</key>
-		<string>settingsOnButton.png</string>
+		<string>settingsOn.png</string>
 		<key>page_icon2</key>
-		<string>scoreOnButton.png</string>
+		<string>scoreOn.png</string>
 		<key>page_icon3</key>
-		<string>timerOnButton.png</string>
+		<string>timerOn.png</string>
 		<key>page_icon4</key>
-		<string>settingsOnButton.png</string>
+		<string>settingsOn.png</string>
 		<key>page_icon5</key>
 		<string>graphButton.png</string>
 		<key>main_title_text</key>

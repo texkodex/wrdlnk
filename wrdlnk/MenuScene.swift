@@ -69,13 +69,13 @@ class MenuScene: BaseScene {
     
     func initializeButtons() {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        var state = UserDefaults.standard.bool(forKey: preferenceSoundEnabledKey)
+        var state = AppDefinition.defaults.bool(forKey: preferenceSoundEnabledKey)
         state ? enableButton(button: soundButton, isSelected: state, focus: true) : enableButton(button: soundButton, isSelected: state)
         
-        state = UserDefaults.standard.bool(forKey: preferenceScoreEnabledKey)
+        state = AppDefinition.defaults.bool(forKey: preferenceScoreEnabledKey)
         state ? enableButton(button: scoreButton, isSelected: state, focus: true) : enableButton(button: scoreButton, isSelected: state)
         
-        state = UserDefaults.standard.bool(forKey: preferenceTimerEnabledKey)
+        state = AppDefinition.defaults.bool(forKey: preferenceTimerEnabledKey)
         state ? enableButton(button: timerButton, isSelected: state, focus: true) : enableButton(button: timerButton, isSelected: state)
         
     }

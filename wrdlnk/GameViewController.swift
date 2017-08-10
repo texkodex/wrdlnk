@@ -29,7 +29,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserDefaults.standard.keyExist(key: preferenceRemoteDataSiteKey) {
+        if AppDefinition.defaults.keyExist(key: preferenceRemoteDataSiteKey) {
             // Load words from remote site
             DataExchange.fetchWordList { [unowned self] (wordGroup) -> () in
                 //self.wordList = wordGroup

@@ -43,11 +43,11 @@ extension BaseScene: ButtonNodeResponderType {
             case .timerSwitch:
                 toggleGameTimer(button: button)
             break
-            case .startNewGame:
-                transitionToScene(destination: SceneType.GameScene, sendingScene: self)
-            break
             case .continueGame:
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+            break
+            case .startNewGame:
+                transitionToScene(destination: SceneType.GameScene, sendingScene: self, startNewGame: true)
             break
             case .gameSettings:
                 transitionToScene(destination: SceneType.Menu, sendingScene: self)

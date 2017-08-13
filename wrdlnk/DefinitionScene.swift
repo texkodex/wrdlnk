@@ -103,6 +103,13 @@ class DefinitionScene: SKScene {
         
     }
     
+    override func didChangeSize(_ oldSize: CGSize) {
+        for node in self.children{
+            let newPosition = CGPoint(x:node.position.x / oldSize.width * self.frame.size.width,y:node.position.y / oldSize.height * self.frame.size.height)
+            node.position = newPosition
+        }
+    }
+    
     func makeVisible (element: ViewElement, node: SKLabelNode){
         print("Entering \(#file):: \(#function) at line \(#line)")
         switch element {

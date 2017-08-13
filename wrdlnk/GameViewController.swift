@@ -81,7 +81,6 @@ class GameViewController: UIViewController {
         if let scene = GKScene(fileNamed: "MainMenuScene") {
             
             // Get the SKScene from the loaded GKScene
-            //if let sceneNode = scene.rootNode as! GameScene? {
             if let sceneNode = scene.rootNode as! MainMenuScene? {
                 
                 // Copy gameplay related content over to the scene
@@ -93,7 +92,8 @@ class GameViewController: UIViewController {
                 
                 // Present the scene
                 if let view = self.view as! SKView? {
-                    view.presentScene(sceneNode)
+                    let transition = SKTransition.reveal(with: SKTransitionDirection.down, duration: 0.5)
+                    view.presentScene(sceneNode, transition: transition)
                     
                     // Adjust scene size to view bounds
                     sceneNode.size = view.bounds.size
@@ -107,16 +107,18 @@ class GameViewController: UIViewController {
         }
     }
     
-    
-    
     override var shouldAutorotate: Bool {
         return true
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscape
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .allButUpsideDown
+        } else {
+            return .all
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.

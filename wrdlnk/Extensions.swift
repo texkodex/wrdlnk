@@ -317,7 +317,7 @@ extension SKTileMapNode {
         return false
     }
     
-    func setTileTexture(tileElement: TileElement) {
+    func setTileTexture(tileElement: TileElement, buttonNode: Bool = false) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         self.removeAllChildren()
         for col in 0..<numberOfColumns {
@@ -326,7 +326,7 @@ extension SKTileMapNode {
                 let tileNode = createSpriteNode(tileElement: tileElement, width: tileWidthLess2, height: tileHeightLess2)
                 tileNode.name = nodeName(node: self, col: col, row: row)
                 tileNode.userData = [tileUserDataClickName : false]
-                tileNode.size = CGSize(width: tileWidthLess2, height: tileHeightLess2)
+                //tileNode.size = CGSize(width: tileWidthLess2, height: tileHeightLess2)
                 let point = self.centerOfTile(atColumn: col, row: row)
                 tileNode.position = point
                 tileNode.alpha = CGFloat(0.0)
@@ -405,6 +405,7 @@ extension SKTileMapNode {
             label.name = String(format:letterNodeColRow, index, row)
             label.fontColor = VowelCharacter(rawValue: letter)?.rawValue == letter ? UIColor.red : UIColor.white
             label.alpha = VowelCharacter(rawValue: letter)?.rawValue == letter ? CGFloat(0.0) : CGFloat(1.0)
+            label.fontSize = 20
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             tileNode.addChild(label)
@@ -412,7 +413,7 @@ extension SKTileMapNode {
         }
     }
     
-    func prepareHighlightForCharacter(tileNode: SKSpriteNode, letter: Character) {
+    func prepareHighlightForCharacter(tileNode: SKSpriteNode, letter: Character, buttonNode: Bool = false) {
         if VowelCharacter(rawValue: letter)?.rawValue == letter {
             addHighlightForSprite(spriteNode: tileNode)
         }
@@ -423,7 +424,11 @@ extension SKTileMapNode {
         let sprite = SKSpriteNode()
         sprite.name = "highlight_\((spriteNode.name)!)"
         sprite.alpha = CGFloat(0.0)
-        sprite.size = CGSize(width: CGFloat(tileWidth), height: CGFloat(tileHeight))
+        if (sprite.name?.contains("button"))! {
+            sprite.size = CGSize(width: CGFloat(defaultTileInnerWidth), height: CGFloat(defaultTileInnerHeight))
+        } else {
+            sprite.size = CGSize(width: CGFloat(tileWidth), height: CGFloat(tileHeight))
+        }
         sprite.run(SKAction.setTexture(texture))
         spriteNode.addChild(sprite)
     }
@@ -485,6 +490,7 @@ extension SKTileMapNode {
             tileNode.alpha = CGFloat(1.0)
             tileNode.userData = [tileUserDataClickName : true]
             tileNode.removeAllChildren()
+            tileNode.size = CGSize(width: CGFloat(defaultTileInnerWidth), height: CGFloat(defaultTileInnerHeight))
             let label = SKLabelNode(fontNamed: "Arial")
             label.text = "\(VowelCharacter.types[index].rawValue)"
             label.name = String(format:letterNodeColRow, index, row)
@@ -492,7 +498,7 @@ extension SKTileMapNode {
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             tileNode.addChild(label)
-            prepareHighlightForCharacter(tileNode: tileNode, letter: VowelCharacter.types[index].rawValue)
+            prepareHighlightForCharacter(tileNode: tileNode, letter: VowelCharacter.types[index].rawValue, buttonNode: true)
         }
     }
     
@@ -536,7 +542,7 @@ extension SKTileMapNode {
     func graphLine(index: Int, accuracy: Float, percentage: Float) -> SKShapeNode {
         let shape = SKShapeNode()
         let rowWidth = self.frame.width / CGFloat(numberOfColumns) * 2
-        let xPos = (self.frame.minX + rowWidth) + CGFloat(index) * rowWidth
+        let xPos = (self.frame.minX + rowWidth / 2) + CGFloat(index) * rowWidth
         let yPos = self.frame.minY + self.frame.height / CGFloat(numberOfRows) + 3
         let rowHeight = self.frame.height / CGFloat(numberOfRows)
         let maxHeight = self.frame.height - rowHeight * 2
@@ -554,7 +560,7 @@ extension SKTileMapNode {
         shape.fillColor = fillColor
         shape.strokeColor = fillStroke
         shape.lineWidth = lineWidth
-        let label = graphText(name: "label_\(index)", text: "\(Int(percentage))%", position: CGPoint(x: xPos, y: yPos - 14))
+        let label = graphText(name: "label_\(index)", text: "\(Int(percentage))%", position: CGPoint(x: xPos + rowWidth / 5, y: yPos - 14))
         shape.addChild(label)
         return shape
     }
@@ -570,7 +576,7 @@ extension SKTileMapNode {
         }
         
         let label = graphText(name: "label_graph_title", text: "Most Recent Performance",
-                              position: CGPoint(x: self.frame.midX, y: -150), fontSize: 24, fontColor: grayTile)
+                              position: CGPoint(x: self.frame.midX, y: -150), fontSize: 24, fontColor: redTile)
         self.addChild(label)
     }
  

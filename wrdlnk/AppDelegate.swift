@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         initialize()
-        
+        self.window?.makeKeyAndVisible()
         return true
     }
     
@@ -35,9 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             AppDefinition.defaults.set(dict, forKey: AppDefinition.defaultsTag);
         }
-        
-        UIPageControl().pageIndicatorTintColor = UIColor.lightGray
-        UIPageControl().currentPageIndicatorTintColor = UIColor.blue
+
     }
 }
 

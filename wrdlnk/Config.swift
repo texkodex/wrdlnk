@@ -29,15 +29,20 @@ enum StoryboardName : String {
 }
 
 // MARK:- Defines
-let debugInfo = false
+let debugInfo = true    
 
-let tileWidth: CGFloat = 44
-let tileHeight: CGFloat = 44
+let defaultTileWidth: CGFloat = 42
+let defaultTileHeight: CGFloat = 42
+let defaultTileInnerWidth: CGFloat = 40.0
+let defaultTileInnerHeight: CGFloat = 40.0
 
-let tileWidthLess2: CGFloat = 42.0
-let tileHeightLess2: CGFloat = 42.0
+let tileWidth: CGFloat = 22
+let tileHeight: CGFloat = 22
 
-let VisibleStateCount = 8
+let tileWidthLess2: CGFloat = 20.0
+let tileHeightLess2: CGFloat = 20.0
+
+let VisibleStateCount = 6
 
 let buttonsTileMap = "buttons"
 let boardTileMap = "board"
@@ -432,8 +437,8 @@ struct StatData {
     private init() {
         if debugInfo {
             self.purge()
-            AppDefinition.defaults.purgeAll()
         }
+        
         if AppDefinition.defaults.keyExist(key: preferenceGameStatKey) {
             let decoded  = AppDefinition.defaults.object(forKey: preferenceGameStatKey) as! Data
             let decodedStats = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Stat]

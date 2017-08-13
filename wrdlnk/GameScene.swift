@@ -203,6 +203,13 @@ class GameScene: BaseScene {
         highScoreLabel?.text = "HighScore: " + UserDefaults().integer(forKey: "highscore").description
     }
     
+    override func didChangeSize(_ oldSize: CGSize) {
+        for node in self.children{
+            let newPosition = CGPoint(x:node.position.x / oldSize.width * self.frame.size.width,y:node.position.y / oldSize.height * self.frame.size.height)
+            node.position = newPosition
+        }
+    }
+    
     func initializeScreenButtons() {
         disableButton(button: definitionButton)
         wordList.currentIndex()! > 0  ? enableButton(button: graphButton) : disableButton(button: graphButton)
@@ -223,7 +230,7 @@ class GameScene: BaseScene {
             counters = params.nodeTile!.addWords(word: wordList.getWords()!)
             break
         case .buttons:
-            params.nodeTile?.setTileTexture(tileElement: TileElement(rawValue: "yellow_tile")!)
+            params.nodeTile?.setTileTexture(tileElement: TileElement(rawValue: "yellow_tile")!, buttonNode: true)
             params.nodeTile?.addButtonLetter()
             break
         case .control: break

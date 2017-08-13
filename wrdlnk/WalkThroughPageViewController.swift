@@ -37,14 +37,14 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
             if view is UIScrollView {
                 view.frame = UIScreen.main.bounds
             } else if view is UIPageControl {
-                view.backgroundColor = .clear
+                view.frame.origin.y = self.view.frame.size.height - 164
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         self.dataSource = self
         self.delegate = self
         
@@ -52,7 +52,7 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
             self.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
         
-       self.view.backgroundColor = .lightGray
+        self.view.backgroundColor = .white
     }
 
     func lastVC(currentVC: UIViewController) -> UIViewController {
@@ -69,6 +69,10 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
         }
         
         let previousIndex = viewControllerIndex - 1
+        
+        guard previousIndex > -1 else {
+            return nil
+        }
         
         guard previousIndex >= 0 else {
             return VCArray.last
@@ -89,10 +93,10 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
         
         let nextIndex = viewControllerIndex + 1
         
-        guard nextIndex < VCArray.count else {
-            return VCArray.first
-        }
-        
+//        guard nextIndex < VCArray.count else {
+//            return VCArray.first
+//        }
+//        
         guard VCArray.count > nextIndex else {
             return nil
         }
@@ -100,11 +104,19 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
         return lastVC(currentVC: VCArray[nextIndex])
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    private func setupPageControl() {
+        let appearance = UIPageControl.appearance()
+        appearance.pageIndicatorTintColor = UIColor.red
+        appearance.currentPageIndicatorTintColor = UIColor.white
+        appearance.backgroundColor = .clear
+    }
+    
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        setupPageControl()
         return VCArray.count
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         guard let firstViewController = pageViewController.viewControllers?.first,
             let firstViewControllerIndex = VCArray.index(of: firstViewController) else {
                 return 0

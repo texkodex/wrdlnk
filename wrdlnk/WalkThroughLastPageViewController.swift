@@ -27,6 +27,8 @@ class WalkThroughLastPageViewController: UIViewController {
     
     @IBOutlet weak var nextPageLabel: UILabel!
     
+    @IBOutlet weak var enterButton: UIButton!
+    
     @IBAction func doneButtonTapped(sender: UIButton) {
         delegate?.lastPageDone()
     }
@@ -59,6 +61,7 @@ class WalkThroughLastPageViewController: UIViewController {
         self.secondSubTitleLabel.text = (self.keyViewDictionary["sub_title2_text"]!)
         self.horizontalineImageFileName = "choose-location-dividing-line"
         horizontalLineImage.image = UIImage(named:self.horizontalineImageFileName)
-        self.nextPageLabel.text = (self.keyViewDictionary["next_page_text"]!)
+        //self.nextPageLabel.text = (self.keyViewDictionary["next_page_text"]!)
+    self.enterButton.setTitle((self.keyViewDictionary["next_page_text"]!), for: .normal)
     }
 }

@@ -6,19 +6,19 @@
 		<key>page_icon1</key>
 		<string>AppIcon.png</string>
 		<key>main_title_text</key>
-		<string>Welcome to WrdLnk</string>
+		<string>WELCOME TO WRDLNK</string>
 		<key>sub_title1_text</key>
-		<string>The app for word explorers</string>
+		<string>IN WRDLNK YOUR CHALLENGE IS TO FIND THE RELATED WORDS IN A GRID</string>
 		<key>sub_title2_text</key>
-		<string>Fun with related words</string>
+		<string>THIS IS HOW IT WORKS</string>
 		<key>next_page_text</key>
-		<string>Get Started</string>
+		<string>FIND OUT MORE</string>
 		<key>next_page_button</key>
 		<string>walkthrough-proceed-arrow.png</string>
 	</dict>
 	<dict>
 		<key>page_icon1</key>
-		<string>settingsOn.png</string>
+		<string>AppIcon.png</string>
 		<key>page_icon2</key>
 		<string>scoreOn.png</string>
 		<key>page_icon3</key>
@@ -28,11 +28,25 @@
 		<key>page_icon5</key>
 		<string>graphButton.png</string>
 		<key>main_title_text</key>
-		<string>Monitor your performance</string>
+		<string>TOUCH TO LINK WORD</string>
 		<key>sub_title1_text</key>
-		<string>Set your own preferences</string>
+		<string>WHEN YOU KNOWN A WORD JUST SELECT THE MISSING LETTER TO COMPLETE THE WORD</string>
 		<key>sub_title2_text</key>
-		<string>Decide what you see</string>
+		<string>THE WORDS ARE RELATED IN SOME WAY</string>
+		<key>next_page_text</key>
+		<string>Next</string>
+		<key>next_page_button</key>
+		<string>walkthrough-proceed-arrow.png</string>
+	</dict>
+	<dict>
+		<key>page_icon1</key>
+		<string>AppIcon.png</string>
+		<key>main_title_text</key>
+		<string>MISSING LETTERS</string>
+		<key>sub_title1_text</key>
+		<string>YOU NEED TO SELECT THE MISSING LETTER FROM THE LIST SHOWN IN LOWER GRID</string>
+		<key>sub_title2_text</key>
+		<string>YOU CAN TURN SOUND ON TO CONFIRM A SELECTION</string>
 		<key>next_page_text</key>
 		<string>Next</string>
 		<key>next_page_button</key>
@@ -42,27 +56,13 @@
 		<key>page_icon1</key>
 		<string>walkthrough-heart-icon.png</string>
 		<key>main_title_text</key>
-		<string>Enjoy!</string>
+		<string>A WAY TO PLAY</string>
 		<key>sub_title1_text</key>
-		<string>We hope you love using WrdLnk</string>
+		<string>IT MAY BE GOOD TO TRY AND FIND THE MIDDLE WORD FIRST IF YOU GET STUCK</string>
 		<key>sub_title2_text</key>
-		<string>as much as we do.</string>
+		<string>WE HOPE YOU ENJOY WRDLNK AS MUCH AS WE DO</string>
 		<key>next_page_text</key>
-		<string>Next</string>
-		<key>next_page_button</key>
-		<string>walkthrough-proceed-arrow.png</string>
-	</dict>
-	<dict>
-		<key>page_icon1</key>
-		<string>walkthrough-heart-icon.png</string>
-		<key>main_title_text</key>
-		<string>Acknowledgements</string>
-		<key>sub_title1_text</key>
-		<string>This app wouldn&apos;t be the same without these people</string>
-		<key>sub_title2_text</key>
-		<string>Thank you very much</string>
-		<key>next_page_text</key>
-		<string>Enter WrdLnk</string>
+		<string>ENTER WRDLNK</string>
 		<key>next_page_button</key>
 		<string>walkthrough-proceed-arrow.png</string>
 	</dict>

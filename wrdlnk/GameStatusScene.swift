@@ -76,6 +76,13 @@ class GameStatusScene: SKScene {
         
     }
     
+    override func didChangeSize(_ oldSize: CGSize) {
+        for node in self.children{
+            let newPosition = CGPoint(x:node.position.x / oldSize.width * self.frame.size.width,y:node.position.y / oldSize.height * self.frame.size.height)
+            node.position = newPosition
+        }
+    }
+    
     // MARK: - Touches
     func touchDown(atPoint pos : CGPoint) {
         print("Entering \(#file):: \(#function) at line \(#line)")

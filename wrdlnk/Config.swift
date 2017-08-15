@@ -29,7 +29,7 @@ enum StoryboardName : String {
 }
 
 // MARK:- Defines
-let debugInfo = true    
+let debugInfo = false
 
 let defaultTileWidth: CGFloat = 42
 let defaultTileHeight: CGFloat = 42

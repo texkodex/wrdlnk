@@ -576,7 +576,7 @@ extension SKTileMapNode {
         }
         
         let label = graphText(name: "label_graph_title", text: "Most Recent Performance",
-                              position: CGPoint(x: self.frame.midX, y: -150), fontSize: 24, fontColor: redTile)
+                              position: CGPoint(x: self.frame.midX, y: frame.minY - 30), fontSize: 24, fontColor: redTile)
         self.addChild(label)
     }
  

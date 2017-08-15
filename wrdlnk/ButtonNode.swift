@@ -49,9 +49,9 @@ enum ButtonIdentifier: String {
         case .proceedToNextScene:
             return "ProceedToNextScene"
         case .provideMeaning:
-            return "questionButton"
+            return "questionOn"
         case .showGraph:
-            return "graphButton"
+            return "graphOn"
         case .appSettings:
             return "settingsOn"
         case .cancel:

@@ -38,14 +38,14 @@ class GameScene: BaseScene {
     
     var definitionOff = false {
         didSet {
-            let imageName = definitionOff ? "questionInactiveButton" : "questionButton"
+            let imageName = definitionOff ? "questionOff" : "questionOn"
             definitionButton?.selectedTexture = SKTexture(imageNamed: imageName)
         }
     }
     
     var graphOff = false {
         didSet {
-            let imageName = graphOff ? "graphInactiveButton" : "graphButton"
+            let imageName = graphOff ? "graphOff" : "graphOn"
             graphButton?.selectedTexture = SKTexture(imageNamed: imageName)
     
             AppDefinition.defaults.set(graphOff, forKey: preferenceShowGraphKey)

@@ -174,6 +174,252 @@ extension WordList {
 extension WordList {
     func level1() {
         
+        
+        info.wordBank.append(Word(prefix: "HERE", link: "AFTER", suffix: "EFFECT"))
+        info.wordBank.append(Word(prefix: "HERE", link: "AFTER", suffix: "NOON"))
+        info.wordBank.append(Word(prefix: "HERE", link: "AFTER", suffix: "THOUGHT"))
+
+        info.wordBank.append(Word(prefix: "PINE", link: "APPLE", suffix: "SAUCE"))
+       
+        info.wordBank.append(Word(prefix: "FIRE", link: "ARM", suffix: "CHAIR"))
+        info.wordBank.append(Word(prefix: "FIRE", link: "ARM", suffix: "HOLE"))
+        info.wordBank.append(Word(prefix: "FIRE", link: "ARM", suffix: "PILE"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "ARM", suffix: "CHAIR"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "ARM", suffix: "HOLE"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "ARM", suffix: "PILE"))
+        info.wordBank.append(Word(prefix: "YARD", link: "ARM", suffix: "CHAIR"))
+        info.wordBank.append(Word(prefix: "YARD", link: "ARM", suffix: "HOLE"))
+        info.wordBank.append(Word(prefix: "YARD", link: "ARM", suffix: "PILE"))
+        
+        // start back - cut
+        info.wordBank.append(Word(prefix: "CUT", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+        
+        // start back - feed
+        info.wordBank.append(Word(prefix: "FEED", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+       
+        // start back - green
+        info.wordBank.append(Word(prefix: "GREEN", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+
+        // start back - half
+        info.wordBank.append(Word(prefix: "HALF", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+
+        // start back - horse
+        info.wordBank.append(Word(prefix: "HORSE", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+ 
+        // start back - hump
+        info.wordBank.append(Word(prefix: "HUMP", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+
+        // start back - hunch
+        info.wordBank.append(Word(prefix: "HUNCH", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+
+        // start back - paper
+        info.wordBank.append(Word(prefix: "PAPER", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+
+        // start back - piggy
+        info.wordBank.append(Word(prefix: "PIGGY", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+
+        // start back - quarter
+        info.wordBank.append(Word(prefix: "QUARTER", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+
+        // start back - set
+        info.wordBank.append(Word(prefix: "SET", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+
+        // start back - tail
+        info.wordBank.append(Word(prefix: "TAIL", link: "BACK", suffix: "ACHE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "LOG"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "PACK"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "SPACE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STABBING"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "STROKE"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "WOODS"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "YARD"))
+        // end back
+
+        info.wordBank.append(Word(prefix: "AIR", link: "BAG", suffix: "PIPES"))
+        info.wordBank.append(Word(prefix: "HAND", link: "BAG", suffix: "PIPES"))
+
+        info.wordBank.append(Word(prefix: "BASE", link: "BALL", suffix: "PLAYER"))
+        info.wordBank.append(Word(prefix: "BASKET", link: "BALL", suffix: "PLAYER"))
+        info.wordBank.append(Word(prefix: "EYE", link: "BALL", suffix: "PLAYER"))
+        info.wordBank.append(Word(prefix: "FOOT", link: "BALL", suffix: "PLAYER"))
+        info.wordBank.append(Word(prefix: "HAND", link: "BALL", suffix: "PLAYER"))
+        info.wordBank.append(Word(prefix: "MEAT", link: "BALL", suffix: "PLAYER"))
+        info.wordBank.append(Word(prefix: "SNOW", link: "BALL", suffix: "PLAYER"))
+        info.wordBank.append(Word(prefix: "SOFT", link: "BALL", suffix: "PLAYER"))
+        info.wordBank.append(Word(prefix: "VOLLEY", link: "BALL", suffix: "PLAYER"))
+
+        info.wordBank.append(Word(prefix: "CROW", link: "BAR", suffix: "CODE"))
+        info.wordBank.append(Word(prefix: "SAND", link: "BAR", suffix: "CODE"))
+
+        info.wordBank.append(Word(prefix: "DATA", link: "BASE", suffix: "BALL"))
+
+        info.wordBank.append(Word(prefix: "BREAD", link: "BASKET", suffix: "BALL"))
+
+        info.wordBank.append(Word(prefix: "JELLY", link: "BEAN", suffix: "CURD"))
+        info.wordBank.append(Word(prefix: "SOY", link: "BEAN", suffix: "CURD"))
+
+        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
+
         info.wordBank.append(Word(prefix: "FLOWER", link: "BED", suffix: "SPREAD"))
         info.wordBank.append(Word(prefix: "FLOWER", link: "BED", suffix: "ROCK"))
         info.wordBank.append(Word(prefix: "FLOWER", link: "BED", suffix: "ROOM"))
@@ -3831,125 +4077,1247 @@ extension WordList {
         info.wordBank.append(Word(prefix: "HACK", link: "SAW", suffix: "MILL"))
         info.wordBank.append(Word(prefix: "HACK", link: "SAW", suffix: "HORSE"))
         
-        
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        
-        
+        info.wordBank.append(Word(prefix: "HIGH", link: "SCHOOL", suffix: "HOUSE"))
+        info.wordBank.append(Word(prefix: "HIGH", link: "SCHOOL", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "HIGH", link: "SCHOOL", suffix: "TEACHER"))
 
+        info.wordBank.append(Word(prefix: "CORK", link: "SCREW", suffix: "DRIVER"))
+
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "BED"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "BIRD"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "BREEZE"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "BOARD"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "CHANGE"))
+        
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "COAST"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "FARER"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "FOOD"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "GOING"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "GRASS"))
+        
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "GULL"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "LION"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "PLANE"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "SHELL"))
+        
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "SHORE"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "SICK"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "SIDE"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "STAR"))
+
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "WALL"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "WAY"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "WEED"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "SEA", suffix: "WORTHY"))
+
+        info.wordBank.append(Word(prefix: "HAND", link: "SET", suffix: "BACK"))
+        info.wordBank.append(Word(prefix: "HEAD", link: "SET", suffix: "BACK"))
+        info.wordBank.append(Word(prefix: "ON", link: "SET", suffix: "BACK"))
+        info.wordBank.append(Word(prefix: "SUN", link: "SET", suffix: "BACK"))
+        info.wordBank.append(Word(prefix: "UP", link: "SET", suffix: "BACK"))
+
+        info.wordBank.append(Word(prefix: "EGG", link: "SHELL", suffix: "FISH"))
+        info.wordBank.append(Word(prefix: "NUT", link: "SHELL", suffix: "FISH"))
+        info.wordBank.append(Word(prefix: "SEA", link: "SHELL", suffix: "FISH"))
+
+        info.wordBank.append(Word(prefix: "BATTLE", link: "SHIP", suffix: "MATE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "SHAPE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "WRECK"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "YARD"))
+
+        info.wordBank.append(Word(prefix: "SPACE", link: "SHIP", suffix: "MATE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "SHAPE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "WRECK"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "YARD"))
+
+        info.wordBank.append(Word(prefix: "SPORTSMAN", link: "SHIP", suffix: "MATE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "SHAPE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "WRECK"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "YARD"))
+
+        info.wordBank.append(Word(prefix: "STAR", link: "SHIP", suffix: "MATE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "SHAPE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "WRECK"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "YARD"))
+
+        info.wordBank.append(Word(prefix: "STEAM", link: "SHIP", suffix: "MATE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "SHAPE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "WRECK"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "YARD"))
+
+        info.wordBank.append(Word(prefix: "WAR", link: "SHIP", suffix: "MATE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "SHAPE"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "WRECK"))
+        info.wordBank.append(Word(prefix: "*", link: "SHIP", suffix: "YARD"))
+
+        info.wordBank.append(Word(prefix: "HORSE", link: "SHOE", suffix: "HORN"))
+        info.wordBank.append(Word(prefix: "HORSE", link: "SHOE", suffix: "LACE"))
+
+        info.wordBank.append(Word(prefix: "OVER", link: "SHOE", suffix: "HORN"))
+        info.wordBank.append(Word(prefix: "OVER", link: "SHOE", suffix: "LACE"))
+        
+        info.wordBank.append(Word(prefix: "SNOW", link: "SHOE", suffix: "HORN"))
+        info.wordBank.append(Word(prefix: "SNOW", link: "SHOE", suffix: "LACE"))
+
+        info.wordBank.append(Word(prefix: "SING", link: "SONG", suffix: "BIRD"))
+        
+        info.wordBank.append(Word(prefix: "CHEAP", link: "SKATE", suffix: "BOARD"))
+
+        info.wordBank.append(Word(prefix: "OVER", link: "SLEEP", suffix: "WALK"))
+
+        info.wordBank.append(Word(prefix: "COW", link: "SLIP", suffix: "COVER"))
+        info.wordBank.append(Word(prefix: "COW", link: "SLIP", suffix: "KNOT"))
+        info.wordBank.append(Word(prefix: "COW", link: "SLIP", suffix: "SHOD"))
+
+        info.wordBank.append(Word(prefix: "BACK", link: "SPACE", suffix: "CRAFT"))
+        info.wordBank.append(Word(prefix: "BACK", link: "SPACE", suffix: "SHIP"))
+        info.wordBank.append(Word(prefix: "BACK", link: "SPACE", suffix: "SUIT"))
+
+        info.wordBank.append(Word(prefix: "SUN", link: "SPOT", suffix: "LIGHT"))
+
+        info.wordBank.append(Word(prefix: "TIME", link: "TABLE", suffix: "CLOTH"))
+        info.wordBank.append(Word(prefix: "TIME", link: "TABLE", suffix: "LAND"))
+        info.wordBank.append(Word(prefix: "TIME", link: "TABLE", suffix: "SAW"))
+        info.wordBank.append(Word(prefix: "TIME", link: "TABLE", suffix: "SPOON"))
+        info.wordBank.append(Word(prefix: "TIME", link: "TABLE", suffix: "TOP"))
+
+        info.wordBank.append(Word(prefix: "WORK", link: "TABLE", suffix: "CLOTH"))
+        info.wordBank.append(Word(prefix: "WORK", link: "TABLE", suffix: "LAND"))
+        info.wordBank.append(Word(prefix: "WORK", link: "TABLE", suffix: "SAW"))
+        info.wordBank.append(Word(prefix: "WORK", link: "TABLE", suffix: "SPOON"))
+        info.wordBank.append(Word(prefix: "WORK", link: "TABLE", suffix: "TOP"))
+
+        info.wordBank.append(Word(prefix: "BOB", link: "TAIL", suffix: "BACK"))
+        info.wordBank.append(Word(prefix: "BOB", link: "TAIL", suffix: "SPIN"))
+
+        info.wordBank.append(Word(prefix: "HIGH", link: "TAIL", suffix: "BACK"))
+        info.wordBank.append(Word(prefix: "HIGH", link: "TAIL", suffix: "SPIN"))
+        
+        info.wordBank.append(Word(prefix: "PIG", link: "TAIL", suffix: "BACK"))
+        info.wordBank.append(Word(prefix: "PIG", link: "TAIL", suffix: "SPIN"))
+        
+        info.wordBank.append(Word(prefix: "SWALLOW", link: "TAIL", suffix: "BACK"))
+        info.wordBank.append(Word(prefix: "SWALLOW", link: "TAIL", suffix: "SPIN"))
+        
+        info.wordBank.append(Word(prefix: "YELLOW", link: "TAIL", suffix: "BACK"))
+        info.wordBank.append(Word(prefix: "YELLOW", link: "TAIL", suffix: "SPIN"))
+
+        info.wordBank.append(Word(prefix: "OVER", link: "TAKE", suffix: "*"))
+
+        info.wordBank.append(Word(prefix: "OUT", link: "TAKE", suffix: "AWAY"))
+        info.wordBank.append(Word(prefix: "OUT", link: "TAKE", suffix: "OFF"))
+        info.wordBank.append(Word(prefix: "OUT", link: "TAKE", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "OUT", link: "TAKE", suffix: "OVER"))
+        
+        info.wordBank.append(Word(prefix: "OVER", link: "TAKE", suffix: "AWAY"))
+        info.wordBank.append(Word(prefix: "OVER", link: "TAKE", suffix: "OFF"))
+        info.wordBank.append(Word(prefix: "OVER", link: "TAKE", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "OVER", link: "TAKE", suffix: "OVER"))
+
+        info.wordBank.append(Word(prefix: "UNDER", link: "TAKE", suffix: "AWAY"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "TAKE", suffix: "OFF"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "TAKE", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "TAKE", suffix: "OVER"))
+
+        info.wordBank.append(Word(prefix: "UP", link: "TAKE", suffix: "AWAY"))
+        info.wordBank.append(Word(prefix: "UP", link: "TAKE", suffix: "OFF"))
+        info.wordBank.append(Word(prefix: "UP", link: "TAKE", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "UP", link: "TAKE", suffix: "OVER"))
+
+        info.wordBank.append(Word(prefix: "BREAK", link: "THROUGH", suffix: "PUT"))
+
+        info.wordBank.append(Word(prefix: "AIR", link: "TIGHT", suffix: "ROPE"))
+        info.wordBank.append(Word(prefix: "WATER", link: "TIGHT", suffix: "ROPE"))
+        
+        // start time - any
+        info.wordBank.append(Word(prefix: "ANY", link: "TIME", suffix: "CARD"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "KEEPER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LAPSE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LINE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "PIECE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SAVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SCALE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SHEET"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "TABLE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WARP"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WORN"))
+        // end time
+
+        // start time - bed
+        info.wordBank.append(Word(prefix: "BED", link: "TIME", suffix: "CARD"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "KEEPER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LAPSE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LINE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "PIECE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SAVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SCALE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SHEET"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "TABLE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WARP"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WORN"))
+        // end time
+
+        // start time - day
+        info.wordBank.append(Word(prefix: "DAY", link: "TIME", suffix: "CARD"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "KEEPER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LAPSE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LINE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "PIECE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SAVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SCALE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SHEET"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "TABLE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WARP"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WORN"))
+        // end time
+
+        // start time - life
+        info.wordBank.append(Word(prefix: "LIFE", link: "TIME", suffix: "CARD"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "KEEPER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LAPSE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LINE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "PIECE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SAVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SCALE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SHEET"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "TABLE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WARP"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WORN"))
+        // end time
+
+        // start time - meal
+        info.wordBank.append(Word(prefix: "MEAL", link: "TIME", suffix: "CARD"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "KEEPER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LAPSE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LINE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "PIECE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SAVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SCALE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SHEET"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "TABLE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WARP"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WORN"))
+        // end time
+
+        // start time - night
+        info.wordBank.append(Word(prefix: "NIGHT", link: "TIME", suffix: "CARD"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "KEEPER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LAPSE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LINE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "PIECE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SAVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SCALE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SHEET"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "TABLE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WARP"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WORN"))
+        // end time
+
+        // start time - over
+        info.wordBank.append(Word(prefix: "OVER", link: "TIME", suffix: "CARD"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "KEEPER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LAPSE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LINE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "PIECE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SAVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SCALE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SHEET"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "TABLE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WARP"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WORN"))
+        // end time
+
+        // start time - some
+        info.wordBank.append(Word(prefix: "SOME", link: "TIME", suffix: "CARD"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "KEEPER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LAPSE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LINE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "PIECE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SAVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SCALE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SHEET"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "TABLE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WARP"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WORN"))
+        // end time
+
+        // start time - spring
+        info.wordBank.append(Word(prefix: "SPRING", link: "TIME", suffix: "CARD"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "KEEPER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LAPSE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LINE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "PIECE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SAVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SCALE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SHEET"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "TABLE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WARP"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WORN"))
+        // end time
+
+        // start time - summer
+        info.wordBank.append(Word(prefix: "SUMMER", link: "TIME", suffix: "CARD"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "KEEPER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LAPSE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LINE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "PIECE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SAVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SCALE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SHEET"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "TABLE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WARP"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WORN"))
+        // end time
+
+        // start time - tea
+        info.wordBank.append(Word(prefix: "TEA", link: "TIME", suffix: "CARD"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "KEEPER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LAPSE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "LINE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "PIECE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SAVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SCALE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "SHEET"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "TABLE"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WARP"))
+        info.wordBank.append(Word(prefix: "*", link: "TIME", suffix: "WORN"))
+        // end time
+
+        info.wordBank.append(Word(prefix: "FINGER", link: "TIP", suffix: "TOE"))
+
+        info.wordBank.append(Word(prefix: "TIP", link: "TOE", suffix: "NAIL"))
+
+        // start top - cook
+        info.wordBank.append(Word(prefix: "COOK", link: "TOP", suffix: "COAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "FLIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "HAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "KNOT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SAIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SIDE"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SOIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SPIN"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "STITCH"))
+        // end top
+ 
+        // start top - desk
+        info.wordBank.append(Word(prefix: "DESK", link: "TOP", suffix: "COAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "FLIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "HAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "KNOT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SAIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SIDE"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SOIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SPIN"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "STITCH"))
+        // end top
+
+        // start top - hard
+        info.wordBank.append(Word(prefix: "HARD", link: "TOP", suffix: "COAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "FLIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "HAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "KNOT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SAIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SIDE"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SOIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SPIN"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "STITCH"))
+        // end top
+
+        // start top - hill
+        info.wordBank.append(Word(prefix: "HILL", link: "TOP", suffix: "COAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "FLIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "HAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "KNOT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SAIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SIDE"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SOIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SPIN"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "STITCH"))
+        // end top
+
+        // start top - table
+        info.wordBank.append(Word(prefix: "TABLE", link: "TOP", suffix: "COAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "FLIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "HAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "KNOT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SAIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SIDE"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SOIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SPIN"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "STITCH"))
+        // end top
+
+        // start top - tree
+        info.wordBank.append(Word(prefix: "TREE", link: "TOP", suffix: "COAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "FLIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "HAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "KNOT"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SAIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SIDE"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SOIL"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "SPIN"))
+        info.wordBank.append(Word(prefix: "*", link: "TOP", suffix: "STITCH"))
+        // end top
+
+        info.wordBank.append(Word(prefix: "DOWN", link: "TURN", suffix: "COAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "OVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "PIKE"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "STILE"))
+
+        info.wordBank.append(Word(prefix: "OVER", link: "TURN", suffix: "COAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "OVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "PIKE"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "STILE"))
+
+        info.wordBank.append(Word(prefix: "UP", link: "TURN", suffix: "COAT"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "OVER"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "PIKE"))
+        info.wordBank.append(Word(prefix: "*", link: "TURN", suffix: "STILE"))
+
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "ACHIEVE"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "ACHIEVER"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "ARM"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "CLOTHING"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "COOK"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "COVER"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "CUT"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "DONE"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "DOG"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "DONE"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "GO"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "GROUND"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "GROWTH"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "HAND"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "SEA"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "SHIRT"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "STAND"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "STATED"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "TAKE"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "TAKER"))
+  
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "VALUE"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "WATER"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "WEAR"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "WEIGHT"))
+        info.wordBank.append(Word(prefix: "DOWN", link: "UNDER", suffix: "WORLD"))
+
+        // start up - break
+        info.wordBank.append(Word(prefix: "BREAK", link: "UP", suffix: "BEAT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "BRINGING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "COMING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DRAFT"))
+
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "GRADE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HILL"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "KEEP"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LIFT"))
+
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LOAD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ON"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RISING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROAR"))
+
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROOT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SET"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAGE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAIRS"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STANDING"))
+
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "START"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STREAM"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SWING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TAKE"))
+
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TOWN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TURN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WARD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WELLING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WIND"))
+        // end up
+
+        // start up - check
+        info.wordBank.append(Word(prefix: "CHECK", link: "UP", suffix: "BEAT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "BRINGING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "COMING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DRAFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "GRADE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HILL"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "KEEP"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LIFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LOAD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ON"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RISING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROAR"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROOT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SET"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAGE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAIRS"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STANDING"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "START"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STREAM"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SWING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TAKE"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TOWN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TURN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WARD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WELLING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WIND"))
+        // end up
+
+        // start up - cut
+        info.wordBank.append(Word(prefix: "CUT", link: "UP", suffix: "BEAT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "BRINGING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "COMING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DRAFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "GRADE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HILL"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "KEEP"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LIFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LOAD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ON"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RISING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROAR"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROOT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SET"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAGE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAIRS"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STANDING"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "START"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STREAM"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SWING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TAKE"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TOWN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TURN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WARD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WELLING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WIND"))
+        // end up
+
+        // start up - grown
+        info.wordBank.append(Word(prefix: "GROWN", link: "UP", suffix: "BEAT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "BRINGING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "COMING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DRAFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "GRADE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HILL"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "KEEP"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LIFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LOAD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ON"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RISING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROAR"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROOT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SET"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAGE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAIRS"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STANDING"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "START"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STREAM"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SWING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TAKE"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TOWN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TURN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WARD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WELLING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WIND"))
+        // end up
+
+        // start up - line
+        info.wordBank.append(Word(prefix: "LINE", link: "UP", suffix: "BEAT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "BRINGING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "COMING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DRAFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "GRADE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HILL"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "KEEP"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LIFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LOAD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ON"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RISING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROAR"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROOT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SET"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAGE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAIRS"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STANDING"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "START"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STREAM"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SWING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TAKE"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TOWN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TURN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WARD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WELLING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WIND"))
+        // end up
+
+        // start up - mock
+        info.wordBank.append(Word(prefix: "MOCK", link: "UP", suffix: "BEAT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "BRINGING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "COMING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DRAFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "GRADE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HILL"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "KEEP"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LIFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LOAD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ON"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RISING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROAR"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROOT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SET"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAGE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAIRS"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STANDING"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "START"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STREAM"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SWING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TAKE"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TOWN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TURN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WARD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WELLING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WIND"))
+        // end up
+
+        // start up - pin
+        info.wordBank.append(Word(prefix: "PIN", link: "UP", suffix: "BEAT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "BRINGING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "COMING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DRAFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "GRADE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HILL"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "KEEP"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LIFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LOAD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ON"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RISING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROAR"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROOT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SET"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAGE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAIRS"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STANDING"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "START"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STREAM"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SWING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TAKE"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TOWN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TURN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WARD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WELLING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WIND"))
+        // end up
+
+        // start up - round
+        info.wordBank.append(Word(prefix: "ROUND", link: "UP", suffix: "BEAT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "BRINGING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "COMING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DRAFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "GRADE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HILL"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "KEEP"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LIFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LOAD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ON"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RISING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROAR"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROOT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SET"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAGE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAIRS"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STANDING"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "START"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STREAM"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SWING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TAKE"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TOWN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TURN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WARD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WELLING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WIND"))
+        // end up
+
+        // start up - startup
+        info.wordBank.append(Word(prefix: "START", link: "UP", suffix: "BEAT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "BRINGING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "COMING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DRAFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "GRADE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HILL"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "KEEP"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LIFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LOAD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ON"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RISING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROAR"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROOT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SET"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAGE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAIRS"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STANDING"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "START"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STREAM"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SWING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TAKE"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TOWN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TURN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WARD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WELLING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WIND"))
+        // end up
+
+        // start up - sun
+        info.wordBank.append(Word(prefix: "SUN", link: "UP", suffix: "BEAT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "BRINGING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "COMING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DRAFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "GRADE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HILL"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "KEEP"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LIFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LOAD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ON"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RISING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROAR"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROOT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SET"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAGE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAIRS"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STANDING"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "START"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STREAM"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SWING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TAKE"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TOWN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TURN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WARD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WELLING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WIND"))
+        // end up
+
+        // start up - warm
+        info.wordBank.append(Word(prefix: "WARM", link: "UP", suffix: "BEAT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "BRINGING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "COMING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "DRAFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "GRADE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HILL"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "KEEP"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LIFT"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "LOAD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ON"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RIGHT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "RISING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROAR"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "ROOT"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SET"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAGE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STAIRS"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STANDING"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "START"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STATE"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "STREAM"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "SWING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TAKE"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TOWN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "TURN"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WARD"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WELLING"))
+        info.wordBank.append(Word(prefix: "*", link: "UP", suffix: "WIND"))
+        // end up
+
+        info.wordBank.append(Word(prefix: "SUPER", link: "USER", suffix: "NAME"))
+
+        info.wordBank.append(Word(prefix: "OVER", link: "VIEW", suffix: "POINT"))
+
+        info.wordBank.append(Word(prefix: "GRAPE", link: "VINE", suffix: "YARD"))
+
+        info.wordBank.append(Word(prefix: "CROSS", link: "WALK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "CROSS", link: "WALK", suffix: "WAY"))
+        info.wordBank.append(Word(prefix: "SIDE", link: "WALK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "SIDE", link: "WALK", suffix: "WAY"))
+
+        info.wordBank.append(Word(prefix: "SEA", link: "WALL", suffix: "FLOWER"))
+        info.wordBank.append(Word(prefix: "SEA", link: "WALL", suffix: "PAPER"))
+        info.wordBank.append(Word(prefix: "STONE", link: "WALL", suffix: "FLOWER"))
+        info.wordBank.append(Word(prefix: "STONE", link: "WALL", suffix: "PAPER"))
+        info.wordBank.append(Word(prefix: "WHITE", link: "WALL", suffix: "FLOWER"))
+        info.wordBank.append(Word(prefix: "WHITE", link: "WALL", suffix: "PAPER"))
+
+        info.wordBank.append(Word(prefix: "BRAIN", link: "WASH", suffix: "CLOTH"))
+        info.wordBank.append(Word(prefix: "BRAIN", link: "WASH", suffix: "STAND"))
+        info.wordBank.append(Word(prefix: "HOG", link: "WASH", suffix: "CLOTH"))
+        info.wordBank.append(Word(prefix: "HOG", link: "WASH", suffix: "STAND"))
+        info.wordBank.append(Word(prefix: "WHITE", link: "WASH", suffix: "CLOTH"))
+        info.wordBank.append(Word(prefix: "WHITE", link: "WASH", suffix: "STAND"))
+
+        info.wordBank.append(Word(prefix: "WORLD", link: "WIDE", suffix: "SCREEN"))
+        info.wordBank.append(Word(prefix: "WORLD", link: "WIDE", suffix: "SPREAD"))
+
+        // start wind - down
+        info.wordBank.append(Word(prefix: "DOWN", link: "WIND", suffix: "BREAKER"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "FALL"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "MILL"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "PIPE"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "SHIELD"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "SOCK"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "STORM"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "SWEPT"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "WARD"))
+        // end wind
+
+        // start wind - up
+        info.wordBank.append(Word(prefix: "UP", link: "WIND", suffix: "BREAKER"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "FALL"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "MILL"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "PIPE"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "SHIELD"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "SOCK"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "STORM"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "SWEPT"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "WARD"))
+        // end wind
+
+        // start wind - whirl
+        info.wordBank.append(Word(prefix: "WHIRL", link: "WIND", suffix: "BREAKER"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "FALL"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "MILL"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "PIPE"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "SHIELD"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "SOCK"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "STORM"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "SWEPT"))
+        info.wordBank.append(Word(prefix: "*", link: "WIND", suffix: "WARD"))
+        // end wind
+
+        info.wordBank.append(Word(prefix: "LEFT", link: "WING", suffix: "SPAN"))
+        info.wordBank.append(Word(prefix: "LEFT", link: "WING", suffix: "SPREAD"))
+        info.wordBank.append(Word(prefix: "RIGHT", link: "WING", suffix: "SPAN"))
+        info.wordBank.append(Word(prefix: "RIGHT", link: "WING", suffix: "SPREAD"))
+
+        info.wordBank.append(Word(prefix: "HARD", link: "WIRE", suffix: "TAP"))
+        info.wordBank.append(Word(prefix: "HAY", link: "WIRE", suffix: "TAP"))
+        info.wordBank.append(Word(prefix: "HIGH", link: "WIRE", suffix: "TAP"))
+        info.wordBank.append(Word(prefix: "HOT", link: "WIRE", suffix: "TAP"))
+  
+        info.wordBank.append(Word(prefix: "CLOCK", link: "WISE", suffix: "CRACK"))
+        info.wordBank.append(Word(prefix: "OTHER", link: "WISE", suffix: "CRACK"))
+
+        info.wordBank.append(Word(prefix: "FORTH", link: "WITH", suffix: "DRAW"))
+        info.wordBank.append(Word(prefix: "FORTH", link: "WITH", suffix: "HOLD"))
+        info.wordBank.append(Word(prefix: "FORTH", link: "WITH", suffix: "IN"))
+        info.wordBank.append(Word(prefix: "FORTH", link: "WITH", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "FORTH", link: "WITH", suffix: "STAND"))
+
+        // start wood - dog
+        info.wordBank.append(Word(prefix: "DOG", link: "WOOD", suffix: "CARVER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "CHUCK"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "CUTTER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "LAND"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "PECKER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "WORK"))
+        // end wood
+
+        // start wood - drift
+        info.wordBank.append(Word(prefix: "DRIFT", link: "WOOD", suffix: "CARVER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "CHUCK"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "CUTTER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "LAND"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "PECKER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "WORK"))
+        // end wood
+        
+        // start wood - fire
+        info.wordBank.append(Word(prefix: "FIRE", link: "WOOD", suffix: "CARVER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "CHUCK"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "CUTTER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "LAND"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "PECKER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "WORK"))
+        // end wood
+
+        // start wood - ply
+        info.wordBank.append(Word(prefix: "PLY", link: "WOOD", suffix: "CARVER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "CHUCK"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "CUTTER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "LAND"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "PECKER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "WORK"))
+        // end wood
+
+        // start wood - red
+        info.wordBank.append(Word(prefix: "RED", link: "WOOD", suffix: "CARVER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "CHUCK"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "CUTTER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "LAND"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "PECKER"))
+        info.wordBank.append(Word(prefix: "*", link: "WOOD", suffix: "WORK"))
+        // end wood
+
+        // start work - art
+        info.wordBank.append(Word(prefix: "ART", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+       
+        // start work - class
+        info.wordBank.append(Word(prefix: "CLASS", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - clock
+        info.wordBank.append(Word(prefix: "CLOCK", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - frame
+        info.wordBank.append(Word(prefix: "FRAME", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - ground
+        info.wordBank.append(Word(prefix: "GROUND", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - hand
+        info.wordBank.append(Word(prefix: "HAND", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - home
+        info.wordBank.append(Word(prefix: "HOME", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - house
+        info.wordBank.append(Word(prefix: "HOUSE", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - needle
+        info.wordBank.append(Word(prefix: "NEEDLE", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - net
+        info.wordBank.append(Word(prefix: "NET", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - over
+        info.wordBank.append(Word(prefix: "OVER", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - paper
+        info.wordBank.append(Word(prefix: "PAPER", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - patch
+        info.wordBank.append(Word(prefix: "PATCH", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - stone
+        info.wordBank.append(Word(prefix: "WORK", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        // start work - wood
+        info.wordBank.append(Word(prefix: "WOOD", link: "WORK", suffix: "BENCH"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "BOOK"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "DAY"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "HORSE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "MAN"))
+        
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "OUT"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "PLACE"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "ROOM"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "SHOP"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "STATION"))
+        info.wordBank.append(Word(prefix: "*", link: "WORK", suffix: "TABLE"))
+        // end work
+
+        info.wordBank.append(Word(prefix: "UNDER", link: "WORLD", suffix: "WIDE"))
+
+        info.wordBank.append(Word(prefix: "BACK", link: "YARD", suffix: "ARM"))
+        info.wordBank.append(Word(prefix: "BACK", link: "YARD", suffix: "STICK"))
+        info.wordBank.append(Word(prefix: "BARN", link: "YARD", suffix: "ARM"))
+        info.wordBank.append(Word(prefix: "BARN", link: "YARD", suffix: "STICK"))
+        info.wordBank.append(Word(prefix: "COURT", link: "YARD", suffix: "ARM"))
+        info.wordBank.append(Word(prefix: "COURT", link: "YARD", suffix: "STICK"))
+        info.wordBank.append(Word(prefix: "FARM", link: "YARD", suffix: "ARM"))
+        info.wordBank.append(Word(prefix: "FARM", link: "YARD", suffix: "STICK"))
+        info.wordBank.append(Word(prefix: "GRAVE", link: "YARD", suffix: "ARM"))
+        info.wordBank.append(Word(prefix: "GRAVE", link: "YARD", suffix: "STICK"))
+        info.wordBank.append(Word(prefix: "SHIP", link: "YARD", suffix: "ARM"))
+        info.wordBank.append(Word(prefix: "SHIP", link: "YARD", suffix: "STICK"))
+        info.wordBank.append(Word(prefix: "VINE", link: "YARD", suffix: "ARM"))
+        info.wordBank.append(Word(prefix: "VINE", link: "YARD", suffix: "STICK"))
     }
     
     func level2() {
         info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
+  
         
     }
     
     func level3() {
         info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
+
     }
     
     func level4() {
         info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-        info.wordBank.append(Word(prefix: "*", link: "*", suffix: "*"))
-}
+    }
 
 }

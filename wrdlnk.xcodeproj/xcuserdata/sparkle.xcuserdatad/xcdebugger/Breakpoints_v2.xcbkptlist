@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wrdlnk/WordGroup.swift"
-            timestampString = "524443223.516649"
+            timestampString = "524545374.43105"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "810"
-            endingLineNumber = "810"
+            startingLineNumber = "1044"
+            endingLineNumber = "1044"
             landmarkName = "level1()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wrdlnk/WordGroup.swift"
-            timestampString = "524514920.102987"
+            timestampString = "524545374.43105"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1588"
-            endingLineNumber = "1588"
+            startingLineNumber = "1835"
+            endingLineNumber = "1835"
             landmarkName = "level1()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wrdlnk/WordGroup.swift"
-            timestampString = "524531603.766179"
+            timestampString = "524545374.43105"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3801"
-            endingLineNumber = "3801"
+            startingLineNumber = "4047"
+            endingLineNumber = "4047"
             landmarkName = "level1()"
             landmarkType = "7">
          </BreakpointContent>

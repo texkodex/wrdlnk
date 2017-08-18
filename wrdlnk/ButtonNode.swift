@@ -24,22 +24,38 @@ enum ButtonIdentifier: String {
     case soundSwitch = "SoundSwitch"
     case scoreSwitch = "ScoreSwitch"
     case timerSwitch = "TimerSwitch"
+    case nightModeSwitch = "NightModeSwitch"
+    case pastelSwitch = "PastelSwitch"
+    case colorBlindSwitch = "ColorBlindSwitch"
     case enterGame = "EnterGame"
-    
+        
     case startNewGame = "StartNewGame"
     case continueGame = "ContinueGame"
     case gameSettings = "GameSettings"
     case inAppPurchase = "InAppPurchase"
+    case instructions = "Instructions"
+    
+    case purchaseOneSwitch = "PurchaseOneSwitch"
+    case purchaseTwoSwitch = "PurchaseTwoSwitch"
+    case gameAward = "GameAward"
+    case awardDetail = "AwardDetail"
     
     static let allButtonIdentifiers: [ButtonIdentifier]
-        = [ .titleImage, .proceedToNextScene, .provideMeaning,
-            .showGraph, .appSettings,
-            .cancel, .moreInfo,
+        = [ .titleImage,
+            .proceedToNextScene,    .provideMeaning,
+            .showGraph,             .appSettings,
+            .cancel,                .moreInfo,
             .soundSwitch, .scoreSwitch, .timerSwitch,
             .enterGame,
             
-            .startNewGame, .continueGame,
-            .gameSettings, .inAppPurchase
+            .startNewGame,          .continueGame,
+            .gameSettings,          .inAppPurchase,
+            .instructions,
+            
+            .purchaseOneSwitch,     .purchaseTwoSwitch,
+            
+            .gameAward,
+            .awardDetail
     ]
     
     var selectedTextureName: String? {
@@ -64,6 +80,12 @@ enum ButtonIdentifier: String {
             return "scoreOn"
         case .timerSwitch:
             return "timerOn"
+        case .nightModeSwitch:
+            return "timerOn"
+        case .pastelSwitch:
+            return "timerOn"
+        case .colorBlindSwitch:
+            return "timerOn"
         case .enterGame:
             return "enterOn"
         case .startNewGame:
@@ -74,6 +96,16 @@ enum ButtonIdentifier: String {
             return "enterOn"
         case .inAppPurchase:
             return "enterOn"
+        case .instructions:
+            return "enterOn"
+        case .purchaseOneSwitch:
+            return "soundOn"
+        case .purchaseTwoSwitch:
+            return "scoreOn"
+        case .gameAward:
+            return "soundOn"
+        case .awardDetail:
+            return "scoreOn"
         }
     }
 }

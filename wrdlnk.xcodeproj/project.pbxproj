@@ -12,6 +12,11 @@
 		CC1148EA1F3841FC00F64550 /* WalkThroughLastPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1148E91F3841FC00F64550 /* WalkThroughLastPageViewController.swift */; };
 		CC1148EC1F393E7100F64550 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC1148EB1F393E7100F64550 /* Onboarding.storyboard */; };
 		CC1148EE1F394D8500F64550 /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1148ED1F394D8500F64550 /* AppViewController.swift */; };
+		CC1C64C11F44A7BE00A9E5C8 /* IAPurchaseManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64C01F44A7BE00A9E5C8 /* IAPurchaseManger.swift */; };
+		CC1C64C31F44AA6D00A9E5C8 /* IAPurchaseScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC1C64C21F44AA6D00A9E5C8 /* IAPurchaseScene.sks */; };
+		CC1C64C51F44AE2800A9E5C8 /* IAPurchaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64C41F44AE2800A9E5C8 /* IAPurchaseScene.swift */; };
+		CC1C64C71F44B44300A9E5C8 /* AwardScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC1C64C61F44B44300A9E5C8 /* AwardScene.sks */; };
+		CC1C64C91F44B47300A9E5C8 /* AwardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64C81F44B47300A9E5C8 /* AwardScene.swift */; };
 		CC2F8E481F18830200463E37 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F8E471F18830100463E37 /* PlaySound.swift */; };
 		CC7202B41F1973F1003394A0 /* awake.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202B31F1973F1003394A0 /* awake.mp3 */; };
 		CC7202B61F19740D003394A0 /* error.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202B51F19740D003394A0 /* error.mp3 */; };
@@ -75,6 +80,11 @@
 		CC1148E91F3841FC00F64550 /* WalkThroughLastPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkThroughLastPageViewController.swift; sourceTree = "<group>"; };
 		CC1148EB1F393E7100F64550 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		CC1148ED1F394D8500F64550 /* AppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
+		CC1C64C01F44A7BE00A9E5C8 /* IAPurchaseManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPurchaseManger.swift; sourceTree = "<group>"; };
+		CC1C64C21F44AA6D00A9E5C8 /* IAPurchaseScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IAPurchaseScene.sks; sourceTree = "<group>"; };
+		CC1C64C41F44AE2800A9E5C8 /* IAPurchaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPurchaseScene.swift; sourceTree = "<group>"; };
+		CC1C64C61F44B44300A9E5C8 /* AwardScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AwardScene.sks; sourceTree = "<group>"; };
+		CC1C64C81F44B47300A9E5C8 /* AwardScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardScene.swift; sourceTree = "<group>"; };
 		CC2F8E471F18830100463E37 /* PlaySound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 		CC7202B31F1973F1003394A0 /* awake.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = awake.mp3; sourceTree = "<group>"; };
 		CC7202B51F19740D003394A0 /* error.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = error.mp3; sourceTree = "<group>"; };
@@ -153,6 +163,14 @@
 			name = Font;
 			sourceTree = "<group>";
 		};
+		CC1C64BF1F44A77D00A9E5C8 /* IAPurchase */ = {
+			isa = PBXGroup;
+			children = (
+				CC1C64C01F44A7BE00A9E5C8 /* IAPurchaseManger.swift */,
+			);
+			name = IAPurchase;
+			sourceTree = "<group>";
+		};
 		CC8BE4201EF10AC900CDB4BB /* Audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +218,7 @@
 		CCAD36151EE0CAE3001C6AFE /* wrdlnk */ = {
 			isa = PBXGroup;
 			children = (
+				CC1C64BF1F44A77D00A9E5C8 /* IAPurchase */,
 				CCDEA3D21F36BECB0046C82D /* WalkThrough */,
 				CCF8474A1EE9DC5B00468E0B /* Helpers */,
 				CCAD364E1EE0CBE0001C6AFE /* Assets */,
@@ -261,15 +280,19 @@
 		CCAD364D1EE0CBCD001C6AFE /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				CC1C64C61F44B44300A9E5C8 /* AwardScene.sks */,
+				CC1C64C81F44B47300A9E5C8 /* AwardScene.swift */,
+				CC8BE4141EEB47F700CDB4BB /* BaseScene.swift */,
+				CC8BE4161EEB494900CDB4BB /* BaseScene+Buttons.swift */,
+				CC8BE4181EEB4AA600CDB4BB /* BaseScene+Focus.swift */,
+				CC8BE42C1F04481800CDB4BB /* DefinitionScene.sks */,
+				CC8BE42E1F044CBE00CDB4BB /* DefinitionScene.swift */,
 				CCAD36181EE0CAE3001C6AFE /* GameScene.sks */,
 				CCAD361C1EE0CAE3001C6AFE /* GameScene.swift */,
 				AE39F6A81EE10C6B00D362C1 /* GameStatusScene.sks */,
 				AE39F6A61EE10AC300D362C1 /* GameStatusScene.swift */,
-				CC8BE42C1F04481800CDB4BB /* DefinitionScene.sks */,
-				CC8BE42E1F044CBE00CDB4BB /* DefinitionScene.swift */,
-				CC8BE4141EEB47F700CDB4BB /* BaseScene.swift */,
-				CC8BE4161EEB494900CDB4BB /* BaseScene+Buttons.swift */,
-				CC8BE4181EEB4AA600CDB4BB /* BaseScene+Focus.swift */,
+				CC1C64C21F44AA6D00A9E5C8 /* IAPurchaseScene.sks */,
+				CC1C64C41F44AE2800A9E5C8 /* IAPurchaseScene.swift */,
 				CC95F9FC1F3A3EF300E55483 /* MainMenuScene.sks */,
 				CC95F9FE1F3A3F1700E55483 /* MainMenuScene.swift */,
 				CCDC23701F200DCE00371F1F /* MenuScene.sks */,
@@ -429,6 +452,8 @@
 				CC8BE4251EF310CC00CDB4BB /* wlink_default.json in Resources */,
 				CC7202BC1F19744C003394A0 /* biff.mp3 in Resources */,
 				CC7202BA1F197437003394A0 /* good.mp3 in Resources */,
+				CC1C64C31F44AA6D00A9E5C8 /* IAPurchaseScene.sks in Resources */,
+				CC1C64C71F44B44300A9E5C8 /* AwardScene.sks in Resources */,
 				CCAD36221EE0CAE3001C6AFE /* Main.storyboard in Resources */,
 				CC95F9FD1F3A3EF300E55483 /* MainMenuScene.sks in Resources */,
 				CC7202B61F19740D003394A0 /* error.mp3 in Resources */,
@@ -462,12 +487,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC1C64C91F44B47300A9E5C8 /* AwardScene.swift in Sources */,
+				CC1C64C11F44A7BE00A9E5C8 /* IAPurchaseManger.swift in Sources */,
 				CC95F9FF1F3A3F1700E55483 /* MainMenuScene.swift in Sources */,
 				CCF8474C1EE9DC6D00468E0B /* Extensions.swift in Sources */,
 				CCDEA3D81F36BF450046C82D /* WalkThroughThreeViewController.swift in Sources */,
 				CC95FA011F41D95B00E55483 /* WordGroup.swift in Sources */,
 				CC2F8E481F18830200463E37 /* PlaySound.swift in Sources */,
 				CC8BE4151EEB47F700CDB4BB /* BaseScene.swift in Sources */,
+				CC1C64C51F44AE2800A9E5C8 /* IAPurchaseScene.swift in Sources */,
 				CC1148EE1F394D8500F64550 /* AppViewController.swift in Sources */,
 				AE39F6A71EE10AC300D362C1 /* GameStatusScene.swift in Sources */,
 				CCDEA3D41F36BEFD0046C82D /* WalkThroughOneViewController.swift in Sources */,

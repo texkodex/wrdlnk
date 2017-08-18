@@ -63,11 +63,20 @@ let settingsNodePath = "//world/config"
 let soundNodePath = "//world/switches/sound"
 let scoreNodePath = "//world/switches/score"
 let timerNodePath = "//world/switches/timer"
+
+let nightModeNodePath = "//world/switches/mode"
+let pastelNodePath = "//world/switches/pastel"
+let colorBlindNodePath = "//world/switches/colorblind"
+
+let purchaseOneNodePath = "//world/switches/purchaseOne"
+let purchaseTwoNodePath = "//world/switches/purchaseTwo"
+
 let enterNodePath = "//world/enter"
 
 let startNodePath = "//world/switches/start"
 let continueNodePath = "//world/switches/continue"
 let settingsMainNodePath = "//world/switches/settings"
+let awardNodePath = "//world/switches/award"
 let purchaseNodePath = "//world/switches/purchase"
 
 let statHighScoreNodePath = "//world/stat/highScore"
@@ -84,10 +93,19 @@ let preferenceSoundEnabledKey = "preference_sound_enabled"
 let preferenceScoreEnabledKey = "preference_score_enabled"
 let preferenceTimerEnabledKey = "preference_timer_enabled"
 
+let preferenceNightModeEnabledKey = "preference_night_mode_enabled"
+let preferencePastelEnabledKey = "preference_pastel_enabled"
+let preferenceColorBlindEnabledKey = "preference_color_blind_enabled"
+
+let preferencePurchaseOneEnabledKey = "preference_purchase_one_enabled"
+let preferencePurchaseTwoEnabledKey = "preference_purchase_two_enabled"
+
 let preferenceContinueGameEnabledKey = "preference_continue_game_enabled"
 let preferenceStartGameEnabledKey = "preference_start_game_enabled"
 let preferenceSettingsMainEnabledKey = "preference_settings_main_enabled"
+let preferenceGameAwardEnabledKey = "preference_game_award_enabled"
 let preferenceInAppPurchaseEnabledKey = "preference_inapp_purchase_enabled"
+let preferenceInstructionsEnabledKey = "preference_instructions_enabled"
 
 let preferenceCurrentScoreKey = "preference_current_score"
 let preferenceHighScoreKey = "preference_high_score"
@@ -104,7 +122,8 @@ let maxMatchingTimeSec = 180
 let grayTile = UIColor(colorLiteralRed: 192 / 255, green: 192 / 255, blue: 192 / 255, alpha: 1)
 let blueTile = UIColor(colorLiteralRed: 77 / 255, green: 146 / 255, blue: 223 / 255, alpha: 1)
 let yellowTile = UIColor(colorLiteralRed: 241 / 255, green: 224 / 255, blue: 95 / 255, alpha: 1)
-let greenTile = UIColor(colorLiteralRed: 129 / 255, green: 209 / 255, blue: 53 / 255, alpha: 1)
+let greenTileOld = UIColor(colorLiteralRed: 129 / 255, green: 209 / 255, blue: 53 / 255, alpha: 1)
+let greenTile = UIColor(colorLiteralRed: 182 / 255, green: 220 / 255, blue: 138 / 255, alpha: 1)
 let redTile = UIColor(colorLiteralRed: 252 / 255, green: 13 / 255, blue: 27 / 255, alpha: 1)
 
 struct viewNode {
@@ -116,7 +135,6 @@ struct viewNode {
 // MARK:- Enums
 enum ViewElement:String {
     case titleImage = "titleImage"
-    case top = "top"
     case main = "main"
     case board = "board"
     case control = "control"
@@ -137,6 +155,12 @@ enum ViewElement:String {
     case scoreSwitch = "ScoreSwitch"
     case timer = "timer"
     case timerSwitch = "TimerSwitch"
+    case mode = "mode"
+    case nightModeSwitch = "NightModeSwitch"
+    case pastel = "pastel"
+    case pastelSwitch = "PastelSwitch"
+    case colorblind = "colorblind"
+    case colorBlindSwitch = "ColorBlindSwitch"
     case enter = "enter"
     case enterGame = "EnterGame"
     
@@ -149,21 +173,42 @@ enum ViewElement:String {
     case gameSettings = "GameSettings"
     case purchase = "purchase"
     case inAppPurchase = "InAppPurchase"
+    case guide = "guide"
+    case instructions = "Instructions"
+    case award = "award"
+    case gameAward = "GameAward"
     
-    static let types = [ titleImage, top, main, board, control, buttons, footer,
+    case purchaseOne = "purchaseOne"
+    case purchaseOneSwitch = "PurchaseOneSwitch"
+    case purchaseTwo = "purchaseTwo"
+    case purchaseTwoSwitch = "PurchaseTwoSwitch"
+    
+    
+    case awardDetail = "awardDetail"
+    
+    static let types = [ titleImage, main, board, control, buttons, footer,
                          meaning, change,
                          prefixMeaning, linkMeaning, suffixMeaning,
                          graph, progressGraph,
                          switches,
-                         sound, soundSwitch,
-                         score, scoreSwitch,
-                         timer, timerSwitch,
-                         enter, enterGame,
+                         sound,         soundSwitch,
+                         score,         scoreSwitch,
+                         timer,         timerSwitch,
+                         mode,          nightModeSwitch,
+                         pastel,        pastelSwitch,
+                         colorblind,    colorBlindSwitch,
+                         enter,         enterGame,
                          
-                         start, startNewGame,
-                         continueTag, continueGame,
-                         settings, gameSettings,
-                         purchase, inAppPurchase
+                         start,         startNewGame,
+                         continueTag,   continueGame,
+                         settings,      gameSettings,
+                         award,         gameAward,
+                         purchase,      inAppPurchase,
+                         guide,         instructions,
+                         
+                         purchaseOne,   purchaseOneSwitch,
+                         purchaseTwo,   purchaseTwoSwitch,
+                         awardDetail
                         ]
 }
 

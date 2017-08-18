@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wrdlnk/Extensions.swift"
-            timestampString = "524275492.190664"
+            filePath = "wrdlnk/GameStatusScene.swift"
+            timestampString = "524710824.244755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "426"
-            endingLineNumber = "426"
-            landmarkName = "addHighlightForSprite(spriteNode:)"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "sceneDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,45 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wrdlnk/WordGroup.swift"
-            timestampString = "524545374.43105"
+            filePath = "wrdlnk/Extensions.swift"
+            timestampString = "524711496.880968"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1044"
-            endingLineNumber = "1044"
-            landmarkName = "level1()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "wrdlnk/WordGroup.swift"
-            timestampString = "524545374.43105"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1835"
-            endingLineNumber = "1835"
-            landmarkName = "level1()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "wrdlnk/WordGroup.swift"
-            timestampString = "524545374.43105"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4047"
-            endingLineNumber = "4047"
-            landmarkName = "level1()"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "transitionToScene(destination:sendingScene:startNewGame:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

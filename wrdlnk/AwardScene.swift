@@ -1,26 +1,24 @@
 //
-//  GameStatusScene.swift
+//  AwardScene.swift
 //  wrdlnk
 //
-//  Created by Selvin on 6/1/17.
+//  Created by sparkle on 8/16/17.
 //  Copyright © 2017 teknowsys. All rights reserved.
 //
 
 import SpriteKit
 import GameplayKit
 
-class GameStatusScene: BaseScene {
+class AwardScene: BaseScene {
     var entities = [GKEntity()]
     var graphs = [String:GKGraph]()
     
     var nodes = [SKNode]()
     
-    var wordList = WordList.sharedInstance
-    
     var statData = StatData.sharedInstance
     
-    let nodeMap = [ViewElement.graph.rawValue, ViewElement.progressGraph.rawValue]
-
+    let nodeMap = [ViewElement.award.rawValue, ViewElement.awardDetail.rawValue]
+    
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
         entities.removeAll()
@@ -33,45 +31,31 @@ class GameStatusScene: BaseScene {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
-        //setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:stats:wordList:))
         setup(nodeMap: nodeMap, completionHandler: makeVisible(params:))
     }
-
+    
     func makeVisible (params: MakeVisibleParams){
         print("Entering \(#file):: \(#function) at line \(#line)")
         switch params.viewElement! {
-        case .progressGraph:
-            if statData.elements().count > 0 {
-                params.nodeTile?.showProgressGraph(stats: statData)
-            }
-            
-            if wordList.getMatchCondition() {
-                preserveDefaults(stats: statData)
-                wordList.handledMatchCondition()
-            } 
-            
-            break
+        case .awardDetail:
+            print("Award details ...")
+        break
         default:
             return
         }
         
     }
     
-    func preserveDefaults(stats: StatData?) {
-        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: stats!.elements())
-        AppDefinition.defaults.set(encodedData, forKey: preferenceGameStatKey)
-    }
-    
     override func update(_ currentTime: TimeInterval) {
         
     }
     
-//    override func didChangeSize(_ oldSize: CGSize) {
-//        for node in self.children{
-//            let newPosition = CGPoint(x:node.position.x / oldSize.width * self.frame.size.width,y:node.position.y / oldSize.height * self.frame.size.height)
-//            node.position = newPosition
-//        }
-//    }
+    override func didChangeSize(_ oldSize: CGSize) {
+        for node in self.children{
+            let newPosition = CGPoint(x:node.position.x / oldSize.width * self.frame.size.width,y:node.position.y / oldSize.height * self.frame.size.height)
+            node.position = newPosition
+        }
+    }
     
     // MARK: - Touches
     func touchDown(atPoint pos : CGPoint) {
@@ -88,7 +72,6 @@ class GameStatusScene: BaseScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        transitionToScene(destination: SceneType.GameScene, sendingScene: self)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -104,3 +87,4 @@ class GameStatusScene: BaseScene {
     }
     
 }
+

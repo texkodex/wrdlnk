@@ -43,18 +43,34 @@ extension BaseScene: ButtonNodeResponderType {
             case .timerSwitch:
                 toggleGameTimer(button: button)
             break
+            case .nightModeSwitch:
+                toggleGameTimer(button: button)
+            break
+            case .pastelSwitch:
+                toggleGameTimer(button: button)
+            break
+            case .colorBlindSwitch:
+                toggleGameTimer(button: button)
+            break
             case .continueGame:
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self)
             break
             case .startNewGame:
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self, startNewGame: true)
             break
+            case .gameAward:
+            transitionToScene(destination: SceneType.GameAward, sendingScene: self)
+            break
             case .gameSettings:
                 transitionToScene(destination: SceneType.Menu, sendingScene: self)
             break
             case .inAppPurchase:
-                transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+                transitionToScene(destination: SceneType.InAppPurchase, sendingScene: self)
             break
+            case .instructions:
+            transitionToScene(destination: SceneType.Instructions, sendingScene: self)
+            break
+
         default:
             return
         }

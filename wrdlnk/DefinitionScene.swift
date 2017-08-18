@@ -24,7 +24,7 @@ struct MakeVisibleParams {
     }
 }
 
-class DefinitionScene: SKScene {
+class DefinitionScene: BaseScene {
     var entities = [GKEntity()]
     var graphs = [String:GKGraph]()
     

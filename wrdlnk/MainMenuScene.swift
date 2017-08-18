@@ -37,19 +37,27 @@ class MainMenuScene: BaseScene {
     }
     
     override var backgroundNodeThree: SKNode? {
+        return childNode(withName: awardNodePath)!
+    }
+    
+    var gameAwardButton: ButtonNode? {
+        return backgroundNodeThree?.childNode(withName: ButtonIdentifier.gameAward.rawValue) as? ButtonNode
+    }
+
+    override var backgroundNodeFour: SKNode? {
         return childNode(withName: settingsMainNodePath)!
     }
     
     var settingsMainButton: ButtonNode? {
-        return backgroundNodeThree?.childNode(withName: ButtonIdentifier.gameSettings.rawValue) as? ButtonNode
+        return backgroundNodeFour?.childNode(withName: ButtonIdentifier.gameSettings.rawValue) as? ButtonNode
     }
     
-    override var backgroundNodeFour: SKNode? {
+    override var backgroundNodeFive: SKNode? {
         return childNode(withName: purchaseNodePath)!
     }
     
     var inAppPurchaseButton: ButtonNode? {
-        return backgroundNodeFour?.childNode(withName: ButtonIdentifier.inAppPurchase.rawValue) as? ButtonNode
+        return backgroundNodeFive?.childNode(withName: ButtonIdentifier.inAppPurchase.rawValue) as? ButtonNode
     }
     
     let nodeMap = [ ViewElement.titleImage.rawValue,
@@ -58,6 +66,8 @@ class MainMenuScene: BaseScene {
                     ViewElement.startNewGame.rawValue,
                     ViewElement.continueTag.rawValue,
                     ViewElement.continueGame.rawValue,
+                    ViewElement.award.rawValue,
+                    ViewElement.gameAward.rawValue,
                     ViewElement.settings.rawValue,
                     ViewElement.gameSettings.rawValue,
                     ViewElement.purchase.rawValue,
@@ -88,6 +98,9 @@ class MainMenuScene: BaseScene {
         state = AppDefinition.defaults.bool(forKey: preferenceContinueGameEnabledKey)
         state ? enableButton(button: continueGameButton, isSelected: state, focus: true) : enableButton(button: continueGameButton, isSelected: state)
         
+        state = AppDefinition.defaults.bool(forKey: preferenceGameAwardEnabledKey)
+        state ? enableButton(button: gameAwardButton, isSelected: state, focus: true) : enableButton(button: gameAwardButton, isSelected: state)
+
         state = AppDefinition.defaults.bool(forKey: preferenceSettingsMainEnabledKey)
         state ? enableButton(button: settingsMainButton, isSelected: state, focus: true) : enableButton(button: settingsMainButton, isSelected: state)
         

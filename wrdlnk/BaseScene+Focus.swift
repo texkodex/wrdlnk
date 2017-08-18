@@ -33,6 +33,9 @@ extension BaseScene {
             .soundSwitch,
             .scoreSwitch,
             .timerSwitch,
+            .nightModeSwitch,
+            .pastelSwitch,
+            .colorBlindSwitch,
             .enterGame,
             .proceedToNextScene,
             .provideMeaning,
@@ -42,6 +45,11 @@ extension BaseScene {
             .continueGame,
             .gameSettings,
             .inAppPurchase,
+            .purchaseOneSwitch,
+            .purchaseTwoSwitch,
+            .gameAward,
+            .awardDetail,
+            .instructions,
             .cancel,
             .moreInfo
         ]

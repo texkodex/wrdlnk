@@ -36,13 +36,37 @@ class MenuScene: BaseScene {
     var timerButton: ButtonNode? {
         return backgroundNodeThree?.childNode(withName: ButtonIdentifier.timerSwitch.rawValue) as? ButtonNode
     }
-
+    
     override var backgroundNodeFour: SKNode? {
+        return childNode(withName: nightModeNodePath)!
+    }
+    
+    var nightModeButton: ButtonNode? {
+        return backgroundNodeFour?.childNode(withName: ButtonIdentifier.nightModeSwitch.rawValue) as? ButtonNode
+    }
+    
+    override var backgroundNodeFive: SKNode? {
+        return childNode(withName: pastelNodePath)!
+    }
+    
+    var pastelButton: ButtonNode? {
+        return backgroundNodeFive?.childNode(withName: ButtonIdentifier.pastelSwitch.rawValue) as? ButtonNode
+    }
+    
+    override var backgroundNodeSix: SKNode? {
+        return childNode(withName: colorBlindNodePath)!
+    }
+    
+    var colorBlindButton: ButtonNode? {
+        return backgroundNodeSix?.childNode(withName: ButtonIdentifier.colorBlindSwitch.rawValue) as? ButtonNode
+    }
+
+    override var backgroundNodeSeven: SKNode? {
         return childNode(withName: enterNodePath)!
     }
     
     var enterButton: ButtonNode? {
-        return backgroundNodeFour?.childNode(withName: ButtonIdentifier.enterGame.rawValue) as? ButtonNode
+        return backgroundNodeSeven?.childNode(withName: ButtonIdentifier.enterGame.rawValue) as? ButtonNode
     }
     
     let nodeMap = [ ViewElement.switches.rawValue,
@@ -74,6 +98,15 @@ class MenuScene: BaseScene {
         
         state = AppDefinition.defaults.bool(forKey: preferenceScoreEnabledKey)
         state ? enableButton(button: scoreButton, isSelected: state, focus: true) : enableButton(button: scoreButton, isSelected: state)
+        
+        state = AppDefinition.defaults.bool(forKey: preferenceNightModeEnabledKey)
+        state ? enableButton(button: nightModeButton, isSelected: state, focus: true) : enableButton(button: nightModeButton, isSelected: state)
+        
+        state = AppDefinition.defaults.bool(forKey: preferencePastelEnabledKey)
+        state ? enableButton(button: pastelButton, isSelected: state, focus: true) : enableButton(button: pastelButton, isSelected: state)
+        
+        state = AppDefinition.defaults.bool(forKey: preferenceColorBlindEnabledKey)
+        state ? enableButton(button: colorBlindButton, isSelected: state, focus: true) : enableButton(button: colorBlindButton, isSelected: state)
         
         state = AppDefinition.defaults.bool(forKey: preferenceTimerEnabledKey)
         state ? enableButton(button: timerButton, isSelected: state, focus: true) : enableButton(button: timerButton, isSelected: state)

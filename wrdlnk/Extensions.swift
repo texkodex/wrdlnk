@@ -16,6 +16,9 @@ enum SceneType {
     case Definition
     case Menu
     case MainMenu
+    case InAppPurchase
+    case GameAward
+    case Instructions
 }
 
 extension UIViewController {
@@ -101,6 +104,12 @@ extension SKScene {
             scene = MenuScene(fileNamed: "MenuScene")!
         case .MainMenu:
             scene = MainMenuScene(fileNamed: "MainMenuScene")!
+        case .InAppPurchase:
+            scene = IAPurchaseScene(fileNamed: "IAPurchaseScene")!
+        case .GameAward:
+            scene = IAPurchaseScene(fileNamed: "AwardScene")!
+        case .Instructions:
+            return
         }
  
         scene.size = (view?.bounds.size)!
@@ -274,6 +283,12 @@ extension ButtonNodeResponderType where Self: BaseScene {
         AppDefinition.defaults.set(button.isSelected, forKey: preferenceContinueGameEnabledKey)
     }
     
+    func toggleAwardSettings(button: ButtonNode) {
+        let state = AppDefinition.defaults.bool(forKey: preferenceGameAwardEnabledKey)
+        button.isSelected = !state
+        AppDefinition.defaults.set(button.isSelected, forKey: preferenceGameAwardEnabledKey)
+    }
+
     func toggleGameSettings(button: ButtonNode) {
         let state = AppDefinition.defaults.bool(forKey: preferenceSettingsMainEnabledKey)
         button.isSelected = !state
@@ -281,7 +296,7 @@ extension ButtonNodeResponderType where Self: BaseScene {
     }
 
     func toggleInAppPurchase(button: ButtonNode) {
-        let state = AppDefinition.defaults.bool(forKey: preferenceStartGameEnabledKey)
+        let state = AppDefinition.defaults.bool(forKey: preferenceInAppPurchaseEnabledKey)
         button.isSelected = !state
         AppDefinition.defaults.set(button.isSelected, forKey: preferenceInAppPurchaseEnabledKey)
     }
@@ -394,8 +409,8 @@ extension SKTileMapNode {
         for (rawIndex, letter) in word.characters.enumerated() {
             let index = rawIndex + offsetInRow(word: word, adjust: adjust)
             let tileNode = self.childNode(withName: nodeName(node: self, col: index, row: row)) as! SKSpriteNode
-            tileNode.color = VowelCharacter(rawValue: letter)?.rawValue == letter ? yellowTile : blueTile
-            if tileNode.color == yellowTile {
+            tileNode.color = VowelCharacter(rawValue: letter)?.rawValue == letter ? greenTile : blueTile
+            if tileNode.color == greenTile {
                 tileNode.userData = [tileUserDataClickName : true]
             }
             tileNode.alpha = CGFloat(1.0)
@@ -488,6 +503,7 @@ extension SKTileMapNode {
         for index in 0..<VowelCharacter.types.count {
             let tileNode = self.childNode(withName: nodeName(node: self, col: index, row: row)) as! SKSpriteNode
             tileNode.alpha = CGFloat(1.0)
+            tileNode.color = greenTile
             tileNode.userData = [tileUserDataClickName : true]
             tileNode.removeAllChildren()
             tileNode.size = CGSize(width: CGFloat(defaultTileInnerWidth), height: CGFloat(defaultTileInnerHeight))
@@ -560,7 +576,7 @@ extension SKTileMapNode {
         shape.fillColor = fillColor
         shape.strokeColor = fillStroke
         shape.lineWidth = lineWidth
-        let label = graphText(name: "label_\(index)", text: "\(Int(percentage))%", position: CGPoint(x: xPos + rowWidth / 5, y: yPos - 14))
+        let label = graphText(name: "label_\(index)", text: "\(Int(percentage))%", position: CGPoint(x: xPos + rowWidth / 7, y: yPos - 14))
         shape.addChild(label)
         return shape
     }

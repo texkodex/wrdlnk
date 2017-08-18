@@ -223,7 +223,6 @@ class GameScene: BaseScene {
     func makeVisible (params: MakeVisibleParams){
         print("Entering \(#file):: \(#function) at line \(#line)")
         switch params.viewElement! {
-        case .top: break
         case .main: break
         case .board:
             params.nodeTile?.setTileTexture(tileElement: TileElement(rawValue: "blue_tile")!)

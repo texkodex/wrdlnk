@@ -183,18 +183,18 @@ extension WordList {
        
         info.wordBank.append(Word(prefix: "FIRE", link: "ARM", suffix: "CHAIR"))
         info.wordBank.append(Word(prefix: "FIRE", link: "ARM", suffix: "HOLE"))
-        info.wordBank.append(Word(prefix: "FIRE", link: "ARM", suffix: "PILE"))
+        info.wordBank.append(Word(prefix: "FIRE", link: "ARM", suffix: "PIT"))
         info.wordBank.append(Word(prefix: "UNDER", link: "ARM", suffix: "CHAIR"))
         info.wordBank.append(Word(prefix: "UNDER", link: "ARM", suffix: "HOLE"))
-        info.wordBank.append(Word(prefix: "UNDER", link: "ARM", suffix: "PILE"))
+        info.wordBank.append(Word(prefix: "UNDER", link: "ARM", suffix: "PIT"))
         info.wordBank.append(Word(prefix: "YARD", link: "ARM", suffix: "CHAIR"))
         info.wordBank.append(Word(prefix: "YARD", link: "ARM", suffix: "HOLE"))
-        info.wordBank.append(Word(prefix: "YARD", link: "ARM", suffix: "PILE"))
+        info.wordBank.append(Word(prefix: "YARD", link: "ARM", suffix: "PIT"))
         
         // start back - cut
         info.wordBank.append(Word(prefix: "CUT", link: "BACK", suffix: "ACHE"))
         info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "BONE"))
-        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP"))
+        info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "DROP")) // 1
         info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "GROUND"))
         info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HAND"))
         info.wordBank.append(Word(prefix: "*", link: "BACK", suffix: "HOE"))

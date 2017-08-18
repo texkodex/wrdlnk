@@ -56,7 +56,7 @@ class BaseScene: SKScene {
     }
     
     func transitionReloadScene(scene: SKScene) {
-        transitionToScene(destination: SceneType.GameScene, sendingScene: scene)
+        //transitionToScene(destination: SceneType.GameScene, sendingScene: scene)
     }
     
 }

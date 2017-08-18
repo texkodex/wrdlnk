@@ -17,6 +17,7 @@
 		CC1C64C51F44AE2800A9E5C8 /* IAPurchaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64C41F44AE2800A9E5C8 /* IAPurchaseScene.swift */; };
 		CC1C64C71F44B44300A9E5C8 /* AwardScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC1C64C61F44B44300A9E5C8 /* AwardScene.sks */; };
 		CC1C64C91F44B47300A9E5C8 /* AwardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64C81F44B47300A9E5C8 /* AwardScene.swift */; };
+		CC1C64CE1F46B92400A9E5C8 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64CD1F46B92400A9E5C8 /* ColorScheme.swift */; };
 		CC2F8E481F18830200463E37 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F8E471F18830100463E37 /* PlaySound.swift */; };
 		CC7202B41F1973F1003394A0 /* awake.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202B31F1973F1003394A0 /* awake.mp3 */; };
 		CC7202B61F19740D003394A0 /* error.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202B51F19740D003394A0 /* error.mp3 */; };
@@ -85,6 +86,7 @@
 		CC1C64C41F44AE2800A9E5C8 /* IAPurchaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPurchaseScene.swift; sourceTree = "<group>"; };
 		CC1C64C61F44B44300A9E5C8 /* AwardScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AwardScene.sks; sourceTree = "<group>"; };
 		CC1C64C81F44B47300A9E5C8 /* AwardScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardScene.swift; sourceTree = "<group>"; };
+		CC1C64CD1F46B92400A9E5C8 /* ColorScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		CC2F8E471F18830100463E37 /* PlaySound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 		CC7202B31F1973F1003394A0 /* awake.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = awake.mp3; sourceTree = "<group>"; };
 		CC7202B51F19740D003394A0 /* error.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = error.mp3; sourceTree = "<group>"; };
@@ -171,6 +173,14 @@
 			name = IAPurchase;
 			sourceTree = "<group>";
 		};
+		CC1C64CC1F46B90100A9E5C8 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				CC1C64CD1F46B92400A9E5C8 /* ColorScheme.swift */,
+			);
+			name = Color;
+			sourceTree = "<group>";
+		};
 		CC8BE4201EF10AC900CDB4BB /* Audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +228,7 @@
 		CCAD36151EE0CAE3001C6AFE /* wrdlnk */ = {
 			isa = PBXGroup;
 			children = (
+				CC1C64CC1F46B90100A9E5C8 /* Color */,
 				CC1C64BF1F44A77D00A9E5C8 /* IAPurchase */,
 				CCDEA3D21F36BECB0046C82D /* WalkThrough */,
 				CCF8474A1EE9DC5B00468E0B /* Helpers */,
@@ -506,6 +517,7 @@
 				CCDEA3E01F37A8690046C82D /* WalkThroughPageViewController.swift in Sources */,
 				CCAD36171EE0CAE3001C6AFE /* AppDelegate.swift in Sources */,
 				CCDC23731F200E3700371F1F /* MenuScene.swift in Sources */,
+				CC1C64CE1F46B92400A9E5C8 /* ColorScheme.swift in Sources */,
 				CC8BE4191EEB4AA600CDB4BB /* BaseScene+Focus.swift in Sources */,
 				CCDEA3D61F36BF1C0046C82D /* WalkThroughTwoViewController.swift in Sources */,
 				CC1148EA1F3841FC00F64550 /* WalkThroughLastPageViewController.swift in Sources */,

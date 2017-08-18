@@ -35,6 +35,8 @@ class GameStatusScene: BaseScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
         //setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:stats:wordList:))
         setup(nodeMap: nodeMap, completionHandler: makeVisible(params:))
+        ColorScheme.instance.set(for: self)
+
     }
 
     func makeVisible (params: MakeVisibleParams){

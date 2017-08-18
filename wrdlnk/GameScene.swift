@@ -157,7 +157,9 @@ class GameScene: BaseScene {
         // Start game timer
         self.playerTimerLabel?.text = timerString()
         countTime()
-     }
+        
+        ColorScheme.instance.set(for: self)
+    }
     
     func readyForInit() {
         initialize.doOnce = false

@@ -88,6 +88,7 @@ class MainMenuScene: BaseScene {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
         initializeButtons()
+        ColorScheme.instance.set(for: self)
     }
 
     func initializeButtons() {

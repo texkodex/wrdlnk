@@ -126,6 +126,10 @@ let greenTileOld = UIColor(colorLiteralRed: 129 / 255, green: 209 / 255, blue: 5
 let greenTile = UIColor(colorLiteralRed: 182 / 255, green: 220 / 255, blue: 138 / 255, alpha: 1)
 let redTile = UIColor(colorLiteralRed: 252 / 255, green: 13 / 255, blue: 27 / 255, alpha: 1)
 
+// Mode colors
+let grayCanvas = UIColor(colorLiteralRed: 230 / 255, green: 230 / 255, blue: 230 / 255, alpha: 1)
+let whiteCanvas = UIColor(colorLiteralRed: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
+
 struct viewNode {
     let name: String
     let node: SKNode

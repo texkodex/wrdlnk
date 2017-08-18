@@ -537,6 +537,7 @@ extension SKTileMapNode {
     
     func graphBackground() -> SKShapeNode {
         let shape = SKShapeNode()
+        shape.name = "graphBackground"
         shape.path = UIBezierPath(roundedRect: CGRect(x: self.frame.minX, y: self.frame.minY, width: self.frame.width, height: self.frame.height), cornerRadius: self.frame.width / 256).cgPath
         shape.position = CGPoint(x: self.frame.midX, y: self.frame.midY) // does not do anything?
         shape.fillColor = grayTile
@@ -555,7 +556,7 @@ extension SKTileMapNode {
         return label
     }
     
-    func graphLine(index: Int, accuracy: Float, percentage: Float) -> SKShapeNode {
+    func graphLine(index: Int, last: Int, accuracy: Float, percentage: Float) -> SKShapeNode {
         let shape = SKShapeNode()
         let rowWidth = self.frame.width / CGFloat(numberOfColumns) * 2
         let xPos = (self.frame.minX + rowWidth / 2) + CGFloat(index) * rowWidth
@@ -578,17 +579,34 @@ extension SKTileMapNode {
         shape.lineWidth = lineWidth
         let label = graphText(name: "label_\(index)", text: "\(Int(percentage))%", position: CGPoint(x: xPos + rowWidth / 7, y: yPos - 14))
         shape.addChild(label)
+        
+        if (index == last) {
+            shape.addChild(arrowNode(frame: frame, rowHeight: rowHeight, rowWidth: rowWidth, xPos: xPos, lineWidth: lineWidth))
+        }
+        
         return shape
+    }
+    
+    func arrowNode(frame: CGRect,rowHeight: CGFloat, rowWidth: CGFloat, xPos: CGFloat, lineWidth: CGFloat) -> SKShapeNode {
+        var points = [CGPoint(x: xPos + 1 - rowWidth / 8, y: frame.maxY + rowHeight * 1.5),
+                      CGPoint(x: xPos + 1, y: frame.maxY + rowHeight / 2),
+                      CGPoint(x: xPos + 1 + rowWidth / 8, y: self.frame.maxY + rowHeight * 1.5)]
+        let arrowShapeNode = SKShapeNode(points: &points,
+                                         count: points.count)
+        arrowShapeNode.strokeColor = greenTile
+        arrowShapeNode.lineWidth = lineWidth * 2
+        
+        return arrowShapeNode
     }
     
     func showProgressGraph(stats: StatData) {
         self.removeAllChildren()
         let shape = graphBackground()
         self.addChild(shape)
-        
+        let last = stats.count() - 1
         for (index, value) in stats.elements().enumerated() {
             print("index: \(index), with value: \(value.percentage)")
-            self.addChild(graphLine(index: index, accuracy: value.accuracy, percentage: value.percentage))
+            self.addChild(graphLine(index: index, last: last, accuracy: value.accuracy, percentage: value.percentage))
         }
         
         let label = graphText(name: "label_graph_title", text: "Most Recent Performance",

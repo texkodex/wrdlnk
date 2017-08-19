@@ -1,14 +1,23 @@
 //
-//  ColorScheme.swift
+//  AppTheme.swift
 //  wrdlnk
 //
 //  Created by sparkle on 8/18/17.
 //  Copyright © 2017 teknowsys. All rights reserved.
 //
-
+import UIKit
 import SpriteKit
 
-class ColorScheme {
+class AppTheme {
+    func set(for view: UIView) {
+        print("restoration id: \(String(describing: view.restorationIdentifier))")
+        for aview in view.subviews {
+            if aview.restorationIdentifier == "background" {
+                aview.backgroundColor = bgColorList.last
+            }
+        }
+     }
+    
     func set(for view: BaseScene) {
         
         for color in bgColorList {
@@ -79,5 +88,5 @@ class ColorScheme {
     
     let parentNodeList = [ "//world/backgroundNode", "//world/switches", "//world/graph/progressGraph"]
     
-    static let instance = ColorScheme()
+    static let instance = AppTheme()
 }

@@ -49,16 +49,9 @@ class WalkThroughOneViewController: UIViewController {
         horizontalLineImage.image = UIImage(named:self.horizontalineImageFileName)
         self.nextPageLabel.text = (self.keyViewDictionary["next_page_text"]!)
         
-        
-        
+        AppTheme.instance.set(for: self.view)
     }
     
     @IBAction func nextPageButton(sender: AnyObject) {
-//        let storyboard = UIStoryboard(name: StoryboardName.Onboarding.rawValue, bundle: nil)
-//         let nextView:WalkThroughTwoViewController = storyboard.instantiateViewController(withIdentifier: "WalkThroughTwoViewController") as! WalkThroughTwoViewController
-//        
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        
-//        appDelegate.window!.rootViewController = nextView
     }
 }

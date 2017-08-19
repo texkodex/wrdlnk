@@ -62,6 +62,8 @@ class WalkThroughLastPageViewController: UIViewController {
         self.horizontalineImageFileName = "choose-location-dividing-line"
         horizontalLineImage.image = UIImage(named:self.horizontalineImageFileName)
         //self.nextPageLabel.text = (self.keyViewDictionary["next_page_text"]!)
-    self.enterButton.setTitle((self.keyViewDictionary["next_page_text"]!), for: .normal)
+        self.enterButton.setTitle((self.keyViewDictionary["next_page_text"]!), for: .normal)
+        
+        AppTheme.instance.set(for: self.view)
     }
 }

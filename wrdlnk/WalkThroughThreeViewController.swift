@@ -48,6 +48,8 @@ class WalkThroughThreeViewController: UIViewController {
         self.horizontalineImageFileName = "choose-location-dividing-line"
         horizontalLineImage.image = UIImage(named:self.horizontalineImageFileName)
         self.nextPageLabel.text = (self.keyViewDictionary["next_page_text"]!)
+        
+        AppTheme.instance.set(for: self.view)
     }
     
     @IBAction func nextPageButton(sender: AnyObject) {

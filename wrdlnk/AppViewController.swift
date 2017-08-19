@@ -10,7 +10,7 @@ import UIKit
 
 class AppViewController: UIViewController {
 
-    var pageViewController:WalkThroughPageViewController?
+    //var pageViewController:WalkThroughPageViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -50,7 +50,7 @@ class DefinitionScene: BaseScene {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
         setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
-        ColorScheme.instance.set(for: self)
+        AppTheme.instance.set(for: self)
     }
     
     // MARK: - Popover screen

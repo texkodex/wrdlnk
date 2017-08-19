@@ -62,7 +62,7 @@ extension GameScene {
     }
     
     func timerString() -> String? {
-        return String(format: "%02d:%02d", ((lround(Double(self.levelTime)) / 60) % 60), lround(Double(self.levelTime)) % 60)
+        return String(format: "[ %02d:%02d ]", ((lround(Double(self.levelTime)) / 60) % 60), lround(Double(self.levelTime)) % 60)
     }
     
     func bonusPoints() -> Int {
@@ -109,6 +109,8 @@ extension SKScene {
         case .GameAward:
             scene = IAPurchaseScene(fileNamed: "AwardScene")!
         case .Instructions:
+            let instructionCntroller = UIViewController()
+            instructionCntroller.launchFromStoryboard(name: StoryboardName.Onboarding.rawValue, controller: "WalkThroughPageViewController")
             return
         }
  

@@ -32,7 +32,7 @@ class AwardScene: BaseScene {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
         setup(nodeMap: nodeMap, completionHandler: makeVisible(params:))
-        ColorScheme.instance.set(for: self)
+        AppTheme.instance.set(for: self)
     }
     
     func makeVisible (params: MakeVisibleParams){

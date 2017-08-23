@@ -58,56 +58,119 @@ enum ButtonIdentifier: String {
             .awardDetail
     ]
     
+    func fullTextureName(_ textureName: String) -> String {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return Mode.colorBlind.rawValue + "/" + textureName
+        case Mode.nightMode:
+            return Mode.nightMode.rawValue + "/" + textureName
+        default:
+            return textureName
+        }
+    }
+    
     var selectedTextureName: String? {
         switch self {
         case .titleImage:
-            return "AppIcon"
+            return fullTextureName("AppIcon")
         case .proceedToNextScene:
-            return "ProceedToNextScene"
+            return fullTextureName("ProceedToNextScene")
         case .provideMeaning:
-            return "questionOn"
+            return fullTextureName("questionOn")
         case .showGraph:
-            return "graphOn"
+            return fullTextureName("graphOn")
         case .appSettings:
-            return "settingsOn"
+            return fullTextureName("settingsOn")
         case .cancel:
-            return "Cancel"
+            return fullTextureName("Cancel")
         case .moreInfo:
-            return "MoreInfo"
+            return fullTextureName("MoreInfo")
         case .soundSwitch:
-            return "soundOn"
+            return fullTextureName("soundOn")
         case .scoreSwitch:
-            return "scoreOn"
+            return fullTextureName("scoreOn")
         case .timerSwitch:
-            return "timerOn"
+            return fullTextureName("timerOn")
         case .nightModeSwitch:
-            return "nightModeOn"
+            return fullTextureName("nightModeOn")
         case .pastelSwitch:
-            return "pastelOn"
+            return fullTextureName("pastelOn")
         case .colorBlindSwitch:
-            return "colorBlindOn"
+            return fullTextureName("colorBlindOn")
         case .enterGame:
-            return "enterOn"
+            return fullTextureName("enterOn")
         case .startNewGame:
-            return "enterOn"
+            return fullTextureName("enterOn")
         case .continueGame:
-            return "enterOn"
+            return fullTextureName("enterOn")
         case .gameSettings:
-            return "enterOn"
+            return fullTextureName("settingsOn")
         case .inAppPurchase:
-            return "paymentOn"
+            return fullTextureName("paymentOn")
         case .instructions:
-            return "infoOn"
+            return fullTextureName("infoOn")
         case .purchaseOneSwitch:
-            return "paymentOn"
+            return fullTextureName("paymentOn")
         case .purchaseTwoSwitch:
-            return "paymentOn"
+            return fullTextureName("paymentOn")
         case .gameAward:
-            return "soundOn"
+            return fullTextureName("soundOn")
         case .awardDetail:
-            return "scoreOn"
+            return fullTextureName("scoreOn")
         }
     }
+    
+    var defaultTextureName: String? {
+        switch self {
+        case .titleImage:
+            return fullTextureName("AppIcon")
+        case .proceedToNextScene:
+            return fullTextureName("ProceedToNextScene")
+        case .provideMeaning:
+            return fullTextureName("questionOff")
+        case .showGraph:
+            return fullTextureName("graphOff")
+        case .appSettings:
+            return fullTextureName("settingsOff")
+        case .cancel:
+            return fullTextureName("Cancel")
+        case .moreInfo:
+            return fullTextureName("MoreInfo")
+        case .soundSwitch:
+            return fullTextureName("soundOff")
+        case .scoreSwitch:
+            return fullTextureName("scoreOff")
+        case .timerSwitch:
+            return fullTextureName("timerOff")
+        case .nightModeSwitch:
+            return fullTextureName("nightModeOff")
+        case .pastelSwitch:
+            return fullTextureName("pastelOff")
+        case .colorBlindSwitch:
+            return fullTextureName("colorBlindOff")
+        case .enterGame:
+            return fullTextureName("enterOn")
+        case .startNewGame:
+            return fullTextureName("enterOff")
+        case .continueGame:
+            return fullTextureName("enterOn")
+        case .gameSettings:
+            return fullTextureName("settingsOn")
+        case .inAppPurchase:
+            return fullTextureName("paymentOff")
+        case .instructions:
+            return fullTextureName("infoOff")
+        case .purchaseOneSwitch:
+            return fullTextureName("paymentOff")
+        case .purchaseTwoSwitch:
+            return fullTextureName("paymentOff")
+        case .gameAward:
+            return fullTextureName("scoreOff")
+        case .awardDetail:
+            return fullTextureName("scoreOff")
+        }
+    }
+
 }
 
 class ButtonNode: SKSpriteNode {
@@ -175,7 +238,12 @@ class ButtonNode: SKSpriteNode {
         }
         self.buttonIdentifier = buttonIdentifier
         
-        defaultTexture = texture
+        if let textureName = buttonIdentifier.defaultTextureName {
+            defaultTexture = SKTexture(imageNamed: textureName)
+        }
+        else {
+            defaultTexture = texture
+        }
         
         if let textureName = buttonIdentifier.selectedTextureName {
             selectedTexture = SKTexture(imageNamed: textureName)

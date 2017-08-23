@@ -65,22 +65,11 @@ class DefinitionScene: BaseScene {
         let popover = dic.popoverPresentationController
         popover?.sourceView = view
         popover?.sourceRect = CGRect(x: 32, y: 32, width: 64, height: 64)
-        
-        //self.view?.presentScene((view?.scene)!, transition: SKTransition.fade(withDuration: 1.0))
-        /*
-            present(
-                UIReferenceLibraryViewController(term: term),
-                animated: true,
-                completion: nil
-            )
-        */
         }
     }
 
     override func didMove(to view: SKView) {
         popUpTheDictionary()
-        //someView = view
-        //view.addSubview(someView)
     }
     
     func checkWord(word: String) -> String? {

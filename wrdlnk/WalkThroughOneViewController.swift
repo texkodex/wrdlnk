@@ -14,6 +14,8 @@ class WalkThroughOneViewController: UIViewController {
     
     @IBOutlet weak var mainTitleLabel: UILabel!
     
+    @IBOutlet weak var infoImage: UIImageView!
+    
     @IBOutlet weak var firstSubTitleLabel: UILabel!
     
     @IBOutlet weak var secondSubTitleLabel: UILabel!
@@ -23,6 +25,7 @@ class WalkThroughOneViewController: UIViewController {
     @IBOutlet weak var nextPageLabel: UILabel!
     
     var imageFileName:String!
+    var infoImageFileName:String!
     var horizontalineImageFileName:String!
     var pageIndex:Int!
     var keyViewDictionary = [String:String]()
@@ -43,6 +46,8 @@ class WalkThroughOneViewController: UIViewController {
         self.imageFileName = self.keyViewDictionary["page_icon1"]!
         walkthroughImage.image = UIImage(named:self.imageFileName)
         self.mainTitleLabel.text = (self.keyViewDictionary["main_title_text"]!)
+        self.infoImageFileName = self.keyViewDictionary["info_image_filename"]!
+        infoImage.image = UIImage(named:self.infoImageFileName)
         self.firstSubTitleLabel.text = (self.keyViewDictionary["sub_title1_text"]!)
         self.secondSubTitleLabel.text = (self.keyViewDictionary["sub_title2_text"]!)
         self.horizontalineImageFileName = "choose-location-dividing-line"

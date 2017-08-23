@@ -97,6 +97,7 @@ let preferenceNightModeEnabledKey = "preference_night_mode_enabled"
 let preferencePastelEnabledKey = "preference_pastel_enabled"
 let preferenceColorBlindEnabledKey = "preference_color_blind_enabled"
 
+let preferencePurchaseDescriptionEnabledKey = "preference_purchase_description_enabled"
 let preferencePurchaseOneEnabledKey = "preference_purchase_one_enabled"
 let preferencePurchaseTwoEnabledKey = "preference_purchase_two_enabled"
 

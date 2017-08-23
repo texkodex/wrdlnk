@@ -19,6 +19,7 @@ class WalkThroughLastPageViewController: UIViewController {
     
     @IBOutlet weak var mainTitleLabel: UILabel!
     
+    
     @IBOutlet weak var firstSubTitleLabel: UILabel!
     
     @IBOutlet weak var secondSubTitleLabel: UILabel!

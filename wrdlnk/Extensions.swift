@@ -277,18 +277,30 @@ extension ButtonNodeResponderType where Self: BaseScene {
         let state = AppDefinition.defaults.bool(forKey: preferenceNightModeEnabledKey)
         button.isSelected = !state
         AppDefinition.defaults.set(button.isSelected, forKey: preferenceNightModeEnabledKey)
+        if button.isSelected {
+            AppDefinition.defaults.set(false, forKey: preferencePastelEnabledKey)
+            AppDefinition.defaults.set(false, forKey: preferenceColorBlindEnabledKey)
+        }
     }
     
     func togglePastel(button: ButtonNode) {
         let state = AppDefinition.defaults.bool(forKey: preferencePastelEnabledKey)
         button.isSelected = !state
         AppDefinition.defaults.set(button.isSelected, forKey: preferencePastelEnabledKey)
+        if button.isSelected {
+            AppDefinition.defaults.set(false, forKey: preferenceNightModeEnabledKey)
+            AppDefinition.defaults.set(false, forKey: preferenceColorBlindEnabledKey)
+        }
     }
     
     func toggleColorBlind(button: ButtonNode) {
         let state = AppDefinition.defaults.bool(forKey: preferenceColorBlindEnabledKey)
         button.isSelected = !state
         AppDefinition.defaults.set(button.isSelected, forKey: preferenceColorBlindEnabledKey)
+        if button.isSelected {
+            AppDefinition.defaults.set(false, forKey: preferenceNightModeEnabledKey)
+            AppDefinition.defaults.set(false, forKey: preferencePastelEnabledKey)
+        }
     }
     func toggleStartNewGame(button: ButtonNode) {
         let state = AppDefinition.defaults.bool(forKey: preferenceStartGameEnabledKey)
@@ -570,7 +582,7 @@ extension SKTileMapNode {
         label.name = name
         label.text = "\(text)"
         label.fontSize = fontSize
-        label.fontColor = fontColor
+        label.fontColor = AppTheme.instance.fontColor()
         label.position = position
         return label
     }
@@ -629,7 +641,7 @@ extension SKTileMapNode {
         }
         
         let label = graphText(name: "label_graph_title", text: "Most Recent Performance",
-                              position: CGPoint(x: self.frame.midX, y: frame.minY - 30), fontSize: 24, fontColor: redTile)
+                              position: CGPoint(x: self.frame.midX, y: frame.minY - 30), fontSize: 24, fontColor: AppTheme.instance.fontColor())
         self.addChild(label)
     }
  

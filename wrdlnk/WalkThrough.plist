@@ -7,6 +7,8 @@
 		<string>AppIcon.png</string>
 		<key>main_title_text</key>
 		<string>WELCOME TO WRDLNK</string>
+		<key>info_image_filename</key>
+		<string>wrdlnk_gamescene.png</string>
 		<key>sub_title1_text</key>
 		<string>IN WRDLNK YOUR CHALLENGE IS TO FIND THE RELATED WORDS IN A GRID</string>
 		<key>sub_title2_text</key>
@@ -19,14 +21,8 @@
 	<dict>
 		<key>page_icon1</key>
 		<string>AppIcon.png</string>
-		<key>page_icon2</key>
-		<string>scoreOn.png</string>
-		<key>page_icon3</key>
-		<string>timerOn.png</string>
-		<key>page_icon4</key>
-		<string>settingsOn.png</string>
-		<key>page_icon5</key>
-		<string>graphOn.png</string>
+		<key>info_image_filename</key>
+		<string>wrdlnk_gamestatus.png</string>
 		<key>main_title_text</key>
 		<string>TOUCH TO LINK WORD</string>
 		<key>sub_title1_text</key>

@@ -32,6 +32,9 @@ class AwardScene: BaseScene {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
         setup(nodeMap: nodeMap, completionHandler: makeVisible(params:))
+        
+        let labelNode = self.scene?.childNode(withName: "//world/top/levelDescription") as? SKLabelNode
+        labelNode?.text = "description goes here"
         AppTheme.instance.set(for: self)
     }
     

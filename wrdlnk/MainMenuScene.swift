@@ -147,33 +147,33 @@ class MainMenuScene: BaseScene {
     }
     
     // MARK: - Touches
-    func touchDown(atPoint pos : CGPoint) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
+//    func touchDown(atPoint pos : CGPoint) {
+//        print("Entering \(#file):: \(#function) at line \(#line)")
+//    }
+//    
+//    func touchMoved(toPoint pos : CGPoint) {
+//        print("Entering \(#file):: \(#function) at line \(#line)")
+//    }
+//    
+//    func touchUp(atPoint pos : CGPoint) {
+//        print("Entering \(#file):: \(#function) at line \(#line)")
+//    }
+//    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        print("Entering \(#file):: \(#function) at line \(#line)")
+//    }
+//    
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        print("Entering \(#file):: \(#function) at line \(#line)")
+//    }
+//    
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        print("Entering \(#file):: \(#function) at line \(#line)")
+//    }
+//    
+//    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        print("Entering \(#file):: \(#function) at line \(#line)")
+//    }
 }
 
 

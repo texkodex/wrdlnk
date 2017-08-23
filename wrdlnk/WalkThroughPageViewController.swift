@@ -53,6 +53,7 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
         }
         
         self.view.backgroundColor = .white
+        AppTheme.instance.set(for: self.view)
     }
 
     func lastVC(currentVC: UIViewController) -> UIViewController {

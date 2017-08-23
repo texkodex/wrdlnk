@@ -44,13 +44,16 @@ extension BaseScene: ButtonNodeResponderType {
                 toggleGameTimer(button: button)
             break
             case .nightModeSwitch:
-                toggleGameTimer(button: button)
+                toggleNightMode(button: button)
+                transitionToScene(destination: SceneType.Menu, sendingScene: self)
             break
             case .pastelSwitch:
-                toggleGameTimer(button: button)
+                togglePastel(button: button)
+                transitionToScene(destination: SceneType.Menu, sendingScene: self)
             break
             case .colorBlindSwitch:
-                toggleGameTimer(button: button)
+                toggleColorBlind(button: button)
+                transitionToScene(destination: SceneType.Menu, sendingScene: self)
             break
             case .continueGame:
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self)

@@ -81,11 +81,11 @@ enum ButtonIdentifier: String {
         case .timerSwitch:
             return "timerOn"
         case .nightModeSwitch:
-            return "timerOn"
+            return "nightModeOn"
         case .pastelSwitch:
-            return "timerOn"
+            return "pastelOn"
         case .colorBlindSwitch:
-            return "timerOn"
+            return "colorBlindOn"
         case .enterGame:
             return "enterOn"
         case .startNewGame:
@@ -95,13 +95,13 @@ enum ButtonIdentifier: String {
         case .gameSettings:
             return "enterOn"
         case .inAppPurchase:
-            return "enterOn"
+            return "paymentOn"
         case .instructions:
-            return "enterOn"
+            return "infoOn"
         case .purchaseOneSwitch:
-            return "soundOn"
+            return "paymentOn"
         case .purchaseTwoSwitch:
-            return "scoreOn"
+            return "paymentOn"
         case .gameAward:
             return "soundOn"
         case .awardDetail:

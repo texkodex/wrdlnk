@@ -273,6 +273,23 @@ extension ButtonNodeResponderType where Self: BaseScene {
         AppDefinition.defaults.set(button.isSelected, forKey: preferenceTimerEnabledKey)
     }
     
+    func toggleNightMode(button: ButtonNode) {
+        let state = AppDefinition.defaults.bool(forKey: preferenceNightModeEnabledKey)
+        button.isSelected = !state
+        AppDefinition.defaults.set(button.isSelected, forKey: preferenceNightModeEnabledKey)
+    }
+    
+    func togglePastel(button: ButtonNode) {
+        let state = AppDefinition.defaults.bool(forKey: preferencePastelEnabledKey)
+        button.isSelected = !state
+        AppDefinition.defaults.set(button.isSelected, forKey: preferencePastelEnabledKey)
+    }
+    
+    func toggleColorBlind(button: ButtonNode) {
+        let state = AppDefinition.defaults.bool(forKey: preferenceColorBlindEnabledKey)
+        button.isSelected = !state
+        AppDefinition.defaults.set(button.isSelected, forKey: preferenceColorBlindEnabledKey)
+    }
     func toggleStartNewGame(button: ButtonNode) {
         let state = AppDefinition.defaults.bool(forKey: preferenceStartGameEnabledKey)
         button.isSelected = !state

@@ -154,7 +154,7 @@ class GameScene: BaseScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
-        
+        resizeIfNeeded()
         let tapBoardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapFrom(recognizer:)))
         tapBoardGestureRecognizer.numberOfTapsRequired = 1
         view.addGestureRecognizer(tapBoardGestureRecognizer)

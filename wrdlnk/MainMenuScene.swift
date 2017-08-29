@@ -89,10 +89,11 @@ class MainMenuScene: BaseScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
+        resizeIfNeeded()
         initializeButtons()
         AppTheme.instance.set(for: self)
     }
-
+    
     func initializeButtons() {
         print("Entering \(#file):: \(#function) at line \(#line)")
         var state = AppDefinition.defaults.bool(forKey: preferenceStartGameEnabledKey)

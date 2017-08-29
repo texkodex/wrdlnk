@@ -179,8 +179,17 @@ class AppTheme {
     func setViewColor(for view: UIView, tuple:(sceneColor: UIColor, backgroundColor: UIColor, fontColor: UIColor)) {
         for aview in view.subviews {
             view.backgroundColor = tuple.sceneColor
+            guard aview.restorationIdentifier != nil else { continue }
             if aview.restorationIdentifier == "background" || aview.restorationIdentifier == "background_view" {
                 aview.backgroundColor = tuple.backgroundColor
+            }
+            if (aview.restorationIdentifier?.lowercased().contains("label"))! {
+                let label = aview as! UILabel
+                label.textColor = tuple.fontColor
+            }
+            if (aview.restorationIdentifier?.lowercased().contains("button"))! {
+                let button = aview as! UIButton
+                button.setTitleColor(tuple.fontColor, for: .normal)
             }
         }
     }
@@ -224,6 +233,19 @@ class AppTheme {
             return colorList[Color.blue.rawValue]
         case Mode.normal:
             return colorList[Color.red.rawValue]
+        }
+    }
+    
+    func backgroundColor() -> UIColor {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return colorList[Color.darkGray.rawValue]
+        case Mode.nightMode:
+            return colorList[Color.gray.rawValue]
+        case Mode.pastel:
+            return colorList[Color.green.rawValue]
+        case Mode.normal:
+            return colorList[Color.white.rawValue]
         }
     }
     

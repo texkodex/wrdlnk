@@ -28,6 +28,74 @@ func imageResize(imageObj:UIImage, sizeChange:CGSize)-> UIImage {
     return scaledImage!
 }
 
+// Device sizes
+extension UIDevice {
+    var iPhone: Bool {
+        return UIDevice().userInterfaceIdiom == .phone
+    }
+    enum ScreenType: String {
+        case iPhone4
+        case iPhone5
+        case iPhone6
+        case iPhone6Plus
+        case unknown
+    }
+    var screenType: ScreenType {
+        guard iPhone else { return .unknown }
+        switch UIScreen.main.nativeBounds.height {
+        case 960:
+            return .iPhone4
+        case 1136:
+            return .iPhone5
+        case 1334:
+            return .iPhone6
+        case 2208:
+            return .iPhone6Plus
+        default:
+            return .unknown
+        }
+    }
+}
+
+extension UIDevice {
+    
+    public class var isiPad: Bool {
+        return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
+    }
+    
+    public class var isiPhone: Bool {
+        return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone
+    }
+    
+    public class var isiPadPro129: Bool {
+        return isiPad && UIScreen.main.nativeBounds.size.height == 2732
+    }
+    
+    public class var isiPadPro97: Bool {
+        return isiPad && UIScreen.main.nativeBounds.size.height == 2048
+    }
+    
+    public class var isiPadPro: Bool {
+        return isiPad && (isiPadPro97 || isiPadPro129)
+    }
+    
+    public class var isiPhone4: Bool {
+        return isiPhone && UIScreen.main.nativeBounds.size.height == 960
+    }
+    
+    public class var isiPhone5: Bool {
+        return isiPhone && UIScreen.main.nativeBounds.size.height == 1136
+    }
+    
+    public class var isiPhone6: Bool {
+        return isiPhone && UIScreen.main.nativeBounds.size.height == 1334
+    }
+    
+    public class var isiPhone6Plus: Bool {
+        return isiPhone && UIScreen.main.nativeBounds.size.height == 2208
+    }
+}
+
 // Screen sizes
 public extension UIDevice {
     
@@ -83,7 +151,6 @@ func getPlatformNameString() -> String {
     
     if DEVICE_IS_SIMULATOR == true
     {
-        // this neat trick is found at http://kelan.io/2015/easier-getenv-in-swift/
         if let dir = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
             machineSwiftString = dir
         }
@@ -95,7 +162,7 @@ func getPlatformNameString() -> String {
         machineSwiftString = String(cString:machine)
     }
     
-    print("machine is \(machineSwiftString)")
+    //print("machine is \(machineSwiftString)")
     return platformName(identifier: machineSwiftString)
 }
 
@@ -124,10 +191,10 @@ func platformName(identifier: String) -> String {
     case "iPad4,4", "iPad4,5", "iPad4,6":           return "iPad Mini 2"
     case "iPad4,7", "iPad4,8", "iPad4,9":           return "iPad Mini 3"
     case "iPad5,1", "iPad5,2":                      return "iPad Mini 4"
-    case "iPad6,3", "iPad6,4", "iPad6,7", "iPad6,8":return "iPad Pro"
+    case "iPad6,3", "iPad6,4", "iPad6,7":           return "iPad Pro"
+    case "iPad6,8":                                 return "iPad Pro (12.9)"
     case "AppleTV5,3":                              return "Apple TV"
     case "i386", "x86_64":                          return "Simulator"
     default:                                        return "Unknown"
     }
-
 }

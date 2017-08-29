@@ -95,10 +95,6 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
         
         let nextIndex = viewControllerIndex + 1
         
-//        guard nextIndex < VCArray.count else {
-//            return VCArray.first
-//        }
-//        
         guard VCArray.count > nextIndex else {
             return nil
         }
@@ -108,8 +104,8 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
     
     private func setupPageControl() {
         let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = UIColor.red
-        appearance.currentPageIndicatorTintColor = UIColor.white
+        appearance.pageIndicatorTintColor = AppTheme.instance.fontColor()
+        appearance.currentPageIndicatorTintColor = AppTheme.instance.backgroundColor()
         appearance.backgroundColor = .clear
     }
     

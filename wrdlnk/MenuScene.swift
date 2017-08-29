@@ -90,10 +90,11 @@ class MenuScene: BaseScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
+        resizeIfNeeded()
         initializeButtons()
         AppTheme.instance.set(for: self)
     }
-    
+
     func initializeButtons() {
         print("Entering \(#file):: \(#function) at line \(#line)")
         var state = AppDefinition.defaults.bool(forKey: preferenceSoundEnabledKey)
@@ -125,12 +126,12 @@ class MenuScene: BaseScene {
     override func update(_ currentTime: TimeInterval) {
     }
     
-    override func didChangeSize(_ oldSize: CGSize) {
-        for node in self.children{
-            let newPosition = CGPoint(x:node.position.x / oldSize.width * self.frame.size.width,y:node.position.y / oldSize.height * self.frame.size.height)
-            node.position = newPosition
-        }
-    }
+//    override func didChangeSize(_ oldSize: CGSize) {
+//        for node in self.children{
+//            let newPosition = CGPoint(x:node.position.x / oldSize.width * self.frame.size.width,y:node.position.y / oldSize.height * self.frame.size.height)
+//            node.position = newPosition
+//        }
+//    }
     
     func makeVisible(element: ViewElement, node: SKSpriteNode){
         print("Entering \(#file):: \(#function) at line \(#line)")

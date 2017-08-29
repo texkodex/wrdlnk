@@ -33,6 +33,26 @@ extension UIViewController {
             appdelegate.window!.rootViewController = vc
         }
     }
+    
+    func resizeImageForFile(infoImageFileName: String)-> UIImage {
+        var infoImage: UIImage!
+        let platform = getPlatformNameString()
+        if platform.contains("iPad Pro (12.9)") || UIDevice.isiPadPro129 {
+            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:500, height: 889))
+        } else if platform.contains("iPad Pro") || UIDevice.isiPadPro97 {
+            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:350, height: 623))
+        } else if platform.contains("iPad Air 2") || UIDevice.isiPad {
+            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:350, height: 623))
+        } else if platform.contains("iPad Air")  || UIDevice.isiPad {
+            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:350, height: 623))
+        }
+        else if platform.contains("iPhone SE") || UIDevice.isiPhone5 {
+            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:90, height: 160))
+        } else {
+            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:150, height: 267))
+        }
+        return infoImage
+    }
 }
 
 extension GameScene {
@@ -103,6 +123,30 @@ extension GameScene {
 
 extension SKScene {
 
+    func resizeIfNeeded() {
+        let rootNode = childNode(withName: "//world")!
+        let platform = getPlatformNameString()
+        if platform.contains("iPad Pro (12.9)") || UIDevice.isiPadPro129 {
+            rootNode.yScale = 2.0
+            rootNode.xScale = 2.0
+        } else if !platform.contains("iPad Air") && platform.contains("iPad") {
+            rootNode.yScale = 1.5
+            rootNode.xScale = 1.5
+        }
+        else if platform.contains("iPad Air") {
+            rootNode.yScale = 1.5
+            rootNode.xScale = 1.5
+        }
+        else if platform.contains("iPhone SE") || UIDevice.isiPhone5 {
+            // resize x and y to 0.8
+            rootNode.yScale = 0.8
+            rootNode.xScale = 0.8
+        } else {
+            // not resize needed
+        }
+        
+    }
+    
     func transitionToScene(destination: SceneType, sendingScene: SKScene, startNewGame : Bool = false) {
         let transDuration = commonDelaySetting
         let transition = SKTransition.fade(with: sendingScene.backgroundColor, duration: transDuration)

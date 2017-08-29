@@ -84,15 +84,15 @@ let statHighScoreNodePath = "//world/stat/highScore"
 let statScoreNodePath = "//world/stat/score"
 let statTimerNodePath = "//world/stat/timer"
 
-let awardCountNodePath = "//award"
+let awardCountNodePath = "//world/award"
 let awardDescriptionLabelNodePath = "//world/top/levelDescription"
-let accuracyGoldCountNodePath = "//award/accuracy/accuracyGoldCount"
-let accuracySilverCountNodePath = "//award/accuracy/accuracySilverCount"
-let accuracyBronzeCountNodePath = "//award/accuracy/accuracyBronzeCount"
+let accuracyGoldCountNodePath = "//world/award/accuracy/accuracyGoldCount"
+let accuracySilverCountNodePath = "//world/award/accuracy/accuracySilverCount"
+let accuracyBronzeCountNodePath = "//world/award/accuracy/accuracyBronzeCount"
 
-let timeGoldCountNodePath = "//award/time/timeGoldCount"
-let timeSilverCountNodePath = "//award/time/timeSilverCount"
-let timeBronzeCountNodePath = "//award/time/timeBronzeCount"
+let timeGoldCountNodePath = "//world/award/time/timeGoldCount"
+let timeSilverCountNodePath = "//world/award/time/timeSilverCount"
+let timeBronzeCountNodePath = "//world/award/time/timeBronzeCount"
 let timeSpeedGoldMultiple = 1.1
 let timeSpeedSilverMultiple = 1.5
 let timeSpeedBronzeMultiple = 2.0

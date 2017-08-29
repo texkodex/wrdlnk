@@ -35,12 +35,13 @@ class GameStatusScene: BaseScene {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
+        resizeIfNeeded()
         //setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:stats:wordList:))
         setup(nodeMap: nodeMap, completionHandler: makeVisible(params:))
         AppTheme.instance.set(for: self)
 
     }
-
+    
     func makeVisible (params: MakeVisibleParams){
         print("Entering \(#file):: \(#function) at line \(#line)")
         switch params.viewElement! {

@@ -49,21 +49,8 @@ class WalkThroughOneViewController: UIViewController {
         self.imageFileName = self.keyViewDictionary["page_icon1"]!
         walkthroughImage.image = UIImage(named:self.imageFileName)
         self.mainTitleLabel.text = (self.keyViewDictionary["main_title_text"]!)
-        
         self.infoImageFileName = self.keyViewDictionary["info_image_filename"]!
-        let platform = getPlatformNameString()
-        if !platform.contains("iPad Air") && platform.contains("iPad") {
-            infoImage.image = imageResize(imageObj: UIImage(named:self.infoImageFileName)!, sizeChange: CGSize(width:500, height: 889))
-        }
-        else if platform.contains("iPad Air") {
-            infoImage.image = imageResize(imageObj: UIImage(named:self.infoImageFileName)!, sizeChange: CGSize(width:350, height: 623))
-        }
-        else if platform.contains("iPhone SE") {
-            infoImage.image = imageResize(imageObj: UIImage(named:self.infoImageFileName)!, sizeChange: CGSize(width:90, height: 160))
-        } else {
-            infoImage.image = imageResize(imageObj: UIImage(named:self.infoImageFileName)!, sizeChange: CGSize(width:150, height: 267))
-        }
-        
+        self.infoImage.image = resizeImageForFile(infoImageFileName: self.infoImageFileName)
         self.firstSubTitleLabel.text = (self.keyViewDictionary["sub_title1_text"]!)
         self.secondSubTitleLabel.text = (self.keyViewDictionary["sub_title2_text"]!)
         self.horizontalineImageFileName = "choose-location-dividing-line"
@@ -130,7 +117,7 @@ class WalkThroughOneViewController: UIViewController {
 
         infoImage.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
 
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[walkthroughImage]-20-[mainTitleLabel]-[infoImage]-2-[firstSubTitleLabel]-2-[secondSubTitleLabel]", options: [], metrics: nil, views: viewBindingsDict))
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[walkthroughImage]-20-[mainTitleLabel]-[infoImage]-[firstSubTitleLabel]-2-[secondSubTitleLabel]", options: [], metrics: nil, views: viewBindingsDict))
         
         constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[firstSubTitleLabel]-32-|", options: [], metrics: nil, views: viewBindingsDict))
         constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[secondSubTitleLabel]-32-|", options: [], metrics: nil, views: viewBindingsDict))

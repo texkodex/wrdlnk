@@ -61,10 +61,11 @@ class AwardScene: BaseScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
+        resizeIfNeeded()
         processAccuracyScores()
         processTimeScores()
     }
-    
+
     override func sceneDidLoad() {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")        

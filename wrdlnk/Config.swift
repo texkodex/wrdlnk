@@ -53,9 +53,10 @@ let tileUserDataClickName = "clickable"
 let letterNodeName = "letter_"
 let letterNodeColRow = "letter_%d_%d"
 
-let remoteWordListSite = "http://www.owsys.com/wlink/api/wlink_default.json"
+let remoteWordListSite = "http://www.wrdlnk.com/wlva01a/api/data/wlink_default.json"
 
 let titleNodePath = "//world/top"
+let statNodePath = "//world/stat"
 let meaningNodePath = "//world/meaning"
 let graphNodePath = "//world/change"
 let settingsNodePath = "//world/config"
@@ -83,9 +84,25 @@ let statHighScoreNodePath = "//world/stat/highScore"
 let statScoreNodePath = "//world/stat/score"
 let statTimerNodePath = "//world/stat/timer"
 
+let awardCountNodePath = "//award"
+let awardDescriptionLabelNodePath = "//world/top/levelDescription"
+let accuracyGoldCountNodePath = "//award/accuracy/accuracyGoldCount"
+let accuracySilverCountNodePath = "//award/accuracy/accuracySilverCount"
+let accuracyBronzeCountNodePath = "//award/accuracy/accuracyBronzeCount"
+
+let timeGoldCountNodePath = "//award/time/timeGoldCount"
+let timeSilverCountNodePath = "//award/time/timeSilverCount"
+let timeBronzeCountNodePath = "//award/time/timeBronzeCount"
+let timeSpeedGoldMultiple = 1.1
+let timeSpeedSilverMultiple = 1.5
+let timeSpeedBronzeMultiple = 2.0
+
+let commonDelaySetting = 0.5
+
 let focusRingName = "focusRing"
 
 let preferenceWordListKey = "preference_wordlist_index"
+let preferenceWordListShuffledKey = "preference_wordlist_shuffled"
 let preferenceShowGraphKey = "preference_graph"
 let preferenceGameStatKey = "preference_game_stat"
 
@@ -114,6 +131,13 @@ let preferenceHighScoreKey = "preference_high_score"
 let preferenceGameTimeKey = "preference_game_time"
 
 let preferenceRemoteDataSiteKey = "preference_remote_data_site"
+
+let preferenceMemoryDataFileKey = "preference_memory_data_file"
+
+let awardDescriptionPrefixDefaultString = "with default: "
+let awardDescriptionPrefixString = "with group: "
+let awardDescriptionFormat = "%@%@"
+let preferenceAwardDescriptionInfoKey = "preference_award_description_info"
 
 let minClickToSeeDefinition = 100
 
@@ -182,6 +206,8 @@ enum ViewElement:String {
     case instructions = "Instructions"
     case award = "award"
     case gameAward = "GameAward"
+    case accuracy = "accuracy"
+    case time = "time"
     
     case purchaseOne = "purchaseOne"
     case purchaseOneSwitch = "PurchaseOneSwitch"
@@ -208,6 +234,7 @@ enum ViewElement:String {
                          continueTag,   continueGame,
                          settings,      gameSettings,
                          award,         gameAward,
+                         accuracy,      time,
                          purchase,      inAppPurchase,
                          guide,         instructions,
                          
@@ -394,6 +421,7 @@ class Stat: NSObject, NSCoding {
     
     struct Keys {
         static let phrase = "phrase"
+        static let minimum = "minimum"
         static let accuracy = "accuracy"
         static let percentage = "percentage"
         static let timeSpan = "timeSpan"
@@ -401,14 +429,16 @@ class Stat: NSObject, NSCoding {
     
     private var _phrase: String? = ""
     private var _accuracy: Float = 0
+    private var _minimum: Int = 0
     private var _percentage: Float = 0
     private var _timeSpan: TimeInterval = 0
     
     override init() {}
     
-    init(phrase: String?, accuracy: Float, percentage: Float, timeSpan: TimeInterval = 0) {
+    init(phrase: String?, accuracy: Float, minimum: Int, percentage: Float, timeSpan: TimeInterval = 0) {
         self._phrase = phrase
         self._accuracy = accuracy
+        self._minimum = minimum
         self._percentage = percentage
         self._timeSpan = timeSpan
     }
@@ -418,6 +448,7 @@ class Stat: NSObject, NSCoding {
         self.init()
         _phrase = decoder.decodeObject(forKey: Keys.phrase) as? String
         _accuracy = decoder.decodeFloat(forKey: Keys.accuracy)
+        _minimum = decoder.decodeInteger(forKey: Keys.minimum)
         _percentage = decoder.decodeFloat(forKey: Keys.percentage)
         _timeSpan = decoder.decodeDouble(forKey: Keys.timeSpan)
     }
@@ -425,6 +456,7 @@ class Stat: NSObject, NSCoding {
     func encode(with coder: NSCoder) {
         coder.encode(_phrase, forKey: "phrase")
         coder.encode(_accuracy, forKey: "accuracy")
+        coder.encode(_minimum, forKey: "minimum")
         coder.encode(_percentage, forKey: "percentage")
         coder.encode(_timeSpan, forKey: "timeSpan")
     }
@@ -448,6 +480,15 @@ class Stat: NSObject, NSCoding {
         }
     }
     
+    var minimum: Int {
+        get {
+            return _minimum
+        }
+        set {
+            _minimum = newValue
+        }
+    }
+
     var percentage: Float {
         get {
             return _percentage
@@ -494,7 +535,7 @@ struct StatData {
             let decodedStats = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Stat]
             for stat in decodedStats {
                 print("reloaded phrase: \(String(describing: stat.phrase))")
-                self.push(element: Stat(phrase: stat.phrase, accuracy: stat.accuracy, percentage: stat.percentage))
+                self.push(element: Stat(phrase: stat.phrase, accuracy: stat.accuracy, minimum: stat.minimum, percentage: stat.percentage, timeSpan: stat.timeSpan))
             }
         }
     }

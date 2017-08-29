@@ -27,6 +27,8 @@ class GameStatusScene: BaseScene {
         graphs.removeAll()
         nodes.removeAll()
         self.removeFromParent()
+        self.removeAllChildren()
+        self.removeAllActions()
         self.view?.presentScene(nil)
     }
     

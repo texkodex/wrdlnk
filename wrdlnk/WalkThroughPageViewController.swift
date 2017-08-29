@@ -25,6 +25,7 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
     deinit {
         VCArray.removeAll()
         walkThroughLastPageDelegate = nil
+        self.view.removeFromSuperview()
     }
     
     private func VCInstance(name: String) -> UIViewController {
@@ -134,5 +135,9 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
     func lastPageDone()
     {
           afterWalkThrough()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }

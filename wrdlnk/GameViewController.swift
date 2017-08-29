@@ -29,18 +29,29 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        AppDefinition.defaults.set(true, forKey: preferenceMemoryDataFileKey)
+        
         if AppDefinition.defaults.keyExist(key: preferenceRemoteDataSiteKey) {
             // Load words from remote site
             DataExchange.fetchWordList { [unowned self] (wordGroup) -> () in
                 //self.wordList = wordGroup
                 self.wordList.networkLoad(wordList: wordGroup)
-                print("wordList retrieved")
+                print("wordList retrieved from remote site")
+                self.setup()
+            }
+        } else if AppDefinition.defaults.keyExist(key: preferenceMemoryDataFileKey) {
+            // Load words from memory file
+            DataExchange.memoryFetchWorldList { [unowned self] (wordGroup) -> () in
+                self.wordList.setupWords()
+                print("wordList retrieved from memory file")
                 self.setup()
             }
         } else {
+            // Load words from data file
             DataExchange.fileFetchWorldList { [unowned self] (wordGroup) -> () in
                 self.wordList.networkLoad(wordList: wordGroup)
-                print("wordList retrieved")
+                print("wordList retrieved from data file")
                 self.setup()
             }
         }

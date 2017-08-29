@@ -226,6 +226,13 @@ class ButtonNode: SKSpriteNode {
 
     lazy var focusRing: SKNode = self.childNode(withName: focusRingName)!
     
+    deinit {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        self.removeFromParent()
+        self.removeAllChildren()
+        self.removeAllActions()
+    }
+
     override init(texture: SKTexture?, color: SKColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
     }

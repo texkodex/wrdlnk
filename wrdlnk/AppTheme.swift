@@ -8,38 +8,6 @@
 import UIKit
 import SpriteKit
 
-/*
-    black: UIColor { get } // 0.0 white
-     
-    darkGray: UIColor { get } // 0.333 white
-     
-    lightGray: UIColor { get } // 0.667 white
-     
-    white: UIColor { get } // 1.0 white
-     
-    gray: UIColor { get } // 0.5 white
-     
-    red: UIColor { get } // 1.0, 0.0, 0.0 RGB
-     
-    green: UIColor { get } // 0.0, 1.0, 0.0 RGB
-     
-    blue: UIColor { get } // 0.0, 0.0, 1.0 RGB
-     
-    cyan: UIColor { get } // 0.0, 1.0, 1.0 RGB
-     
-    yellow: UIColor { get } // 1.0, 1.0, 0.0 RGB
-     
-    magenta: UIColor { get } // 1.0, 0.0, 1.0 RGB
-     
-    orange: UIColor { get } // 1.0, 0.5, 0.0 RGB
-     
-    purple: UIColor { get } // 0.5, 0.0, 0.5 RGB
-     
-    brown: UIColor { get } // 0.6, 0.4, 0.2 RGB
-     
-    clear: UIColor { get } // 0.0 white, 0.0 alpha
-*/
-
 enum Color:Int {
     case black = 0
     case darkGray = 1
@@ -98,104 +66,6 @@ func currentMode() -> Mode {
 
 
 class AppTheme {
-    func set(for view: UIView) {
-        print("restoration id: \(String(describing: view.restorationIdentifier))")
-        set(for: view, mode: currentMode())
-     }
-    
-    func set(for view: UIView, mode: Mode) {
-        var tuple: (sceneColor: UIColor, backgroundColor: UIColor, fontColor: UIColor)
-        switch currentMode() {
-        case Mode.colorBlind:
-            tuple.sceneColor = colorList[Color.black.rawValue]
-            tuple.backgroundColor = colorList[Color.lightGray.rawValue]
-            tuple.fontColor = colorList[Color.white.rawValue]
-            break
-        case Mode.nightMode:
-            tuple.sceneColor = colorList[Color.black.rawValue]
-            tuple.backgroundColor = colorList[Color.black.rawValue]
-            tuple.fontColor = colorList[Color.orange.rawValue]
-            break
-        case Mode.pastel:
-            tuple.sceneColor = colorList[Color.white.rawValue]
-            tuple.backgroundColor = colorList[Color.green.rawValue]
-            tuple.fontColor = colorList[Color.blue.rawValue]
-            break
-        case Mode.normal:
-            tuple.sceneColor = colorList[Color.white.rawValue]
-            tuple.backgroundColor = colorList[Color.red.rawValue]
-            tuple.fontColor = colorList[Color.red.rawValue]
-            break
-        }
-
-        for aview in view.subviews {
-            view.backgroundColor = tuple.sceneColor
-            if aview.restorationIdentifier == "background" {
-                aview.backgroundColor = tuple.backgroundColor
-            }
-        }
-    }
-    
-    func set(for view: BaseScene) {
-        set(for: view, mode: currentMode())
-    }
-    
-    func set(for view: BaseScene, mode: Mode) {
-        switch currentMode() {
-        case Mode.colorBlind:
-            changeNodes(view: view, mode: Mode.colorBlind,
-                        sceneColor: colorList[Color.black.rawValue],
-                        backgroundColor: colorList[Color.darkGray.rawValue], fontColor: colorList[Color.white.rawValue], alpha: 0.3)
-            break
-        case Mode.nightMode:
-            changeNodes(view: view, mode: Mode.nightMode,
-                        sceneColor: colorList[Color.black.rawValue],
-                        backgroundColor: colorList[Color.gray.rawValue], fontColor: colorList[Color.orange.rawValue], alpha: 0.3)
-            break
-        case Mode.pastel:
-            changeNodes(view: view, mode: Mode.pastel,
-                        sceneColor: colorList[Color.white.rawValue],
-                        backgroundColor: colorList[Color.green.rawValue], fontColor: colorList[Color.blue.rawValue])
-            break
-        case Mode.normal:
-            changeNodes(view: view, mode: Mode.normal,
-                        sceneColor: colorList[Color.white.rawValue],
-                        backgroundColor: colorList[Color.red.rawValue], fontColor: colorList[Color.red.rawValue])
-            break
-        }
-    }
-    
-    func fontColor() -> UIColor {
-        switch currentMode() {
-        case Mode.colorBlind:
-            return colorList[Color.white.rawValue]
-        case Mode.nightMode:
-            return colorList[Color.orange.rawValue]
-        case Mode.pastel:
-            return colorList[Color.blue.rawValue]
-        case Mode.normal:
-            return colorList[Color.red.rawValue]
-        }
-    }
-    
-    func changeNodes(view: BaseScene, mode: Mode, sceneColor: UIColor, backgroundColor: UIColor, fontColor: UIColor, alpha: CGFloat = 0.1) {
-        view.scene?.backgroundColor = sceneColor
-    
-        changeTexture(view: view, mode: mode, fontColor: fontColor)
-        changeSpriteNode(view: view, parentNode: NodeName.spriteNodeBackgroundParent.rawValue,
-                         nodeName: NodeName.background.rawValue, color: backgroundColor, alpha: alpha)
-        
-        changeShapeNode(view: view, parentNode: NodeName.progressGraphName.rawValue,
-                        nodeName: NodeName.graphBackground.rawValue, color: backgroundColor)
-        
-        changeLabelNode(view: view, parentNode: NodeName.labelNodeSwitchParent.rawValue,
-                        nodeName: NodeName.purchaseOne.rawValue,
-                        fontName: fontName, fontColor: fontColor)
-        changeLabelNode(view: view, parentNode: NodeName.labelNodeSwitchParent.rawValue,
-                        nodeName: NodeName.purchaseTwo.rawValue,
-                        fontName: fontName, fontColor: fontColor)
-    }
-    
     let nodeList = [ "//world/top/titleImage",
                      "//world/backgroundNode",
                      "//world/top/title",
@@ -274,7 +144,106 @@ class AppTheme {
                      "//meaning/prefixMeaning",
                      "//meaning/linkMeaning",
                      "//meaning/suffixMeaning"
-                        ]
+    ]
+    
+    let fontName = "Helvetica Bold"
+    
+    static let instance = AppTheme()
+    
+    func set(for view: UIView) {
+        print("restoration id: \(String(describing: view.restorationIdentifier))")
+        set(for: view, mode: currentMode())
+     }
+    
+    func set(for view: UIView, mode: Mode) {
+        switch currentMode() {
+        case Mode.colorBlind:
+            setViewColor(for: view, tuple: (sceneColor: colorList[Color.black.rawValue],
+                backgroundColor: colorList[Color.lightGray.rawValue], fontColor: colorList[Color.white.rawValue]))
+            break
+        case Mode.nightMode:
+            setViewColor(for: view, tuple: (sceneColor: colorList[Color.black.rawValue],
+                backgroundColor: colorList[Color.black.rawValue], fontColor: colorList[Color.orange.rawValue]))
+            break
+        case Mode.pastel:
+            setViewColor(for: view, tuple: (sceneColor: colorList[Color.white.rawValue],
+                backgroundColor: colorList[Color.green.rawValue], fontColor: colorList[Color.blue.rawValue]))
+            break
+        case Mode.normal:
+            setViewColor(for: view, tuple: (sceneColor: colorList[Color.white.rawValue],
+                backgroundColor: colorList[Color.red.rawValue], fontColor: colorList[Color.red.rawValue]))
+            break
+        }
+    }
+    
+    func setViewColor(for view: UIView, tuple:(sceneColor: UIColor, backgroundColor: UIColor, fontColor: UIColor)) {
+        for aview in view.subviews {
+            view.backgroundColor = tuple.sceneColor
+            if aview.restorationIdentifier == "background" || aview.restorationIdentifier == "background_view" {
+                aview.backgroundColor = tuple.backgroundColor
+            }
+        }
+    }
+    
+    func set(for view: BaseScene) {
+        set(for: view, mode: currentMode())
+    }
+    
+    func set(for view: BaseScene, mode: Mode) {
+        switch currentMode() {
+        case Mode.colorBlind:
+            changeNodes(view: view, mode: Mode.colorBlind,
+                        sceneColor: colorList[Color.black.rawValue],
+                        backgroundColor: colorList[Color.darkGray.rawValue], fontColor: colorList[Color.white.rawValue], alpha: 0.3)
+            break
+        case Mode.nightMode:
+            changeNodes(view: view, mode: Mode.nightMode,
+                        sceneColor: colorList[Color.black.rawValue],
+                        backgroundColor: colorList[Color.gray.rawValue], fontColor: colorList[Color.orange.rawValue], alpha: 0.3)
+            break
+        case Mode.pastel:
+            changeNodes(view: view, mode: Mode.pastel,
+                        sceneColor: colorList[Color.white.rawValue],
+                        backgroundColor: colorList[Color.green.rawValue], fontColor: colorList[Color.blue.rawValue])
+            break
+        case Mode.normal:
+            changeNodes(view: view, mode: Mode.normal,
+                        sceneColor: colorList[Color.white.rawValue],
+                        backgroundColor: colorList[Color.red.rawValue], fontColor: colorList[Color.red.rawValue])
+            break
+        }
+    }
+    
+    func fontColor() -> UIColor {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return colorList[Color.white.rawValue]
+        case Mode.nightMode:
+            return colorList[Color.orange.rawValue]
+        case Mode.pastel:
+            return colorList[Color.blue.rawValue]
+        case Mode.normal:
+            return colorList[Color.red.rawValue]
+        }
+    }
+    
+    func changeNodes(view: BaseScene, mode: Mode, sceneColor: UIColor, backgroundColor: UIColor, fontColor: UIColor, alpha: CGFloat = 0.1) {
+        view.scene?.backgroundColor = sceneColor
+    
+        changeTexture(view: view, mode: mode, fontColor: fontColor)
+        changeSpriteNode(view: view, parentNode: NodeName.spriteNodeBackgroundParent.rawValue,
+                         nodeName: NodeName.background.rawValue, color: backgroundColor, alpha: alpha)
+        
+        changeShapeNode(view: view, parentNode: NodeName.progressGraphName.rawValue,
+                        nodeName: NodeName.graphBackground.rawValue, color: backgroundColor)
+        
+        changeLabelNode(view: view, parentNode: NodeName.labelNodeSwitchParent.rawValue,
+                        nodeName: NodeName.purchaseOne.rawValue,
+                        fontName: fontName, fontColor: fontColor)
+        changeLabelNode(view: view, parentNode: NodeName.labelNodeSwitchParent.rawValue,
+                        nodeName: NodeName.purchaseTwo.rawValue,
+                        fontName: fontName, fontColor: fontColor)
+    }
     
     func changeSceneElements(view: BaseScene, mode: String, fontColor: UIColor) {
         for nodeName in nodeList {
@@ -375,8 +344,4 @@ class AppTheme {
             }
         }
     }
-    
-    let fontName = "Helvetica Bold"
-    
-    static let instance = AppTheme()
 }

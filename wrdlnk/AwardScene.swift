@@ -10,6 +10,36 @@ import SpriteKit
 import GameplayKit
 
 class AwardScene: BaseScene {
+    
+    // MARK:- SKLabelNode
+    override var backgroundNodeOne: SKNode? {
+        return childNode(withName: awardCountNodePath)!
+    }
+    
+    var accuracyGoldCountLabel: SKLabelNode? {
+        return backgroundNodeOne?.childNode(withName: accuracyGoldCountNodePath) as? SKLabelNode
+    }
+    
+    var accuracySilverCountLabel: SKLabelNode? {
+        return backgroundNodeOne?.childNode(withName: accuracySilverCountNodePath) as? SKLabelNode
+    }
+    
+    var accuracyBronzeCountLabel: SKLabelNode? {
+        return backgroundNodeOne?.childNode(withName: accuracyBronzeCountNodePath) as? SKLabelNode
+    }
+
+    var timeGoldCountLabel: SKLabelNode? {
+        return backgroundNodeOne?.childNode(withName: timeGoldCountNodePath) as? SKLabelNode
+    }
+    
+    var timeSilverCountLabel: SKLabelNode? {
+        return backgroundNodeOne?.childNode(withName: timeSilverCountNodePath) as? SKLabelNode
+    }
+    
+    var timeBronzeCountLabel: SKLabelNode? {
+        return backgroundNodeOne?.childNode(withName: timeBronzeCountNodePath) as? SKLabelNode
+    }
+
     var entities = [GKEntity()]
     var graphs = [String:GKGraph]()
     
@@ -17,78 +47,109 @@ class AwardScene: BaseScene {
     
     var statData = StatData.sharedInstance
     
-    let nodeMap = [ViewElement.award.rawValue, ViewElement.awardDetail.rawValue]
-    
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
         entities.removeAll()
         graphs.removeAll()
         nodes.removeAll()
         self.removeFromParent()
+        self.removeAllChildren()
+        self.removeAllActions()
         self.view?.presentScene(nil)
+    }
+    
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        processAccuracyScores()
+        processTimeScores()
     }
     
     override func sceneDidLoad() {
         super.sceneDidLoad()
-        print("Entering \(#file):: \(#function) at line \(#line)")
-        setup(nodeMap: nodeMap, completionHandler: makeVisible(params:))
-        
-        let labelNode = self.scene?.childNode(withName: "//world/top/levelDescription") as? SKLabelNode
-        labelNode?.text = "description goes here"
+        print("Entering \(#file):: \(#function) at line \(#line)")        
+        let labelNode = self.scene?.childNode(withName: awardDescriptionLabelNodePath) as? SKLabelNode
+        labelNode?.text = AppDefinition.defaults.string(forKey: preferenceAwardDescriptionInfoKey)
+
         AppTheme.instance.set(for: self)
     }
     
-    func makeVisible (params: MakeVisibleParams){
-        print("Entering \(#file):: \(#function) at line \(#line)")
-        switch params.viewElement! {
-        case .awardDetail:
-            print("Award details ...")
-        break
-        default:
-            return
+    func processAccuracyScores() {
+        var goldCount: Int = 0
+        var silverCount: Int = 0
+        var bronzeCount: Int = 0
+        
+        if statData.elements().count >= VisibleStateCount {
+            var goldInterimCount: Int = 0
+            var silverInterimCount: Int = 0
+            var bronzeInterimCount: Int = 0
+            for (index, statElement) in statData.elements().enumerated() {
+                if index > VisibleStateCount - 1 && index % VisibleStateCount == 0 {
+                    if bronzeInterimCount == VisibleStateCount {
+                        bronzeCount += 1
+                    }
+                    if silverInterimCount == VisibleStateCount {
+                        silverCount += 1
+                    }
+                    if goldInterimCount == VisibleStateCount {
+                        goldCount += 1
+                    }
+                    goldInterimCount = 0
+                    silverInterimCount = 0
+                    bronzeInterimCount = 0
+                }
+                if statElement.accuracy >= 0.85 && statElement.accuracy <= 0.90 {
+                    bronzeInterimCount += 1
+                } else if statElement.accuracy > 0.9 && statElement.accuracy < 1.0 {
+                    silverInterimCount += 1
+                } else if statElement.accuracy == 1.0 {
+                    goldInterimCount += 1
+                }
+            }
         }
         
+        accuracyGoldCountLabel?.text = "\(goldCount)"
+        accuracySilverCountLabel?.text = "\(silverCount)"
+        accuracyBronzeCountLabel?.text = "\(bronzeCount)"
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        
-    }
-    
-    override func didChangeSize(_ oldSize: CGSize) {
-        for node in self.children{
-            let newPosition = CGPoint(x:node.position.x / oldSize.width * self.frame.size.width,y:node.position.y / oldSize.height * self.frame.size.height)
-            node.position = newPosition
+    func processTimeScores() {
+        var goldCount: Int = 0
+        var silverCount: Int = 0
+        var bronzeCount: Int = 0
+
+        if statData.elements().count >= VisibleStateCount {
+            var goldInterimCount: Int = 0
+            var silverInterimCount: Int = 0
+            var bronzeInterimCount: Int = 0
+            for (index, statElement) in statData.elements().enumerated() {
+                if index > VisibleStateCount - 1 && index % VisibleStateCount == 0 {
+                    if bronzeInterimCount == VisibleStateCount {
+                        bronzeCount += 1
+                    }
+                    if silverInterimCount == VisibleStateCount {
+                        silverCount += 1
+                    }
+                    if goldInterimCount == VisibleStateCount {
+                        goldCount += 1
+                    }
+                    goldInterimCount = 0
+                    silverInterimCount = 0
+                    bronzeInterimCount = 0
+                }
+                if statElement.timeSpan > 0 &&  Int(statElement.timeSpan) <= Int(Float(statElement.minimum) * Float(timeSpeedGoldMultiple)) {
+                    goldInterimCount += 1
+                } else if statElement.timeSpan > 0 &&  Int(statElement.timeSpan) <= Int(Float(statElement.minimum) * Float(timeSpeedSilverMultiple)) {
+                    silverInterimCount += 1
+                } else if statElement.timeSpan > 0 &&  Int(statElement.timeSpan) <= Int(Float(statElement.minimum) * Float(timeSpeedBronzeMultiple)) {
+                    bronzeInterimCount += 1
+                }
+            }
         }
+
+        timeGoldCountLabel?.text = "\(goldCount)"
+        timeSilverCountLabel?.text = "\(silverCount)"
+        timeBronzeCountLabel?.text = "\(bronzeCount)"
     }
-    
-    // MARK: - Touches
-    func touchDown(atPoint pos : CGPoint) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Entering \(#file):: \(#function) at line \(#line)")
-    }
-    
 }
 

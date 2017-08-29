@@ -23,10 +23,14 @@ class AppViewController: UIViewController {
         
         if (loadedInitialDefaults)
         {
-            launchFromStoryboard(name: StoryboardName.Onboarding.rawValue, controller: "WalkThroughPageViewController")
+            delay(commonDelaySetting) {
+                self.launchFromStoryboard(name: StoryboardName.Onboarding.rawValue, controller: "WalkThroughPageViewController")
             AppDefinition.defaults.set(!loadedInitialDefaults, forKey: AppDefinition.InitialDefaults)
+            }
         } else {
-            launchFromStoryboard(name: StoryboardName.Main.rawValue, controller: "GameViewController")
+            delay(commonDelaySetting) {
+                self.launchFromStoryboard(name: StoryboardName.Main.rawValue, controller: "GameViewController")
+            }
         }
     }
 }

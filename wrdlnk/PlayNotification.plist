@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>message1</key>
+		<string>GREAT!</string>
+		<key>message2</key>
+		<string>TOPNOTCH</string>
+		<key>message3</key>
+		<string>FANTASTIC!</string>
+		<key>message4</key>
+		<string>GROOVY</string>
+		<key>message5</key>
+		<string>PEACHY!</string>
+		<key>message6</key>
+		<string>FABULOUS</string>
+		<key>message7</key>
+		<string>AMAZING</string>
+		<key>message8</key>
+		<string>SUPER!</string>
+		<key>message9</key>
+		<string>GOOD WORK!</string>
+		<key>message10</key>
+		<string>SMASHING</string>
+		<key>message11</key>
+		<string>YEAH!</string>
+		<key>message12</key>
+		<string>GOOD WORD!</string>
+	</dict>
+</array>
+</plist>

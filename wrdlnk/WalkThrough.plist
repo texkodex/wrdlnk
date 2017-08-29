@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>page_icon1</key>
-		<string>AppIcon.png</string>
+		<string>apple-icon-76x76.png</string>
 		<key>main_title_text</key>
 		<string>WELCOME TO WRDLNK</string>
 		<key>info_image_filename</key>
@@ -14,13 +14,13 @@
 		<key>sub_title2_text</key>
 		<string>THIS IS HOW IT WORKS</string>
 		<key>next_page_text</key>
-		<string>FIND OUT MORE</string>
+		<string>FIND OUT MORE &gt;</string>
 		<key>next_page_button</key>
-		<string>walkthrough-proceed-arrow.png</string>
+		<string></string>
 	</dict>
 	<dict>
 		<key>page_icon1</key>
-		<string>AppIcon.png</string>
+		<string>apple-icon-76x76.png</string>
 		<key>info_image_filename</key>
 		<string>wrdlnk_gamestatus.png</string>
 		<key>main_title_text</key>
@@ -30,37 +30,41 @@
 		<key>sub_title2_text</key>
 		<string>THE WORDS ARE RELATED IN SOME WAY</string>
 		<key>next_page_text</key>
-		<string>Next</string>
+		<string>NEXT &gt;</string>
 		<key>next_page_button</key>
-		<string>walkthrough-proceed-arrow.png</string>
+		<string></string>
 	</dict>
 	<dict>
 		<key>page_icon1</key>
-		<string>AppIcon.png</string>
+		<string>apple-icon-76x76.png</string>
 		<key>main_title_text</key>
 		<string>MISSING LETTERS</string>
+		<key>info_image_filename</key>
+		<string>wrdlnk_mainmenu_colorblind.png</string>
 		<key>sub_title1_text</key>
 		<string>YOU NEED TO SELECT THE MISSING LETTER FROM THE LIST SHOWN IN LOWER GRID</string>
 		<key>sub_title2_text</key>
 		<string>YOU CAN TURN SOUND ON TO CONFIRM A SELECTION</string>
 		<key>next_page_text</key>
-		<string>Next</string>
+		<string>NEXT &gt;</string>
 		<key>next_page_button</key>
-		<string>walkthrough-proceed-arrow.png</string>
+		<string></string>
 	</dict>
 	<dict>
 		<key>page_icon1</key>
-		<string>walkthrough-heart-icon.png</string>
+		<string>loveHeart.png</string>
 		<key>main_title_text</key>
 		<string>A WAY TO PLAY</string>
+		<key>info_image_filename</key>
+		<string>wrdlnk_settings_nightmode</string>
 		<key>sub_title1_text</key>
 		<string>IT MAY BE GOOD TO TRY AND FIND THE MIDDLE WORD FIRST IF YOU GET STUCK</string>
 		<key>sub_title2_text</key>
 		<string>WE HOPE YOU ENJOY WRDLNK AS MUCH AS WE DO</string>
 		<key>next_page_text</key>
-		<string>ENTER WRDLNK</string>
+		<string>ENTER WRDLNK &gt;</string>
 		<key>next_page_button</key>
-		<string>walkthrough-proceed-arrow.png</string>
+		<string></string>
 	</dict>
 </array>
 </plist>

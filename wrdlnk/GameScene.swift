@@ -11,7 +11,7 @@ import GameplayKit
 
 class GameScene: BaseScene {
     
-    // MARK:- Buttons
+    // MARK:- Nodes
     override var backgroundNodeOne: SKNode? {
         return childNode(withName: meaningNodePath)!
     }
@@ -61,16 +61,20 @@ class GameScene: BaseScene {
     }
     
     // MARK:- SKLabelNode
+    override var backgroundNodeFour: SKNode? {
+        return childNode(withName: statNodePath)!
+    }
+
     var playerScoreLabel: SKLabelNode? {
-        return backgroundNodeOne?.childNode(withName: statScoreNodePath) as? SKLabelNode
+        return backgroundNodeFour?.childNode(withName: statScoreNodePath) as? SKLabelNode
     }
     
     var highScoreLabel: SKLabelNode? {
-        return backgroundNodeOne?.childNode(withName: statHighScoreNodePath) as? SKLabelNode
+        return backgroundNodeFour?.childNode(withName: statHighScoreNodePath) as? SKLabelNode
     }
 
     var playerTimerLabel: SKLabelNode? {
-        return backgroundNodeOne?.childNode(withName: statTimerNodePath) as? SKLabelNode
+        return backgroundNodeFour?.childNode(withName: statTimerNodePath) as? SKLabelNode
     }
 
     // MARK:- Data structures
@@ -117,7 +121,6 @@ class GameScene: BaseScene {
     
     var levelTime:Int  {
         get {
-
             return UserDefaults().integer(forKey: preferenceGameTimeKey)
         }
         set {
@@ -143,6 +146,8 @@ class GameScene: BaseScene {
         spriteNodeList.removeAll()
         matchList.removeAll()
         self.removeFromParent()
+        self.removeAllChildren()
+        self.removeAllActions()
         self.view?.presentScene(nil)
     }
     
@@ -242,11 +247,11 @@ class GameScene: BaseScene {
         
     }
         
-    func tileColor(node: SKTileMapNode) {
-        node.getTileColor(completionClosure: { (row, col, color) in
-            print("color: \(color) at row: \(row) col: \(col)")
-        })
-    }
+//    func tileColor(node: SKTileMapNode) {
+//        node.getTileColor(completionClosure: { (row, col, color) in
+//            print("color: \(color) at row: \(row) col: \(col)")
+//        })
+//    }
     
     func update(_ currentTime: TimeInterval, for scene: SKScene) {
         
@@ -291,13 +296,16 @@ class GameScene: BaseScene {
     }
     
     func progressSummary() {
+        let diffTime = self.levelTime - self.startTime
         print("Performance for word link")
         print("Word: \(counters.wordphrase())")
         print("Number of click attempts: \(counters.totalClicks())")
         print("Accuracy nearer to 1.0 is: " + String(format:"%.2f", counters.accuracy()))
         print("Percentage is: " + String(format:"%.2f", counters.percentage()))
+        print("Time to match: \(diffTime) seconds")
         statData.push(element: Stat(phrase: counters.wordphrase(), accuracy: counters.accuracy(),
-                                    percentage: counters.percentage()))
+                                    minimum: counters.minClicks(), percentage: counters.percentage(),
+                                    timeSpan: TimeInterval(diffTime)))
     }
     
     // MARK: - Gesture recognizer

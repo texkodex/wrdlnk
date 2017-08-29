@@ -44,11 +44,28 @@ extension GameScene {
             
             if self.levelTime >= 0 {
                 self.countIndicator()
-            }else{
+            } else{
                 self.removeAction(forKey: "counter")
             }
         })
-        let sequence = SKAction.sequence([wait,block])
+        let sequence = SKAction.sequence([wait, block])
+        
+        run(SKAction.repeatForever(sequence), withKey: "counter")
+    }
+    
+    func countTime2() {
+        self.startTime = self.levelTime
+        let wait = SKAction.wait(forDuration: 1.0) //change countdown speed here
+        let block = SKAction.run({
+            [unowned self] in
+            
+            if self.levelTime >= 0 {
+                self.countIndicator()
+            } else{
+                self.removeAction(forKey: "counter")
+            }
+        })
+        let sequence = SKAction.sequence([wait, block])
         
         run(SKAction.repeatForever(sequence), withKey: "counter")
     }
@@ -87,7 +104,7 @@ extension GameScene {
 extension SKScene {
 
     func transitionToScene(destination: SceneType, sendingScene: SKScene, startNewGame : Bool = false) {
-        let transDuration = 0.5
+        let transDuration = commonDelaySetting
         let transition = SKTransition.fade(with: sendingScene.backgroundColor, duration: transDuration)
         
         unowned var scene = SKScene()
@@ -110,7 +127,9 @@ extension SKScene {
             scene = IAPurchaseScene(fileNamed: "AwardScene")!
         case .Instructions:
             let instructionCntroller = UIViewController()
-            instructionCntroller.launchFromStoryboard(name: StoryboardName.Onboarding.rawValue, controller: "WalkThroughPageViewController")
+            delay(commonDelaySetting) {
+                instructionCntroller.launchFromStoryboard(name: StoryboardName.Onboarding.rawValue, controller: "WalkThroughPageViewController")
+            }
             return
         }
  
@@ -159,7 +178,7 @@ extension SKScene {
         for sceneElement in self.children {
             if debugInfo { print("element: \((sceneElement.name)!) - number: \(self.children.count)") }
             for sceneSubElement in sceneElement.children {
-                if debugInfo { print("sub element: \((sceneSubElement.name)!) - number: \(sceneElement.children.count)") }
+                if debugInfo { print("sub element: \((sceneSubElement.name)!) - number: \(sceneSubElement.children.count)") }
                 if (nodeMap.contains((sceneSubElement.name)!)) {
                     let currentElement = "\((sceneSubElement.name!))"
                     if debugInfo { print("child element \(currentElement)")
@@ -740,7 +759,6 @@ extension UserDefaults {
     func purgeAll() {
         let appDomain = Bundle.main.bundleIdentifier!
         AppDefinition.defaults.removePersistentDomain(forName: appDomain)
-        AppDefinition.defaults.synchronize()
     }
 }
 

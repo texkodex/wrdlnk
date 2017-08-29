@@ -43,6 +43,8 @@ class DefinitionScene: BaseScene {
         graphs.removeAll()
         nodes.removeAll()
         self.removeFromParent()
+        self.removeAllChildren()
+        self.removeAllActions()
         self.view?.presentScene(nil)
     }
     
@@ -100,7 +102,7 @@ class DefinitionScene: BaseScene {
         }
     }
     
-    func makeVisible (element: ViewElement, node: SKLabelNode){
+    func makeVisible (element: ViewElement, node: SKLabelNode) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         switch element {
         case .prefixMeaning, .linkMeaning, .suffixMeaning:

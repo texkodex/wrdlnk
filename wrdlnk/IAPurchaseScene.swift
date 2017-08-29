@@ -38,6 +38,8 @@ class IAPurchaseScene: BaseScene {
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
         self.removeFromParent()
+        self.removeAllChildren()
+        self.removeAllActions()
         self.view?.presentScene(nil)
     }
     

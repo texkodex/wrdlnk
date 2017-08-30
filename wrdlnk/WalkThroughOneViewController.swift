@@ -117,7 +117,7 @@ class WalkThroughOneViewController: UIViewController {
 
         infoImage.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
 
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[walkthroughImage]-20-[mainTitleLabel]-[infoImage]-[firstSubTitleLabel]-2-[secondSubTitleLabel]", options: [], metrics: nil, views: viewBindingsDict))
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[walkthroughImage(==76)]-20-[mainTitleLabel]-[infoImage]-[firstSubTitleLabel]-2-[secondSubTitleLabel]", options: [], metrics: nil, views: viewBindingsDict))
         
         constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[firstSubTitleLabel]-32-|", options: [], metrics: nil, views: viewBindingsDict))
         constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[secondSubTitleLabel]-32-|", options: [], metrics: nil, views: viewBindingsDict))

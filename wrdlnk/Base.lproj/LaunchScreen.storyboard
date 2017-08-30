@@ -17,24 +17,29 @@
                         <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleAspectFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="sDc-MY-Bo9">
-                                <rect key="frame" x="58" y="206.5" width="256" height="256"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="sDc-MY-Bo9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" red="0.98414444919999999" green="0.90554356579999995" blue="0.90215826030000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="sDc-MY-Bo9" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="1md-pE-1qS"/>
+                            <constraint firstItem="sDc-MY-Bo9" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Dgs-ZK-e5k"/>
+                            <constraint firstItem="sDc-MY-Bo9" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="Rkb-O5-ALU"/>
+                            <constraint firstItem="sDc-MY-Bo9" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dMn-M3-8OT"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52" y="374.66266866566718"/>
+            <point key="canvasLocation" x="52" y="388"/>
         </scene>
     </scenes>
     <resources>
-        <image name="AppIcon" width="360" height="360"/>
+        <image name="AppIcon" width="76" height="76"/>
     </resources>
 </document>

@@ -29,11 +29,22 @@ class IAPurchaseScene: BaseScene {
         return backgroundNodeTwo?.childNode(withName: ButtonIdentifier.purchaseTwoSwitch.rawValue) as? ButtonNode
     }
     
+    override var backgroundNodeThree: SKNode? {
+        return childNode(withName: purchaseThreeNodePath)!
+    }
+    
+    var purchaseThreeButton: ButtonNode? {
+        return backgroundNodeThree?.childNode(withName: ButtonIdentifier.purchaseThreeSwitch.rawValue) as? ButtonNode
+    }
+
+    
     let nodeMap = [ ViewElement.switches.rawValue,
                     ViewElement.purchaseOne.rawValue,
                     ViewElement.purchaseOneSwitch.rawValue,
                     ViewElement.purchaseTwo.rawValue,
-                    ViewElement.purchaseTwoSwitch.rawValue ]
+                    ViewElement.purchaseTwoSwitch.rawValue,
+                    ViewElement.purchaseThree.rawValue,
+                    ViewElement.purchaseThreeSwitch.rawValue]
     
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
@@ -58,6 +69,9 @@ class IAPurchaseScene: BaseScene {
         
         state = AppDefinition.defaults.bool(forKey: preferencePurchaseTwoEnabledKey)
         state ? enableButton(button: purchaseTwoButton, isSelected: state, focus: true) : enableButton(button: purchaseTwoButton, isSelected: state)
+        
+        state = AppDefinition.defaults.bool(forKey: preferencePurchaseThreeEnabledKey)
+        state ? enableButton(button: purchaseThreeButton, isSelected: state, focus: true) : enableButton(button: purchaseThreeButton, isSelected: state)
     }
     
     override func sceneDidLoad() {

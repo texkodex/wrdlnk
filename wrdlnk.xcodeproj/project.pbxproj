@@ -19,6 +19,7 @@
 		CC1C64C91F44B47300A9E5C8 /* AwardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64C81F44B47300A9E5C8 /* AwardScene.swift */; };
 		CC1C64CE1F46B92400A9E5C8 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64CD1F46B92400A9E5C8 /* AppTheme.swift */; };
 		CC2F8E481F18830200463E37 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F8E471F18830100463E37 /* PlaySound.swift */; };
+		CC4494CD1F5628A100CB0906 /* wireIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC4494CC1F5628A100CB0906 /* wireIcon.xcassets */; };
 		CC4F90CF1F51D637001BB049 /* PlayNotification.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC4F90CE1F51D637001BB049 /* PlayNotification.plist */; };
 		CC4F90D11F51E9FE001BB049 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F90D01F51E9FE001BB049 /* Utility.swift */; };
 		CC7202B41F1973F1003394A0 /* awake.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202B31F1973F1003394A0 /* awake.mp3 */; };
@@ -29,6 +30,11 @@
 		CC7202BE1F19745B003394A0 /* beepbeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202BD1F19745B003394A0 /* beepbeep.mp3 */; };
 		CC7202C01F1AAC95003394A0 /* yes.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202BF1F1AAC95003394A0 /* yes.mp3 */; };
 		CC7202C21F1D5D7D003394A0 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7202C11F1D5D7D003394A0 /* DataStore.swift */; };
+		CC7911BF1F55A3E3009E7B4A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7911BE1F55A3E3009E7B4A /* SplashViewController.swift */; };
+		CC7911C11F55A3F9009E7B4A /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7911C01F55A3F9009E7B4A /* LogoView.swift */; };
+		CC7911C31F55A408009E7B4A /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7911C21F55A408009E7B4A /* TileView.swift */; };
+		CC7911C51F55A494009E7B4A /* TileGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7911C41F55A494009E7B4A /* TileGridView.swift */; };
+		CC7911C71F55A587009E7B4A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7911C61F55A587009E7B4A /* Common.swift */; };
 		CC8BE4131EEB2D7100CDB4BB /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4121EEB2D7100CDB4BB /* ButtonNode.swift */; };
 		CC8BE4151EEB47F700CDB4BB /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4141EEB47F700CDB4BB /* BaseScene.swift */; };
 		CC8BE4171EEB494900CDB4BB /* BaseScene+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4161EEB494900CDB4BB /* BaseScene+Buttons.swift */; };
@@ -90,6 +96,7 @@
 		CC1C64C81F44B47300A9E5C8 /* AwardScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardScene.swift; sourceTree = "<group>"; };
 		CC1C64CD1F46B92400A9E5C8 /* AppTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		CC2F8E471F18830100463E37 /* PlaySound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
+		CC4494CC1F5628A100CB0906 /* wireIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = wireIcon.xcassets; sourceTree = "<group>"; };
 		CC4F90CE1F51D637001BB049 /* PlayNotification.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlayNotification.plist; sourceTree = "<group>"; };
 		CC4F90D01F51E9FE001BB049 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		CC7202B31F1973F1003394A0 /* awake.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = awake.mp3; sourceTree = "<group>"; };
@@ -100,6 +107,11 @@
 		CC7202BD1F19745B003394A0 /* beepbeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beepbeep.mp3; sourceTree = "<group>"; };
 		CC7202BF1F1AAC95003394A0 /* yes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = yes.mp3; sourceTree = "<group>"; };
 		CC7202C11F1D5D7D003394A0 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		CC7911BE1F55A3E3009E7B4A /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		CC7911C01F55A3F9009E7B4A /* LogoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
+		CC7911C21F55A408009E7B4A /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		CC7911C41F55A494009E7B4A /* TileGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileGridView.swift; sourceTree = "<group>"; };
+		CC7911C61F55A587009E7B4A /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		CC8BE4121EEB2D7100CDB4BB /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		CC8BE4141EEB47F700CDB4BB /* BaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
 		CC8BE4161EEB494900CDB4BB /* BaseScene+Buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseScene+Buttons.swift"; sourceTree = "<group>"; };
@@ -185,6 +197,19 @@
 			name = Theme;
 			sourceTree = "<group>";
 		};
+		CC7911BD1F55A39E009E7B4A /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				CC7911BE1F55A3E3009E7B4A /* SplashViewController.swift */,
+				CC7911C01F55A3F9009E7B4A /* LogoView.swift */,
+				CC7911C21F55A408009E7B4A /* TileView.swift */,
+				CC7911C41F55A494009E7B4A /* TileGridView.swift */,
+				CC7911C61F55A587009E7B4A /* Common.swift */,
+				CC4494CC1F5628A100CB0906 /* wireIcon.xcassets */,
+			);
+			name = SplashScreen;
+			sourceTree = "<group>";
+		};
 		CC8BE4201EF10AC900CDB4BB /* Audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +257,7 @@
 		CCAD36151EE0CAE3001C6AFE /* wrdlnk */ = {
 			isa = PBXGroup;
 			children = (
+				CC7911BD1F55A39E009E7B4A /* SplashScreen */,
 				CC1C64CC1F46B90100A9E5C8 /* Theme */,
 				CC1C64BF1F44A77D00A9E5C8 /* IAPurchase */,
 				CCDEA3D21F36BECB0046C82D /* WalkThrough */,
@@ -481,6 +507,7 @@
 				CCAD36191EE0CAE3001C6AFE /* GameScene.sks in Resources */,
 				CC8BE41B1EEB4F4500CDB4BB /* Images.xcassets in Resources */,
 				CCAD36271EE0CAE3001C6AFE /* LaunchScreen.storyboard in Resources */,
+				CC4494CD1F5628A100CB0906 /* wireIcon.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,9 +532,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC7911BF1F55A3E3009E7B4A /* SplashViewController.swift in Sources */,
 				CC4F90D11F51E9FE001BB049 /* Utility.swift in Sources */,
 				CC1C64C91F44B47300A9E5C8 /* AwardScene.swift in Sources */,
 				CC1C64C11F44A7BE00A9E5C8 /* IAPurchaseManger.swift in Sources */,
+				CC7911C71F55A587009E7B4A /* Common.swift in Sources */,
 				CC95F9FF1F3A3F1700E55483 /* MainMenuScene.swift in Sources */,
 				CCF8474C1EE9DC6D00468E0B /* Extensions.swift in Sources */,
 				CCDEA3D81F36BF450046C82D /* WalkThroughThreeViewController.swift in Sources */,
@@ -528,8 +557,11 @@
 				CC1C64CE1F46B92400A9E5C8 /* AppTheme.swift in Sources */,
 				CC8BE4191EEB4AA600CDB4BB /* BaseScene+Focus.swift in Sources */,
 				CCDEA3D61F36BF1C0046C82D /* WalkThroughTwoViewController.swift in Sources */,
+				CC7911C31F55A408009E7B4A /* TileView.swift in Sources */,
 				CC1148EA1F3841FC00F64550 /* WalkThroughLastPageViewController.swift in Sources */,
+				CC7911C11F55A3F9009E7B4A /* LogoView.swift in Sources */,
 				CC8BE4131EEB2D7100CDB4BB /* ButtonNode.swift in Sources */,
+				CC7911C51F55A494009E7B4A /* TileGridView.swift in Sources */,
 				CC8BE4231EF22F0E00CDB4BB /* DataExchange.swift in Sources */,
 				CCF8474E1EE9DD1600468E0B /* Config.swift in Sources */,
 				CC8BE42F1F044CBE00CDB4BB /* DefinitionScene.swift in Sources */,

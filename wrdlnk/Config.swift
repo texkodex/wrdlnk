@@ -21,6 +21,7 @@ struct AppDefinition {
     static let InitialDefaults = "initialDefaults"
     static let DefaultBackground = "BackgroundColor"
     static let WalkthroughContent = "WalkThrough"
+    static let PlayNotification = "PlayNotification"
 }
 
 enum StoryboardName : String {
@@ -55,6 +56,7 @@ let letterNodeColRow = "letter_%d_%d"
 
 let remoteWordListSite = "http://www.wrdlnk.com/wlva01a/api/data/wlink_default.json"
 
+let backgroundNodePath = "//world/backgroundNode"
 let titleNodePath = "//world/top"
 let statNodePath = "//world/stat"
 let meaningNodePath = "//world/meaning"
@@ -71,6 +73,7 @@ let colorBlindNodePath = "//world/switches/colorblind"
 
 let purchaseOneNodePath = "//world/switches/purchaseOne"
 let purchaseTwoNodePath = "//world/switches/purchaseTwo"
+let purchaseThreeNodePath = "//world/switches/purchaseThree"
 
 let enterNodePath = "//world/enter"
 
@@ -105,6 +108,7 @@ let preferenceWordListKey = "preference_wordlist_index"
 let preferenceWordListShuffledKey = "preference_wordlist_shuffled"
 let preferenceShowGraphKey = "preference_graph"
 let preferenceGameStatKey = "preference_game_stat"
+let preferenceGameTextDescriptionKey = "preference_game_text_description"
 
 let preferenceSoundEnabledKey = "preference_sound_enabled"
 let preferenceScoreEnabledKey = "preference_score_enabled"
@@ -117,6 +121,7 @@ let preferenceColorBlindEnabledKey = "preference_color_blind_enabled"
 let preferencePurchaseDescriptionEnabledKey = "preference_purchase_description_enabled"
 let preferencePurchaseOneEnabledKey = "preference_purchase_one_enabled"
 let preferencePurchaseTwoEnabledKey = "preference_purchase_two_enabled"
+let preferencePurchaseThreeEnabledKey = "preference_purchase_three_enabled"
 
 let preferenceContinueGameEnabledKey = "preference_continue_game_enabled"
 let preferenceStartGameEnabledKey = "preference_start_game_enabled"
@@ -138,6 +143,17 @@ let awardDescriptionPrefixDefaultString = "with default: "
 let awardDescriptionPrefixString = "with group: "
 let awardDescriptionFormat = "%@%@"
 let preferenceAwardDescriptionInfoKey = "preference_award_description_info"
+
+let preferenceAccuracyLowerBoundDataKey = "preference_accuracy_lower_bound_data"
+let preferenceTimeLowerBoundDataKey = "preference_time_lower_bound_data"
+
+let preferenceAccuracyGoldCountKey = "preference_accuracy_gold_count"
+let preferenceAccuracySilverCountKey = "preference_accuracy_silver_count"
+let preferenceAccuracyBronzeCountKey = "preference_accuracy_bronze_count"
+
+let preferenceTimeGoldCountKey = "preference_time_gold_count"
+let preferenceTimeSilverCountKey = "preference_time_silver_count"
+let preferenceTimeBronzeCountKey = "preference_time_bronze_count"
 
 let minClickToSeeDefinition = 100
 
@@ -213,6 +229,8 @@ enum ViewElement:String {
     case purchaseOneSwitch = "PurchaseOneSwitch"
     case purchaseTwo = "purchaseTwo"
     case purchaseTwoSwitch = "PurchaseTwoSwitch"
+    case purchaseThree = "purchaseThree"
+    case purchaseThreeSwitch = "PurchaseThreeSwitch"
     
     
     case awardDetail = "awardDetail"
@@ -240,6 +258,7 @@ enum ViewElement:String {
                          
                          purchaseOne,   purchaseOneSwitch,
                          purchaseTwo,   purchaseTwoSwitch,
+                         purchaseThree,   purchaseThreeSwitch,
                          awardDetail
                         ]
 }

@@ -3,30 +3,30 @@
 <plist version="1.0">
 <array>
 	<dict>
-		<key>message1</key>
+		<key>message_great</key>
 		<string>GREAT!</string>
-		<key>message2</key>
+		<key>message_topnotch</key>
 		<string>TOPNOTCH</string>
-		<key>message3</key>
+		<key>message_fantastic</key>
 		<string>FANTASTIC!</string>
-		<key>message4</key>
+		<key>message_groovy</key>
 		<string>GROOVY</string>
-		<key>message5</key>
+		<key>message_peachy!</key>
 		<string>PEACHY!</string>
-		<key>message6</key>
+		<key>message_fabulous</key>
 		<string>FABULOUS</string>
-		<key>message7</key>
+		<key>message_amazing</key>
 		<string>AMAZING</string>
-		<key>message8</key>
+		<key>message_super</key>
 		<string>SUPER!</string>
-		<key>message9</key>
+		<key>message_goodwork</key>
 		<string>GOOD WORK!</string>
-		<key>message10</key>
+		<key>message_smashing</key>
 		<string>SMASHING</string>
-		<key>message11</key>
+		<key>message_yeah</key>
 		<string>YEAH!</string>
-		<key>message12</key>
-		<string>GOOD WORD!</string>
+		<key>message_award</key>
+		<string>AWARD!</string>
 	</dict>
 </array>
 </plist>

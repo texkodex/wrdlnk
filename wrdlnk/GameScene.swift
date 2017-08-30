@@ -97,6 +97,13 @@ class GameScene: BaseScene {
     
     var matchList: [String] = []
 
+    var keyPlayNotificationDictionary = [String:String]()
+    var contentPlist:[[String:String]] = []
+    
+    var notificationMessageList: [String] = []
+    var awardMessageList: [String] = []
+    var completedMessageList: [String] = []
+    
     var resetCounters:Bool {
         get {
             return UserDefaults().bool(forKey: preferenceStartGameEnabledKey)
@@ -106,7 +113,6 @@ class GameScene: BaseScene {
         }
     }
 
-    
     var playerScore:Int {
         get {
             return UserDefaults().integer(forKey: preferenceCurrentScoreKey)
@@ -159,11 +165,59 @@ class GameScene: BaseScene {
         tapBoardGestureRecognizer.numberOfTapsRequired = 1
         view.addGestureRecognizer(tapBoardGestureRecognizer)
         
+        playNotification()
         // Start game timer
         self.playerTimerLabel?.text = timerString()
         countTime()
         
         AppTheme.instance.set(for: self)
+    }
+    
+    func playNotification() {
+        let path = Bundle.main.path(forResource: AppDefinition.PlayNotification, ofType: AppDefinition.PropertyList);
+        self.contentPlist = NSArray(contentsOfFile:path!) as! [[String:String]]
+        
+        self.keyPlayNotificationDictionary = self.contentPlist[0]
+        
+        notificationMessageList.append(keyPlayNotificationDictionary["message_great"]!)
+        notificationMessageList.append(keyPlayNotificationDictionary["message_super"]!)
+        notificationMessageList.append(keyPlayNotificationDictionary["message_goodwork"]!)
+        notificationMessageList.append(keyPlayNotificationDictionary["message_fabulous"]!)
+        notificationMessageList.append(keyPlayNotificationDictionary["message_smashing"]!)
+
+        awardMessageList.append(keyPlayNotificationDictionary["message_amazing"]!)
+        awardMessageList.append(keyPlayNotificationDictionary["message_topnotch"]!)
+        awardMessageList.append(keyPlayNotificationDictionary["message_yeah"]!)
+        awardMessageList.append(keyPlayNotificationDictionary["message_award"]!)
+
+        completedMessageList.append(keyPlayNotificationDictionary["message_amazing"]!)
+        completedMessageList.append(keyPlayNotificationDictionary["message_topnotch"]!)
+        completedMessageList.append(keyPlayNotificationDictionary["message_fantastic"]!)
+
+    }
+    
+    func playNotificationMessage()->String? {
+        let count = notificationMessageList.count
+        if count > 0 {
+            return notificationMessageList[random(count)]
+        }
+        return nil
+    }
+    
+    func awardMessage()->String? {
+        let count = awardMessageList.count
+        if count > 0 {
+            return awardMessageList[random(count)]
+        }
+        return nil
+    }
+    
+    func completedMessage()->String? {
+        let count = completedMessageList.count
+        if count > 0 {
+            return completedMessageList[random(count)]
+        }
+        return nil
     }
     
     func readyForInit() {
@@ -441,11 +495,16 @@ class GameScene: BaseScene {
             progressSummary()
             enableGraphDisplay()
             readyForInit()
-            transitionReloadScene(scene: self)
-            stopAudio(delay: 0.5)
+            
+            playTextAnimated(text: completedMessage())
+            delay(2.0) {
+                self.stopAudio(delay: 0.2)
+                self.transitionReloadScene(scene: self)
+            }
             return
         } else {
             playSoundForEvent(soundEvent: .yes)
+            //playTextAnimated(text: playNotificationMessage())
         }
     }
     
@@ -494,6 +553,28 @@ class GameScene: BaseScene {
         } else {
             playerTimerLabel?.isHidden = true
         }
+    }
+    
+    // MARK:- play progress text
+    func playTextAnimated(text: String?) {
+        guard (text != nil) else { return }
+        let backgroundNode = self.childNode(withName: backgroundNodePath)!
+        let textLabel = SKLabelNode(fontNamed: "Chalkduster")
+        textLabel.zPosition = 10
+        textLabel.position = CGPoint(x: backgroundNode.frame.midX - (2 * tileWidth), y: max(backgroundNode.frame.midY * (7 * tileHeight), backgroundNode.frame.maxY - tileHeight))
+        textLabel.text = text
+        textLabel.fontColor = AppTheme.instance.fontColor()
+        self.addChild(textLabel)
+        let moveText = SKAction.move(to: CGPoint(x: backgroundNode.frame.midX + (2 * tileWidth), y: backgroundNode.frame.minY + tileHeight), duration: 1.0)
+        let fadeAway = SKAction.fadeOut(withDuration: 0.9)
+        let removeNode = SKAction.removeFromParent()
+        let sequence = SKAction.sequence([.group([.scale(to: 1.5, duration: 0.6),
+                                                  .scale(to: 1, duration: 0.6)]),
+                                          .rotate(byAngle: .pi * 2, duration: 0.6),
+                                          moveText,
+                                          fadeAway,
+                                          removeNode])
+        textLabel.run(sequence)
     }
 }
 

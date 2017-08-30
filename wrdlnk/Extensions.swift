@@ -20,7 +20,38 @@ enum SceneType {
     case GameAward
     case Instructions
 }
+/*
+ fileprivate var rootViewController: UIViewController? = nil
+ 
+ override func viewDidLoad() {
+ super.viewDidLoad()
+ runSplashScreen()
+ 
+ }
+ 
+ func runSplashScreenViewController() {
+ if rootViewController is SplashViewController {
+ return
+ }
+ 
+ rootViewController?.willMove(toParentViewController: nil)
+ rootViewController?.removeFromParentViewController()
+ rootViewController?.view.removeFromSuperview()
+ rootViewController?.didMove(toParentViewController: nil)
+ 
+ let splashViewController = SplashViewController(tileViewFileName: "wireIcon")
+ rootViewController = splashViewController
+ splashViewController.pulsing = true
+ 
+ splashViewController.willMove(toParentViewController: self)
+ addChildViewController(splashViewController)
+ view.addSubview(splashViewController.view)
+ splashViewController.didMove(toParentViewController: self)
+ }
 
+ 
+ 
+ */
 extension UIViewController {
     var className: String {
         return NSStringFromClass(self.classForCoder).components(separatedBy: ".").last!;
@@ -30,7 +61,10 @@ extension UIViewController {
         let storyboard:UIStoryboard? = UIStoryboard(name: name, bundle: nil)
         if let vc = storyboard?.instantiateViewController(withIdentifier: controller) {
             let appdelegate = UIApplication.shared.delegate as! AppDelegate
-            appdelegate.window!.rootViewController = vc
+            delay(0.5) {
+                appdelegate.window!.rootViewController = vc
+                vc.willMove(toParentViewController: self)
+            }
         }
     }
     
@@ -129,11 +163,7 @@ extension SKScene {
         if platform.contains("iPad Pro (12.9)") || UIDevice.isiPadPro129 {
             rootNode.yScale = 2.0
             rootNode.xScale = 2.0
-        } else if !platform.contains("iPad Air") && platform.contains("iPad") {
-            rootNode.yScale = 1.5
-            rootNode.xScale = 1.5
-        }
-        else if platform.contains("iPad Air") {
+        } else if UIDevice.isiPad {
             rootNode.yScale = 1.5
             rootNode.xScale = 1.5
         }
@@ -425,7 +455,7 @@ extension SKTileMapNode {
     func hideTileCellWithoutLetter(spriteNode: SKSpriteNode, col: Int, row: Int) -> Bool {
         return false
     }
-    
+
     func setTileTexture(tileElement: TileElement, buttonNode: Bool = false) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         self.removeAllChildren()
@@ -435,7 +465,6 @@ extension SKTileMapNode {
                 let tileNode = createSpriteNode(tileElement: tileElement, width: tileWidthLess2, height: tileHeightLess2)
                 tileNode.name = nodeName(node: self, col: col, row: row)
                 tileNode.userData = [tileUserDataClickName : false]
-                //tileNode.size = CGSize(width: tileWidthLess2, height: tileHeightLess2)
                 let point = self.centerOfTile(atColumn: col, row: row)
                 tileNode.position = point
                 tileNode.alpha = CGFloat(0.0)
@@ -459,7 +488,7 @@ extension SKTileMapNode {
     
     func getSpriteNode(nodesAtPoint: [SKNode]) -> SKSpriteNode? {
         for mapNode in nodesAtPoint {
-            if (mapNode.name?.hasPrefix(tileNodeName))! {
+            if mapNode.name != nil && (mapNode.name?.hasPrefix(tileNodeName))! {
                  return mapNode as? SKSpriteNode
             }
         }
@@ -536,7 +565,7 @@ extension SKTileMapNode {
         if (sprite.name?.contains("button"))! {
             sprite.size = CGSize(width: CGFloat(defaultTileInnerWidth), height: CGFloat(defaultTileInnerHeight))
         } else {
-            sprite.size = CGSize(width: CGFloat(tileWidth), height: CGFloat(tileHeight))
+            sprite.size = CGSize(width: CGFloat(tileWidthLess2), height: CGFloat(tileHeightLess2))
         }
         sprite.run(SKAction.setTexture(texture))
         spriteNode.addChild(sprite)
@@ -650,7 +679,7 @@ extension SKTileMapNode {
         return label
     }
     
-    func graphLine(index: Int, last: Int, accuracy: Float, percentage: Float) -> SKShapeNode {
+    func graphLine(index: Int, last: Int, accuracy: Float, percentage: Float, phrase: String?) -> SKShapeNode {
         let shape = SKShapeNode()
         let rowWidth = self.frame.width / CGFloat(numberOfColumns) * 2
         let xPos = (self.frame.minX + rowWidth / 2) + CGFloat(index) * rowWidth
@@ -674,6 +703,12 @@ extension SKTileMapNode {
         let label = graphText(name: "label_\(index)", text: "\(Int(percentage))%", position: CGPoint(x: xPos + rowWidth / 7, y: yPos - 14))
         shape.addChild(label)
         
+        if AppDefinition.defaults.keyExist(key: preferenceGameTextDescriptionKey) {
+            // Annotation vertical line
+            let verticalLabel = verticalText(text: phrase, position: CGPoint(x: CGFloat(xPos - rowWidth / 14), y: self.frame.midY))
+            shape.addChild(verticalLabel)
+        }
+        
         if (index == last) {
             shape.addChild(arrowNode(frame: frame, rowHeight: rowHeight, rowWidth: rowWidth, xPos: xPos, lineWidth: lineWidth))
         }
@@ -693,6 +728,21 @@ extension SKTileMapNode {
         return arrowShapeNode
     }
     
+    func verticalText(text: String?, position: CGPoint) ->SKLabelNode {
+        let textLabel = SKLabelNode(fontNamed: "Arial")
+        textLabel.zRotation = CGFloat.pi / 2
+        if text != nil {
+            let components = text?.characters.split(separator: "|")
+            let firstPhrase = components?.dropLast(1).map(String.init).joined(separator: " ")
+            textLabel.text = firstPhrase
+        }
+        textLabel.fontColor = AppTheme.instance.fontColor()
+        textLabel.alpha = 0.5
+        textLabel.fontSize = 20
+        textLabel.position = position
+        return textLabel
+    }
+    
     func showProgressGraph(stats: StatData) {
         self.removeAllChildren()
         let shape = graphBackground()
@@ -700,7 +750,7 @@ extension SKTileMapNode {
         let last = stats.count() - 1
         for (index, value) in stats.elements().enumerated() {
             print("index: \(index), with value: \(value.percentage)")
-            self.addChild(graphLine(index: index, last: last, accuracy: value.accuracy, percentage: value.percentage))
+            self.addChild(graphLine(index: index, last: last, accuracy: value.accuracy, percentage: value.percentage, phrase: value.phrase))
         }
         
         let label = graphText(name: "label_graph_title", text: "Most Recent Performance",

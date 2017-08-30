@@ -44,6 +44,7 @@ enum NodeName: String {
     case progressGraphName = "//world/graph/progressGraph"
     case purchaseOne = "purchaseOne"
     case purchaseTwo = "purchaseTwo"
+    case purchaseThree = "purchaseThree"
 }
 
 enum Mode: String {
@@ -132,6 +133,9 @@ class AppTheme {
                      "//world/switches/purchaseTwo",
                      "//world/switches/purchaseTwo/PurchaseTwoSwitch",
                      "//world/switches/purchaseTwo/PurchaseTwoSwitch/focusRing",
+                     "//world/switches/purchaseThree",
+                     "//world/switches/purchaseThree/PurchaseThreeSwitch",
+                     "//world/switches/purchaseThree/PurchaseThreeSwitch/focusRing",
                      "//world/stat/score",
                      "//world/stat/timer",
                      "//world/change/ShowGraph",
@@ -146,7 +150,8 @@ class AppTheme {
                      "//meaning/suffixMeaning"
     ]
     
-    let fontName = "Helvetica Bold"
+    // "Helvetica Bold"
+    let fontName = "Arial"
     
     static let instance = AppTheme()
     
@@ -264,6 +269,9 @@ class AppTheme {
                         fontName: fontName, fontColor: fontColor)
         changeLabelNode(view: view, parentNode: NodeName.labelNodeSwitchParent.rawValue,
                         nodeName: NodeName.purchaseTwo.rawValue,
+                        fontName: fontName, fontColor: fontColor)
+        changeLabelNode(view: view, parentNode: NodeName.labelNodeSwitchParent.rawValue,
+                        nodeName: NodeName.purchaseThree.rawValue,
                         fontName: fontName, fontColor: fontColor)
     }
     

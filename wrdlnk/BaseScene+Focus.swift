@@ -47,6 +47,7 @@ extension BaseScene {
             .inAppPurchase,
             .purchaseOneSwitch,
             .purchaseTwoSwitch,
+            .purchaseThreeSwitch,
             .gameAward,
             .awardDetail,
             .instructions,

@@ -37,6 +37,7 @@ enum ButtonIdentifier: String {
     
     case purchaseOneSwitch = "PurchaseOneSwitch"
     case purchaseTwoSwitch = "PurchaseTwoSwitch"
+    case purchaseThreeSwitch = "PurchaseThreeSwitch"
     case gameAward = "GameAward"
     case awardDetail = "AwardDetail"
     
@@ -52,7 +53,7 @@ enum ButtonIdentifier: String {
             .gameSettings,          .inAppPurchase,
             .instructions,
             
-            .purchaseOneSwitch,     .purchaseTwoSwitch,
+            .purchaseOneSwitch,     .purchaseTwoSwitch,     .purchaseThreeSwitch,
             
             .gameAward,
             .awardDetail
@@ -113,6 +114,8 @@ enum ButtonIdentifier: String {
             return fullTextureName("paymentOn")
         case .purchaseTwoSwitch:
             return fullTextureName("paymentOn")
+        case .purchaseThreeSwitch:
+            return fullTextureName("paymentOn")
         case .gameAward:
             return fullTextureName("soundOn")
         case .awardDetail:
@@ -155,7 +158,7 @@ enum ButtonIdentifier: String {
         case .continueGame:
             return fullTextureName("enterOn")
         case .gameSettings:
-            return fullTextureName("settingsOn")
+            return fullTextureName("settingsOff")
         case .inAppPurchase:
             return fullTextureName("paymentOff")
         case .instructions:
@@ -163,6 +166,8 @@ enum ButtonIdentifier: String {
         case .purchaseOneSwitch:
             return fullTextureName("paymentOff")
         case .purchaseTwoSwitch:
+            return fullTextureName("paymentOff")
+        case .purchaseThreeSwitch:
             return fullTextureName("paymentOff")
         case .gameAward:
             return fullTextureName("scoreOff")

@@ -29,7 +29,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         AppDefinition.defaults.set(true, forKey: preferenceMemoryDataFileKey)
         
         if AppDefinition.defaults.keyExist(key: preferenceRemoteDataSiteKey) {

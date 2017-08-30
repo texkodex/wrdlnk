@@ -76,78 +76,117 @@ class AwardScene: BaseScene {
     }
     
     func processAccuracyScores() {
-        var goldCount: Int = 0
-        var silverCount: Int = 0
-        var bronzeCount: Int = 0
+        var goldCount: Int = AppDefinition.defaults.integer(forKey: preferenceAccuracyGoldCountKey)
+        var silverCount: Int = AppDefinition.defaults.integer(forKey: preferenceAccuracySilverCountKey)
+        var bronzeCount: Int = AppDefinition.defaults.integer(forKey: preferenceAccuracyBronzeCountKey)
+        let lowerBound = AppDefinition.defaults.integer(forKey: preferenceAccuracyLowerBoundDataKey)
+        let count = statData.count()
+        let condition = statData.isEmpty() || count - lowerBound < VisibleStateCount
         
-        if statData.elements().count >= VisibleStateCount {
+        if !condition {
             var goldInterimCount: Int = 0
             var silverInterimCount: Int = 0
             var bronzeInterimCount: Int = 0
-            for (index, statElement) in statData.elements().enumerated() {
-                if index > VisibleStateCount - 1 && index % VisibleStateCount == 0 {
-                    if bronzeInterimCount == VisibleStateCount {
-                        bronzeCount += 1
-                    }
-                    if silverInterimCount == VisibleStateCount {
-                        silverCount += 1
-                    }
-                    if goldInterimCount == VisibleStateCount {
-                        goldCount += 1
-                    }
+            
+            for index in lowerBound..<count {
+                let statElement = statData.elements()[index]
+                let found = goldInterimCount >= VisibleStateCount
+                    || goldInterimCount + silverInterimCount >= VisibleStateCount
+                    || goldInterimCount + silverInterimCount + bronzeInterimCount >= VisibleStateCount
+                
+                if goldInterimCount == VisibleStateCount {
+                    goldCount += 1
+                    
+                } else if goldInterimCount + silverInterimCount == VisibleStateCount {
+                    silverCount += 1
+                    
+                } else if goldInterimCount + silverInterimCount + bronzeInterimCount == VisibleStateCount {
+                    bronzeCount += 1
+                }
+                
+                if (found) {
                     goldInterimCount = 0
                     silverInterimCount = 0
                     bronzeInterimCount = 0
+                    AppDefinition.defaults.set(lowerBound + index, forKey: preferenceAccuracyLowerBoundDataKey)
                 }
+                
                 if statElement.accuracy >= 0.85 && statElement.accuracy <= 0.90 {
                     bronzeInterimCount += 1
-                } else if statElement.accuracy > 0.9 && statElement.accuracy < 1.0 {
+                }
+                if statElement.accuracy > 0.9 && statElement.accuracy < 1.0 {
                     silverInterimCount += 1
-                } else if statElement.accuracy == 1.0 {
+                }
+                if statElement.accuracy == 1.0 {
                     goldInterimCount += 1
                 }
             }
+
+            AppDefinition.defaults.set(goldCount, forKey: preferenceAccuracyGoldCountKey)
+            AppDefinition.defaults.set(silverCount, forKey: preferenceAccuracySilverCountKey)
+            AppDefinition.defaults.set(bronzeCount, forKey: preferenceAccuracyBronzeCountKey)
         }
-        
         accuracyGoldCountLabel?.text = "\(goldCount)"
         accuracySilverCountLabel?.text = "\(silverCount)"
         accuracyBronzeCountLabel?.text = "\(bronzeCount)"
     }
     
     func processTimeScores() {
-        var goldCount: Int = 0
-        var silverCount: Int = 0
-        var bronzeCount: Int = 0
-
-        if statData.elements().count >= VisibleStateCount {
+        var goldCount: Int = AppDefinition.defaults.integer(forKey: preferenceTimeGoldCountKey)
+        var silverCount: Int = AppDefinition.defaults.integer(forKey: preferenceTimeSilverCountKey)
+        var bronzeCount: Int = AppDefinition.defaults.integer(forKey: preferenceTimeBronzeCountKey)
+        let lowerBound = AppDefinition.defaults.integer(forKey: preferenceTimeLowerBoundDataKey)
+        let count = statData.count()
+        let condition = statData.isEmpty() || count - lowerBound < VisibleStateCount
+        
+        if !condition {
+            let distance = statData.elements().distance(from: 0, to: lowerBound)
+            let arraySlice = statData.elements().dropLast(distance)
+            let newStatData = Array(arraySlice)
+            
             var goldInterimCount: Int = 0
             var silverInterimCount: Int = 0
             var bronzeInterimCount: Int = 0
-            for (index, statElement) in statData.elements().enumerated() {
-                if index > VisibleStateCount - 1 && index % VisibleStateCount == 0 {
-                    if bronzeInterimCount == VisibleStateCount {
-                        bronzeCount += 1
-                    }
-                    if silverInterimCount == VisibleStateCount {
-                        silverCount += 1
-                    }
-                    if goldInterimCount == VisibleStateCount {
-                        goldCount += 1
-                    }
+            
+            for (index, statElement) in newStatData.enumerated() {
+                
+                let found = goldInterimCount >= VisibleStateCount
+                    || goldInterimCount + silverInterimCount >= VisibleStateCount
+                    || goldInterimCount + silverInterimCount + bronzeInterimCount >= VisibleStateCount
+
+                if goldInterimCount == VisibleStateCount {
+                    goldCount += 1
+                   
+                } else if goldInterimCount + silverInterimCount == VisibleStateCount {
+                    silverCount += 1
+                    
+                } else if goldInterimCount + silverInterimCount + bronzeInterimCount == VisibleStateCount {
+                    bronzeCount += 1
+                }
+                
+                if (found) {
                     goldInterimCount = 0
                     silverInterimCount = 0
                     bronzeInterimCount = 0
+                    AppDefinition.defaults.set(lowerBound + index, forKey: preferenceTimeLowerBoundDataKey)
                 }
+                
                 if statElement.timeSpan > 0 &&  Int(statElement.timeSpan) <= Int(Float(statElement.minimum) * Float(timeSpeedGoldMultiple)) {
                     goldInterimCount += 1
-                } else if statElement.timeSpan > 0 &&  Int(statElement.timeSpan) <= Int(Float(statElement.minimum) * Float(timeSpeedSilverMultiple)) {
+                }
+                if statElement.timeSpan > 0 &&  Int(statElement.timeSpan) <= Int(Float(statElement.minimum) * Float(timeSpeedSilverMultiple)) {
                     silverInterimCount += 1
-                } else if statElement.timeSpan > 0 &&  Int(statElement.timeSpan) <= Int(Float(statElement.minimum) * Float(timeSpeedBronzeMultiple)) {
+                }
+                if statElement.timeSpan > 0 &&  Int(statElement.timeSpan) <= Int(Float(statElement.minimum) * Float(timeSpeedBronzeMultiple)) {
                     bronzeInterimCount += 1
                 }
             }
+            
+            AppDefinition.defaults.set(goldCount, forKey: preferenceTimeGoldCountKey)
+            AppDefinition.defaults.set(silverCount, forKey: preferenceTimeSilverCountKey)
+            AppDefinition.defaults.set(bronzeCount, forKey: preferenceTimeBronzeCountKey)
         }
-
+        
         timeGoldCountLabel?.text = "\(goldCount)"
         timeSilverCountLabel?.text = "\(silverCount)"
         timeBronzeCountLabel?.text = "\(bronzeCount)"

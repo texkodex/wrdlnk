@@ -51,5 +51,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wrdlnk/AppTheme.swift"
+            timestampString = "525960292.199672"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
+            landmarkName = "changeSceneElements(view:mode:fontColor:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wrdlnk.AppTheme.changeSceneElements (view : wrdlnk.BaseScene, mode : Swift.String, fontColor : __ObjC.UIColor) -&gt; ()"
+                  moduleName = "wrdlnk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sparkle/Documents/dev/code/swift/wrdlnk/wrdlnk/AppTheme.swift"
+                  timestampString = "525947404.245241"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "302"
+                  endingLineNumber = "302"
+                  offsetFromSymbolStart = "3341">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wrdlnk.AppTheme.changeSceneElements (view : wrdlnk.BaseScene, mode : Swift.String, fontColor : __ObjC.UIColor) -&gt; ()"
+                  moduleName = "wrdlnk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sparkle/Documents/dev/code/swift/wrdlnk/wrdlnk/AppTheme.swift"
+                  timestampString = "525947404.24665"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "302"
+                  endingLineNumber = "302"
+                  offsetFromSymbolStart = "20236">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wrdlnk/AppTheme.swift"
+            timestampString = "525960292.199672"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
+            landmarkName = "changeSceneElements(view:mode:fontColor:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

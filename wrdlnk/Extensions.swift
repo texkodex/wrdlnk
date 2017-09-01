@@ -53,7 +53,7 @@ extension UIViewController {
         else if platform.contains("iPhone SE") || UIDevice.isiPhone5 {
             infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:90, height: 160))
         } else {
-            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:150, height: 267))
+            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:140, height: 249))
         }
         return infoImage
     }
@@ -577,7 +577,7 @@ extension SKTileMapNode {
             }
             tileNode.alpha = CGFloat(1.0)
             tileNode.removeAllChildren()
-            let label = SKLabelNode(fontNamed: "Arial")
+            let label = SKLabelNode(fontNamed: fontName)
             label.text = "\(letter)"
             label.name = String(format:letterNodeColRow, index, row)
             label.fontColor = VowelCharacter(rawValue: letter)?.rawValue == letter ? UIColor.red : UIColor.white
@@ -669,7 +669,7 @@ extension SKTileMapNode {
             tileNode.userData = [tileUserDataClickName : true]
             tileNode.removeAllChildren()
             tileNode.size = CGSize(width: CGFloat(defaultTileInnerWidth), height: CGFloat(defaultTileInnerHeight))
-            let label = SKLabelNode(fontNamed: "Arial")
+            let label = SKLabelNode(fontNamed: fontName)
             label.text = "\(VowelCharacter.types[index].rawValue)"
             label.name = String(format:letterNodeColRow, index, row)
             label.fontColor = UIColor.red
@@ -709,7 +709,7 @@ extension SKTileMapNode {
     }
     
     func graphText(name: String, text: String, position: CGPoint, fontSize: CGFloat = 14, fontColor: UIColor = .white) -> SKLabelNode {
-        let label = SKLabelNode(fontNamed: "Arial")
+        let label = SKLabelNode(fontNamed: fontName)
         label.name = name
         label.text = "\(text)"
         label.fontSize = fontSize
@@ -768,7 +768,7 @@ extension SKTileMapNode {
     }
     
     func verticalText(text: String?, position: CGPoint) ->SKLabelNode {
-        let textLabel = SKLabelNode(fontNamed: "Arial")
+        let textLabel = SKLabelNode(fontNamed: fontName)
         textLabel.zRotation = CGFloat.pi / 2
         if text != nil {
             let components = text?.characters.split(separator: "|")

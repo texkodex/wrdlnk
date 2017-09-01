@@ -158,13 +158,18 @@ class AppTheme {
                      "//world/action/heading",
                      "//world/action/heading/actionHeading1",
                      "//world/action/heading/actionHeading2",
-                     "//world/action/heading/actionHeading3"
+                     "//world/action/heading/actionHeading3",
+                     "//world/action/proceedAction/actionYes",
+                     "//world/action/cancelAction/actionNo",
+                     "//world/action/proceedAction/actionYes/ActionYesSwitch",
+                     "//world/action/cancelAction/actionNo/ActionNoSwitch",
+                     "//world/action/proceedAction/actionYes/ActionYesSwitch/focusRing",
+                     "//world/action/cancelAction/actionNo/ActionNoSwitch/focusRing"
 
                      
     ]
     
-    // "Helvetica Bold"
-    let fontName = "Arial"
+
     
     static let instance = AppTheme()
     
@@ -290,13 +295,14 @@ class AppTheme {
                 print("texture name: \(String(describing: nodeSprite?.name))")
                 if (nodeSprite?.name?.lowercased().contains("titleimage"))! {
                     let texture = UIDevice.isiPad ? "apple-icon-144x144" : "apple-icon-76x76"
-                    nodeSprite?.texture = SKTexture(imageNamed: mode + texture)
-                } else if mode != "" && (nodeSprite?.name?.lowercased().contains("link"))! {
+                    nodeSprite?.texture = SKTexture(imageNamed: mode.contains("normal") ? texture : mode + texture)
+                } else if !mode.contains("normal") && (nodeSprite?.name?.lowercased().contains("awardlink"))! {
                     nodeSprite?.texture = SKTexture(imageNamed: mode + "awardLink")
                 } else {
                     let rawString = nodeSprite?.texture?.description.components(separatedBy: "\'")
-                    let name = rawString?[1]
-                    nodeSprite?.texture = SKTexture(imageNamed: mode + name!)
+                    let name = mode.contains("normal") ? rawString?[1] : String(mode + (rawString?[1])!)
+                    
+                    nodeSprite?.texture = SKTexture(imageNamed: name!)
                 }
             }
             
@@ -320,7 +326,8 @@ class AppTheme {
                     || (nodeLabel?.name?.lowercased().contains("mode"))!
                     || (nodeLabel?.name?.lowercased().contains("pastel"))!
                     || (nodeLabel?.name?.lowercased().contains("colorblind"))!
-                    || (nodeLabel?.name?.lowercased().contains("meaning"))! {
+                    || (nodeLabel?.name?.lowercased().contains("meaning"))!
+                    || (nodeLabel?.name?.lowercased().contains("action"))! {
                     nodeLabel?.fontColor = fontColor
                 }
             }
@@ -336,10 +343,10 @@ class AppTheme {
             changeSceneElements(view: view, mode: Mode.nightMode.rawValue + "/", fontColor: fontColor)
             break
         case Mode.pastel:
-            changeSceneElements(view: view, mode: "", fontColor: fontColor)
+            changeSceneElements(view: view, mode: Mode.pastel.rawValue + "/", fontColor: fontColor)
             break
         case Mode.normal:
-            changeSceneElements(view: view, mode: "", fontColor: fontColor)
+            changeSceneElements(view: view, mode: Mode.normal.rawValue + "/", fontColor: fontColor)
             break
         }
     }

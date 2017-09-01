@@ -32,6 +32,9 @@ enum StoryboardName : String {
 // MARK:- Defines
 let debugInfo = false
 
+// "Helvetica Bold" or "Arial"
+let fontName = "Helvetica"
+
 let defaultTileWidth: CGFloat = 42
 let defaultTileHeight: CGFloat = 42
 let defaultTileInnerWidth: CGFloat = 40.0

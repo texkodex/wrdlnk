@@ -48,6 +48,8 @@ func fullTextureName(_ textureName: String) -> String {
         return Mode.colorBlind.rawValue + "/" + textureName
     case Mode.nightMode:
         return Mode.nightMode.rawValue + "/" + textureName
+    case Mode.pastel:
+        return Mode.pastel.rawValue + "/" + textureName
     default:
         return textureName
     }

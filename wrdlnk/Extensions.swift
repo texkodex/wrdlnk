@@ -718,6 +718,35 @@ extension SKTileMapNode {
         return label
     }
     
+    func fillColor() -> UIColor? {
+        switch currentMode() {
+            case Mode.colorBlind:
+                return .lightGray
+            default:
+                return redTile
+        }
+    }
+    
+    func strokeColor() -> UIColor? {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return .darkGray
+        case Mode.pastel:
+            return redTile
+        default:
+            return AppTheme.instance.fontColor()
+        }
+    }
+    
+    func arrowColor() -> UIColor? {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return .darkGray
+        default:
+            return greenTile
+        }
+    }
+
     func graphLine(index: Int, last: Int, accuracy: Float, percentage: Float, phrase: String?) -> SKShapeNode {
         let shape = SKShapeNode()
         let rowWidth = self.frame.width / CGFloat(numberOfColumns) * 2
@@ -729,15 +758,15 @@ extension SKTileMapNode {
         let yHeight = maxHeight * CGFloat(accuracy)
         let cornerRadius = CGFloat(0)
         
-        let fillColor = redTile
-        let fillStroke = redTile
+        let fillColor = self.fillColor()
+        let fillStroke = self.strokeColor()
         let lineWidth = CGFloat(2)
         
         shape.path = UIBezierPath(roundedRect: CGRect(x: xPos, y: yPos, width: xWidth, height: yHeight),
                                   cornerRadius: cornerRadius).cgPath
         shape.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
-        shape.fillColor = fillColor
-        shape.strokeColor = fillStroke
+        shape.fillColor = fillColor!
+        shape.strokeColor = fillStroke!
         shape.lineWidth = lineWidth
         let label = graphText(name: "label_\(index)", text: "\(Int(percentage))%", position: CGPoint(x: xPos + rowWidth / 7, y: yPos - 14))
         shape.addChild(label)
@@ -761,7 +790,7 @@ extension SKTileMapNode {
                       CGPoint(x: xPos + 1 + rowWidth / 8, y: self.frame.maxY + rowHeight * 1.5)]
         let arrowShapeNode = SKShapeNode(points: &points,
                                          count: points.count)
-        arrowShapeNode.strokeColor = greenTile
+        arrowShapeNode.strokeColor = self.arrowColor()!
         arrowShapeNode.lineWidth = lineWidth * 2
         
         return arrowShapeNode

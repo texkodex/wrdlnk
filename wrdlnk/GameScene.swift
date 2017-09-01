@@ -189,6 +189,7 @@ class GameScene: BaseScene {
         awardMessageList.append(keyPlayNotificationDictionary["message_yeah"]!)
         awardMessageList.append(keyPlayNotificationDictionary["message_award"]!)
 
+        completedMessageList.append(keyPlayNotificationDictionary["message_yeah"]!)
         completedMessageList.append(keyPlayNotificationDictionary["message_goodwork"]!)
         completedMessageList.append(keyPlayNotificationDictionary["message_super"]!)
         completedMessageList.append(keyPlayNotificationDictionary["message_amazing"]!)

@@ -130,22 +130,6 @@
       "idiom" : "ipad",
       "size" : "83.5x83.5",
       "scale" : "2x"
-    },
-    {
-      "filename" : "apple-icon-152x152@2x.png",
-      "unassigned" : true
-    },
-    {
-      "filename" : "apple-icon-152x152@3x.png",
-      "unassigned" : true
-    },
-    {
-      "filename" : "apple-icon-180x180@2x.png",
-      "unassigned" : true
-    },
-    {
-      "filename" : "apple-icon-180x180@3x.png",
-      "unassigned" : true
     }
   ],
   "info" : {

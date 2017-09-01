@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AE39F6A71EE10AC300D362C1 /* GameStatusScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE39F6A61EE10AC300D362C1 /* GameStatusScene.swift */; };
 		AE39F6A91EE10C6B00D362C1 /* GameStatusScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AE39F6A81EE10C6B00D362C1 /* GameStatusScene.sks */; };
+		CC08CF071F59B47300638DDB /* WordGroupDataFront.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC08CF061F59B47300638DDB /* WordGroupDataFront.swift */; };
+		CC08CF091F59B63400638DDB /* WordGroupDataBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC08CF081F59B63400638DDB /* WordGroupDataBack.swift */; };
 		CC1148EA1F3841FC00F64550 /* WalkThroughLastPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1148E91F3841FC00F64550 /* WalkThroughLastPageViewController.swift */; };
 		CC1148EC1F393E7100F64550 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC1148EB1F393E7100F64550 /* Onboarding.storyboard */; };
 		CC1148EE1F394D8500F64550 /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1148ED1F394D8500F64550 /* AppViewController.swift */; };
@@ -88,6 +90,8 @@
 /* Begin PBXFileReference section */
 		AE39F6A61EE10AC300D362C1 /* GameStatusScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStatusScene.swift; sourceTree = "<group>"; };
 		AE39F6A81EE10C6B00D362C1 /* GameStatusScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStatusScene.sks; sourceTree = "<group>"; };
+		CC08CF061F59B47300638DDB /* WordGroupDataFront.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordGroupDataFront.swift; sourceTree = "<group>"; };
+		CC08CF081F59B63400638DDB /* WordGroupDataBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordGroupDataBack.swift; sourceTree = "<group>"; };
 		CC1148E91F3841FC00F64550 /* WalkThroughLastPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkThroughLastPageViewController.swift; sourceTree = "<group>"; };
 		CC1148EB1F393E7100F64550 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		CC1148ED1F394D8500F64550 /* AppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
@@ -380,6 +384,8 @@
 				CC8BE4221EF22F0E00CDB4BB /* DataExchange.swift */,
 				CC7202C11F1D5D7D003394A0 /* DataStore.swift */,
 				CC95FA001F41D95B00E55483 /* WordGroup.swift */,
+				CC08CF061F59B47300638DDB /* WordGroupDataFront.swift */,
+				CC08CF081F59B63400638DDB /* WordGroupDataBack.swift */,
 				CC4F90D01F51E9FE001BB049 /* Utility.swift */,
 			);
 			name = Helpers;
@@ -557,6 +563,7 @@
 				CCDEA3D41F36BEFD0046C82D /* WalkThroughOneViewController.swift in Sources */,
 				CC8BE4171EEB494900CDB4BB /* BaseScene+Buttons.swift in Sources */,
 				CCAD361D1EE0CAE3001C6AFE /* GameScene.swift in Sources */,
+				CC08CF071F59B47300638DDB /* WordGroupDataFront.swift in Sources */,
 				CCAD361F1EE0CAE3001C6AFE /* GameViewController.swift in Sources */,
 				CC7202C21F1D5D7D003394A0 /* DataStore.swift in Sources */,
 				CCDEA3E01F37A8690046C82D /* WalkThroughPageViewController.swift in Sources */,
@@ -564,6 +571,7 @@
 				CCDC23731F200E3700371F1F /* MenuScene.swift in Sources */,
 				CC1C64CE1F46B92400A9E5C8 /* AppTheme.swift in Sources */,
 				CC8BE4191EEB4AA600CDB4BB /* BaseScene+Focus.swift in Sources */,
+				CC08CF091F59B63400638DDB /* WordGroupDataBack.swift in Sources */,
 				CCDEA3D61F36BF1C0046C82D /* WalkThroughTwoViewController.swift in Sources */,
 				CC7911C31F55A408009E7B4A /* TileView.swift in Sources */,
 				CC1148EA1F3841FC00F64550 /* WalkThroughLastPageViewController.swift in Sources */,

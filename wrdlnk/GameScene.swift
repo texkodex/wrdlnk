@@ -183,13 +183,14 @@ class GameScene: BaseScene {
         notificationMessageList.append(keyPlayNotificationDictionary["message_super"]!)
         notificationMessageList.append(keyPlayNotificationDictionary["message_goodwork"]!)
         notificationMessageList.append(keyPlayNotificationDictionary["message_fabulous"]!)
-        notificationMessageList.append(keyPlayNotificationDictionary["message_smashing"]!)
 
         awardMessageList.append(keyPlayNotificationDictionary["message_amazing"]!)
         awardMessageList.append(keyPlayNotificationDictionary["message_topnotch"]!)
         awardMessageList.append(keyPlayNotificationDictionary["message_yeah"]!)
         awardMessageList.append(keyPlayNotificationDictionary["message_award"]!)
 
+        completedMessageList.append(keyPlayNotificationDictionary["message_goodwork"]!)
+        completedMessageList.append(keyPlayNotificationDictionary["message_super"]!)
         completedMessageList.append(keyPlayNotificationDictionary["message_amazing"]!)
         completedMessageList.append(keyPlayNotificationDictionary["message_topnotch"]!)
         completedMessageList.append(keyPlayNotificationDictionary["message_fantastic"]!)
@@ -496,7 +497,7 @@ class GameScene: BaseScene {
             enableGraphDisplay()
             readyForInit()
             
-            playTextAnimated(text: completedMessage())
+            playTextAnimated(fileName: completedMessage())
             delay(2.0) {
                 self.stopAudio(delay: 0.2)
                 self.transitionReloadScene(scene: self)
@@ -504,7 +505,7 @@ class GameScene: BaseScene {
             return
         } else {
             playSoundForEvent(soundEvent: .yes)
-            //playTextAnimated(text: playNotificationMessage())
+            //playTextAnimated(fileName: playNotificationMessage())
         }
     }
     
@@ -556,25 +557,50 @@ class GameScene: BaseScene {
     }
     
     // MARK:- play progress text
-    func playTextAnimated(text: String?) {
-        guard (text != nil) else { return }
-        let backgroundNode = self.childNode(withName: backgroundNodePath)!
-        let textLabel = SKLabelNode(fontNamed: "Chalkduster")
-        textLabel.zPosition = 10
-        textLabel.position = CGPoint(x: backgroundNode.frame.midX - (2 * tileWidth), y: max(backgroundNode.frame.midY * (7 * tileHeight), backgroundNode.frame.maxY - tileHeight))
-        textLabel.text = text
-        textLabel.fontColor = AppTheme.instance.fontColor()
-        self.addChild(textLabel)
-        let moveText = SKAction.move(to: CGPoint(x: backgroundNode.frame.midX + (2 * tileWidth), y: backgroundNode.frame.minY + tileHeight), duration: 1.0)
-        let fadeAway = SKAction.fadeOut(withDuration: 0.9)
+    func playTextAnimated(fileName: String?) {
+        guard (fileName != nil) else { return }
+        
+        var positionScale:CGFloat!
+        var spriteScale: CGFloat!
+        var groupAction:[SKAction] = []
+        let texture = SKTexture(imageNamed: fileName!)
+        let messageNode = SKSpriteNode(texture: texture, size:CGSize(width: texture.size().width, height: texture.size().height))
+        
+        if UIDevice.isiPad {
+            positionScale = 1.3
+            spriteScale = 1.5
+            messageNode.scale(to: CGSize(width: texture.size().width * spriteScale,
+                                         height: texture.size().height * spriteScale))
+            groupAction = [.scale(to: spriteScale, duration: 0.3)]
+        } else {
+            positionScale = 0.9
+            spriteScale = 1.0
+            groupAction = [.scale(to: spriteScale, duration: 0.3)]
+        }
+        
+        let bgframe = self.childNode(withName: backgroundNodePath)!.frame
+        let moveToArray = [CGPoint(x: bgframe.midX + (2 * tileWidth), y: bgframe.minY * positionScale),
+                         CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.minY * positionScale),
+                         CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.minY * positionScale) ]
+        
+        let moveFromArray = [CGPoint(x: bgframe.midX + (2 * tileWidth), y: max(bgframe.midY + (7 * tileHeight), bgframe.maxY - tileHeight)),
+                           CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.maxY * positionScale),
+                           CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.maxY * positionScale) ]
+        let fromPos = moveFromArray[random(3)]
+        let toPos = moveToArray[random(3)]
+        messageNode.position = fromPos
+        
+        self.addChild(messageNode)
+        let moveText = SKAction.move(to: toPos, duration: 0.9)
+        let fadeAway = SKAction.fadeOut(withDuration: 1.3)
         let removeNode = SKAction.removeFromParent()
-        let sequence = SKAction.sequence([.group([.scale(to: 1.5, duration: 0.6),
-                                                  .scale(to: 1, duration: 0.6)]),
+        
+        let sequence = SKAction.sequence([.group(groupAction),
                                           .rotate(byAngle: .pi * 2, duration: 0.6),
                                           moveText,
                                           fadeAway,
                                           removeNode])
-        textLabel.run(sequence)
+        messageNode.run(sequence)
     }
 }
 

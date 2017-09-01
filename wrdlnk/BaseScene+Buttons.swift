@@ -58,8 +58,13 @@ extension BaseScene: ButtonNodeResponderType {
             case .continueGame:
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self)
             break
-            case .startNewGame:
+            case .actionYesSwitch:
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self, startNewGame: true)
+            break
+            case .startNewGame:
+                transitionToScene(destination: SceneType.Overlay, sendingScene: self)
+            case .actionNoSwitch:
+                transitionToScene(destination: SceneType.MainMenu, sendingScene: self)
             break
             case .gameAward:
             transitionToScene(destination: SceneType.GameAward, sendingScene: self)
@@ -71,9 +76,8 @@ extension BaseScene: ButtonNodeResponderType {
                 transitionToScene(destination: SceneType.InAppPurchase, sendingScene: self)
             break
             case .instructions:
-            transitionToScene(destination: SceneType.Instructions, sendingScene: self)
+                transitionToScene(destination: SceneType.Instructions, sendingScene: self)
             break
-
         default:
             return
         }

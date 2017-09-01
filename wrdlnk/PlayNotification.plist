@@ -4,29 +4,23 @@
 <array>
 	<dict>
 		<key>message_great</key>
-		<string>GREAT!</string>
+		<string>message_great.png</string>
 		<key>message_topnotch</key>
-		<string>TOPNOTCH</string>
+		<string>message_topnotch.png</string>
 		<key>message_fantastic</key>
-		<string>FANTASTIC!</string>
-		<key>message_groovy</key>
-		<string>GROOVY</string>
-		<key>message_peachy!</key>
-		<string>PEACHY!</string>
+		<string>message_fantastic.png</string>
 		<key>message_fabulous</key>
-		<string>FABULOUS</string>
+		<string>message_fabulous.png</string>
 		<key>message_amazing</key>
-		<string>AMAZING</string>
+		<string>message_amazing.png</string>
 		<key>message_super</key>
-		<string>SUPER!</string>
+		<string>message_super.png</string>
 		<key>message_goodwork</key>
-		<string>GOOD WORK!</string>
-		<key>message_smashing</key>
-		<string>SMASHING</string>
+		<string>message_goodwork.png</string>
 		<key>message_yeah</key>
-		<string>YEAH!</string>
+		<string>message_yeah.png</string>
 		<key>message_award</key>
-		<string>AWARD!</string>
+		<string>message_award.png</string>
 	</dict>
 </array>
 </plist>

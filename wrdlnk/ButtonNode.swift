@@ -41,6 +41,9 @@ enum ButtonIdentifier: String {
     case gameAward = "GameAward"
     case awardDetail = "AwardDetail"
     
+    case actionYesSwitch = "ActionYesSwitch"
+    case actionNoSwitch = "ActionNoSwitch"
+    
     static let allButtonIdentifiers: [ButtonIdentifier]
         = [ .titleImage,
             .proceedToNextScene,    .provideMeaning,
@@ -56,19 +59,11 @@ enum ButtonIdentifier: String {
             .purchaseOneSwitch,     .purchaseTwoSwitch,     .purchaseThreeSwitch,
             
             .gameAward,
-            .awardDetail
+            .awardDetail,
+            
+            .actionYesSwitch,       .actionNoSwitch
     ]
     
-    func fullTextureName(_ textureName: String) -> String {
-        switch currentMode() {
-        case Mode.colorBlind:
-            return Mode.colorBlind.rawValue + "/" + textureName
-        case Mode.nightMode:
-            return Mode.nightMode.rawValue + "/" + textureName
-        default:
-            return textureName
-        }
-    }
     
     var selectedTextureName: String? {
         switch self {
@@ -120,6 +115,10 @@ enum ButtonIdentifier: String {
             return fullTextureName("soundOn")
         case .awardDetail:
             return fullTextureName("scoreOn")
+        case .actionYesSwitch:
+            return fullTextureName("enterOn")
+        case .actionNoSwitch:
+            return fullTextureName("exitOn")
         }
     }
     
@@ -173,6 +172,10 @@ enum ButtonIdentifier: String {
             return fullTextureName("scoreOff")
         case .awardDetail:
             return fullTextureName("scoreOff")
+        case .actionYesSwitch:
+            return fullTextureName("enterOff")
+        case .actionNoSwitch:
+            return fullTextureName("exitOn")
         }
     }
 

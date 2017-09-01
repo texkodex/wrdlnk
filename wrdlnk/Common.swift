@@ -29,7 +29,7 @@ let kRippleMagnitudeMultiplier: CGFloat = 0.025
 public extension UIColor {
     public class func splashPrimaryColor()->UIColor {
         struct C {
-            static var c : UIColor = UIColor(red: 252/255, green: 13/255, blue: 27/255, alpha: 0.3)
+            static var c : UIColor = UIColor(red: 251/255, green: 231/255, blue: 230/255, alpha: 1.0)
         }
         return C.c
     }
@@ -39,5 +39,16 @@ public extension UIColor {
             static var c : UIColor = UIColor(red: 252/255, green: 13/255, blue: 27/255, alpha: 0.1)
         }
         return C.c
+    }
+}
+
+func fullTextureName(_ textureName: String) -> String {
+    switch currentMode() {
+    case Mode.colorBlind:
+        return Mode.colorBlind.rawValue + "/" + textureName
+    case Mode.nightMode:
+        return Mode.nightMode.rawValue + "/" + textureName
+    default:
+        return textureName
     }
 }

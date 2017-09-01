@@ -48,6 +48,8 @@ extension BaseScene {
             .purchaseOneSwitch,
             .purchaseTwoSwitch,
             .purchaseThreeSwitch,
+            .actionYesSwitch,
+            .actionNoSwitch,
             .gameAward,
             .awardDetail,
             .instructions,

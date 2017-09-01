@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "wireIcon.png",
+      "filename" : "message_super.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "wireIcon@2x.png",
+      "filename" : "message_super@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "wireIcon@3x.png",
+      "filename" : "message_super@3x.png",
       "scale" : "3x"
     }
   ],

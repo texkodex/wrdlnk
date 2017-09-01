@@ -11,7 +11,7 @@ import UIKit
 open class SplashViewController: UIViewController {
     open var pulsing: Bool = false
     
-    let animatedULogoView: AnimatedULogoView = AnimatedULogoView(frame: CGRect(x: 0.0, y: 0.0, width: 90.0, height: 90.0))
+    let animatedULogoView: AnimatedULogoView = AnimatedULogoView(frame: CGRect(x: 0.0, y: 0.0, width: 110.0, height: 64.0))
     var tileGridView: TileGridView!
     
     public init(tileViewFileName: String) {

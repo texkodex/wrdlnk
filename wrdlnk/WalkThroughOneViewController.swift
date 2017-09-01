@@ -46,7 +46,7 @@ class WalkThroughOneViewController: UIViewController {
         self.contentPlist = NSArray(contentsOfFile:path!) as! [[String:String]]
         
         self.keyViewDictionary = self.contentPlist[0]
-        self.imageFileName = self.keyViewDictionary["page_icon1"]!
+        self.imageFileName = fullTextureName(self.keyViewDictionary["page_icon1"]!)
         walkthroughImage.image = UIImage(named:self.imageFileName)
         self.mainTitleLabel.text = (self.keyViewDictionary["main_title_text"]!)
         self.infoImageFileName = self.keyViewDictionary["info_image_filename"]!
@@ -59,26 +59,6 @@ class WalkThroughOneViewController: UIViewController {
         
         AppTheme.instance.set(for: self.view)
     }
-    
-    /*
-     alignAllLeft
-     
-     alignAllRight
-     
-     alignAllTop
-     
-     alignAllBottom
-     
-     alignAllLeading
-     
-     alignAllTrailing
-     
-     alignAllCenterX
-     
-     alignAllCenterY
-     
-     alignAllLastBaseline
-     */
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -107,17 +87,17 @@ class WalkThroughOneViewController: UIViewController {
         
         let margins = view.layoutMarginsGuide
         
-        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(-4)-[walkthroughImage(==76)]", options: [], metrics: nil, views: viewBindingsDict)
+        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(-4)-[walkthroughImage(>=76)]", options: [], metrics: nil, views: viewBindingsDict)
             walkthroughImage.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
         backgroundView.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
-       constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-80-[backgroundView(>=542@20)]-40-|", options: [], metrics: nil, views: viewBindingsDict))
+       constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[walkthroughImage(>=76)]-[backgroundView(>=542@20)]-40-|", options: [], metrics: nil, views: viewBindingsDict))
         
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-16-[backgroundView(>=340@20)]-16-|", options: [.alignAllCenterX], metrics: nil, views: viewBindingsDict))
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-16-[backgroundView(>=305@20)]-16-|", options: [.alignAllCenterX], metrics: nil, views: viewBindingsDict))
         mainTitleLabel.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
 
         infoImage.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
 
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[walkthroughImage(==76)]-20-[mainTitleLabel]-[infoImage]-[firstSubTitleLabel]-2-[secondSubTitleLabel]", options: [], metrics: nil, views: viewBindingsDict))
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[walkthroughImage(>=76)]-30-[mainTitleLabel]-20-[infoImage]-[firstSubTitleLabel]-2-[secondSubTitleLabel]", options: [], metrics: nil, views: viewBindingsDict))
         
         constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[firstSubTitleLabel]-32-|", options: [], metrics: nil, views: viewBindingsDict))
         constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[secondSubTitleLabel]-32-|", options: [], metrics: nil, views: viewBindingsDict))

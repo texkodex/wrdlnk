@@ -19,39 +19,9 @@ enum SceneType {
     case InAppPurchase
     case GameAward
     case Instructions
+    case Overlay
 }
-/*
- fileprivate var rootViewController: UIViewController? = nil
- 
- override func viewDidLoad() {
- super.viewDidLoad()
- runSplashScreen()
- 
- }
- 
- func runSplashScreenViewController() {
- if rootViewController is SplashViewController {
- return
- }
- 
- rootViewController?.willMove(toParentViewController: nil)
- rootViewController?.removeFromParentViewController()
- rootViewController?.view.removeFromSuperview()
- rootViewController?.didMove(toParentViewController: nil)
- 
- let splashViewController = SplashViewController(tileViewFileName: "wireIcon")
- rootViewController = splashViewController
- splashViewController.pulsing = true
- 
- splashViewController.willMove(toParentViewController: self)
- addChildViewController(splashViewController)
- view.addSubview(splashViewController.view)
- splashViewController.didMove(toParentViewController: self)
- }
 
- 
- 
- */
 extension UIViewController {
     var className: String {
         return NSStringFromClass(self.classForCoder).components(separatedBy: ".").last!;
@@ -76,9 +46,9 @@ extension UIViewController {
         } else if platform.contains("iPad Pro") || UIDevice.isiPadPro97 {
             infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:350, height: 623))
         } else if platform.contains("iPad Air 2") || UIDevice.isiPad {
-            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:350, height: 623))
+            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:305, height: 542))
         } else if platform.contains("iPad Air")  || UIDevice.isiPad {
-            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:350, height: 623))
+            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:305, height: 542))
         }
         else if platform.contains("iPhone SE") || UIDevice.isiPhone5 {
             infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:90, height: 160))
@@ -86,6 +56,27 @@ extension UIViewController {
             infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:150, height: 267))
         }
         return infoImage
+    }
+}
+
+extension UIView {
+    func resizeView()-> CGAffineTransform {
+        var transform: CGAffineTransform!
+        let platform = getPlatformNameString()
+        if platform.contains("iPad Pro (12.9)") || UIDevice.isiPadPro129 {
+            transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+        } else if UIDevice.isiPad {
+            transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        }
+        else if platform.contains("iPhone SE") || UIDevice.isiPhone5 {
+            // resize x and y to 0.8
+            transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            
+        } else {
+            // no resize needed
+            transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
+        return transform
     }
 }
 
@@ -124,6 +115,24 @@ extension GameScene {
         run(SKAction.repeatForever(sequence), withKey: "counter")
     }
     
+    func updateClock() {
+        var leadingZero = ""
+        var leadingZeroMin = ""
+        var timeMin = Int()
+        let actionwait = SKAction.wait(forDuration: 1.0)
+        var timesecond = Int()
+        let actionrun = SKAction.run({
+            timeMin += 1
+            timesecond += 1
+            if timesecond == 60 {timesecond = 0}
+            if timeMin  / 60 <= 9 { leadingZeroMin = "0" } else { leadingZeroMin = "" }
+            if timesecond <= 9 { leadingZero = "0" } else { leadingZero = "" }
+            
+            self.playerTimerLabel?.text = "Time [ \(leadingZeroMin)\(timeMin/60) : \(leadingZero)\(timesecond) ]"
+        })
+        self.playerTimerLabel?.run(SKAction.repeatForever(SKAction.sequence([actionwait,actionrun])))
+    }
+    
     private func countIndicator() {
         self.levelTime += 1
         self.playerTimerLabel?.text = timerString()
@@ -152,6 +161,14 @@ extension GameScene {
         }
         
         return 2
+    }
+}
+
+extension CGRect {
+    // e.g. view.frame = CGRect(x:0, y:0, width: 800, height: 400)
+    init(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+        
+        self.init(x:x, y:y, width:width, height:height)
     }
 }
 
@@ -205,6 +222,8 @@ extension SKScene {
                 instructionCntroller.launchFromStoryboard(name: StoryboardName.Onboarding.rawValue, controller: "WalkThroughPageViewController")
             }
             return
+        case .Overlay:
+            scene = OverlayScene(fileNamed: "OverlayScene")!
         }
  
         scene.size = (view?.bounds.size)!
@@ -395,6 +414,7 @@ extension ButtonNodeResponderType where Self: BaseScene {
             AppDefinition.defaults.set(false, forKey: preferencePastelEnabledKey)
         }
     }
+    
     func toggleStartNewGame(button: ButtonNode) {
         let state = AppDefinition.defaults.bool(forKey: preferenceStartGameEnabledKey)
         button.isSelected = !state
@@ -424,6 +444,25 @@ extension ButtonNodeResponderType where Self: BaseScene {
         button.isSelected = !state
         AppDefinition.defaults.set(button.isSelected, forKey: preferenceInAppPurchaseEnabledKey)
     }
+    
+    func toggleOverlayActionYes(button: ButtonNode) {
+        let state = AppDefinition.defaults.bool(forKey: preferenceOverlayActionYesKey)
+        button.isSelected = !state
+        AppDefinition.defaults.set(button.isSelected, forKey: preferenceOverlayActionYesKey)
+        if button.isSelected {
+            AppDefinition.defaults.set(false, forKey: preferenceOverlayActionNoKey)
+        }
+    }
+
+    func toggleOverlayActionNo(button: ButtonNode) {
+        let state = AppDefinition.defaults.bool(forKey: preferenceOverlayActionNoKey)
+        button.isSelected = !state
+        AppDefinition.defaults.set(button.isSelected, forKey: preferenceOverlayActionNoKey)
+        if button.isSelected {
+            AppDefinition.defaults.set(false, forKey: preferenceOverlayActionYesKey)
+        }
+    }
+
 }
 
 extension SKTileMapNode {

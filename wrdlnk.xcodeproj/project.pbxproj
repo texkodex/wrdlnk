@@ -62,6 +62,8 @@
 		CCDEA3D81F36BF450046C82D /* WalkThroughThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEA3D71F36BF450046C82D /* WalkThroughThreeViewController.swift */; };
 		CCDEA3DA1F36BFF40046C82D /* WalkThrough.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCDEA3D91F36BFF40046C82D /* WalkThrough.plist */; };
 		CCDEA3E01F37A8690046C82D /* WalkThroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEA3DF1F37A8690046C82D /* WalkThroughPageViewController.swift */; };
+		CCE627F71F574D650018BD1C /* OverlayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCE627F61F574D650018BD1C /* OverlayScene.sks */; };
+		CCE627F91F574D890018BD1C /* OverlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE627F81F574D890018BD1C /* OverlayScene.swift */; };
 		CCF8474C1EE9DC6D00468E0B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474B1EE9DC6D00468E0B /* Extensions.swift */; };
 		CCF8474E1EE9DD1600468E0B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474D1EE9DD1600468E0B /* Config.swift */; };
 /* End PBXBuildFile section */
@@ -145,6 +147,8 @@
 		CCDEA3D71F36BF450046C82D /* WalkThroughThreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkThroughThreeViewController.swift; sourceTree = "<group>"; };
 		CCDEA3D91F36BFF40046C82D /* WalkThrough.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WalkThrough.plist; sourceTree = "<group>"; };
 		CCDEA3DF1F37A8690046C82D /* WalkThroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkThroughPageViewController.swift; sourceTree = "<group>"; };
+		CCE627F61F574D650018BD1C /* OverlayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OverlayScene.sks; sourceTree = "<group>"; };
+		CCE627F81F574D890018BD1C /* OverlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayScene.swift; sourceTree = "<group>"; };
 		CCF8474B1EE9DC6D00468E0B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CCF8474D1EE9DD1600468E0B /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -339,6 +343,8 @@
 				CCDC23701F200DCE00371F1F /* MenuScene.sks */,
 				CCDC23721F200E3700371F1F /* MenuScene.swift */,
 				CC4F90CE1F51D637001BB049 /* PlayNotification.plist */,
+				CCE627F61F574D650018BD1C /* OverlayScene.sks */,
+				CCE627F81F574D890018BD1C /* OverlayScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -501,6 +507,7 @@
 				CCAD36221EE0CAE3001C6AFE /* Main.storyboard in Resources */,
 				CC95F9FD1F3A3EF300E55483 /* MainMenuScene.sks in Resources */,
 				CC7202B61F19740D003394A0 /* error.mp3 in Resources */,
+				CCE627F71F574D650018BD1C /* OverlayScene.sks in Resources */,
 				CCDEA3DA1F36BFF40046C82D /* WalkThrough.plist in Resources */,
 				CC1148EC1F393E7100F64550 /* Onboarding.storyboard in Resources */,
 				CC7202BE1F19745B003394A0 /* beepbeep.mp3 in Resources */,
@@ -545,6 +552,7 @@
 				CC8BE4151EEB47F700CDB4BB /* BaseScene.swift in Sources */,
 				CC1C64C51F44AE2800A9E5C8 /* IAPurchaseScene.swift in Sources */,
 				CC1148EE1F394D8500F64550 /* AppViewController.swift in Sources */,
+				CCE627F91F574D890018BD1C /* OverlayScene.swift in Sources */,
 				AE39F6A71EE10AC300D362C1 /* GameStatusScene.swift in Sources */,
 				CCDEA3D41F36BEFD0046C82D /* WalkThroughOneViewController.swift in Sources */,
 				CC8BE4171EEB494900CDB4BB /* BaseScene+Buttons.swift in Sources */,

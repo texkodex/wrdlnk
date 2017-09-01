@@ -100,6 +100,10 @@ let timeSpeedGoldMultiple = 1.1
 let timeSpeedSilverMultiple = 1.5
 let timeSpeedBronzeMultiple = 2.0
 
+let overlayNodePath = "//world/action"
+let overlayActionYesNodePath = "//world/action/proceedAction"
+let overlayActionNoNodePath = "//world/action/cancelAction"
+
 let commonDelaySetting = 0.5
 
 let focusRingName = "focusRing"
@@ -147,6 +151,10 @@ let preferenceAwardDescriptionInfoKey = "preference_award_description_info"
 let preferenceAccuracyLowerBoundDataKey = "preference_accuracy_lower_bound_data"
 let preferenceTimeLowerBoundDataKey = "preference_time_lower_bound_data"
 
+let preferenceMaxNumberOfDataPlaysKey = "preference_max_number_of_data_plays"
+
+let MaxNumberOfDataPlays = 4
+
 let preferenceAccuracyGoldCountKey = "preference_accuracy_gold_count"
 let preferenceAccuracySilverCountKey = "preference_accuracy_silver_count"
 let preferenceAccuracyBronzeCountKey = "preference_accuracy_bronze_count"
@@ -154,6 +162,10 @@ let preferenceAccuracyBronzeCountKey = "preference_accuracy_bronze_count"
 let preferenceTimeGoldCountKey = "preference_time_gold_count"
 let preferenceTimeSilverCountKey = "preference_time_silver_count"
 let preferenceTimeBronzeCountKey = "preference_time_bronze_count"
+
+let preferenceOverlayActionYesKey = "preference_overlay_action_yes"
+
+let preferenceOverlayActionNoKey = "preference_overlay_action_no"
 
 let minClickToSeeDefinition = 100
 
@@ -166,6 +178,9 @@ let yellowTile = UIColor(colorLiteralRed: 241 / 255, green: 224 / 255, blue: 95 
 let greenTileOld = UIColor(colorLiteralRed: 129 / 255, green: 209 / 255, blue: 53 / 255, alpha: 1)
 let greenTile = UIColor(colorLiteralRed: 182 / 255, green: 220 / 255, blue: 138 / 255, alpha: 1)
 let redTile = UIColor(colorLiteralRed: 252 / 255, green: 13 / 255, blue: 27 / 255, alpha: 1)
+let pastelForegroundTile = UIColor(colorLiteralRed: 255 / 255, green: 217 / 255, blue: 170 / 255, alpha: 1)
+let pastelBackgroundTile = UIColor(colorLiteralRed: 252 / 255, green: 253 / 255, blue: 223 / 255, alpha: 1)
+let pastelFontColor = UIColor(colorLiteralRed: 98 / 255, green: 184 / 255, blue: 165 / 255, alpha: 1)
 
 // Mode colors
 let grayCanvas = UIColor(colorLiteralRed: 230 / 255, green: 230 / 255, blue: 230 / 255, alpha: 1)
@@ -232,8 +247,14 @@ enum ViewElement:String {
     case purchaseThree = "purchaseThree"
     case purchaseThreeSwitch = "PurchaseThreeSwitch"
     
-    
     case awardDetail = "awardDetail"
+    
+    case action = "action"
+    case proceedAction = "proceedAction"
+    case actionYesSwitch = "ActionYesSwitch"
+    case cancelAction = "cancelAction"
+    case actionNoSwitch = "ActionNoSwitch"
+    
     
     static let types = [ titleImage, main, board, control, buttons, footer,
                          meaning, change,
@@ -259,7 +280,12 @@ enum ViewElement:String {
                          purchaseOne,   purchaseOneSwitch,
                          purchaseTwo,   purchaseTwoSwitch,
                          purchaseThree,   purchaseThreeSwitch,
-                         awardDetail
+                         awardDetail,
+                         
+                         action,
+                         proceedAction, actionYesSwitch,
+                         cancelAction, actionNoSwitch,
+                         
                         ]
 }
 

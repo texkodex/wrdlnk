@@ -9,10 +9,10 @@ import UIKit
 import SpriteKit
 
 enum Color:Int {
-    case black = 0
-    case darkGray = 1
-    case lightGray = 2
-    case white = 3
+    case blackTile
+    case darkGrayTile
+    case lightGrayTile
+    case whiteTile
     case gray = 4
     case red = 5
     case green = 6
@@ -34,7 +34,7 @@ enum Color:Int {
     case pastelFontColor
 }
 
-let colorList: [UIColor] = [  .black, .darkGray, .lightGray, .white, .gray, .red, .green,
+let colorList: [UIColor] = [  blackTile, darkGrayTile, lightGrayTile, whiteTile, .gray, .red, .green,
                                 .blue, .cyan, .yellow, .magenta, .orange, .purple, .brown, .clear,
                                 blueTile, grayTile, greenTile, redTile, yellowTile, pastelForegroundTile, pastelBackgroundTile,
                                     pastelFontColor ]
@@ -181,19 +181,19 @@ class AppTheme {
     func set(for view: UIView, mode: Mode) {
         switch mode {
         case Mode.colorBlind:
-            setViewColor(for: view, tuple: (sceneColor: colorList[Color.black.rawValue],
-                                            backgroundColor: colorList[Color.lightGray.rawValue], fontColor: colorList[Color.white.rawValue], alpha: 1.0), mode: mode)
+            setViewColor(for: view, tuple: (sceneColor: blackTile,
+                                            backgroundColor: lightGrayTile, fontColor: whiteTile, alpha: 0.1), mode: mode)
             break
         case Mode.nightMode:
-            setViewColor(for: view, tuple: (sceneColor: colorList[Color.black.rawValue],
-                backgroundColor: colorList[Color.black.rawValue], fontColor: colorList[Color.orange.rawValue], alpha: 1.0), mode: mode)
+            setViewColor(for: view, tuple: (sceneColor: blackTile,
+                backgroundColor: grayTile, fontColor: colorList[Color.orange.rawValue], alpha: 0.3), mode: mode)
             break
         case Mode.pastel:
             setViewColor(for: view, tuple: (sceneColor: colorList[Color.pastelBackgroundTile.rawValue],
                 backgroundColor: colorList[Color.pastelForegroundTile.rawValue], fontColor: colorList[Color.pastelFontColor.rawValue], alpha: 1.0), mode: mode)
             break
         case Mode.normal:
-            setViewColor(for: view, tuple: (sceneColor: colorList[Color.white.rawValue],
+            setViewColor(for: view, tuple: (sceneColor: whiteTile,
                 backgroundColor: colorList[Color.red.rawValue], fontColor: colorList[Color.red.rawValue], alpha: 0.1), mode: mode)
             break
         }
@@ -230,13 +230,13 @@ class AppTheme {
         switch currentMode() {
         case Mode.colorBlind:
             changeNodes(view: view, mode: Mode.colorBlind,
-                        sceneColor: colorList[Color.black.rawValue],
-                        backgroundColor: colorList[Color.darkGray.rawValue], fontColor: colorList[Color.white.rawValue], alpha: 0.3)
+                        sceneColor: blackTile,
+                        backgroundColor: lightGrayTile, fontColor: whiteTile, alpha: 0.1)
             break
         case Mode.nightMode:
             changeNodes(view: view, mode: Mode.nightMode,
-                        sceneColor: colorList[Color.black.rawValue],
-                        backgroundColor: colorList[Color.gray.rawValue], fontColor: colorList[Color.orange.rawValue], alpha: 0.3)
+                        sceneColor: blackTile,
+                        backgroundColor: grayTile, fontColor: colorList[Color.orange.rawValue], alpha: 0.3)
             break
         case Mode.pastel:
             changeNodes(view: view, mode: Mode.pastel,
@@ -245,7 +245,7 @@ class AppTheme {
             break
         case Mode.normal:
             changeNodes(view: view, mode: Mode.normal,
-                        sceneColor: colorList[Color.white.rawValue],
+                        sceneColor: whiteTile,
                         backgroundColor: colorList[Color.red.rawValue], fontColor: colorList[Color.red.rawValue], alpha: 0.1)
             break
         }
@@ -254,26 +254,26 @@ class AppTheme {
     func fontColor() -> UIColor {
         switch currentMode() {
         case Mode.colorBlind:
-            return colorList[Color.white.rawValue]
+            return whiteTile
         case Mode.nightMode:
             return colorList[Color.orange.rawValue]
         case Mode.pastel:
             return colorList[Color.pastelFontColor.rawValue]
         case Mode.normal:
-            return colorList[Color.red.rawValue]
+            return redTile
         }
     }
     
     func backgroundColor() -> UIColor {
         switch currentMode() {
         case Mode.colorBlind:
-            return colorList[Color.darkGray.rawValue]
+            return darkGrayTile
         case Mode.nightMode:
-            return colorList[Color.gray.rawValue]
+            return grayTile
         case Mode.pastel:
             return colorList[Color.pastelBackgroundTile.rawValue]
         case Mode.normal:
-            return colorList[Color.white.rawValue]
+            return whiteTile
         }
     }
     

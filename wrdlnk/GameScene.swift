@@ -127,14 +127,19 @@ class GameScene: BaseScene {
     
     var levelTime:Int  {
         get {
+            UserDefaults().set(180, forKey: preferenceGameTimeKey)
             return UserDefaults().integer(forKey: preferenceGameTimeKey)
-        }
-        set {
-            UserDefaults().set(newValue, forKey: preferenceGameTimeKey)
         }
     }
 
-    var startTime:Int = 0
+    var startTime:Int  {
+        get {
+            return UserDefaults().integer(forKey: preferenceStartTimeKey)
+        }
+        set {
+            UserDefaults().set(newValue, forKey: preferenceStartTimeKey)
+        }
+    }
     
     struct initialize {
         static var doOnce: Bool = false
@@ -292,7 +297,7 @@ class GameScene: BaseScene {
             counters = params.nodeTile!.addWords(word: wordList.getWords()!)
             break
         case .buttons:
-            params.nodeTile?.setTileTexture(tileElement: TileElement(rawValue: "yellow_tile")!, buttonNode: true)
+            params.nodeTile?.setTileTexture(tileElement: TileElement(rawValue: "green_tile")!, buttonNode: true)
             params.nodeTile?.addButtonLetter()
             break
         case .control: break
@@ -302,13 +307,7 @@ class GameScene: BaseScene {
         }
         
     }
-        
-//    func tileColor(node: SKTileMapNode) {
-//        node.getTileColor(completionClosure: { (row, col, color) in
-//            print("color: \(color) at row: \(row) col: \(col)")
-//        })
-//    }
-    
+            
     func update(_ currentTime: TimeInterval, for scene: SKScene) {
         
     }
@@ -491,7 +490,7 @@ class GameScene: BaseScene {
     func checkForAllMatches() {
         playerScore += matchLetterValue
         if counters.matchComplete() {
-            playerScore += bonusPoints()
+            if (startTime > 0) { playerScore += bonusPoints() }
             playSoundForEvent(soundEvent: .great)
             wordList.setMatchCondition()
             progressSummary()
@@ -502,6 +501,7 @@ class GameScene: BaseScene {
             delay(2.0) {
                 self.stopAudio(delay: 0.2)
                 self.transitionReloadScene(scene: self)
+                //UserDefaults().set(self.levelTime, forKey: preferenceStartTimeKey)
             }
             return
         } else {
@@ -555,6 +555,8 @@ class GameScene: BaseScene {
         } else {
             playerTimerLabel?.isHidden = true
         }
+        
+        startTime = UserDefaults().integer(forKey: preferenceStartTimeKey)
     }
     
     // MARK:- play progress text

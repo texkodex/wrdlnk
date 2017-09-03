@@ -32,8 +32,8 @@ enum StoryboardName : String {
 // MARK:- Defines
 let debugInfo = false
 
-// "Helvetica Bold" or "Arial"
-let fontName = "Helvetica"
+// "Helvetica" or "Arial"
+let fontName = "San Francisco"
 
 let defaultTileWidth: CGFloat = 42
 let defaultTileHeight: CGFloat = 42
@@ -141,6 +141,7 @@ let preferenceCurrentScoreKey = "preference_current_score"
 let preferenceHighScoreKey = "preference_high_score"
 
 let preferenceGameTimeKey = "preference_game_time"
+let preferenceStartTimeKey = "preference_start_time"
 
 let preferenceRemoteDataSiteKey = "preference_remote_data_site"
 
@@ -175,7 +176,11 @@ let minClickToSeeDefinition = 100
 let matchLetterValue = 2
 let maxMatchingTimeSec = 180
 
-let grayTile = UIColor(colorLiteralRed: 192 / 255, green: 192 / 255, blue: 192 / 255, alpha: 1)
+let whiteTile = UIColor(colorLiteralRed: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
+let blackTile = UIColor(colorLiteralRed: 0 / 0, green: 0 / 255, blue: 0 / 255, alpha: 1)
+let darkGrayTile = UIColor(colorLiteralRed: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.333)
+let lightGrayTile = UIColor(colorLiteralRed: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.667)
+let grayTile = UIColor(colorLiteralRed: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.5)
 let blueTile = UIColor(colorLiteralRed: 77 / 255, green: 146 / 255, blue: 223 / 255, alpha: 1)
 let yellowTile = UIColor(colorLiteralRed: 241 / 255, green: 224 / 255, blue: 95 / 255, alpha: 1)
 let greenTileOld = UIColor(colorLiteralRed: 129 / 255, green: 209 / 255, blue: 53 / 255, alpha: 1)
@@ -313,7 +318,7 @@ enum VowelCharacter: Character {
     static let types = [A, E, I, O, U, Y]
 }
 
-let TileColor = [grayTile, blueTile, yellowTile, greenTile, redTile]
+let TileColor = [ whiteTile, blackTile, darkGrayTile, lightGrayTile, grayTile, blueTile, yellowTile, greenTile, redTile]
 
 // TileMap cell (0,0) in lower left hand corner
 enum VowelRow: Int {

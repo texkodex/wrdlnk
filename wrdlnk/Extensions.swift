@@ -80,31 +80,35 @@ extension UIView {
     }
 }
 
-extension GameScene {
-    func countTime() {
-        self.startTime = self.levelTime
-        let wait = SKAction.wait(forDuration: 1.0) //change countdown speed here
-        let block = SKAction.run({
-            [unowned self] in
-            
-            if self.levelTime >= 0 {
-                self.countIndicator()
-            } else{
-                self.removeAction(forKey: "counter")
-            }
-        })
-        let sequence = SKAction.sequence([wait, block])
-        
-        run(SKAction.repeatForever(sequence), withKey: "counter")
+extension UIFont {
+    
+    var monospacedDigitFont: UIFont {
+        let oldFontDescriptor = fontDescriptor
+        let newFontDescriptor = oldFontDescriptor.monospacedDigitFontDescriptor
+        return UIFont(descriptor: newFontDescriptor, size: 0)
     }
     
-    func countTime2() {
-        self.startTime = self.levelTime
+}
+
+private extension UIFontDescriptor {
+    
+    var monospacedDigitFontDescriptor: UIFontDescriptor {
+        let fontDescriptorFeatureSettings = [[UIFontFeatureTypeIdentifierKey: kNumberSpacingType, UIFontFeatureSelectorIdentifierKey: kMonospacedNumbersSelector]]
+        let fontDescriptorAttributes = [UIFontDescriptorFeatureSettingsAttribute: fontDescriptorFeatureSettings]
+        let fontDescriptor = self.addingAttributes(fontDescriptorAttributes)
+        return fontDescriptor
+    }
+    
+}
+
+extension GameScene {
+    func countTime() {
+ //       self.startTime = self.levelTime
         let wait = SKAction.wait(forDuration: 1.0) //change countdown speed here
         let block = SKAction.run({
             [unowned self] in
             
-            if self.levelTime >= 0 {
+            if self.startTime > 0 {
                 self.countIndicator()
             } else{
                 self.removeAction(forKey: "counter")
@@ -134,7 +138,7 @@ extension GameScene {
     }
     
     private func countIndicator() {
-        self.levelTime += 1
+        if  self.startTime > 0 { self.startTime -= 1 }
         self.playerTimerLabel?.text = timerString()
         if ((self.playerTimerLabel?.alpha)! < CGFloat(1.0)) {
             self.playerTimerLabel?.alpha = 1
@@ -142,7 +146,10 @@ extension GameScene {
     }
     
     func timerString() -> String? {
-        return String(format: "[ %02d:%02d ]", ((lround(Double(self.levelTime)) / 60) % 60), lround(Double(self.levelTime)) % 60)
+        let timeString = String(format: ". %02d:%02d .", ((lround(Double(self.startTime)) / 60) % 60), lround(Double(self.startTime)) % 60)
+        
+        return timeString
+        
     }
     
     func bonusPoints() -> Int {
@@ -566,13 +573,54 @@ extension SKTileMapNode {
         return 0
     }
     
+    func tileColor(name: String = "board", vowel: Bool = false) -> UIColor {
+        let mode = currentMode()
+        if name == "board" {
+            switch mode {
+            case Mode.colorBlind:
+                return vowel ? lightGrayTile
+                            : darkGrayTile
+            default:
+                return vowel ? greenTile : blueTile
+            }
+        } else {
+            switch mode {
+            case Mode.colorBlind:
+                return lightGrayTile
+            default:
+                return greenTile
+            }
+        }
+    }
+    
+    func tileFontColor(name: String = "board", vowel: Bool = false) -> UIColor {
+        let mode = currentMode()
+        if name == "board" {
+            switch mode {
+            case Mode.colorBlind:
+                return vowel ? UIColor.white
+                    : lightGrayTile
+            default:
+                return vowel ? UIColor.red : UIColor.white
+            }
+        } else {
+            switch mode {
+            case Mode.colorBlind:
+                return UIColor.white
+            default:
+                return UIColor.red
+            }
+        }
+    }
+    
     // To place words in center of screen
     func placeWord(word: String, row: Int, adjust: Bool = false) {
         for (rawIndex, letter) in word.characters.enumerated() {
             let index = rawIndex + offsetInRow(word: word, adjust: adjust)
             let tileNode = self.childNode(withName: nodeName(node: self, col: index, row: row)) as! SKSpriteNode
-            tileNode.color = VowelCharacter(rawValue: letter)?.rawValue == letter ? greenTile : blueTile
-            if tileNode.color == greenTile {
+            let condition = VowelCharacter(rawValue: letter)?.rawValue == letter
+            tileNode.color = tileColor(vowel: condition)
+            if condition && (tileNode.color == greenTile || tileNode.color == lightGrayTile) {
                 tileNode.userData = [tileUserDataClickName : true]
             }
             tileNode.alpha = CGFloat(1.0)
@@ -580,7 +628,7 @@ extension SKTileMapNode {
             let label = SKLabelNode(fontNamed: fontName)
             label.text = "\(letter)"
             label.name = String(format:letterNodeColRow, index, row)
-            label.fontColor = VowelCharacter(rawValue: letter)?.rawValue == letter ? UIColor.red : UIColor.white
+            label.fontColor = tileFontColor(vowel: condition)
             label.alpha = VowelCharacter(rawValue: letter)?.rawValue == letter ? CGFloat(0.0) : CGFloat(1.0)
             label.fontSize = 20
             label.horizontalAlignmentMode = .center
@@ -665,14 +713,16 @@ extension SKTileMapNode {
         for index in 0..<VowelCharacter.types.count {
             let tileNode = self.childNode(withName: nodeName(node: self, col: index, row: row)) as! SKSpriteNode
             tileNode.alpha = CGFloat(1.0)
-            tileNode.color = greenTile
-            tileNode.userData = [tileUserDataClickName : true]
+            tileNode.color = tileColor(name: "button", vowel: true)
+            if (tileNode.color == greenTile || tileNode.color == lightGrayTile) {
+                tileNode.userData = [tileUserDataClickName : true]
+            }
             tileNode.removeAllChildren()
             tileNode.size = CGSize(width: CGFloat(defaultTileInnerWidth), height: CGFloat(defaultTileInnerHeight))
             let label = SKLabelNode(fontNamed: fontName)
             label.text = "\(VowelCharacter.types[index].rawValue)"
             label.name = String(format:letterNodeColRow, index, row)
-            label.fontColor = UIColor.red
+            label.fontColor = tileFontColor(name: "button", vowel: true)
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             tileNode.addChild(label)

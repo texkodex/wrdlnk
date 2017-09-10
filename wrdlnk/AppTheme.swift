@@ -296,7 +296,7 @@ class AppTheme {
                 if (nodeSprite?.name?.lowercased().contains("titleimage"))! {
                     let texture = UIDevice.isiPad ? "apple-icon-144x144" : "apple-icon-76x76"
                     nodeSprite?.texture = SKTexture(imageNamed: mode.contains("normal") ? texture : mode + texture)
-                } else if !mode.contains("normal") && (nodeSprite?.name?.lowercased().contains("awardlink"))! {
+                } else if !mode.contains("normal") && !mode.contains("pastel") && (nodeSprite?.name?.lowercased().contains("link"))! {
                     nodeSprite?.texture = SKTexture(imageNamed: mode + "awardLink")
                 } else {
                     let rawString = nodeSprite?.texture?.description.components(separatedBy: "\'")

@@ -453,7 +453,8 @@ struct VowelCount {
     }
     
     func totalClicks() -> Int {
-        return clicks
+        //return clicks
+        return info.vowelCountList[0].clicks
     }
     
     func totalBoardTileClicks() -> Int {

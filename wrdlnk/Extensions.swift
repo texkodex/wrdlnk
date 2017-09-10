@@ -103,7 +103,6 @@ private extension UIFontDescriptor {
 
 extension GameScene {
     func countTime() {
- //       self.startTime = self.levelTime
         let wait = SKAction.wait(forDuration: 1.0) //change countdown speed here
         let block = SKAction.run({
             [unowned self] in
@@ -147,7 +146,6 @@ extension GameScene {
     
     func timerString() -> String? {
         let timeString = String(format: ". %02d:%02d .", ((lround(Double(self.startTime)) / 60) % 60), lround(Double(self.startTime)) % 60)
-        
         return timeString
         
     }
@@ -201,7 +199,7 @@ extension SKScene {
         
     }
     
-    func transitionToScene(destination: SceneType, sendingScene: SKScene, startNewGame : Bool = false) {
+    func transitionToScene(destination: SceneType, sendingScene: SKScene, startNewGame : Bool = false, continueGame: Bool = false) {
         let transDuration = commonDelaySetting
         let transition = SKTransition.fade(with: sendingScene.backgroundColor, duration: transDuration)
         
@@ -209,7 +207,8 @@ extension SKScene {
        
         switch destination {
         case .GameScene:
-            UserDefaults().set(startNewGame, forKey: preferenceStartGameEnabledKey)
+            AppDefinition.defaults.set(startNewGame, forKey: preferenceStartGameEnabledKey)
+            AppDefinition.defaults.set(continueGame, forKey: preferenceContinueGameEnabledKey)
             scene = GameScene(fileNamed: "GameScene")!
         case .GameStatus:
             scene = GameStatusScene(fileNamed: "GameStatusScene")!

@@ -62,10 +62,11 @@ struct WordList {
     
     static var sharedInstance = WordList()
     
-    private init() {
+    init() {
         if debugInfo {
             AppDefinition.defaults.set(0, forKey: preferenceWordListKey)
             AppDefinition.defaults.purgeAll()
+            AppDefinition.defaults.set(true, forKey: preferenceContinueGameEnabledKey)
         }
         info.index =  AppDefinition.defaults.keyExist(key: preferenceWordListKey) ? AppDefinition.defaults.integer(forKey: preferenceWordListKey) : 0
     }
@@ -172,7 +173,7 @@ extension WordList {
                 saveWordList()
                 AppDefinition.defaults.set(true, forKey: preferenceWordListShuffledKey)
                 if !AppDefinition.defaults.keyExist(key: preferenceMaxNumberOfDataPlaysKey) {
-                    AppDefinition.defaults.set(0, forKey: preferenceMaxNumberOfDataPlaysKey)
+                    AppDefinition.defaults.set(MaxNumberOfDataPlays, forKey: preferenceMaxNumberOfDataPlaysKey)
                 }
                 if !AppDefinition.defaults.keyExist(key: preferenceAccuracyLowerBoundDataKey) {
                     AppDefinition.defaults.set(0, forKey: preferenceAccuracyLowerBoundDataKey)
@@ -253,7 +254,7 @@ extension WordList {
         if let match = info.matchCondition, match == true {
             info.index = AppDefinition.defaults.integer(forKey: preferenceWordListKey)
             info.index = (info.index + 1) % info.wordBank.count
-            UserDefaults().set(info.index, forKey: preferenceWordListKey)
+            AppDefinition.defaults.set(info.index, forKey: preferenceWordListKey)
         }
         return info.wordBank[info.index]
     }
@@ -261,12 +262,12 @@ extension WordList {
     func skip() {
         info.index = AppDefinition.defaults.integer(forKey: preferenceWordListKey)
         info.index = (info.index + 1) % info.wordBank.count
-        UserDefaults().set(info.index, forKey: preferenceWordListKey)
+        AppDefinition.defaults.set(info.index, forKey: preferenceWordListKey)
     }
     
     func stay() {
         info.index = AppDefinition.defaults.integer(forKey: preferenceWordListKey)
-        UserDefaults().set(info.index, forKey: preferenceWordListKey)
+        AppDefinition.defaults.set(info.index, forKey: preferenceWordListKey)
     }
     
     func getCurrentWords() -> Word? {
@@ -289,6 +290,10 @@ extension WordList {
         info.matchCondition = true
     }
     
+    mutating func clearMatchCondition() {
+        info.matchCondition = nil
+    }
+
     mutating func handledMatchCondition() {
         if let match = info.matchCondition, match == true {
             info.matchCondition = nil
@@ -309,13 +314,12 @@ extension WordList {
         AppDefinition.defaults.set(0, forKey: preferenceWordListKey)
         info.index = 0
         
-        if numPlays < MaxNumberOfDataPlays {
+        if numPlays > MaxNumberOfDataPlays {
             AppDefinition.defaults.set(0, forKey: preferenceAccuracyLowerBoundDataKey)
             AppDefinition.defaults.set(0, forKey: preferenceTimeLowerBoundDataKey)
         }
         
-        AppDefinition.defaults.set(numPlays + 1, forKey: preferenceTimeLowerBoundDataKey)
-        
+        AppDefinition.defaults.set(numPlays + 1, forKey: preferenceMaxNumberOfDataPlaysKey)
     }
 }
 

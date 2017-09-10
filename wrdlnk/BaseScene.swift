@@ -55,7 +55,7 @@ class BaseScene: SKScene {
         super.didChangeSize(oldSize)
     }
     
-    func transitionReloadScene(scene: SKScene) {
+    func transitionReloadScene(scene: SKScene, continueGame: Bool = true) {
         //transitionToScene(destination: SceneType.GameScene, sendingScene: scene)
     }
     

@@ -128,8 +128,13 @@ class MainMenuScene: BaseScene {
         }
     }
     
+    func setGameLevelTime() {
+       AppDefinition.defaults.set(GameLevelTime, forKey: preferenceGameLevelTimeKey)
+    }
+    
     func makeVisible(element: ViewElement, node: SKSpriteNode){
         print("Entering \(#file):: \(#function) at line \(#line)")
+        setGameLevelTime()
         switch element {
         case .startNewGame:
             print("startNewGame visible")

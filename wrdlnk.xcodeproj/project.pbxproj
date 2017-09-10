@@ -22,6 +22,7 @@
 		CC1C64CE1F46B92400A9E5C8 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64CD1F46B92400A9E5C8 /* AppTheme.swift */; };
 		CC2F8E481F18830200463E37 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F8E471F18830100463E37 /* PlaySound.swift */; };
 		CC4494CD1F5628A100CB0906 /* wireIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC4494CC1F5628A100CB0906 /* wireIcon.xcassets */; };
+		CC4D21991F5CE3B600521254 /* LiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4D21981F5CE3B600521254 /* LiveData.swift */; };
 		CC4F90CF1F51D637001BB049 /* PlayNotification.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC4F90CE1F51D637001BB049 /* PlayNotification.plist */; };
 		CC4F90D11F51E9FE001BB049 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F90D01F51E9FE001BB049 /* Utility.swift */; };
 		CC7202B41F1973F1003394A0 /* awake.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202B31F1973F1003394A0 /* awake.mp3 */; };
@@ -66,6 +67,11 @@
 		CCDEA3E01F37A8690046C82D /* WalkThroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEA3DF1F37A8690046C82D /* WalkThroughPageViewController.swift */; };
 		CCE627F71F574D650018BD1C /* OverlayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCE627F61F574D650018BD1C /* OverlayScene.sks */; };
 		CCE627F91F574D890018BD1C /* OverlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE627F81F574D890018BD1C /* OverlayScene.swift */; };
+		CCF0209E1F630D7D00FF6597 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474D1EE9DD1600468E0B /* Config.swift */; };
+		CCF0209F1F632B4800FF6597 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474B1EE9DC6D00468E0B /* Extensions.swift */; };
+		CCF020A01F632B4E00FF6597 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F90D01F51E9FE001BB049 /* Utility.swift */; };
+		CCF020A11F632B5D00FF6597 /* LiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4D21981F5CE3B600521254 /* LiveData.swift */; };
+		CCF020A21F632B6600FF6597 /* DataExchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4221EF22F0E00CDB4BB /* DataExchange.swift */; };
 		CCF8474C1EE9DC6D00468E0B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474B1EE9DC6D00468E0B /* Extensions.swift */; };
 		CCF8474E1EE9DD1600468E0B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474D1EE9DD1600468E0B /* Config.swift */; };
 /* End PBXBuildFile section */
@@ -103,6 +109,7 @@
 		CC1C64CD1F46B92400A9E5C8 /* AppTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		CC2F8E471F18830100463E37 /* PlaySound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 		CC4494CC1F5628A100CB0906 /* wireIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = wireIcon.xcassets; sourceTree = "<group>"; };
+		CC4D21981F5CE3B600521254 /* LiveData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveData.swift; sourceTree = "<group>"; };
 		CC4F90CE1F51D637001BB049 /* PlayNotification.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlayNotification.plist; sourceTree = "<group>"; };
 		CC4F90D01F51E9FE001BB049 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		CC7202B31F1973F1003394A0 /* awake.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = awake.mp3; sourceTree = "<group>"; };
@@ -387,6 +394,7 @@
 				CC08CF061F59B47300638DDB /* WordGroupDataFront.swift */,
 				CC08CF081F59B63400638DDB /* WordGroupDataBack.swift */,
 				CC4F90D01F51E9FE001BB049 /* Utility.swift */,
+				CC4D21981F5CE3B600521254 /* LiveData.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -561,6 +569,7 @@
 				CCE627F91F574D890018BD1C /* OverlayScene.swift in Sources */,
 				AE39F6A71EE10AC300D362C1 /* GameStatusScene.swift in Sources */,
 				CCDEA3D41F36BEFD0046C82D /* WalkThroughOneViewController.swift in Sources */,
+				CC4D21991F5CE3B600521254 /* LiveData.swift in Sources */,
 				CC8BE4171EEB494900CDB4BB /* BaseScene+Buttons.swift in Sources */,
 				CCAD361D1EE0CAE3001C6AFE /* GameScene.swift in Sources */,
 				CC08CF071F59B47300638DDB /* WordGroupDataFront.swift in Sources */,
@@ -588,7 +597,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCF020A21F632B6600FF6597 /* DataExchange.swift in Sources */,
+				CCF020A01F632B4E00FF6597 /* Utility.swift in Sources */,
 				CCAD36321EE0CAE3001C6AFE /* wrdlnkTests.swift in Sources */,
+				CCF020A11F632B5D00FF6597 /* LiveData.swift in Sources */,
+				CCF0209F1F632B4800FF6597 /* Extensions.swift in Sources */,
+				CCF0209E1F630D7D00FF6597 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

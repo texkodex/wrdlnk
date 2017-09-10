@@ -30,10 +30,10 @@ enum StoryboardName : String {
 }
 
 // MARK:- Defines
-let debugInfo = false
+let debugInfo = true
 
-// "Helvetica" or "Arial"
-let fontName = "San Francisco"
+// "SF Mono" or "Helvetica" or "Arial"
+let fontName = "SF Pro Display Regular"
 
 let defaultTileWidth: CGFloat = 42
 let defaultTileHeight: CGFloat = 42
@@ -47,6 +47,7 @@ let tileWidthLess2: CGFloat = 20.0
 let tileHeightLess2: CGFloat = 20.0
 
 let VisibleStateCount = 6
+let GameLevelTime = 20
 
 let buttonsTileMap = "buttons"
 let boardTileMap = "board"
@@ -62,6 +63,7 @@ let remoteWordListSite = "http://www.wrdlnk.com/wlva01a/api/data/wlink_default.j
 let backgroundNodePath = "//world/backgroundNode"
 let titleNodePath = "//world/top"
 let statNodePath = "//world/stat"
+let boardNodePath = "//world/main/board"
 let meaningNodePath = "//world/meaning"
 let graphNodePath = "//world/change"
 let settingsNodePath = "//world/config"
@@ -112,6 +114,8 @@ let commonDelaySetting = 0.5
 let focusRingName = "focusRing"
 
 let preferenceWordListKey = "preference_wordlist_index"
+let preferenceWordMatchKey = "preference_word_match_index"
+
 let preferenceWordListShuffledKey = "preference_wordlist_shuffled"
 let preferenceShowGraphKey = "preference_graph"
 let preferenceGameStatKey = "preference_game_stat"
@@ -140,7 +144,8 @@ let preferenceInstructionsEnabledKey = "preference_instructions_enabled"
 let preferenceCurrentScoreKey = "preference_current_score"
 let preferenceHighScoreKey = "preference_high_score"
 
-let preferenceGameTimeKey = "preference_game_time"
+let preferenceGameLevelTimeKey = "preference_game_level_time"
+
 let preferenceStartTimeKey = "preference_start_time"
 
 let preferenceRemoteDataSiteKey = "preference_remote_data_site"
@@ -232,7 +237,6 @@ enum ViewElement:String {
     case enter = "enter"
     case enterGame = "EnterGame"
     
-    
     case start = "start"
     case startNewGame = "StartNewGame"
     case continueTag = "continue"
@@ -262,7 +266,6 @@ enum ViewElement:String {
     case actionYesSwitch = "ActionYesSwitch"
     case cancelAction = "cancelAction"
     case actionNoSwitch = "ActionNoSwitch"
-    
     
     static let types = [ titleImage, main, board, control, buttons, footer,
                          meaning, change,
@@ -364,26 +367,61 @@ protocol VowelCountData {
 
 let phraseSeparator = "|"
 
+// MARK:- VowelCount structure
 struct VowelCount {
-    let phrase: String
-    var prefix: VowelData
-    var link: VowelData
-    var suffix: VowelData
-    let total: Int
-    var clicks: Int = 0
-    var boardTileClick: Int = 0
-    var match: Int = 0
-    var setTotal: Int = 0
-    let minimumClicks: Int
-    let clickMultiple = 2
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let CountersArchiveURL = DocumentsDirectory.appendingPathComponent("counters")
+
+    public internal(set) var phrase: String
+    public internal(set) var prefix: Int
+    public internal(set) var link: Int
+    public internal(set) var suffix: Int
+    public internal(set) var total: Int
+    public internal(set) var clicks: Int
+    public internal(set) var boardTileClick: Int
+    public internal(set) var match: Int
+    public internal(set) var setTotal: Int
+    public internal(set) var minimumClicks: Int
+    public internal(set) var clickMultiple: Int
+ 
+    fileprivate struct info {
+        static var initialize: Bool = false
+        static var vowelCountList = [VowelCount]()
+    }
     
-    init (phrase: String = "_unset_", prefix: Int = 0, link: Int = 0, suffix: Int = 0) {
+    static let sharedInstance = VowelCount()
+    
+    private init() {
+        if debugInfo {
+            info.vowelCountList.removeAll()
+        }
+        self.phrase = ""
+        self.prefix = 0
+        self.link  = 0
+        self.suffix  = 0
+        self.total = 0
+        self.clicks = 0
+        self.boardTileClick = 0
+        self.match = 0
+        self.setTotal = 0
+        self.minimumClicks = 0
+        self.clickMultiple = 2
+    }
+
+    init (phrase: String = "_unset_", prefix: Int = 0, link: Int = 0, suffix: Int = 0, total: Int = 0,
+          clicks: Int = 0, boardTileClick: Int = 0, match: Int = 0, setTotal: Int = 0, minimumClicks: Int = 1, clickMultiple: Int = 2) {
         self.phrase = phrase
-        self.prefix = VowelData(id: 1, count: prefix)
-        self.link  = VowelData(id: 2, count: link)
-        self.suffix  = VowelData(id: 3, count: suffix)
+        self.prefix = prefix
+        self.link  = link
+        self.suffix  = suffix
         self.total = prefix + link + suffix
+        self.clicks = clicks
+        self.boardTileClick = boardTileClick
+        self.match = match
+        self.setTotal = setTotal
         self.minimumClicks = (prefix + link + suffix) * clickMultiple
+        self.clickMultiple = clickMultiple
+        
     }
     
     func wordphrase() -> String {
@@ -391,15 +429,15 @@ struct VowelCount {
     }
     
     func prefixZero() -> Bool {
-        return prefix.count == 0 ? true : false
+        return prefix == 0 ? true : false
     }
     
     func linkZero() -> Bool {
-        return link.count == 0 ? true : false
+        return link == 0 ? true : false
     }
     
     func suffixZero() -> Bool {
-        return suffix.count == 0 ? true : false
+        return suffix == 0 ? true : false
     }
     
     func totalZero() -> Bool {
@@ -428,33 +466,44 @@ struct VowelCount {
     
     mutating func prefixDecrement() {
         if !prefixZero() {
-            prefix.count -= 1
+            self.prefix -= 1
+            info.vowelCountList[0] = self
         }
     }
     
     mutating func linkDecrement() {
         if !linkZero() {
-            link.count -= 1
+            self.link -= 1
+            info.vowelCountList[0] = self
         }
     }
     
     mutating func suffixDecrement() {
         if !suffixZero() {
-            suffix.count -= 1
+            self.suffix -= 1
+            info.vowelCountList[0] = self
         }
     }
     
     mutating func clickAttempt() {
-        clicks += 1
+        self.clicks += 1
+        info.vowelCountList[0] = self
+    }
+    
+    mutating func restoreMatch() {
+        self.match += 1
+        info.vowelCountList[0] = self
     }
     
     mutating func boardClickAttempt() {
-        boardTileClick += 1
+        self.boardTileClick += 1
+        info.vowelCountList[0] = self
     }
     
     mutating func clickMatch() {
         if match < total {
-            match += 1
+            self.match += 1
+            info.vowelCountList[0] = self
         }
     }
     
@@ -470,8 +519,127 @@ struct VowelCount {
     }
 }
 
-class Stat: NSObject, NSCoding {
+extension VowelCount {
+    class Coding: NSObject, NSCoding {
+        let vowelCount: VowelCount?
+        
+        init(vowelCount: VowelCount) {
+            self.vowelCount = vowelCount
+            super.init()
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            guard let phrase = aDecoder.decodeObject(forKey: "phrase") as? String,
+                let prefix = aDecoder.decodeInteger(forKey: "prefix") as? Int,
+                let link = aDecoder.decodeInteger(forKey: "link") as? Int,
+                let suffix = aDecoder.decodeInteger(forKey: "suffix") as? Int,
+                let total = aDecoder.decodeInteger(forKey: "total") as? Int,
+                let clicks = aDecoder.decodeInteger(forKey: "clicks") as? Int,
+                let boardTileClick = aDecoder.decodeInteger (forKey: "boardTileClick") as? Int,
+                let match = aDecoder.decodeInteger(forKey: "match") as? Int,
+                let setTotal = aDecoder.decodeInteger(forKey: "setTotal") as? Int,
+                let minimumClicks = aDecoder.decodeInteger(forKey: "minimumClicks") as? Int,
+                let clickMultiple = aDecoder.decodeInteger(forKey: "clickMultiple") as? Int  else {
+                return nil
+            }
+            
+            vowelCount = VowelCount(phrase: phrase, prefix: prefix, link: link, suffix: suffix,
+                                    total: total, clicks: clicks, boardTileClick: boardTileClick,
+                                    match: match, setTotal: setTotal, minimumClicks: minimumClicks,
+                                    clickMultiple: clickMultiple)
+            super.init()
+        }
+        
+        public func encode(with aCoder: NSCoder) {
+            guard let vowelCount = vowelCount else {
+                return
+            }
+            
+            aCoder.encode(vowelCount.phrase, forKey: "phrase")
+            aCoder.encode(vowelCount.prefix, forKey: "prefix")
+            aCoder.encode(vowelCount.link, forKey: "link")
+            aCoder.encode(vowelCount.suffix, forKey: "suffix")
+            aCoder.encode(vowelCount.total, forKey: "total")
+            aCoder.encode(vowelCount.clicks, forKey: "clicks")
+            aCoder.encode(vowelCount.boardTileClick, forKey: "boardTileClick")
+            aCoder.encode(vowelCount.match, forKey: "match")
+            aCoder.encode(vowelCount.setTotal, forKey: "setTotal")
+            aCoder.encode(vowelCount.minimumClicks, forKey: "minimumClicks")
+            aCoder.encode(vowelCount.clickMultiple, forKey: "clickMultiple")
+        }
+    }
+}
+
+extension VowelCount: Encodable {
+    var encoded: Decodable? {
+        return VowelCount.Coding(vowelCount: self)
+    }
+}
+
+extension VowelCount.Coding: Decodable {
+    var decoded: Encodable? {
+        return self.vowelCount
+    }
+}
+
+extension VowelCount {
+    func isEmpty() -> Bool {
+        return info.vowelCountList.isEmpty
+    }
     
+    mutating func loadVowelCount() {
+        do {
+            let fileExists = (try? VowelCount.CountersArchiveURL.checkResourceIsReachable()) ?? false
+            if fileExists {
+                let data = try Data(contentsOf: VowelCount.CountersArchiveURL, options: .alwaysMapped)
+                if let back = (NSKeyedUnarchiver.unarchiveObject(with: data) as? [VowelCount.Coding])?.decoded {
+                    loadCountData(vowelCountList: back as! [VowelCount])
+                }
+            }
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    mutating func saveVowelCount() {
+        do {
+            let data = NSKeyedArchiver.archivedData(withRootObject: info.vowelCountList.encoded)
+            try data.write(to: VowelCount.CountersArchiveURL, options: .atomic)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    mutating func clear() {
+        info.vowelCountList.removeAll()
+    }
+    
+    mutating func loadCountData(vowelCountList: [VowelCount]) {
+        if vowelCountList.count > 0 && !vowelCountList[0].phrase.contains("_unset_") {
+            if info.vowelCountList.count == 1 {
+                info.vowelCountList[0].clicks += self.clicks
+            } else if info.vowelCountList.count == 0 {
+                info.vowelCountList.append(self)
+            }
+        } else {
+            if vowelCountList.count == 0 {
+               info.vowelCountList.append(self)
+            } else {
+                info.vowelCountList[0] = self
+            }
+        }
+    }
+    
+    mutating func deleteVowelCount() {
+        clear()
+        saveVowelCount()
+    }
+}
+
+// MARK:- Stat structure
+
+class Stat: NSObject, NSCoding {
     struct Keys {
         static let phrase = "phrase"
         static let minimum = "minimum"
@@ -513,7 +681,6 @@ class Stat: NSObject, NSCoding {
         coder.encode(_percentage, forKey: "percentage")
         coder.encode(_timeSpan, forKey: "timeSpan")
     }
-    
     
     var phrase: String? {
         get {
@@ -572,7 +739,6 @@ public struct Queue<T>: ExpressibleByArrayLiteral {
 }
 
 struct StatData {
-    
     fileprivate struct info {
         static var statQueue = Queue<Stat>()
     }
@@ -595,7 +761,6 @@ struct StatData {
 }
 
 extension StatData {
-    
     func isEmpty() -> Bool {
         return info.statQueue.elements.count == 0
     }
@@ -633,5 +798,4 @@ extension StatData {
     func unique() {
         print("To implement unique() method.")
     }
-
 }

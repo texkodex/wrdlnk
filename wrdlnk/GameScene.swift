@@ -76,7 +76,7 @@ class GameScene: BaseScene {
     var playerTimerLabel: SKLabelNode? {
         return backgroundNodeFour?.childNode(withName: statTimerNodePath) as? SKLabelNode
     }
-
+    
     // MARK:- Data structures
     var entities = [GKEntity()]
     
@@ -86,7 +86,7 @@ class GameScene: BaseScene {
     
     var lastSpriteClick: SKSpriteNode? = nil
     
-    var counters = VowelCount()
+    var counters = VowelCount.sharedInstance
     
     var statData = StatData.sharedInstance
     
@@ -97,6 +97,8 @@ class GameScene: BaseScene {
     
     var matchList: [String] = []
 
+    var liveData = LiveData.sharedInstance
+    
     var keyPlayNotificationDictionary = [String:String]()
     var contentPlist:[[String:String]] = []
     
@@ -106,20 +108,30 @@ class GameScene: BaseScene {
     
     var resetCounters:Bool {
         get {
-            return UserDefaults().bool(forKey: preferenceStartGameEnabledKey)
+            return AppDefinition.defaults.bool(forKey: preferenceStartGameEnabledKey)
         }
         set {
-            UserDefaults().set(newValue, forKey: preferenceStartGameEnabledKey)
+            AppDefinition.defaults.set(newValue, forKey: preferenceStartGameEnabledKey)
         }
     }
 
+    var resetTimer:Bool {
+        get {
+            return AppDefinition.defaults.bool(forKey: preferenceContinueGameEnabledKey)
+        }
+        set {
+            AppDefinition.defaults.set(newValue, forKey: preferenceContinueGameEnabledKey)
+        }
+    }
+
+    
     var playerScore:Int {
         get {
-            return UserDefaults().integer(forKey: preferenceCurrentScoreKey)
+            return AppDefinition.defaults.integer(forKey: preferenceCurrentScoreKey)
         }
         set {
             playerScoreLabel?.text = "\(newValue)"
-            UserDefaults().set(newValue, forKey: preferenceCurrentScoreKey)
+            AppDefinition.defaults.set(newValue, forKey: preferenceCurrentScoreKey)
         }
     }
     
@@ -127,17 +139,16 @@ class GameScene: BaseScene {
     
     var levelTime:Int  {
         get {
-            UserDefaults().set(180, forKey: preferenceGameTimeKey)
-            return UserDefaults().integer(forKey: preferenceGameTimeKey)
+            return AppDefinition.defaults.integer(forKey: preferenceGameLevelTimeKey)
         }
     }
 
     var startTime:Int  {
         get {
-            return UserDefaults().integer(forKey: preferenceStartTimeKey)
+            return AppDefinition.defaults.integer(forKey: preferenceStartTimeKey)
         }
         set {
-            UserDefaults().set(newValue, forKey: preferenceStartTimeKey)
+            AppDefinition.defaults.set(newValue, forKey: preferenceStartTimeKey)
         }
     }
     
@@ -151,6 +162,8 @@ class GameScene: BaseScene {
             wordList.stay()
         }
         
+        liveData.saveLiveData()
+        counters.saveVowelCount()
         readyForInit()
         entities.removeAll()
         graphs.removeAll()
@@ -242,9 +255,9 @@ class GameScene: BaseScene {
     private func resetForNewGame() {
         if resetCounters {
             wordList.reset()
-            UserDefaults().set(false, forKey: preferenceGameTimeKey)
-            UserDefaults().set(0, forKey: preferenceCurrentScoreKey)
-            UserDefaults().set(0, forKey: preferenceGameTimeKey)
+            AppDefinition.defaults.set(0, forKey: preferenceCurrentScoreKey)
+            startTime = AppDefinition.defaults.integer(forKey: preferenceGameLevelTimeKey)
+            AppDefinition.defaults.set(true, forKey: preferenceContinueGameEnabledKey)
         }
     }
     
@@ -268,7 +281,9 @@ class GameScene: BaseScene {
         playerScoreUpdate()
         playerTimerUpdate()
         // Set the high score
-        highScoreLabel?.text = "HighScore: " + UserDefaults().integer(forKey: "highscore").description
+        highScoreLabel?.text = "HighScore: " + AppDefinition.defaults.integer(forKey: "highscore").description
+        
+        replaySelection()
     }
     
     override func didChangeSize(_ oldSize: CGSize) {
@@ -284,8 +299,33 @@ class GameScene: BaseScene {
         enableButton(button: settingsButton)
     }
     
-    override func transitionReloadScene(scene: SKScene) {
-        transitionToScene(destination: SceneType.GameScene, sendingScene: scene)
+    func replaySelection() {
+        if !resetTimer {
+            // restore vowelCount
+            counters.loadVowelCount()
+            // get match count
+            for (_, selection) in liveData.allItems().enumerated() {
+                showBoardTile(position: selection.position)
+                let boardNode: SKNode? = childNode(withName: boardNodePath)
+                let matchSprite = boardNode?.childNode(withName: selection.position) as! SKSpriteNode
+                let matchLabel = matchSprite.getLabelFromSprite()
+                matchLabel?.alpha = CGFloat(1.0)
+                counters.restoreMatch()
+            }
+            
+        } else {
+         liveData.deleteLiveData()
+         counters.deleteVowelCount()
+        }
+    }
+    
+    func showBoardTile(position: String) {
+        print(position)
+        //counters.clickMatch()
+    }
+    
+    override func transitionReloadScene(scene: SKScene, continueGame: Bool = true) {
+        transitionToScene(destination: SceneType.GameScene, sendingScene: scene, continueGame: continueGame)
     }
     
     func makeVisible (params: MakeVisibleParams){
@@ -415,17 +455,26 @@ class GameScene: BaseScene {
             if !matchList.contains(list[index].name!) {
                 matchList.append(list[index].name!)
             }
+            let data = LiveData(position: list[index].name!)
+            if !liveData.contains(item: data) {
+                liveData.addItem(item: data)
+            }
         }
     }
     
     func inMatchList(list: [SKSpriteNode]) ->Bool {
         var count = 0
+        var lCount = 0
         for (index, _) in list.enumerated() {
             if matchList.contains(list[index].name!) {
                 count += 1
             }
+            let data = LiveData(position: list[index].name!)
+            if liveData.contains(item: data) {
+                lCount += 1
+            }
         }
-        return count > 0
+        return count > 0 || lCount > 0
     }
     
     func processTileSprite(sprite: SKSpriteNode?, handler:(String)->Void) {
@@ -499,13 +548,17 @@ class GameScene: BaseScene {
             
             playTextAnimated(fileName: completedMessage())
             delay(2.0) {
+                self.liveData.deleteLiveData()
+                self.counters.deleteVowelCount()
                 self.stopAudio(delay: 0.2)
                 self.transitionReloadScene(scene: self)
-                //UserDefaults().set(self.levelTime, forKey: preferenceStartTimeKey)
+                self.resetTimer = true
+                AppDefinition.defaults.set(true, forKey: preferenceContinueGameEnabledKey)
             }
             return
         } else {
             playSoundForEvent(soundEvent: .yes)
+            wordList.clearMatchCondition()
             //playTextAnimated(fileName: playNotificationMessage())
         }
     }
@@ -539,10 +592,10 @@ class GameScene: BaseScene {
             playerScoreLabel?.isHidden = false
         }
         
-        playerScore = UserDefaults().integer(forKey: preferenceCurrentScoreKey)
-        let highScore = UserDefaults().integer(forKey: preferenceHighScoreKey)
+        playerScore = AppDefinition.defaults.integer(forKey: preferenceCurrentScoreKey)
+        let highScore = AppDefinition.defaults.integer(forKey: preferenceHighScoreKey)
         if playerScore > highScore {
-            UserDefaults().set(playerScore, forKey: preferenceHighScoreKey)
+            AppDefinition.defaults.set(playerScore, forKey: preferenceHighScoreKey)
         }
         playerScoreLabel?.text = "\(playerScore)"
         
@@ -556,7 +609,14 @@ class GameScene: BaseScene {
             playerTimerLabel?.isHidden = true
         }
         
-        startTime = UserDefaults().integer(forKey: preferenceStartTimeKey)
+        if resetTimer {
+            startTime = AppDefinition.defaults.integer(forKey: preferenceGameLevelTimeKey)
+            resetTimer = false
+            AppDefinition.defaults.set(false, forKey: preferenceContinueGameEnabledKey)
+            wordList.clearMatchCondition()
+        } else {
+            startTime = AppDefinition.defaults.integer(forKey: preferenceStartTimeKey)
+        }
     }
     
     // MARK:- play progress text

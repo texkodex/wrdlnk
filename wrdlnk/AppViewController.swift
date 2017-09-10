@@ -49,7 +49,7 @@ class AppViewController: UIViewController {
     
     func runApplication() {
         if debugInfo {
-            UserDefaults.standard.purgeAll()
+            AppDefinition.defaults.purgeAll()
         }
         
         let loadedInitialDefaults = AppDefinition.defaults.value(forKey: AppDefinition.InitialDefaults) as! Bool

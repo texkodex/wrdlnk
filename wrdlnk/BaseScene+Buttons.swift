@@ -56,7 +56,8 @@ extension BaseScene: ButtonNodeResponderType {
                 transitionToScene(destination: SceneType.Menu, sendingScene: self)
             break
             case .continueGame:
-                transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+                let continueGame = AppDefinition.defaults.bool(forKey: preferenceContinueGameEnabledKey)
+                transitionToScene(destination: SceneType.GameScene, sendingScene: self, continueGame: continueGame)
             break
             case .actionYesSwitch:
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self, startNewGame: true)

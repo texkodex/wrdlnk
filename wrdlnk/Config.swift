@@ -386,6 +386,7 @@ struct VowelCount {
  
     fileprivate struct info {
         static var initialize: Bool = false
+        static var minClicks: Int = 0
         static var vowelCountList = [VowelCount]()
     }
     
@@ -419,6 +420,7 @@ struct VowelCount {
         self.boardTileClick = boardTileClick
         self.match = match
         self.setTotal = setTotal
+        info.minClicks = (prefix + link + suffix) * clickMultiple
         self.minimumClicks = (prefix + link + suffix) * clickMultiple
         self.clickMultiple = clickMultiple
         
@@ -453,8 +455,7 @@ struct VowelCount {
     }
     
     func totalClicks() -> Int {
-        //return clicks
-        return info.vowelCountList[0].clicks
+        return !isEmpty() ? info.vowelCountList[0].clicks : 0
     }
     
     func totalBoardTileClicks() -> Int {
@@ -462,49 +463,63 @@ struct VowelCount {
     }
     
     func minClicks() -> Int {
-        return minimumClicks
+        return info.minClicks
     }
     
     mutating func prefixDecrement() {
         if !prefixZero() {
             self.prefix -= 1
-            info.vowelCountList[0] = self
+            if !isEmpty() {
+                info.vowelCountList[0] = self
+            }
         }
     }
     
     mutating func linkDecrement() {
         if !linkZero() {
             self.link -= 1
-            info.vowelCountList[0] = self
+            if !isEmpty() {
+                info.vowelCountList[0] = self
+            }
         }
     }
     
     mutating func suffixDecrement() {
         if !suffixZero() {
             self.suffix -= 1
-            info.vowelCountList[0] = self
+            if !isEmpty() {
+                info.vowelCountList[0] = self
+            }
         }
     }
     
     mutating func clickAttempt() {
         self.clicks += 1
-        info.vowelCountList[0] = self
+        if !isEmpty() {
+            info.vowelCountList[0] = self
+        }
     }
     
     mutating func restoreMatch() {
         self.match += 1
-        info.vowelCountList[0] = self
+        if !isEmpty() {
+            info.vowelCountList[0] = self
+        }
     }
     
     mutating func boardClickAttempt() {
         self.boardTileClick += 1
-        info.vowelCountList[0] = self
+        if !isEmpty() {
+            info.vowelCountList[0] = self
+        }
     }
     
     mutating func clickMatch() {
         if match < total {
             self.match += 1
-            info.vowelCountList[0] = self
+            if !isEmpty() {
+                info.vowelCountList[0] = self
+            }
         }
     }
     
@@ -512,7 +527,7 @@ struct VowelCount {
         print("total: \(total)")
         print("minimumClicks: \(minimumClicks)")
         print("clicks: \(clicks)")
-        return Float(clicks > 0 ? Float(minClicks()) / Float(totalClicks()) : 0)
+        return Float(clicks > 0 ? min(Float(minClicks()) / Float(totalClicks()), 1.0) : 0)
     }
     
    func percentage() -> Float {

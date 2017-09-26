@@ -47,7 +47,12 @@ let tileWidthLess2: CGFloat = 22.0
 let tileHeightLess2: CGFloat = 22.0
 
 let VisibleStateCount = 6
+let StatDataSize = 3000
 let GameLevelTime = 20
+
+let StorageForStatItem = "ItemStat"
+let StorageForStatItemVC = "ItemStatVC"
+let StorageForStatDataItem = "ItemStatData"
 
 let buttonsTileMap = "buttons"
 let boardTileMap = "board"
@@ -751,12 +756,22 @@ public struct Queue<T>: ExpressibleByArrayLiteral {
     public mutating func push(value: T) { elements.append(value) }
     public mutating func pop() -> T { return elements.removeFirst() }
     public var isEmpty: Bool { return elements.isEmpty }
-    public var isThreshold: Bool { return elements.count > VisibleStateCount }
+    public var isThreshold: Bool { return elements.count > StatDataSize }
     public var count: Int { return elements.count }
     public init(arrayLiteral elements: T...) { self.elements = elements }
 }
 
 struct StatData {
+    
+    var store = DataStore.sharedInstance
+    
+    var filePath: String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        print("The url path in the document directory \(String(describing: url))")
+        return(url!.appendingPathComponent(StorageForStatItem).path)
+    }
+    
     fileprivate struct info {
         static var statQueue = Queue<Stat>()
     }
@@ -767,13 +782,30 @@ struct StatData {
             self.purge()
         }
         
-        if AppDefinition.defaults.keyExist(key: preferenceGameStatKey) {
-            let decoded  = AppDefinition.defaults.object(forKey: preferenceGameStatKey) as! Data
-            let decodedStats = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Stat]
-            for stat in decodedStats {
+        if AppDefinition.defaults.keyExist(key: preferenceGameStatKey)
+            && AppDefinition.defaults.bool(forKey: preferenceGameStatKey) {
+            loadData()
+            for stat in self.store.itemsStat {
                 print("reloaded phrase: \(String(describing: stat.phrase))")
                 self.push(element: Stat(phrase: stat.phrase, accuracy: stat.accuracy, minimum: stat.minimum, percentage: stat.percentage, timeSpan: stat.timeSpan))
             }
+        }
+    }
+    
+    fileprivate func saveData(stat: Stat) {
+        self.store.itemsStat.append(stat)
+        NSKeyedArchiver.archiveRootObject(self.store.itemsStat, toFile: filePath)
+    }
+    
+    fileprivate func clearData() {
+        self.store.itemsStat.removeAll()
+        NSKeyedArchiver.archiveRootObject(self.store.itemsStat, toFile: filePath)
+        AppDefinition.defaults.set(false, forKey: preferenceGameStatKey)
+    }
+    
+    fileprivate func loadData() {
+        if let itemsStat = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [Stat] {
+            self.store.itemsStat = itemsStat
         }
     }
 }
@@ -795,6 +827,11 @@ extension StatData {
         prune()
         unique()
         info.statQueue.push(value: element)
+        saveData(stat: element)
+        if !isEmpty() && !AppDefinition.defaults.keyExist(key: preferenceGameStatKey)
+            || !AppDefinition.defaults.bool(forKey: preferenceGameStatKey) {
+            AppDefinition.defaults.set(true, forKey: preferenceGameStatKey)
+        }
     }
     
     func pop() -> Stat? {
@@ -811,6 +848,7 @@ extension StatData {
         while !isEmpty() {
             _ = pop()
         }
+        clearData()
     }
     
     func unique() {

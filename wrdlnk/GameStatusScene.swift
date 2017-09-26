@@ -36,7 +36,6 @@ class GameStatusScene: BaseScene {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
         resizeIfNeeded()
-        //setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:stats:wordList:))
         setup(nodeMap: nodeMap, completionHandler: makeVisible(params:))
         AppTheme.instance.set(for: self)
 
@@ -59,24 +58,19 @@ class GameStatusScene: BaseScene {
         default:
             return
         }
-        
     }
     
     func preserveDefaults(stats: StatData?) {
-        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: stats!.elements())
-        AppDefinition.defaults.set(encodedData, forKey: preferenceGameStatKey)
+        //let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: stats!.elements())
+        if !AppDefinition.defaults.keyExist(key: preferenceGameStatKey) {
+            AppDefinition.defaults.set(true, forKey: preferenceGameStatKey)
+        }
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
         
     }
-    
-//    override func didChangeSize(_ oldSize: CGSize) {
-//        for node in self.children{
-//            let newPosition = CGPoint(x:node.position.x / oldSize.width * self.frame.size.width,y:node.position.y / oldSize.height * self.frame.size.height)
-//            node.position = newPosition
-//        }
-//    }
     
     // MARK: - Touches
     func touchDown(atPoint pos : CGPoint) {

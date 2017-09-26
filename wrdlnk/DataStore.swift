@@ -9,5 +9,6 @@
 class DataStore {
     static let sharedInstance = DataStore()
     private init() {}
-    var statDataItems: [Stat] = []
+    var itemsStat: [Stat] = []
+    var itemsStatData: [StatData] = []
 }

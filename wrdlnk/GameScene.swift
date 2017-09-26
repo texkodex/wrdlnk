@@ -295,7 +295,7 @@ class GameScene: BaseScene {
     
     func initializeScreenButtons() {
         disableButton(button: definitionButton)
-        wordList.currentIndex()! > 0  ? enableButton(button: graphButton) : disableButton(button: graphButton)
+        wordList.currentIndex()! > 0 && !statData.isEmpty()  ? enableButton(button: graphButton) : disableButton(button: graphButton)
         enableButton(button: settingsButton)
     }
     

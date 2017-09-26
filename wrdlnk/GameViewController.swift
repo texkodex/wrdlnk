@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
         let manager = FileManager.default
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
         print("The url path in the document directory \(String(describing: url))")
-        return(url!.appendingPathComponent("Data").path)
+        return(url!.appendingPathComponent(StorageForStatItemVC).path)
     }
     
     deinit {
@@ -29,7 +29,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         AppDefinition.defaults.set(true, forKey: preferenceMemoryDataFileKey)
         
         if AppDefinition.defaults.keyExist(key: preferenceRemoteDataSiteKey) {
@@ -74,13 +74,13 @@ class GameViewController: UIViewController {
     }
     
     private func saveData(stat: Stat) {
-        self.store.statDataItems.append(stat)
-        NSKeyedArchiver.archiveRootObject(self.store.statDataItems, toFile: filePath)
+        self.store.itemsStat.append(stat)
+        NSKeyedArchiver.archiveRootObject(self.store.itemsStat, toFile: filePath)
     }
 
     private func loadData() {
-        if let statData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [Stat] {
-            self.store.statDataItems = statData
+        if let itemsStat = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [Stat] {
+            self.store.itemsStat = itemsStat
         }
     }
     
@@ -102,6 +102,7 @@ class GameViewController: UIViewController {
                 
                 // Present the scene
                 if let view = self.view as! SKView? {
+
                     let transition = SKTransition.reveal(with: SKTransitionDirection.down, duration: 0.5)
                     view.presentScene(sceneNode, transition: transition)
                     

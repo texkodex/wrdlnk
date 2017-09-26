@@ -152,10 +152,11 @@ extension Word {
         required init?(coder aDecoder: NSCoder) {
             guard let prefix = aDecoder.decodeObject(forKey: "prefix") as? String,
                 let link = aDecoder.decodeObject(forKey: "link") as? String,
-                let suffix = aDecoder.decodeObject(forKey: "suffix") as? String,
-                let level = aDecoder.decodeObject (forKey: "level") as? Int  else {
+                let suffix = aDecoder.decodeObject(forKey: "suffix") as? String else {
                     return nil
             }
+
+            let level = aDecoder.decodeInteger (forKey: "level")
             
             word = Word(prefix: prefix, link: link, suffix: suffix, level: level)
             

@@ -32,7 +32,7 @@ extension UIViewController {
         let storyboard:UIStoryboard? = UIStoryboard(name: name, bundle: nil)
         if let vc = storyboard?.instantiateViewController(withIdentifier: controller) {
             let appDelegate: UIApplicationDelegate = UIApplication.shared.delegate!
-            vc.view.backgroundColor = UIColor.clear
+
             delay(0.5) {
                 appDelegate.window!?.rootViewController = vc
                 vc.willMove(toParentViewController: self)

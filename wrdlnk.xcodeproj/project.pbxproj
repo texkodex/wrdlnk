@@ -72,6 +72,14 @@
 		CCF020A01F632B4E00FF6597 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F90D01F51E9FE001BB049 /* Utility.swift */; };
 		CCF020A11F632B5D00FF6597 /* LiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4D21981F5CE3B600521254 /* LiveData.swift */; };
 		CCF020A21F632B6600FF6597 /* DataExchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4221EF22F0E00CDB4BB /* DataExchange.swift */; };
+		CCF3CC301F79AB3D00035B76 /* great2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CCF3CC2F1F79AB3D00035B76 /* great2.mp3 */; };
+		CCF3CC321F79F94C00035B76 /* GameScene+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC311F79F94C00035B76 /* GameScene+Extensions.swift */; };
+		CCF3CC341F79FA1600035B76 /* SKScene+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC331F79FA1600035B76 /* SKScene+Extensions.swift */; };
+		CCF3CC361F79FA8900035B76 /* BaseScene+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC351F79FA8900035B76 /* BaseScene+Extensions.swift */; };
+		CCF3CC381F79FAF200035B76 /* ButtonNodeResponderType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC371F79FAF200035B76 /* ButtonNodeResponderType+Extensions.swift */; };
+		CCF3CC3A1F79FB5000035B76 /* SKTileMapNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC391F79FB5000035B76 /* SKTileMapNode+Extensions.swift */; };
+		CCF3CC3C1F79FBFB00035B76 /* SKSpriteNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC3B1F79FBFB00035B76 /* SKSpriteNode+Extensions.swift */; };
+		CCF3CC3E1F79FC4D00035B76 /* SKLabelNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC3D1F79FC4D00035B76 /* SKLabelNode+Extensions.swift */; };
 		CCF8474C1EE9DC6D00468E0B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474B1EE9DC6D00468E0B /* Extensions.swift */; };
 		CCF8474E1EE9DD1600468E0B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474D1EE9DD1600468E0B /* Config.swift */; };
 /* End PBXBuildFile section */
@@ -160,6 +168,14 @@
 		CCDEA3DF1F37A8690046C82D /* WalkThroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkThroughPageViewController.swift; sourceTree = "<group>"; };
 		CCE627F61F574D650018BD1C /* OverlayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OverlayScene.sks; sourceTree = "<group>"; };
 		CCE627F81F574D890018BD1C /* OverlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayScene.swift; sourceTree = "<group>"; };
+		CCF3CC2F1F79AB3D00035B76 /* great2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = great2.mp3; sourceTree = "<group>"; };
+		CCF3CC311F79F94C00035B76 /* GameScene+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameScene+Extensions.swift"; sourceTree = "<group>"; };
+		CCF3CC331F79FA1600035B76 /* SKScene+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKScene+Extensions.swift"; sourceTree = "<group>"; };
+		CCF3CC351F79FA8900035B76 /* BaseScene+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseScene+Extensions.swift"; sourceTree = "<group>"; };
+		CCF3CC371F79FAF200035B76 /* ButtonNodeResponderType+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ButtonNodeResponderType+Extensions.swift"; sourceTree = "<group>"; };
+		CCF3CC391F79FB5000035B76 /* SKTileMapNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKTileMapNode+Extensions.swift"; sourceTree = "<group>"; };
+		CCF3CC3B1F79FBFB00035B76 /* SKSpriteNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKSpriteNode+Extensions.swift"; sourceTree = "<group>"; };
+		CCF3CC3D1F79FC4D00035B76 /* SKLabelNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKLabelNode+Extensions.swift"; sourceTree = "<group>"; };
 		CCF8474B1EE9DC6D00468E0B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CCF8474D1EE9DD1600468E0B /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -236,6 +252,7 @@
 		CC8BE4211EF10DCC00CDB4BB /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				CCF3CC2F1F79AB3D00035B76 /* great2.mp3 */,
 				CC7202BF1F1AAC95003394A0 /* yes.mp3 */,
 				CC7202BD1F19745B003394A0 /* beepbeep.mp3 */,
 				CC7202BB1F19744C003394A0 /* biff.mp3 */,
@@ -356,6 +373,13 @@
 				CC4F90CE1F51D637001BB049 /* PlayNotification.plist */,
 				CCE627F61F574D650018BD1C /* OverlayScene.sks */,
 				CCE627F81F574D890018BD1C /* OverlayScene.swift */,
+				CCF3CC311F79F94C00035B76 /* GameScene+Extensions.swift */,
+				CCF3CC331F79FA1600035B76 /* SKScene+Extensions.swift */,
+				CCF3CC351F79FA8900035B76 /* BaseScene+Extensions.swift */,
+				CCF3CC371F79FAF200035B76 /* ButtonNodeResponderType+Extensions.swift */,
+				CCF3CC391F79FB5000035B76 /* SKTileMapNode+Extensions.swift */,
+				CCF3CC3B1F79FBFB00035B76 /* SKSpriteNode+Extensions.swift */,
+				CCF3CC3D1F79FC4D00035B76 /* SKLabelNode+Extensions.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -467,6 +491,7 @@
 				TargetAttributes = {
 					CCAD36121EE0CAE3001C6AFE = {
 						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = B8FBKBQS3V;
 						ProvisioningStyle = Automatic;
 					};
 					CCAD362C1EE0CAE3001C6AFE = {
@@ -527,6 +552,7 @@
 				CC7202BE1F19745B003394A0 /* beepbeep.mp3 in Resources */,
 				CCAD36191EE0CAE3001C6AFE /* GameScene.sks in Resources */,
 				CC8BE41B1EEB4F4500CDB4BB /* Images.xcassets in Resources */,
+				CCF3CC301F79AB3D00035B76 /* great2.mp3 in Resources */,
 				CCAD36271EE0CAE3001C6AFE /* LaunchScreen.storyboard in Resources */,
 				CC4494CD1F5628A100CB0906 /* wireIcon.xcassets in Resources */,
 			);
@@ -553,6 +579,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCF3CC321F79F94C00035B76 /* GameScene+Extensions.swift in Sources */,
+				CCF3CC361F79FA8900035B76 /* BaseScene+Extensions.swift in Sources */,
 				CC7911BF1F55A3E3009E7B4A /* SplashViewController.swift in Sources */,
 				CC4F90D11F51E9FE001BB049 /* Utility.swift in Sources */,
 				CC1C64C91F44B47300A9E5C8 /* AwardScene.swift in Sources */,
@@ -573,9 +601,11 @@
 				CC8BE4171EEB494900CDB4BB /* BaseScene+Buttons.swift in Sources */,
 				CCAD361D1EE0CAE3001C6AFE /* GameScene.swift in Sources */,
 				CC08CF071F59B47300638DDB /* WordGroupDataFront.swift in Sources */,
+				CCF3CC3A1F79FB5000035B76 /* SKTileMapNode+Extensions.swift in Sources */,
 				CCAD361F1EE0CAE3001C6AFE /* GameViewController.swift in Sources */,
 				CC7202C21F1D5D7D003394A0 /* DataStore.swift in Sources */,
 				CCDEA3E01F37A8690046C82D /* WalkThroughPageViewController.swift in Sources */,
+				CCF3CC3E1F79FC4D00035B76 /* SKLabelNode+Extensions.swift in Sources */,
 				CCAD36171EE0CAE3001C6AFE /* AppDelegate.swift in Sources */,
 				CCDC23731F200E3700371F1F /* MenuScene.swift in Sources */,
 				CC1C64CE1F46B92400A9E5C8 /* AppTheme.swift in Sources */,
@@ -587,9 +617,12 @@
 				CC7911C11F55A3F9009E7B4A /* LogoView.swift in Sources */,
 				CC8BE4131EEB2D7100CDB4BB /* ButtonNode.swift in Sources */,
 				CC7911C51F55A494009E7B4A /* TileGridView.swift in Sources */,
+				CCF3CC381F79FAF200035B76 /* ButtonNodeResponderType+Extensions.swift in Sources */,
 				CC8BE4231EF22F0E00CDB4BB /* DataExchange.swift in Sources */,
 				CCF8474E1EE9DD1600468E0B /* Config.swift in Sources */,
 				CC8BE42F1F044CBE00CDB4BB /* DefinitionScene.swift in Sources */,
+				CCF3CC3C1F79FBFB00035B76 /* SKSpriteNode+Extensions.swift in Sources */,
+				CCF3CC341F79FA1600035B76 /* SKScene+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,6 +780,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = B8FBKBQS3V;
 				INFOPLIST_FILE = wrdlnk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -762,6 +796,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = B8FBKBQS3V;
 				INFOPLIST_FILE = wrdlnk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

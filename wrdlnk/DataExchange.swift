@@ -153,7 +153,7 @@ extension Word {
             guard let prefix = aDecoder.decodeObject(forKey: "prefix") as? String,
                 let link = aDecoder.decodeObject(forKey: "link") as? String,
                 let suffix = aDecoder.decodeObject(forKey: "suffix") as? String,
-                let level = aDecoder.decodeInteger (forKey: "level") as? Int  else {
+                let level = aDecoder.decodeObject (forKey: "level") as? Int  else {
                     return nil
             }
             

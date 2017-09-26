@@ -6,6 +6,7 @@
 //  Copyright © 2017 teknowsys. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 @UIApplicationMain
@@ -38,4 +39,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
 }
-

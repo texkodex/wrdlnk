@@ -30,7 +30,7 @@ enum StoryboardName : String {
 }
 
 // MARK:- Defines
-let debugInfo = true
+let debugInfo = false
 
 // "SF Mono" or "Helvetica" or "Arial"
 let fontName = "SF Pro Display Regular"
@@ -40,11 +40,11 @@ let defaultTileHeight: CGFloat = 42
 let defaultTileInnerWidth: CGFloat = 40.0
 let defaultTileInnerHeight: CGFloat = 40.0
 
-let tileWidth: CGFloat = 22
-let tileHeight: CGFloat = 22
+let tileWidth: CGFloat = 24
+let tileHeight: CGFloat = 24
 
-let tileWidthLess2: CGFloat = 20.0
-let tileHeightLess2: CGFloat = 20.0
+let tileWidthLess2: CGFloat = 22.0
+let tileHeightLess2: CGFloat = 22.0
 
 let VisibleStateCount = 6
 let GameLevelTime = 20
@@ -343,13 +343,14 @@ enum SoundEvent:String {
     case error = "error"
     case warning = "warning"
     case great = "great"
+    case great2 = "great2"
     case good = "good"
     case again = "again"
     case end = "end"
     case upgrade = "upgrade"
     
     static let types = [awake, beep, beepbeep, bang, biff, yes, no, error,
-                        warning, great, good, again,
+                        warning, great, great2, good, again,
                         end, upgrade]
 }
 
@@ -545,19 +546,20 @@ extension VowelCount {
         }
 
         required init?(coder aDecoder: NSCoder) {
-            guard let phrase = aDecoder.decodeObject(forKey: "phrase") as? String,
-                let prefix = aDecoder.decodeInteger(forKey: "prefix") as? Int,
-                let link = aDecoder.decodeInteger(forKey: "link") as? Int,
-                let suffix = aDecoder.decodeInteger(forKey: "suffix") as? Int,
-                let total = aDecoder.decodeInteger(forKey: "total") as? Int,
-                let clicks = aDecoder.decodeInteger(forKey: "clicks") as? Int,
-                let boardTileClick = aDecoder.decodeInteger (forKey: "boardTileClick") as? Int,
-                let match = aDecoder.decodeInteger(forKey: "match") as? Int,
-                let setTotal = aDecoder.decodeInteger(forKey: "setTotal") as? Int,
-                let minimumClicks = aDecoder.decodeInteger(forKey: "minimumClicks") as? Int,
-                let clickMultiple = aDecoder.decodeInteger(forKey: "clickMultiple") as? Int  else {
+            guard let phrase = aDecoder.decodeObject(forKey: "phrase") as? String else {
                 return nil
             }
+
+            let prefix = aDecoder.decodeInteger(forKey: "prefix")
+            let link = aDecoder.decodeInteger(forKey: "link")
+            let suffix = aDecoder.decodeInteger(forKey: "suffix")
+            let total = aDecoder.decodeInteger(forKey: "total")
+            let clicks = aDecoder.decodeInteger(forKey: "clicks")
+            let boardTileClick = aDecoder.decodeInteger (forKey: "boardTileClick")
+            let match = aDecoder.decodeInteger(forKey: "match")
+            let setTotal = aDecoder.decodeInteger(forKey: "setTotal")
+            let minimumClicks = aDecoder.decodeInteger(forKey: "minimumClicks")
+            let clickMultiple = aDecoder.decodeInteger(forKey: "clickMultiple")
             
             vowelCount = VowelCount(phrase: phrase, prefix: prefix, link: link, suffix: suffix,
                                     total: total, clicks: clicks, boardTileClick: boardTileClick,

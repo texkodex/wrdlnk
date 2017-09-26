@@ -536,18 +536,28 @@ class GameScene: BaseScene {
         }
     }
 
+    func messageFrequency() -> Double {
+        let displayOptional = random(9)
+        print("displayOptional is: \(displayOptional)")
+        var pause:Double = 0.3
+        if  displayOptional % 3 == 0 {
+            playTextAnimated(fileName: completedMessage())
+            pause = 2.0
+        }
+        return pause
+    }
+    
     func checkForAllMatches() {
         playerScore += matchLetterValue
         if counters.matchComplete() {
             if (startTime > 0) { playerScore += bonusPoints() }
-            playSoundForEvent(soundEvent: .great)
+            playSoundForEvent(soundEvent: .great2)
             wordList.setMatchCondition()
             progressSummary()
             enableGraphDisplay()
             readyForInit()
             
-            playTextAnimated(fileName: completedMessage())
-            delay(2.0) {
+            delay(messageFrequency()) {
                 self.liveData.deleteLiveData()
                 self.counters.deleteVowelCount()
                 self.stopAudio(delay: 0.2)

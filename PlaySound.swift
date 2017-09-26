@@ -40,8 +40,8 @@ extension GameScene {
         case .good:
             playSimpleSound(fileName: SoundEvent.good.rawValue)
             break
-        case .great:
-            playSimpleSound(fileName: SoundEvent.great.rawValue)
+        case .great2:
+            playSimpleSound(fileName: SoundEvent.great2.rawValue)
             break
         case .error:
             playSimpleSound(fileName: SoundEvent.error.rawValue)

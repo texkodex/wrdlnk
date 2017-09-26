@@ -48,10 +48,11 @@ extension LiveData {
         }
         
         required init?(coder aDecoder: NSCoder) {
-            guard let position = aDecoder.decodeObject(forKey: "position") as? String,
-                let level = aDecoder.decodeInteger (forKey: "level") as? Int  else {
-                    return nil
+            guard let position = aDecoder.decodeObject(forKey: "position") as? String else {
+                return nil
             }
+
+            let level = aDecoder.decodeInteger (forKey: "level")
             
             liveData = LiveData(position: position, level: level)
             

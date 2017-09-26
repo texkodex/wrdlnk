@@ -29,7 +29,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
         AppDefinition.defaults.set(true, forKey: preferenceMemoryDataFileKey)
         
         if AppDefinition.defaults.keyExist(key: preferenceRemoteDataSiteKey) {
@@ -55,6 +55,7 @@ class GameViewController: UIViewController {
                 self.setup()
             }
         }
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -83,8 +84,6 @@ class GameViewController: UIViewController {
         }
     }
     
-    // GameScene width = 667 and height = 375
-    // Background width = 590 and height = 310
     func setup() {
         // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
         // including entities and graphs.

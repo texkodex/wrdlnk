@@ -554,6 +554,7 @@ class GameScene: BaseScene {
             playSoundForEvent(soundEvent: .great2)
             wordList.setMatchCondition()
             progressSummary()
+            statData.saveData()
             enableGraphDisplay()
             readyForInit()
             

@@ -80,6 +80,8 @@
 		CCF3CC3A1F79FB5000035B76 /* SKTileMapNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC391F79FB5000035B76 /* SKTileMapNode+Extensions.swift */; };
 		CCF3CC3C1F79FBFB00035B76 /* SKSpriteNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC3B1F79FBFB00035B76 /* SKSpriteNode+Extensions.swift */; };
 		CCF3CC3E1F79FC4D00035B76 /* SKLabelNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC3D1F79FC4D00035B76 /* SKLabelNode+Extensions.swift */; };
+		CCF3CC401F7AB0AC00035B76 /* VowelCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC3F1F7AB0AC00035B76 /* VowelCount.swift */; };
+		CCF3CC421F7AB16C00035B76 /* Stat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3CC411F7AB16C00035B76 /* Stat.swift */; };
 		CCF8474C1EE9DC6D00468E0B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474B1EE9DC6D00468E0B /* Extensions.swift */; };
 		CCF8474E1EE9DD1600468E0B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474D1EE9DD1600468E0B /* Config.swift */; };
 /* End PBXBuildFile section */
@@ -176,6 +178,8 @@
 		CCF3CC391F79FB5000035B76 /* SKTileMapNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKTileMapNode+Extensions.swift"; sourceTree = "<group>"; };
 		CCF3CC3B1F79FBFB00035B76 /* SKSpriteNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKSpriteNode+Extensions.swift"; sourceTree = "<group>"; };
 		CCF3CC3D1F79FC4D00035B76 /* SKLabelNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKLabelNode+Extensions.swift"; sourceTree = "<group>"; };
+		CCF3CC3F1F7AB0AC00035B76 /* VowelCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VowelCount.swift; sourceTree = "<group>"; };
+		CCF3CC411F7AB16C00035B76 /* Stat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stat.swift; sourceTree = "<group>"; };
 		CCF8474B1EE9DC6D00468E0B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CCF8474D1EE9DD1600468E0B /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -419,6 +423,8 @@
 				CC08CF081F59B63400638DDB /* WordGroupDataBack.swift */,
 				CC4F90D01F51E9FE001BB049 /* Utility.swift */,
 				CC4D21981F5CE3B600521254 /* LiveData.swift */,
+				CCF3CC3F1F7AB0AC00035B76 /* VowelCount.swift */,
+				CCF3CC411F7AB16C00035B76 /* Stat.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -594,6 +600,7 @@
 				CC8BE4151EEB47F700CDB4BB /* BaseScene.swift in Sources */,
 				CC1C64C51F44AE2800A9E5C8 /* IAPurchaseScene.swift in Sources */,
 				CC1148EE1F394D8500F64550 /* AppViewController.swift in Sources */,
+				CCF3CC401F7AB0AC00035B76 /* VowelCount.swift in Sources */,
 				CCE627F91F574D890018BD1C /* OverlayScene.swift in Sources */,
 				AE39F6A71EE10AC300D362C1 /* GameStatusScene.swift in Sources */,
 				CCDEA3D41F36BEFD0046C82D /* WalkThroughOneViewController.swift in Sources */,
@@ -607,6 +614,7 @@
 				CCDEA3E01F37A8690046C82D /* WalkThroughPageViewController.swift in Sources */,
 				CCF3CC3E1F79FC4D00035B76 /* SKLabelNode+Extensions.swift in Sources */,
 				CCAD36171EE0CAE3001C6AFE /* AppDelegate.swift in Sources */,
+				CCF3CC421F7AB16C00035B76 /* Stat.swift in Sources */,
 				CCDC23731F200E3700371F1F /* MenuScene.swift in Sources */,
 				CC1C64CE1F46B92400A9E5C8 /* AppTheme.swift in Sources */,
 				CC8BE4191EEB4AA600CDB4BB /* BaseScene+Focus.swift in Sources */,

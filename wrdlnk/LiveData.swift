@@ -10,7 +10,7 @@ import Foundation
 
 struct LiveData {
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
-    static let LiveDataArchiveURL = DocumentsDirectory.appendingPathComponent("liveData")
+    static let LiveDataArchiveURL = DocumentsDirectory.appendingPathComponent(StorageForLiveData)
     
     fileprivate struct info {
         static var index: Int = 0

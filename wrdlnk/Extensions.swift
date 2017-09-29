@@ -33,7 +33,7 @@ extension UIViewController {
         if let vc = storyboard?.instantiateViewController(withIdentifier: controller) {
             let appDelegate: UIApplicationDelegate = UIApplication.shared.delegate!
 
-            delay(0.5) {
+            delay(commonDelaySetting) {
                 appDelegate.window!?.rootViewController = vc
                 vc.willMove(toParentViewController: self)
             }

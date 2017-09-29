@@ -91,6 +91,7 @@ class MainMenuScene: BaseScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
         resizeIfNeeded()
         initializeButtons()
+        setGameLevelTime()
         AppTheme.instance.set(for: self)
     }
     
@@ -112,6 +113,10 @@ class MainMenuScene: BaseScene {
         state ? enableButton(button: inAppPurchaseButton, isSelected: state, focus: true) : enableButton(button: inAppPurchaseButton, isSelected: state)
     }
     
+    func setGameLevelTime() {
+        AppDefinition.defaults.set(GameLevelTime, forKey: preferenceGameLevelTimeKey)
+    }
+    
     override func sceneDidLoad() {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
@@ -128,13 +133,8 @@ class MainMenuScene: BaseScene {
         }
     }
     
-    func setGameLevelTime() {
-       AppDefinition.defaults.set(GameLevelTime, forKey: preferenceGameLevelTimeKey)
-    }
-    
     func makeVisible(element: ViewElement, node: SKSpriteNode){
         print("Entering \(#file):: \(#function) at line \(#line)")
-        setGameLevelTime()
         switch element {
         case .startNewGame:
             print("startNewGame visible")
@@ -153,35 +153,6 @@ class MainMenuScene: BaseScene {
         }
         
     }
-    
-    // MARK: - Touches
-//    func touchDown(atPoint pos : CGPoint) {
-//        print("Entering \(#file):: \(#function) at line \(#line)")
-//    }
-//    
-//    func touchMoved(toPoint pos : CGPoint) {
-//        print("Entering \(#file):: \(#function) at line \(#line)")
-//    }
-//    
-//    func touchUp(atPoint pos : CGPoint) {
-//        print("Entering \(#file):: \(#function) at line \(#line)")
-//    }
-//    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        print("Entering \(#file):: \(#function) at line \(#line)")
-//    }
-//    
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        print("Entering \(#file):: \(#function) at line \(#line)")
-//    }
-//    
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        print("Entering \(#file):: \(#function) at line \(#line)")
-//    }
-//    
-//    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        print("Entering \(#file):: \(#function) at line \(#line)")
-//    }
 }
 
 

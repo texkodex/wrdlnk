@@ -40,20 +40,24 @@ let defaultTileHeight: CGFloat = 42
 let defaultTileInnerWidth: CGFloat = 40.0
 let defaultTileInnerHeight: CGFloat = 40.0
 
-let tileWidth: CGFloat = 24
-let tileHeight: CGFloat = 24
+let tileWidth: CGFloat = 28
+let tileHeight: CGFloat = 28
 
-let tileWidthLess2: CGFloat = 22.0
-let tileHeightLess2: CGFloat = 22.0
+let tileWidthLess2: CGFloat = 26.0
+let tileHeightLess2: CGFloat = 26.0
 
-let VisibleStateCount = 6
-let StatDataSize = 3000
+let VisibleStateCount = 7
+let StatDataSize = 5000
 let GameLevelTime = 20
 
 let StorageForStatItem = "ItemStat"
+let StorageForCounters = "Counters"
 let StorageForStatItemVC = "ItemStatVC"
 let StorageForStatDataItem = "ItemStatData"
 let StorageForLiveData = "LiveData"
+let StorageForWordList = "wordlist"
+let WordListKey = "wordListKey"
+
 
 let buttonsTileMap = "buttons"
 let boardTileMap = "board"
@@ -64,7 +68,7 @@ let tileUserDataClickName = "clickable"
 let letterNodeName = "letter_"
 let letterNodeColRow = "letter_%d_%d"
 
-let remoteWordListSite = "http://www.wrdlnk.com/wlva01a/api/data/wlink_default.json"
+let remoteWordListSite = "http:remote_site.json"
 
 let backgroundNodePath = "//world/backgroundNode"
 let titleNodePath = "//world/top"
@@ -115,7 +119,7 @@ let overlayNodePath = "//world/action"
 let overlayActionYesNodePath = "//world/action/proceedAction"
 let overlayActionNoNodePath = "//world/action/cancelAction"
 
-let commonDelaySetting = 0.5
+let commonDelaySetting = 0.7
 
 let focusRingName = "focusRing"
 
@@ -130,6 +134,7 @@ let preferenceGameTextDescriptionKey = "preference_game_text_description"
 let preferenceSoundEnabledKey = "preference_sound_enabled"
 let preferenceScoreEnabledKey = "preference_score_enabled"
 let preferenceTimerEnabledKey = "preference_timer_enabled"
+let preferenceSetTimerEnabledKey = "preference_set_timer_enabled"
 
 let preferenceNightModeEnabledKey = "preference_night_mode_enabled"
 let preferencePastelEnabledKey = "preference_pastel_enabled"
@@ -167,6 +172,7 @@ let preferenceAccuracyLowerBoundDataKey = "preference_accuracy_lower_bound_data"
 let preferenceTimeLowerBoundDataKey = "preference_time_lower_bound_data"
 
 let preferenceMaxNumberOfDataPlaysKey = "preference_max_number_of_data_plays"
+let preferenceCurrentNumberOfDataPlaysKey = "preference_current_number_of_data_plays"
 
 let MaxNumberOfDataPlays = 4
 
@@ -200,6 +206,7 @@ let redTile = UIColor(colorLiteralRed: 252 / 255, green: 13 / 255, blue: 27 / 25
 let pastelForegroundTile = UIColor(colorLiteralRed: 255 / 255, green: 217 / 255, blue: 170 / 255, alpha: 1)
 let pastelBackgroundTile = UIColor(colorLiteralRed: 252 / 255, green: 253 / 255, blue: 223 / 255, alpha: 1)
 let pastelFontColor = UIColor(colorLiteralRed: 98 / 255, green: 184 / 255, blue: 165 / 255, alpha: 1)
+let pastelFontColor2 = UIColor(colorLiteralRed: 214 / 255, green: 222 / 255, blue: 255 / 255, alpha: 1)
 
 // Mode colors
 let grayCanvas = UIColor(colorLiteralRed: 230 / 255, green: 230 / 255, blue: 230 / 255, alpha: 1)

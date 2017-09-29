@@ -126,13 +126,6 @@ class MenuScene: BaseScene {
     override func update(_ currentTime: TimeInterval) {
     }
     
-//    override func didChangeSize(_ oldSize: CGSize) {
-//        for node in self.children{
-//            let newPosition = CGPoint(x:node.position.x / oldSize.width * self.frame.size.width,y:node.position.y / oldSize.height * self.frame.size.height)
-//            node.position = newPosition
-//        }
-//    }
-    
     func makeVisible(element: ViewElement, node: SKSpriteNode){
         print("Entering \(#file):: \(#function) at line \(#line)")
         switch element {

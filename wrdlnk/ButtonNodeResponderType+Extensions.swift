@@ -28,6 +28,7 @@ extension ButtonNodeResponderType where Self: BaseScene {
         let state = AppDefinition.defaults.bool(forKey: preferenceTimerEnabledKey)
         button.isSelected = !state
         AppDefinition.defaults.set(button.isSelected, forKey: preferenceTimerEnabledKey)
+        AppDefinition.defaults.set(button.isSelected, forKey: preferenceSetTimerEnabledKey)
     }
     
     func toggleNightMode(button: ButtonNode) {

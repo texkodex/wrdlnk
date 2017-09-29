@@ -36,7 +36,7 @@ class WalkThroughOneViewController: UIViewController {
     
     deinit {
         self.removeFromParentViewController()
-        self.view.removeFromSuperview()
+        self.view?.removeFromSuperview()
     }
     
     override func viewDidLoad() {

@@ -41,19 +41,31 @@ class GameStatusScene: BaseScene {
 
     }
     
+    private func showProgressGarph(params: MakeVisibleParams) {
+        let length = statData.elements().count
+        if length > 0 {
+            if length < VisibleStateCount {
+                params.nodeTile?.showProgressGraph(stats: statData.elements())
+            } else {
+                let slice = Array(statData.elements()[length - VisibleStateCount..<length])
+                params.nodeTile?.showProgressGraph(stats: slice)
+            }
+        }
+    }
+    
+    private func preserveWordListMatch() {
+        if wordList.getMatchCondition() {
+            preserveDefaults(stats: statData)
+            wordList.handledMatchCondition()
+        }
+    }
+    
     func makeVisible (params: MakeVisibleParams){
         print("Entering \(#file):: \(#function) at line \(#line)")
         switch params.viewElement! {
         case .progressGraph:
-            if statData.elements().count > 0 {
-                params.nodeTile?.showProgressGraph(stats: statData)
-            }
-            
-            if wordList.getMatchCondition() {
-                preserveDefaults(stats: statData)
-                wordList.handledMatchCondition()
-            } 
-            
+            showProgressGarph(params: params)
+            preserveWordListMatch()
             break
         default:
             return
@@ -61,11 +73,9 @@ class GameStatusScene: BaseScene {
     }
     
     func preserveDefaults(stats: StatData?) {
-        //let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: stats!.elements())
         if !AppDefinition.defaults.keyExist(key: preferenceGameStatKey) {
             AppDefinition.defaults.set(true, forKey: preferenceGameStatKey)
         }
-        
     }
     
     override func update(_ currentTime: TimeInterval) {

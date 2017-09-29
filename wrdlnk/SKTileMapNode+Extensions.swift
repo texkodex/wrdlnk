@@ -60,7 +60,7 @@ extension SKTileMapNode {
     
     func getLabelNode(nodesAtPoint: [SKNode]) -> SKLabelNode? {
         for mapNode in nodesAtPoint {
-            if (mapNode.name?.hasPrefix(tileNodeName))! {
+            if mapNode.name != nil && (mapNode.name?.hasPrefix(tileNodeName))! {
                 for child in mapNode.children {
                     if (child.name?.hasPrefix(letterNodeName))! {
                         return child as? SKLabelNode
@@ -91,7 +91,7 @@ extension SKTileMapNode {
     
     func vowelLabelNode(nodesAtPoint: [SKNode]) -> Bool? {
         for mapNode in nodesAtPoint {
-            if (mapNode.name?.hasPrefix(tileNodeName))! {
+            if mapNode.name != nil && (mapNode.name?.hasPrefix(tileNodeName))! {
                 for child in mapNode.children {
                     if (child.name?.hasPrefix(letterNodeName))! {
                         let labelChar = (child as! SKLabelNode).text?.characters.first
@@ -119,6 +119,12 @@ extension SKTileMapNode {
             case Mode.colorBlind:
                 return vowel ? lightGrayTile
                     : darkGrayTile
+            case Mode.nightMode:
+                return vowel ? darkGrayTile
+                    : lightGrayTile
+            case Mode.pastel:
+                return vowel ? pastelBackgroundTile
+                    : pastelFontColor2
             default:
                 return vowel ? greenTile : blueTile
             }
@@ -126,6 +132,10 @@ extension SKTileMapNode {
             switch mode {
             case Mode.colorBlind:
                 return lightGrayTile
+            case Mode.nightMode:
+                return darkGrayTile
+            case Mode.pastel:
+                return pastelBackgroundTile
             default:
                 return greenTile
             }
@@ -139,6 +149,12 @@ extension SKTileMapNode {
             case Mode.colorBlind:
                 return vowel ? UIColor.white
                     : lightGrayTile
+            case Mode.nightMode:
+                return vowel ? UIColor.orange
+                    : whiteTile
+            case Mode.pastel:
+                return vowel ? pastelFontColor
+                    : whiteTile
             default:
                 return vowel ? UIColor.red : UIColor.white
             }
@@ -146,10 +162,21 @@ extension SKTileMapNode {
             switch mode {
             case Mode.colorBlind:
                 return UIColor.white
+            case Mode.nightMode:
+                return UIColor.orange
+            case Mode.pastel:
+                return pastelFontColor
             default:
                 return UIColor.red
             }
         }
+    }
+    
+    func tileNodeColorClickable(color: UIColor) -> Bool {
+        return color == lightGrayTile
+            || color == darkGrayTile
+            || color == pastelBackgroundTile
+            || color == greenTile
     }
     
     // To place words in center of screen
@@ -159,7 +186,7 @@ extension SKTileMapNode {
             let tileNode = self.childNode(withName: nodeName(node: self, col: index, row: row)) as! SKSpriteNode
             let condition = VowelCharacter(rawValue: letter)?.rawValue == letter
             tileNode.color = tileColor(vowel: condition)
-            if condition && (tileNode.color == greenTile || tileNode.color == lightGrayTile) {
+            if condition && tileNodeColorClickable(color: tileNode.color) {
                 tileNode.userData = [tileUserDataClickName : true]
             }
             tileNode.alpha = CGFloat(1.0)
@@ -183,8 +210,17 @@ extension SKTileMapNode {
         }
     }
     
+    private func getControlPadPathName() -> String {
+        switch currentMode() {
+        case Mode.pastel:
+            return Mode.pastel.rawValue + "/" + "ControlPad"
+        default:
+            return "ControlPad"
+        }
+    }
+    
     func addHighlightForSprite(spriteNode: SKSpriteNode) {
-        let texture = SKTexture(imageNamed: "ControlPad")
+        let texture = SKTexture(imageNamed: getControlPadPathName())
         let sprite = SKSpriteNode()
         sprite.name = "highlight_\((spriteNode.name)!)"
         sprite.alpha = CGFloat(0.0)
@@ -253,7 +289,7 @@ extension SKTileMapNode {
             let tileNode = self.childNode(withName: nodeName(node: self, col: index, row: row)) as! SKSpriteNode
             tileNode.alpha = CGFloat(1.0)
             tileNode.color = tileColor(name: "button", vowel: true)
-            if (tileNode.color == greenTile || tileNode.color == lightGrayTile) {
+            if tileNodeColorClickable(color: tileNode.color) {
                 tileNode.userData = [tileUserDataClickName : true]
             }
             tileNode.removeAllChildren()
@@ -311,6 +347,8 @@ extension SKTileMapNode {
         switch currentMode() {
         case Mode.colorBlind:
             return .lightGray
+        case Mode.pastel:
+            return pastelBackgroundTile
         default:
             return redTile
         }
@@ -321,7 +359,7 @@ extension SKTileMapNode {
         case Mode.colorBlind:
             return .darkGray
         case Mode.pastel:
-            return redTile
+            return pastelBackgroundTile
         default:
             return AppTheme.instance.fontColor()
         }
@@ -400,12 +438,13 @@ extension SKTileMapNode {
         return textLabel
     }
     
-    func showProgressGraph(stats: StatData) {
+    func showProgressGraph(stats: [Stat]) {
         self.removeAllChildren()
         let shape = graphBackground()
         self.addChild(shape)
-        let last = stats.count() - 1
-        for (index, value) in stats.elements().enumerated() {
+        let last = stats.count - 1
+
+        for (index, value) in stats.enumerated() {
             print("index: \(index), with value: \(value.percentage)")
             self.addChild(graphLine(index: index, last: last, accuracy: value.accuracy, percentage: value.percentage, phrase: value.phrase))
         }

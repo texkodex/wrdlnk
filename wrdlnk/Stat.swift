@@ -194,7 +194,10 @@ extension StatData {
     
     func prune() {
         while info.statQueue.isThreshold {
-            _ = pop()
+            let pruneSize = Int(StatDataSize / 10)
+            for _ in 0..<pruneSize {
+                _ = pop()
+            }
         }
     }
     
@@ -202,6 +205,7 @@ extension StatData {
         while !isEmpty() {
             _ = pop()
         }
+        info.initilize = false
     }
     
     func unique() {

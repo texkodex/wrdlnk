@@ -36,7 +36,7 @@ class WalkThroughThreeViewController: UIViewController {
     
     deinit {
         self.removeFromParentViewController()
-        self.view.removeFromSuperview()
+        self.view?.removeFromSuperview()
 
     }
     

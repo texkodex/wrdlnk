@@ -40,6 +40,14 @@ class AwardScene: BaseScene {
         return backgroundNodeOne?.childNode(withName: timeBronzeCountNodePath) as? SKLabelNode
     }
 
+    var maxNumberOfPlays:Int {
+        get { return AppDefinition.defaults.integer(forKey: preferenceMaxNumberOfDataPlaysKey) }
+    }
+    
+    var currentNumberOfPlays:Int {
+        get { return AppDefinition.defaults.integer(forKey: preferenceCurrentNumberOfDataPlaysKey) }
+    }
+    
     var entities = [GKEntity()]
     var graphs = [String:GKGraph]()
     
@@ -62,7 +70,10 @@ class AwardScene: BaseScene {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
         resizeIfNeeded()
-        processAccuracyScores()
+
+        if currentNumberOfPlays < maxNumberOfPlays {
+            processAccuracyScores()
+        }
         processTimeScores()
     }
 

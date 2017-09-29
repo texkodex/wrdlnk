@@ -149,20 +149,23 @@ func getPlatformNameString() -> String {
     
     var machineSwiftString : String = ""
     
-    if DEVICE_IS_SIMULATOR == true
-    {
-        if let dir = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
-            machineSwiftString = dir
+    #if USE_SIMULATOR
+        if DEVICE_IS_SIMULATOR == true
+        {
+            if let dir = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
+                machineSwiftString = dir
+            }
+        } else {
+            var size : size_t = 0
+            
+            sysctlbyname("hw.machine", nil, &size, nil, 0)
+            var machine = [CChar](repeating: 0, count: Int(size))
+            sysctlbyname("hw.machine", &machine, &size, nil, 0)
+            machineSwiftString = String(cString:machine)
         }
-    } else {
-        var size : size_t = 0
-        sysctlbyname("hw.machine", nil, &size, nil, 0)
-        var machine = [CChar](repeating: 0, count: Int(size))
-        sysctlbyname("hw.machine", &machine, &size, nil, 0)
-        machineSwiftString = String(cString:machine)
-    }
+        print("machine is \(machineSwiftString)")
+    #endif
     
-    //print("machine is \(machineSwiftString)")
     return platformName(identifier: machineSwiftString)
 }
 

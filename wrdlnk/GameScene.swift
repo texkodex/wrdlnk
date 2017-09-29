@@ -124,6 +124,12 @@ class GameScene: BaseScene {
         }
     }
 
+    var initializeTimer:Bool {
+        get {
+            return AppDefinition.defaults.bool(forKey: preferenceSetTimerEnabledKey)
+        }
+    }
+
     
     var playerScore:Int {
         get {
@@ -185,10 +191,27 @@ class GameScene: BaseScene {
         
         playNotification()
         // Start game timer
-        self.playerTimerLabel?.text = timerString()
-        countTime()
+        setupTimer()
         
         AppTheme.instance.set(for: self)
+    }
+    
+    func setupTimer() {
+        if initializeTimer {
+            startTime = AppDefinition.defaults.integer(forKey: preferenceGameLevelTimeKey)
+            AppDefinition.defaults.set(false, forKey: preferenceSetTimerEnabledKey)
+        }
+        self.playerTimerLabel?.text = timerString()
+        countTime()
+    }
+    
+    func modePrefixString() -> String {
+        if currentMode().rawValue.contains("normal") {
+            return ""
+        }
+        else {
+            return currentMode().rawValue + "/"
+        }
     }
     
     func playNotification() {
@@ -196,23 +219,23 @@ class GameScene: BaseScene {
         self.contentPlist = NSArray(contentsOfFile:path!) as! [[String:String]]
         
         self.keyPlayNotificationDictionary = self.contentPlist[0]
-        
-        notificationMessageList.append(keyPlayNotificationDictionary["message_great"]!)
-        notificationMessageList.append(keyPlayNotificationDictionary["message_super"]!)
-        notificationMessageList.append(keyPlayNotificationDictionary["message_goodwork"]!)
-        notificationMessageList.append(keyPlayNotificationDictionary["message_fabulous"]!)
+        let modePrefix = modePrefixString()
+        notificationMessageList.append(modePrefix + keyPlayNotificationDictionary["message_great"]!)
+        notificationMessageList.append(modePrefix + keyPlayNotificationDictionary["message_super"]!)
+        notificationMessageList.append(modePrefix + keyPlayNotificationDictionary["message_goodwork"]!)
+        notificationMessageList.append(modePrefix + keyPlayNotificationDictionary["message_fabulous"]!)
 
-        awardMessageList.append(keyPlayNotificationDictionary["message_amazing"]!)
-        awardMessageList.append(keyPlayNotificationDictionary["message_topnotch"]!)
-        awardMessageList.append(keyPlayNotificationDictionary["message_yeah"]!)
-        awardMessageList.append(keyPlayNotificationDictionary["message_award"]!)
+        awardMessageList.append(modePrefix + keyPlayNotificationDictionary["message_amazing"]!)
+        awardMessageList.append(modePrefix + keyPlayNotificationDictionary["message_topnotch"]!)
+        awardMessageList.append(modePrefix + keyPlayNotificationDictionary["message_yeah"]!)
+        awardMessageList.append(modePrefix + keyPlayNotificationDictionary["message_award"]!)
 
-        completedMessageList.append(keyPlayNotificationDictionary["message_yeah"]!)
-        completedMessageList.append(keyPlayNotificationDictionary["message_goodwork"]!)
-        completedMessageList.append(keyPlayNotificationDictionary["message_super"]!)
-        completedMessageList.append(keyPlayNotificationDictionary["message_amazing"]!)
-        completedMessageList.append(keyPlayNotificationDictionary["message_topnotch"]!)
-        completedMessageList.append(keyPlayNotificationDictionary["message_fantastic"]!)
+        completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_yeah"]!)
+        completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_goodwork"]!)
+        completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_super"]!)
+        completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_amazing"]!)
+        completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_topnotch"]!)
+        completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_fantastic"]!)
 
     }
     
@@ -255,6 +278,7 @@ class GameScene: BaseScene {
     private func resetForNewGame() {
         if resetCounters {
             wordList.reset()
+            statData.purge()
             AppDefinition.defaults.set(0, forKey: preferenceCurrentScoreKey)
             startTime = AppDefinition.defaults.integer(forKey: preferenceGameLevelTimeKey)
             AppDefinition.defaults.set(true, forKey: preferenceContinueGameEnabledKey)
@@ -321,7 +345,6 @@ class GameScene: BaseScene {
     
     func showBoardTile(position: String) {
         print(position)
-        //counters.clickMatch()
     }
     
     override func transitionReloadScene(scene: SKScene, continueGame: Bool = true) {
@@ -353,9 +376,7 @@ class GameScene: BaseScene {
     }
     
     // MARK: - Touches
-    
     override func update(_ currentTime: TimeInterval) {
-       
     }
     
     func checkIfNodeProcessed(location: CGPoint, nodesAtPoint: [SKNode]) -> Bool {
@@ -383,7 +404,7 @@ class GameScene: BaseScene {
     func getTileMapByName(nodesAtPoint: [SKNode], name: String) -> SKTileMapNode? {
         for node in nodesAtPoint {
             let tileMapNode = node as? SKTileMapNode
-            if (tileMapNode?.name?.contains(name)) != nil {
+            if tileMapNode != nil && (tileMapNode?.name?.contains(name)) != nil {
                 return tileMapNode
             }
         }
@@ -404,7 +425,6 @@ class GameScene: BaseScene {
     }
     
     // MARK: - Gesture recognizer
-    
     func handleTapFrom(recognizer: UITapGestureRecognizer) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         if recognizer.state != .ended {
@@ -570,7 +590,6 @@ class GameScene: BaseScene {
         } else {
             playSoundForEvent(soundEvent: .yes)
             wordList.clearMatchCondition()
-            //playTextAnimated(fileName: playNotificationMessage())
         }
     }
     

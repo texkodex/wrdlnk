@@ -10,9 +10,9 @@
 		<key>info_image_filename</key>
 		<string>wrdlnk_gamescene.png</string>
 		<key>sub_title1_text</key>
-		<string>IN WRDLNK YOUR CHALLENGE IS TO FIND THE RELATED WORDS IN A GRID</string>
+		<string>IN WRDLNK YOUR CHALLENGE IS TO FIND THE RELATED WORDS IN A GRID.</string>
 		<key>sub_title2_text</key>
-		<string>WORDS JOIN TO MAKE OTHER WORDS</string>
+		<string>WORDS JOIN TO MAKE OTHER WORDS.</string>
 		<key>next_page_text</key>
 		<string>FIND OUT MORE &gt;</string>
 		<key>next_page_button</key>
@@ -26,9 +26,9 @@
 		<key>main_title_text</key>
 		<string>TOUCH TO LINK WORD</string>
 		<key>sub_title1_text</key>
-		<string>WHEN YOU KNOW A WORD JUST SELECT THE MISSING LETTER TO COMPLETE THE WORD</string>
+		<string>WHEN YOU KNOW A WORD JUST SELECT THE MISSING LETTER TO COMPLETE THE WORD.</string>
 		<key>sub_title2_text</key>
-		<string>THE WORDS ARE RELATED IN SOME WAY</string>
+		<string>THE WORDS ARE RELATED IN SOME WAY.</string>
 		<key>next_page_text</key>
 		<string>NEXT &gt;</string>
 		<key>next_page_button</key>
@@ -42,9 +42,9 @@
 		<key>info_image_filename</key>
 		<string>wrdlnk_mainmenu_colorblind.png</string>
 		<key>sub_title1_text</key>
-		<string>COLLECT POINTS FOR ACCURACY OR SPEED</string>
+		<string>COLLECT POINTS FOR ACCURACY OR SPEED.</string>
 		<key>sub_title2_text</key>
-		<string>YOU CAN CHANGE YOUR GAME SCENE</string>
+		<string>YOU CAN CHANGE YOUR GAME SCENE.</string>
 		<key>next_page_text</key>
 		<string>NEXT &gt;</string>
 		<key>next_page_button</key>
@@ -58,9 +58,9 @@
 		<key>info_image_filename</key>
 		<string>wrdlnk_settings_nightmode</string>
 		<key>sub_title1_text</key>
-		<string>YOU MAY ATTEMPT TO FIND THE MIDDLE WORD FIRST</string>
+		<string>YOU MAY ATTEMPT TO FIND THE MIDDLE WORD FIRST.</string>
 		<key>sub_title2_text</key>
-		<string>WE HOPE YOU ENJOY WRDLNK AS MUCH AS WE DO</string>
+		<string>WE HOPE YOU ENJOY WRDLNK AS MUCH AS WE DO.</string>
 		<key>next_page_text</key>
 		<string>ENTER Wrdlnk &gt;</string>
 		<key>next_page_button</key>

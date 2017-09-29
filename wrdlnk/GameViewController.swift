@@ -16,6 +16,8 @@ class GameViewController: UIViewController {
     var wordList = WordList.sharedInstance
     var store = DataStore.sharedInstance
     
+    var imageView: UIImageView!
+    
     var filePath: String {
         let manager = FileManager.default
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
@@ -25,10 +27,52 @@ class GameViewController: UIViewController {
     
     deinit {
         print("deinit GameViewController")
+        self.removeFromParentViewController()
+    }
+    
+    private func getBackgroundColor() -> UIColor {
+        switch currentMode() {
+        case Mode.colorBlind:
+            let alpha = 1.0
+            return blackTile.withAlphaComponent(CGFloat(alpha))
+        case Mode.nightMode:
+            let alpha = 1.0
+            return blackTile.withAlphaComponent(CGFloat(alpha))
+        case Mode.pastel:
+            let alpha = 1.0
+            return pastelBackgroundTile.withAlphaComponent(CGFloat(alpha))
+        case Mode.normal:
+            let alpha = 1.0
+            return whiteTile.withAlphaComponent(CGFloat(alpha))
+        }
+    }
+
+    private func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
+    private func setImageView() {
+        let imageView = UIImageView(image: getImageWithColor(color: getBackgroundColor(), size: CGSize(width: 750, height: 1335)))
+        imageView.contentMode = .scaleAspectFill
+        self.view.addSubview(imageView)
+    }
+    
+    private func removeImageView() {
+        for view in self.view.subviews {
+            view.removeFromSuperview()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setImageView()
         
         AppDefinition.defaults.set(true, forKey: preferenceMemoryDataFileKey)
         
@@ -85,10 +129,7 @@ class GameViewController: UIViewController {
     }
     
     func setup() {
-        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
-        // including entities and graphs.
-        //if let scene = GKScene(fileNamed: "GameScene") {
-        if let scene = GKScene(fileNamed: "MainMenuScene") {
+            if let scene = GKScene(fileNamed: "MainMenuScene") {
             
             // Get the SKScene from the loaded GKScene
             if let sceneNode = scene.rootNode as! MainMenuScene? {
@@ -102,17 +143,18 @@ class GameViewController: UIViewController {
                 
                 // Present the scene
                 if let view = self.view as! SKView? {
-
-                    let transition = SKTransition.reveal(with: SKTransitionDirection.down, duration: 0.5)
+                    let transition = SKTransition.fade(with: self.view.backgroundColor!, duration: commonDelaySetting)
                     view.presentScene(sceneNode, transition: transition)
                     
                     // Adjust scene size to view bounds
                     sceneNode.size = view.bounds.size
                     
                     view.ignoresSiblingOrder = true
-                    
-                    //view.showsFPS = true
-                    //view.showsNodeCount = true
+                    #if SHOW_PERFORMANCE
+                        view.showsFPS = true
+                        view.showsNodeCount = true
+                    #endif
+                    removeImageView()
                 }
             }
         }

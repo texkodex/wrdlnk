@@ -25,7 +25,7 @@ let phraseSeparator = "|"
 // MARK:- VowelCount structure
 struct VowelCount {
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
-    static let CountersArchiveURL = DocumentsDirectory.appendingPathComponent("counters")
+    static let CountersArchiveURL = DocumentsDirectory.appendingPathComponent(StorageForCounters)
     
     public internal(set) var phrase: String
     public internal(set) var prefix: Int

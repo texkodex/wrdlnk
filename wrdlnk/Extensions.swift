@@ -23,43 +23,6 @@ enum SceneType {
     case Overlay
 }
 
-extension UIViewController {
-    var className: String {
-        return NSStringFromClass(self.classForCoder).components(separatedBy: ".").last!;
-    }
-    
-    func launchFromStoryboard(name: String, controller: String) {
-        let storyboard:UIStoryboard? = UIStoryboard(name: name, bundle: nil)
-        if let vc = storyboard?.instantiateViewController(withIdentifier: controller) {
-            let appDelegate: UIApplicationDelegate = UIApplication.shared.delegate!
-
-            delay(commonDelaySetting) {
-                appDelegate.window!?.rootViewController = vc
-                vc.willMove(toParentViewController: self)
-            }
-        }
-    }
-    
-    func resizeImageForFile(infoImageFileName: String)-> UIImage {
-        var infoImage: UIImage!
-        let platform = getPlatformNameString()
-        if platform.contains("iPad Pro (12.9)") || UIDevice.isiPadPro129 {
-            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:500, height: 889))
-        } else if platform.contains("iPad Pro") || UIDevice.isiPadPro97 {
-            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:350, height: 623))
-        } else if platform.contains("iPad Air 2") || UIDevice.isiPad {
-            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:305, height: 542))
-        } else if platform.contains("iPad Air")  || UIDevice.isiPad {
-            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:305, height: 542))
-        }
-        else if platform.contains("iPhone SE") || UIDevice.isiPhone5 {
-            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:90, height: 160))
-        } else {
-            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:140, height: 249))
-        }
-        return infoImage
-    }
-}
 
 extension UIView {
     func resizeView()-> CGAffineTransform {

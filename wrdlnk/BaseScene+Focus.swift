@@ -53,6 +53,7 @@ extension BaseScene {
             .gameAward,
             .awardDetail,
             .instructions,
+            .shareSwitch,
             .cancel,
             .moreInfo
         ]

@@ -192,13 +192,35 @@ extension StatData {
         return info.statQueue.pop()
     }
     
+    private func adjustThresholdIndices(isThreshold: Bool, copyIndex: Int) {
+        if isThreshold {
+            // adjust indices
+            let diff = copyIndex - info.statQueue.count
+            let lowerBound = AppDefinition.defaults.integer(forKey: preferenceAccuracyLowerBoundDataKey)
+            if lowerBound > diff {
+                AppDefinition.defaults.set(diff - lowerBound, forKey: preferenceAccuracyLowerBoundDataKey)
+                AppDefinition.defaults.set(diff - lowerBound, forKey: preferenceTimeLowerBoundDataKey)
+            } else {
+                AppDefinition.defaults.set(0, forKey: preferenceAccuracyLowerBoundDataKey)
+                AppDefinition.defaults.set(0, forKey: preferenceTimeLowerBoundDataKey)
+            }
+        }
+    }
+    
     func prune() {
+        let isThreshold = info.statQueue.isThreshold
+        var copyIndex = 0
+        if isThreshold {
+            // record indices
+            copyIndex = info.statQueue.count
+        }
         while info.statQueue.isThreshold {
             let pruneSize = Int(StatDataSize / 10)
             for _ in 0..<pruneSize {
                 _ = pop()
             }
         }
+        adjustThresholdIndices(isThreshold: isThreshold, copyIndex: copyIndex)
     }
     
     func purge() {

@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 class MainMenuScene: BaseScene {
-
+    
     
     override var backgroundNode: SKNode? {
         return childNode(withName: titleNodePath)!
@@ -19,7 +19,7 @@ class MainMenuScene: BaseScene {
     var titleButton: ButtonNode? {
         return backgroundNode?.childNode(withName: ButtonIdentifier.titleImage.rawValue) as? ButtonNode
     }
-
+    
     override var backgroundNodeOne: SKNode? {
         return childNode(withName: startNodePath)!
     }
@@ -43,7 +43,7 @@ class MainMenuScene: BaseScene {
     var gameAwardButton: ButtonNode? {
         return backgroundNodeThree?.childNode(withName: ButtonIdentifier.gameAward.rawValue) as? ButtonNode
     }
-
+    
     override var backgroundNodeFour: SKNode? {
         return childNode(withName: settingsMainNodePath)!
     }
@@ -105,7 +105,7 @@ class MainMenuScene: BaseScene {
         
         state = AppDefinition.defaults.bool(forKey: preferenceGameAwardEnabledKey)
         state ? enableButton(button: gameAwardButton, isSelected: state, focus: true) : enableButton(button: gameAwardButton, isSelected: state)
-
+        
         state = AppDefinition.defaults.bool(forKey: preferenceSettingsMainEnabledKey)
         state ? enableButton(button: settingsMainButton, isSelected: state, focus: true) : enableButton(button: settingsMainButton, isSelected: state)
         
@@ -153,6 +153,49 @@ class MainMenuScene: BaseScene {
         }
         
     }
+    
+    // MARK: - Touches
+    func touchDown(atPoint pos : CGPoint) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+    }
+    
+    func touchMoved(toPoint pos : CGPoint) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+    }
+    
+    func touchUp(atPoint pos : CGPoint) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        let touch =  touches.first
+        let positionInScene = touch!.location(in: self)
+        let touchedNode = self.atPoint(positionInScene)
+        
+        if let name = touchedNode.name {
+            if name == "titleImage" {
+                print("Touched titleImage")
+                let sequence = SKAction.sequence([.rotate(byAngle: .pi * 2, duration: 0.7)])
+                touchedNode.run(sequence)
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        
+        
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+    }
+    
 }
 
 

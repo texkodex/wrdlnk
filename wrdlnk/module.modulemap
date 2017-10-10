@@ -1,0 +1,73 @@
+module Firebase {
+  header "Firebase.h"
+  export *
+}
+
+// Facebook Bolts modules
+
+framework module Bolts {
+    umbrella header "Bolts.h"
+    
+    export *
+    module * { export * }
+    
+    explicit module BFAppLinkResolving {
+        header "BFAppLinkResolving.h"
+        export *
+    }
+    explicit module BFWebViewAppLinkResolver {
+        header "BFWebViewAppLinkResolver.h"
+        export *
+    }
+}
+
+module Facebook {
+    header "Facebook.h"
+    export *
+}
+
+framework module FBSDKCoreKit {
+    umbrella header "FBSDKCoreKit.h"
+    
+    export *
+    module * { export * }
+}
+
+framework module FBSDKLoginKit {
+    umbrella header "FBSDKLoginKit.h"
+    
+    export *
+    module * { export * }
+}
+
+framework module FBSDKShareKit {
+    umbrella header "FBSDKShareKit.h"
+    
+    export *
+    module * { export * }
+}
+
+// Twitter module map
+
+module Twitter {
+    header "Twitter.h"
+    export *
+}
+
+framework module TwitterCore {
+    umbrella header "TwitterCore.h"
+    
+    export *
+    module * { export * }
+}
+
+framework module TwitterKit {
+    umbrella header "TwitterKit.h"
+    
+    export *
+    module * { export * }
+    
+    link framework "AVFoundation"
+    link framework "CoreMedia"
+    link framework "SafariServices"
+}

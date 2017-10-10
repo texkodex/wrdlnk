@@ -68,7 +68,22 @@ func currentMode() -> Mode {
     return Mode.normal
 }
 
-
+func getBackgroundColor() -> UIColor {
+    switch currentMode() {
+    case Mode.colorBlind:
+        let alpha = 1.0
+        return blackTile.withAlphaComponent(CGFloat(alpha))
+    case Mode.nightMode:
+        let alpha = 1.0
+        return blackTile.withAlphaComponent(CGFloat(alpha))
+    case Mode.pastel:
+        let alpha = 1.0
+        return pastelBackgroundTile.withAlphaComponent(CGFloat(alpha))
+    case Mode.normal:
+        let alpha = 1.0
+        return whiteTile.withAlphaComponent(CGFloat(alpha))
+    }
+}
 
 class AppTheme {
     let nodeList = [ "//world/top/titleImage",
@@ -95,6 +110,8 @@ class AppTheme {
                      "//award/time/timeGoldCount",
                      "//award/time/timeSilverCount",
                      "//award/time/timeBronzeCount",
+                     "//award/social/ShareSwitch",
+                     "//award/social/ShareSwitch/focusRing",
                      "//world/switches/continue",
                      "//world/switches/continue/ContinueGame",
                      "//world/switches/continue/ContinueGame/focusRing",

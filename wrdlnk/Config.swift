@@ -19,6 +19,7 @@ struct AppDefinition {
     static let PropertyList = "plist"
     static let defaultsTag = "defaults"
     static let InitialDefaults = "initialDefaults"
+    static let InitialLogin = "initialLogin"
     static let DefaultBackground = "BackgroundColor"
     static let WalkthroughContent = "WalkThrough"
     static let PlayNotification = "PlayNotification"
@@ -49,6 +50,10 @@ let tileHeightLess2: CGFloat = 26.0
 let VisibleStateCount = 7
 let StatDataSize = 5000
 let GameLevelTime = 20
+
+let MesssageDisplayThreshold = 0.85
+let CommonDelaySetting = 0.7
+let MinimumAwardLevelForSharing = 6
 
 let StorageForStatItem = "ItemStat"
 let StorageForCounters = "Counters"
@@ -103,6 +108,7 @@ let statScoreNodePath = "//world/stat/score"
 let statTimerNodePath = "//world/stat/timer"
 
 let awardCountNodePath = "//world/award"
+let socialNodePath = "//world/award/social"
 let awardDescriptionLabelNodePath = "//world/top/levelDescription"
 let accuracyGoldCountNodePath = "//world/award/accuracy/accuracyGoldCount"
 let accuracySilverCountNodePath = "//world/award/accuracy/accuracySilverCount"
@@ -118,8 +124,6 @@ let timeSpeedBronzeMultiple = 2.0
 let overlayNodePath = "//world/action"
 let overlayActionYesNodePath = "//world/action/proceedAction"
 let overlayActionNoNodePath = "//world/action/cancelAction"
-
-let commonDelaySetting = 0.7
 
 let focusRingName = "focusRing"
 
@@ -151,6 +155,8 @@ let preferenceSettingsMainEnabledKey = "preference_settings_main_enabled"
 let preferenceGameAwardEnabledKey = "preference_game_award_enabled"
 let preferenceInAppPurchaseEnabledKey = "preference_inapp_purchase_enabled"
 let preferenceInstructionsEnabledKey = "preference_instructions_enabled"
+
+let preferenceShareSocialEnabledKey = "preference_share_social_enabled"
 
 let preferenceCurrentScoreKey = "preference_current_score"
 let preferenceHighScoreKey = "preference_high_score"
@@ -280,6 +286,9 @@ enum ViewElement:String {
     case cancelAction = "cancelAction"
     case actionNoSwitch = "ActionNoSwitch"
     
+    case social = "social"
+    case shareSwitch = "ShareSwitch"
+    
     static let types = [ titleImage, main, board, control, buttons, footer,
                          meaning, change,
                          prefixMeaning, linkMeaning, suffixMeaning,
@@ -309,7 +318,7 @@ enum ViewElement:String {
                          action,
                          proceedAction, actionYesSwitch,
                          cancelAction, actionNoSwitch,
-                         
+                         shareSwitch,
                         ]
 }
 

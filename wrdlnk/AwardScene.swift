@@ -8,14 +8,24 @@
 
 import SpriteKit
 import GameplayKit
+import Social
 
 class AwardScene: BaseScene {
-    
-    // MARK:- SKLabelNode
+    // MARK:- Nodes
     override var backgroundNodeOne: SKNode? {
         return childNode(withName: awardCountNodePath)!
     }
     
+    override var backgroundNodeTwo: SKNode? {
+        return childNode(withName: socialNodePath)!
+    }
+    
+    // MARK:- ButtonNode
+    var shareButton: ButtonNode? {
+        return backgroundNodeTwo?.childNode(withName: ButtonIdentifier.shareSwitch.rawValue) as? ButtonNode
+    }
+    
+    // MARK:- SKLabelNode
     var accuracyGoldCountLabel: SKLabelNode? {
         return backgroundNodeOne?.childNode(withName: accuracyGoldCountNodePath) as? SKLabelNode
     }
@@ -48,6 +58,14 @@ class AwardScene: BaseScene {
         get { return AppDefinition.defaults.integer(forKey: preferenceCurrentNumberOfDataPlaysKey) }
     }
     
+    var minimumAwardLevelForSharing:Bool {
+        get {
+            return AppDefinition.defaults.integer(forKey: preferenceAccuracyGoldCountKey)
+                    + AppDefinition.defaults.integer(forKey: preferenceAccuracySilverCountKey)
+                    + AppDefinition.defaults.integer(forKey: preferenceAccuracyBronzeCountKey) > MinimumAwardLevelForSharing
+        }
+    }
+
     var entities = [GKEntity()]
     var graphs = [String:GKGraph]()
     
@@ -55,6 +73,8 @@ class AwardScene: BaseScene {
     
     var statData = StatData.sharedInstance
     
+    let socialMediaManager:SocialMediaManager = SocialMediaManager()
+
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
         entities.removeAll()
@@ -70,20 +90,42 @@ class AwardScene: BaseScene {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
         resizeIfNeeded()
+        
+        processScores()
+    }
 
+    private func initializeScreenButtons() {
+        if minimumAwardLevelForSharing {
+            enableButton(button: shareButton)
+        } else {
+            disableButton(button: shareButton)
+        }
+    }
+    
+    private func processScores() {
         if currentNumberOfPlays < maxNumberOfPlays {
             processAccuracyScores()
         }
         processTimeScores()
     }
-
+    
     override func sceneDidLoad() {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")        
         let labelNode = self.scene?.childNode(withName: awardDescriptionLabelNodePath) as? SKLabelNode
         labelNode?.text = AppDefinition.defaults.string(forKey: preferenceAwardDescriptionInfoKey)
 
+        initializeScreenButtons()
+        
         AppTheme.instance.set(for: self)
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        let state = AppDefinition.defaults.bool(forKey: preferenceShareSocialEnabledKey)
+        if state && minimumAwardLevelForSharing {
+            print("share request")
+            shareAward()
+        }
     }
     
     func processAccuracyScores() {
@@ -201,6 +243,54 @@ class AwardScene: BaseScene {
         timeGoldCountLabel?.text = "\(goldCount)"
         timeSilverCountLabel?.text = "\(silverCount)"
         timeBronzeCountLabel?.text = "\(bronzeCount)"
+    }
+    
+    func actionButton() {
+        // Alert
+        let alert = UIAlertController(title: "Share", message: "Share WRDLNK award", preferredStyle: .actionSheet)
+        
+        let actionFacebook = UIAlertAction(title: "Share on Facebook", style: .default) { (action) in
+            self.shareAwardFacebook()
+        }
+        
+        let actionTwitter = UIAlertAction(title: "Share on Twitter", style: .default) { (action) in
+            self.shareAwardTwitter()
+        }
+        
+        let actionClose = UIAlertAction(title: "Cancel", style: .cancel) { (action) in }
+
+        // Add action to action sheet
+        alert.addAction(actionFacebook)
+        alert.addAction(actionTwitter)
+        alert.addAction(actionClose)
+        // Present alert
+        DispatchQueue.main.async {
+            self.view?.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        }
+        
+    }
+    
+    func shareAward() {
+        AppDefinition.defaults.set(false, forKey: preferenceShareSocialEnabledKey)
+        actionButton()
+    }
+    
+    func shareAwardFacebook() {
+        let image = self.getScreenshot(scene: self)
+        let device = UIDevice.isiPhone ? "iPhone" : "iPad"
+        let text = "WRDLNK Award Progress on \(device)"
+        let sharablePost = SharablePost(image:image, url:nil, text: text)
+        let vc = self.view?.window?.rootViewController
+        SocialMediaManager.shareOnFacebook(object: sharablePost, from: vc!)
+    }
+    
+    func shareAwardTwitter() {
+        let image = self.getScreenshot(scene: self)
+        let device = UIDevice.isiPhone ? "iPhone" : "iPad"
+        let text = "WRDLNK Award Progress on \(device)"
+        let sharablePost = SharablePost(image:image, url:nil, text: text)
+        let vc = self.view?.window?.rootViewController
+        SocialMediaManager.shareOnTwitter(object: sharablePost, from: vc!)
     }
 }
 

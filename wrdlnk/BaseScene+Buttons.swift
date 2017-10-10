@@ -37,6 +37,9 @@ extension BaseScene: ButtonNodeResponderType {
             case .soundSwitch:
                 toggleAudioSound(button: button)
             break
+            case .shareSwitch:
+                toggleShareSocial(button: button)
+            break
             case .scoreSwitch:
                 toggleGameScore(button: button)
             break

@@ -34,7 +34,7 @@ extension SKScene {
     }
     
     func transitionToScene(destination: SceneType, sendingScene: SKScene, startNewGame : Bool = false, continueGame: Bool = false) {
-        let transDuration = commonDelaySetting
+        let transDuration = CommonDelaySetting
         let transition = SKTransition.fade(with: sendingScene.backgroundColor, duration: transDuration)
         
         unowned var scene = SKScene()
@@ -57,9 +57,10 @@ extension SKScene {
         case .GameAward:
             scene = IAPurchaseScene(fileNamed: "AwardScene")!
         case .Instructions:
-            let instructionCntroller = UIViewController()
-            delay(commonDelaySetting) {
-                instructionCntroller.launchFromStoryboard(name: StoryboardName.Onboarding.rawValue, controller: "WalkThroughPageViewController")
+            let instructionController = UIViewController()
+
+            delay(CommonDelaySetting) {
+                instructionController.launchFromStoryboard(name: StoryboardName.Onboarding.rawValue, controller: "WalkThroughPageViewController")
             }
             return
         case .Overlay:
@@ -146,5 +147,19 @@ extension SKScene {
         }
     }
     
+    func getScreenshot(scene: SKScene) -> UIImage {
+        let snapshotView = scene.view!.snapshotView(afterScreenUpdates: true)
+        let bounds = UIScreen.main.bounds
+        
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0)
+        
+        snapshotView?.drawHierarchy(in: bounds, afterScreenUpdates: true)
+        
+        let screenshotImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        
+        UIGraphicsEndImageContext()
+        
+        return screenshotImage;
+    }
 }
 

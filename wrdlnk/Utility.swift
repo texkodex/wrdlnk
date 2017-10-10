@@ -14,6 +14,7 @@ public func delay(_ delay:Double, closure:@escaping ()->()) {
         deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }
 
+
 // Resize image
 func imageResize(imageObj:UIImage, sizeChange:CGSize)-> UIImage {
     

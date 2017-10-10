@@ -44,6 +44,8 @@ enum ButtonIdentifier: String {
     case actionYesSwitch = "ActionYesSwitch"
     case actionNoSwitch = "ActionNoSwitch"
     
+    case shareSwitch = "ShareSwitch"
+    
     static let allButtonIdentifiers: [ButtonIdentifier]
         = [ .titleImage,
             .proceedToNextScene,    .provideMeaning,
@@ -61,7 +63,8 @@ enum ButtonIdentifier: String {
             .gameAward,
             .awardDetail,
             
-            .actionYesSwitch,       .actionNoSwitch
+            .actionYesSwitch,       .actionNoSwitch,
+            .shareSwitch
     ]
     
     
@@ -119,6 +122,8 @@ enum ButtonIdentifier: String {
             return fullTextureName("enterOn")
         case .actionNoSwitch:
             return fullTextureName("exitOn")
+        case .shareSwitch:
+            return fullTextureName("share")
         }
     }
     
@@ -176,6 +181,8 @@ enum ButtonIdentifier: String {
             return fullTextureName("enterOff")
         case .actionNoSwitch:
             return fullTextureName("exitOn")
+        case .shareSwitch:
+            return fullTextureName("share")
         }
     }
 

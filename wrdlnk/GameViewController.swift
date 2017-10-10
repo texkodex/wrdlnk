@@ -29,46 +29,7 @@ class GameViewController: UIViewController {
         print("deinit GameViewController")
         self.removeFromParentViewController()
     }
-    
-    private func getBackgroundColor() -> UIColor {
-        switch currentMode() {
-        case Mode.colorBlind:
-            let alpha = 1.0
-            return blackTile.withAlphaComponent(CGFloat(alpha))
-        case Mode.nightMode:
-            let alpha = 1.0
-            return blackTile.withAlphaComponent(CGFloat(alpha))
-        case Mode.pastel:
-            let alpha = 1.0
-            return pastelBackgroundTile.withAlphaComponent(CGFloat(alpha))
-        case Mode.normal:
-            let alpha = 1.0
-            return whiteTile.withAlphaComponent(CGFloat(alpha))
-        }
-    }
 
-    private func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        color.setFill()
-        UIRectFill(rect)
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return image
-    }
-    
-    private func setImageView() {
-        let imageView = UIImageView(image: getImageWithColor(color: getBackgroundColor(), size: CGSize(width: 750, height: 1335)))
-        imageView.contentMode = .scaleAspectFill
-        self.view.addSubview(imageView)
-    }
-    
-    private func removeImageView() {
-        for view in self.view.subviews {
-            view.removeFromSuperview()
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -143,7 +104,7 @@ class GameViewController: UIViewController {
                 
                 // Present the scene
                 if let view = self.view as! SKView? {
-                    let transition = SKTransition.fade(with: self.view.backgroundColor!, duration: commonDelaySetting)
+                    let transition = SKTransition.fade(with: self.view.backgroundColor!, duration: CommonDelaySetting)
                     view.presentScene(sceneNode, transition: transition)
                     
                     // Adjust scene size to view bounds

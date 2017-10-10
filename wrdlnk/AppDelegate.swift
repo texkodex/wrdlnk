@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        FirebaseApp.configure()
         initialize()
         self.window?.makeKeyAndVisible()
         return true
@@ -26,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         AppDefinition.defaults.register(
             defaults: [AppDefinition.InitialDefaults: false,
+                       AppDefinition.InitialLogin: false,
              AppDefinition.DefaultBackground: [105.0/255.0, 111.0/255.0, 120.0/255.0, 1.0]])
         
         let path = Bundle.main.path(forResource: AppDefinition.UserDefaultsTag, ofType: AppDefinition.PropertyList);

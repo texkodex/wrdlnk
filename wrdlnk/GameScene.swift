@@ -27,7 +27,7 @@ class GameScene: BaseScene {
     var definitionButton: ButtonNode? {
         return backgroundNodeOne?.childNode(withName: ButtonIdentifier.provideMeaning.rawValue) as? ButtonNode
     }
-
+    
     var graphButton: ButtonNode? {
         return backgroundNodeTwo?.childNode(withName: ButtonIdentifier.showGraph.rawValue) as? ButtonNode
     }
@@ -47,9 +47,9 @@ class GameScene: BaseScene {
         didSet {
             let imageName = graphOff ? "graphOff" : "graphOn"
             graphButton?.selectedTexture = SKTexture(imageNamed: imageName)
-    
+            
             AppDefinition.defaults.set(graphOff, forKey: preferenceShowGraphKey)
-
+            
         }
     }
     
@@ -64,7 +64,7 @@ class GameScene: BaseScene {
     override var backgroundNodeFour: SKNode? {
         return childNode(withName: statNodePath)!
     }
-
+    
     var playerScoreLabel: SKLabelNode? {
         return backgroundNodeFour?.childNode(withName: statScoreNodePath) as? SKLabelNode
     }
@@ -72,7 +72,7 @@ class GameScene: BaseScene {
     var highScoreLabel: SKLabelNode? {
         return backgroundNodeFour?.childNode(withName: statHighScoreNodePath) as? SKLabelNode
     }
-
+    
     var playerTimerLabel: SKLabelNode? {
         return backgroundNodeFour?.childNode(withName: statTimerNodePath) as? SKLabelNode
     }
@@ -96,7 +96,7 @@ class GameScene: BaseScene {
     var spriteNodeList: [SKSpriteNode] = []
     
     var matchList: [String] = []
-
+    
     var liveData = LiveData.sharedInstance
     
     var keyPlayNotificationDictionary = [String:String]()
@@ -114,7 +114,7 @@ class GameScene: BaseScene {
             AppDefinition.defaults.set(newValue, forKey: preferenceStartGameEnabledKey)
         }
     }
-
+    
     var resetTimer:Bool {
         get {
             return AppDefinition.defaults.bool(forKey: preferenceContinueGameEnabledKey)
@@ -123,13 +123,13 @@ class GameScene: BaseScene {
             AppDefinition.defaults.set(newValue, forKey: preferenceContinueGameEnabledKey)
         }
     }
-
+    
     var initializeTimer:Bool {
         get {
             return AppDefinition.defaults.bool(forKey: preferenceSetTimerEnabledKey)
         }
     }
-
+    
     
     var playerScore:Int {
         get {
@@ -148,7 +148,7 @@ class GameScene: BaseScene {
             return AppDefinition.defaults.integer(forKey: preferenceGameLevelTimeKey)
         }
     }
-
+    
     var startTime:Int  {
         get {
             return AppDefinition.defaults.integer(forKey: preferenceStartTimeKey)
@@ -224,19 +224,19 @@ class GameScene: BaseScene {
         notificationMessageList.append(modePrefix + keyPlayNotificationDictionary["message_super"]!)
         notificationMessageList.append(modePrefix + keyPlayNotificationDictionary["message_goodwork"]!)
         notificationMessageList.append(modePrefix + keyPlayNotificationDictionary["message_fabulous"]!)
-
+        
         awardMessageList.append(modePrefix + keyPlayNotificationDictionary["message_amazing"]!)
         awardMessageList.append(modePrefix + keyPlayNotificationDictionary["message_topnotch"]!)
         awardMessageList.append(modePrefix + keyPlayNotificationDictionary["message_yeah"]!)
         awardMessageList.append(modePrefix + keyPlayNotificationDictionary["message_award"]!)
-
+        
         completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_yeah"]!)
         completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_goodwork"]!)
         completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_super"]!)
         completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_amazing"]!)
         completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_topnotch"]!)
         completedMessageList.append(modePrefix + keyPlayNotificationDictionary["message_fantastic"]!)
-
+        
     }
     
     func playNotificationMessage()->String? {
@@ -268,7 +268,7 @@ class GameScene: BaseScene {
     }
     
     func initComplete() {
-         initialize.doOnce = true
+        initialize.doOnce = true
     }
     
     func testIfInit() -> Bool {
@@ -338,8 +338,8 @@ class GameScene: BaseScene {
             }
             
         } else {
-         liveData.deleteLiveData()
-         counters.deleteVowelCount()
+            liveData.deleteLiveData()
+            counters.deleteVowelCount()
         }
     }
     
@@ -370,7 +370,7 @@ class GameScene: BaseScene {
         }
         
     }
-            
+    
     func update(_ currentTime: TimeInterval, for scene: SKScene) {
         
     }
@@ -555,12 +555,14 @@ class GameScene: BaseScene {
             matchSprite.unhighlight(spriteName: matchSprite.name!)
         }
     }
-
+    
     func messageFrequency() -> Double {
         let displayOptional = random(9)
         print("displayOptional is: \(displayOptional)")
         var pause:Double = 0.3
-        if  displayOptional % 3 == 0 {
+        let condition = displayOptional % 3 == 0
+            && counters.accuracy() > Float(MesssageDisplayThreshold)
+        if  condition {
             playTextAnimated(fileName: completedMessage())
             pause = 2.0
         }
@@ -673,12 +675,12 @@ class GameScene: BaseScene {
         
         let bgframe = self.childNode(withName: backgroundNodePath)!.frame
         let moveToArray = [CGPoint(x: bgframe.midX + (2 * tileWidth), y: bgframe.minY * positionScale),
-                         CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.minY * positionScale),
-                         CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.minY * positionScale) ]
+                           CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.minY * positionScale),
+                           CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.minY * positionScale) ]
         
         let moveFromArray = [CGPoint(x: bgframe.midX + (2 * tileWidth), y: max(bgframe.midY + (7 * tileHeight), bgframe.maxY - tileHeight)),
-                           CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.maxY * positionScale),
-                           CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.maxY * positionScale) ]
+                             CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.maxY * positionScale),
+                             CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.maxY * positionScale) ]
         let fromPos = moveFromArray[random(3)]
         let toPos = moveToArray[random(3)]
         messageNode.position = fromPos

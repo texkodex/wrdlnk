@@ -109,5 +109,10 @@ extension ButtonNodeResponderType where Self: BaseScene {
         }
     }
     
+    func toggleShareSocial(button: ButtonNode) {
+        let state = AppDefinition.defaults.bool(forKey: preferenceShareSocialEnabledKey)
+        button.isSelected = !state
+        AppDefinition.defaults.set(button.isSelected, forKey: preferenceShareSocialEnabledKey)
+    }
 }
 

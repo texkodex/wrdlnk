@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 
+public let random: (Int) -> Int = { Int(arc4random_uniform(UInt32($0))) }
+
 public func delay(_ delay:Double, closure:@escaping ()->()) {
     DispatchQueue.main.asyncAfter(
         deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }
-
 
 // Resize image
 func imageResize(imageObj:UIImage, sizeChange:CGSize)-> UIImage {
@@ -28,6 +29,29 @@ func imageResize(imageObj:UIImage, sizeChange:CGSize)-> UIImage {
     UIGraphicsEndImageContext() // !!!
     return scaledImage!
 }
+
+let preamble = "\(#file):: \(#function) at line \(#line)"
+// If showTraceOutput is true, then generate trace output in the debugger window.
+// Set false to disable output.
+var showTraceOutput = true
+
+// Queue used to serialize trace output from multiple threads
+let traceSyncQueue = DispatchQueue(label: "com.wrdlnk.serialTraceQueue", qos: .default)
+
+func getTraceFunc(_ name:String, traceSyncQueue: DispatchQueue, showTraceOutput:Bool) -> ((String, () -> String) -> Void) {
+    func trace(_ functionName: String, messageExpression: () -> String) -> Void {
+        if showTraceOutput {
+            traceSyncQueue.sync() {
+                let threadId = pthread_mach_thread_np(pthread_self())
+                print("\(name) (\(threadId)): \(functionName): \(messageExpression())")
+            }
+        }
+    }
+    return trace
+}
+
+// Queue used to serialize trace output from multiple threads
+let trace = getTraceFunc("wrdlnk", traceSyncQueue: traceSyncQueue, showTraceOutput: showTraceOutput)
 
 // Device sizes
 extension UIDevice {

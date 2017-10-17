@@ -23,6 +23,7 @@ struct AppDefinition {
     static let DefaultBackground = "BackgroundColor"
     static let WalkthroughContent = "WalkThrough"
     static let PlayNotification = "PlayNotification"
+    static let FirebaseConfigFile = "GoogleService-firebase-Info"
 }
 
 enum StoryboardName : String {
@@ -199,24 +200,24 @@ let minClickToSeeDefinition = 100
 let matchLetterValue = 2
 let maxMatchingTimeSec = 180
 
-let whiteTile = UIColor(colorLiteralRed: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
-let blackTile = UIColor(colorLiteralRed: 0 / 0, green: 0 / 255, blue: 0 / 255, alpha: 1)
-let darkGrayTile = UIColor(colorLiteralRed: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.333)
-let lightGrayTile = UIColor(colorLiteralRed: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.667)
-let grayTile = UIColor(colorLiteralRed: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 0.5)
-let blueTile = UIColor(colorLiteralRed: 77 / 255, green: 146 / 255, blue: 223 / 255, alpha: 1)
-let yellowTile = UIColor(colorLiteralRed: 241 / 255, green: 224 / 255, blue: 95 / 255, alpha: 1)
-let greenTileOld = UIColor(colorLiteralRed: 129 / 255, green: 209 / 255, blue: 53 / 255, alpha: 1)
-let greenTile = UIColor(colorLiteralRed: 182 / 255, green: 220 / 255, blue: 138 / 255, alpha: 1)
-let redTile = UIColor(colorLiteralRed: 252 / 255, green: 13 / 255, blue: 27 / 255, alpha: 1)
-let pastelForegroundTile = UIColor(colorLiteralRed: 255 / 255, green: 217 / 255, blue: 170 / 255, alpha: 1)
-let pastelBackgroundTile = UIColor(colorLiteralRed: 252 / 255, green: 253 / 255, blue: 223 / 255, alpha: 1)
-let pastelFontColor = UIColor(colorLiteralRed: 98 / 255, green: 184 / 255, blue: 165 / 255, alpha: 1)
-let pastelFontColor2 = UIColor(colorLiteralRed: 214 / 255, green: 222 / 255, blue: 255 / 255, alpha: 1)
+let whiteTile = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+let blackTile = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+let darkGrayTile = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+let lightGrayTile = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+let grayTile = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+let blueTile = #colorLiteral(red: 0.3019607843, green: 0.5725490196, blue: 0.8745098039, alpha: 1)
+let yellowTile = #colorLiteral(red: 0.9450980392, green: 0.8784313725, blue: 0.3725490196, alpha: 1)
+let greenTileOld = #colorLiteral(red: 0.5058823529, green: 0.8196078431, blue: 0.2078431373, alpha: 1)
+let greenTile = #colorLiteral(red: 0.7137254902, green: 0.862745098, blue: 0.5411764706, alpha: 1)
+let redTile = #colorLiteral(red: 0.9882352941, green: 0.05098039216, blue: 0.1058823529, alpha: 1)
+let pastelForegroundTile = #colorLiteral(red: 1, green: 0.8509803922, blue: 0.6666666667, alpha: 1)
+let pastelBackgroundTile = #colorLiteral(red: 0.9882352941, green: 0.9921568627, blue: 0.8745098039, alpha: 1)
+let pastelFontColor = #colorLiteral(red: 0.368627451, green: 0.7215686275, blue: 0.6470588235, alpha: 1)
+let pastelFontColor2 = #colorLiteral(red: 0.8392156863, green: 0.8705882353, blue: 1, alpha: 1)
 
 // Mode colors
-let grayCanvas = UIColor(colorLiteralRed: 230 / 255, green: 230 / 255, blue: 230 / 255, alpha: 1)
-let whiteCanvas = UIColor(colorLiteralRed: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
+let grayCanvas = #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1)
+let whiteCanvas = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 
 struct viewNode {
     let name: String

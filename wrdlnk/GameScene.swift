@@ -82,13 +82,23 @@ class GameScene: BaseScene {
     
     var graphs = [String:GKGraph]()
     
-    var wordList = WordList.sharedInstance
+    var wordList: WordListBox {
+        get { return WordListBox.sharedInstance }
+    }
     
-    var lastSpriteClick: SKSpriteNode? = nil
+    var lastSpriteClick: SKSpriteNode?
     
-    var counters = VowelCount.sharedInstance
+    var counters : VowelCountBox {
+        get { return VowelCountBox.sharedInstance }
+    }
     
-    var statData = StatData.sharedInstance
+    var liveData : LiveDataBox {
+        get { return LiveDataBox.sharedInstance }
+    }
+    
+    var statData : StatDataBox {
+        get { return StatDataBox.sharedInstance }
+    }
     
     let nodeMap = [ViewElement.main.rawValue, ViewElement.board.rawValue,
                    ViewElement.control.rawValue, ViewElement.buttons.rawValue]
@@ -96,8 +106,6 @@ class GameScene: BaseScene {
     var spriteNodeList: [SKSpriteNode] = []
     
     var matchList: [String] = []
-    
-    var liveData = LiveData.sharedInstance
     
     var keyPlayNotificationDictionary = [String:String]()
     var contentPlist:[[String:String]] = []
@@ -164,12 +172,7 @@ class GameScene: BaseScene {
     
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        if counters.match < counters.total {
-            wordList.stay()
-        }
-        
-        liveData.saveLiveData()
-        counters.saveVowelCount()
+        preserve()
         readyForInit()
         entities.removeAll()
         graphs.removeAll()
@@ -179,6 +182,16 @@ class GameScene: BaseScene {
         self.removeAllChildren()
         self.removeAllActions()
         self.view?.presentScene(nil)
+    }
+    
+    private func preserve() {
+        if !counters.matchComplete() {
+            wordList.stay()
+        }
+        wordList.saveWordList()
+        statData.saveData()
+        liveData.saveLiveData()
+        counters.saveVowelCount()
     }
     
     override func didMove(to view: SKView) {
@@ -298,6 +311,7 @@ class GameScene: BaseScene {
         
         wordList.setSelectedRow(row: nil)
         
+        loadSavedSettings()
         // Enable buttons if data available
         initializeScreenButtons()
         
@@ -308,6 +322,10 @@ class GameScene: BaseScene {
         highScoreLabel?.text = "HighScore: " + AppDefinition.defaults.integer(forKey: "highscore").description
         
         replaySelection()
+    }
+    
+    private func loadSavedSettings() {
+        statData.loadData()
     }
     
     override func didChangeSize(_ oldSize: CGSize) {
@@ -329,6 +347,7 @@ class GameScene: BaseScene {
             counters.loadVowelCount()
             // get match count
             for (_, selection) in liveData.allItems().enumerated() {
+                if selection.position.lowercased().contains("buttons") { continue }
                 showBoardTile(position: selection.position)
                 let boardNode: SKNode? = childNode(withName: boardNodePath)
                 let matchSprite = boardNode?.childNode(withName: selection.position) as! SKSpriteNode
@@ -357,7 +376,8 @@ class GameScene: BaseScene {
         case .main: break
         case .board:
             params.nodeTile?.setTileTexture(tileElement: TileElement(rawValue: "blue_tile")!)
-            counters = params.nodeTile!.addWords(word: wordList.getWords()!)
+            let counter = params.nodeTile!.addWords(word: wordList.getWords()!)
+            counters.setup(vowelCount: counter)
             break
         case .buttons:
             params.nodeTile?.setTileTexture(tileElement: TileElement(rawValue: "green_tile")!, buttonNode: true)
@@ -382,31 +402,29 @@ class GameScene: BaseScene {
     func checkIfNodeProcessed(location: CGPoint, nodesAtPoint: [SKNode]) -> Bool {
         for node in nodesAtPoint {
             let labelNode = node as? SKLabelNode
-            if labelNode?.contains(location) != nil {
-                if (labelNode?.alpha)! < CGFloat(1) { return false }
-            }
+            guard let _ = labelNode?.contains(location) else { continue }
+            if (labelNode?.alpha)! < CGFloat(1) { return false }
         }
         return false
     }
     
-    func getTileMap(location: CGPoint, nodesAtPoint: [SKNode]) -> (tilemap: SKTileMapNode?, name: String?) {
+    func getTileMap(location: CGPoint, nodesAtPoint: [SKNode]) -> (tilemap: SKTileMapNode?, mapnode: SKNode?, name: String?) {
         for node in nodesAtPoint {
             if debugInfo { print("node in list: \((node.name)!)") }
-            let tileMapNode = node as? SKTileMapNode
-            if tileMapNode != nil && (tileMapNode?.contains(location)) != nil {
-                if debugInfo { print("point found at: \((tileMapNode?.name)!)") }
-                return (tileMapNode, (tileMapNode?.name)!)
+            guard let tileMapNode = node as? SKTileMapNode else { continue }
+            let atPoint = self.atPoint(location)
+            if self.contains(location) {
+                if debugInfo { print("point found at: \(String(describing: tileMapNode.name))") }
+                return (tileMapNode, atPoint, tileMapNode.name)
             }
         }
-        return (nil, nil)
+        return (nil, nil, nil)
     }
     
     func getTileMapByName(nodesAtPoint: [SKNode], name: String) -> SKTileMapNode? {
         for node in nodesAtPoint {
-            let tileMapNode = node as? SKTileMapNode
-            if tileMapNode != nil && (tileMapNode?.name?.contains(name)) != nil {
-                return tileMapNode
-            }
+            guard let tileMapNode = node as? SKTileMapNode, let _ = tileMapNode.name?.contains(name) else { continue }
+            return tileMapNode
         }
         return nil
     }
@@ -425,7 +443,7 @@ class GameScene: BaseScene {
     }
     
     // MARK: - Gesture recognizer
-    func handleTapFrom(recognizer: UITapGestureRecognizer) {
+    @objc func handleTapFrom(recognizer: UITapGestureRecognizer) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         if recognizer.state != .ended {
             return
@@ -437,95 +455,128 @@ class GameScene: BaseScene {
         let nodesAtPoint = self.nodes(at: location)
         
         let nodeData = getTileMap(location: location, nodesAtPoint: nodesAtPoint)
+    
         guard let tileMap = nodeData.tilemap else { return }
         
         guard let tileSprite = tileMap.getSpriteNode(nodesAtPoint: nodesAtPoint) else { return }
         
-        if isSameCellClicked(sprite: tileSprite) { return }
+        if isSameCellClicked(prevSprite: &lastSpriteClick, sprite: tileSprite) { return }
         
         countClick(sprite: tileSprite)
         
-        processTileSprite(sprite: tileSprite, handler: wordRowSelected(name:))
-    }
-    
-    func isSameCellClicked(sprite: SKSpriteNode) -> Bool {
-        if lastSpriteClick != nil && lastSpriteClick?.name == sprite.name {
-            return true
-        } else {
-            lastSpriteClick = sprite
+        let highlight = processSpriteHighlight(sprite: tileSprite, spriteNodeList: &spriteNodeList)
+        if highlight.nodeHighlight {
+           processTileSprite(spriteNode: highlight.spriteNode!, spriteNodeName: highlight.spriteNodeName!, wordlist: wordList, spriteNodeList: &spriteNodeList, handler: wordRowSelected(name:wordlist:))
         }
-        return false
     }
     
-    func wordRowSelected(name: String) {
+    private func processSpriteHighlight(sprite: SKSpriteNode?, spriteNodeList: inout [SKSpriteNode]) -> (nodeHighlight: Bool, spriteNode: SKSpriteNode?, spriteNodeName: String?) {
+        guard let spriteNode = sprite, let spriteNodeName = spriteNode.name,
+            let parentName = sprite?.parent?.name else {
+                return (false, nil, nil)
+        }
+        
+        if let index = uniqueSpriteList(name: parentName, spriteNodeList: spriteNodeList) {
+            let lastSprite = spriteNodeList.remove(at: index)
+            lastSprite.unhighlight(spriteName: lastSprite.name!)
+        }
+        
+        if (inMatchList(list: spriteNodeList + [spriteNode])) { return (false, nil, nil) }
+        
+        spriteNode.highlight(spriteName: spriteNodeName)
+        
+        return (true, spriteNode, spriteNodeName)
+    }
+    
+    private func processTileSprite(spriteNode: SKSpriteNode, spriteNodeName: String, wordlist: WordListBox, spriteNodeList: inout [SKSpriteNode], handler:(String, WordListBox)->Void) {
+        
+        
+        let queue = DispatchQueue(label: "com.teknowsys.processtilesprite.queue")
+        queue.sync {
+            handler(spriteNodeName, wordlist)
+            spriteNodeList.append(spriteNode)
+            checkForSpriteMatch(spriteList: &spriteNodeList)
+        }
+        
+        showDefinitionButton()
+    }
+    
+    private func isSameCellClicked(prevSprite: inout SKSpriteNode?, sprite: SKSpriteNode) -> Bool {
+        guard let _ = prevSprite else {
+            prevSprite = sprite
+            return false
+        }
+        var same = false
+        if prevSprite?.name == sprite.name  {
+            same = true
+        }
+        prevSprite = sprite
+        return same
+    }
+    
+    func wordRowSelected(name: String, wordlist: WordListBox) {
         print("word row name is: \(name)")
         let parts = name.characters.split{$0 == "_"}.map(String.init)
         let column = Int(parts[parts.count - 1])!
         print("extract column is: \(column)")
-        wordList.setSelectedRow(row: VowelRow(rawValue: column)!)
+        let vowelRow = VowelRow(rawValue: column)!
+        wordList.setSelectedRow(row: vowelRow)
         
         if (name.contains(boardTileMap)) {
             counters.boardClickAttempt()
         }
     }
     
-    func matchListAdd(list: [SKSpriteNode]) {
-        for (index, _) in list.enumerated() {
-            if !(list[index].parent?.name?.hasPrefix("board"))! { continue }
-            if !matchList.contains(list[index].name!) {
-                matchList.append(list[index].name!)
-            }
-            let data = LiveData(position: list[index].name!)
-            if !liveData.contains(item: data) {
-                liveData.addItem(item: data)
+    func matchListAdd( matchListItems: inout [String], list: [SKSpriteNode]) {
+        let queue = DispatchQueue(label: "com.teknowsys.wrdlnk.matchlistadd")
+        queue.sync {
+            for (index, _) in list.enumerated() {
+                guard let _ = list[index].parent?.name?.hasPrefix("board"), let name = list[index].name else { continue }
+                
+                if matchListItems.isEmpty || !matchListItems.contains(name) {
+                    matchListItems.append(name)
+                }
+
+                if liveData.isEmpty() || !liveData.contains(item: LiveData(position: name)) {
+                    liveData.addItem(item: LiveData(position: name))
+                }
             }
         }
     }
     
     func inMatchList(list: [SKSpriteNode]) ->Bool {
+        if liveData.isEmpty() { return false }
         var count = 0
         var lCount = 0
         for (index, _) in list.enumerated() {
-            if matchList.contains(list[index].name!) {
+            guard let name = list[index].name else { continue }
+            if !matchList.isEmpty && matchList.contains(name) {
                 count += 1
             }
-            let data = LiveData(position: list[index].name!)
-            if liveData.contains(item: data) {
+    
+            if !liveData.isEmpty() && liveData.contains(item: LiveData(position: name)) {
                 lCount += 1
             }
         }
         return count > 0 || lCount > 0
     }
     
-    func processTileSprite(sprite: SKSpriteNode?, handler:(String)->Void) {
-        let index = uniqueSpriteList(name: (sprite?.parent?.name)!)
-        if index != nil {
-            let lastSprite = spriteNodeList.remove(at: index!)
-            lastSprite.unhighlight(spriteName: lastSprite.name!)
-        }
-        if (inMatchList(list: spriteNodeList + [sprite!])) { return }
-        sprite?.highlight(spriteName: (sprite?.name)!)
-        handler((sprite?.name)!)
-        spriteNodeList.append(sprite!)
-        checkForSpriteMatch()
-        showDefinitionButton()
-    }
-    
-    func uniqueSpriteList(name: String) -> Int? {
+    func uniqueSpriteList(name: String, spriteNodeList: [SKSpriteNode]) -> Int? {
         for (index, spriteNode) in spriteNodeList.enumerated() {
-            if spriteNode.parent?.name == name { return index }
+            guard let parentName = spriteNode.parent?.name else { continue }
+            if parentName == name { return index }
         }
         return nil
     }
     
-    func checkForSpriteMatch() {
-        if spriteNodeList.count > 1 {
-            if spriteNodeList.first?.getLabelTextForSprite() == spriteNodeList.last?.getLabelTextForSprite() {
+    func checkForSpriteMatch(spriteList: inout [SKSpriteNode]) {
+        if spriteList.count > 1 {
+            if spriteList.first?.getLabelTextForSprite() == spriteList.last?.getLabelTextForSprite() {
                 print("Match found between tile map character buttons character")
-                if (inMatchList(list: spriteNodeList)) { return }
-                matchListAdd(list: spriteNodeList)
+                if (inMatchList(list: spriteList)) { return }
+                matchListAdd(matchListItems: &matchList, list: spriteList)
                 counters.clickMatch()
-                unhighlightAll()
+                unhighlightAll(spriteList: &spriteList)
                 checkForAllMatches()
             } else {
                 playSoundForEvent(soundEvent: .error)
@@ -533,16 +584,16 @@ class GameScene: BaseScene {
         }
     }
     
-    func unhighlightAll() {
-        let count = spriteNodeList.count
+    func unhighlightAll(spriteList: inout [SKSpriteNode]) {
+        let count = spriteList.count
         for _ in 0..<count {
-            removeAndUnhighlightLabel()
+            removeAndUnhighlightLabel(spriteList: &spriteList)
         }
     }
     
-    func removeAndUnhighlightLabel() {
-        if spriteNodeList.count > 0 {
-            let matchSprite = spriteNodeList.remove(at: 0)
+    func removeAndUnhighlightLabel(spriteList: inout [SKSpriteNode]) {
+        if spriteList.count > 0 {
+            let matchSprite = spriteList.remove(at: 0)
             matchSprite.unhighlight(spriteName: matchSprite.name!)
             let matchLabel = matchSprite.getLabelFromSprite()
             matchLabel?.vowelSet()
@@ -576,7 +627,8 @@ class GameScene: BaseScene {
             playSoundForEvent(soundEvent: .great2)
             wordList.setMatchCondition()
             progressSummary()
-            statData.saveData()
+            
+            preserve()
             enableGraphDisplay()
             readyForInit()
             
@@ -591,7 +643,9 @@ class GameScene: BaseScene {
             return
         } else {
             playSoundForEvent(soundEvent: .yes)
-            wordList.clearMatchCondition()
+            if !wordList.isEmpty() {
+                wordList.clearMatchCondition()
+            }
         }
     }
     
@@ -653,7 +707,7 @@ class GameScene: BaseScene {
     
     // MARK:- play progress text
     func playTextAnimated(fileName: String?) {
-        guard (fileName != nil) else { return }
+        guard let _ = fileName else { return }
         
         var positionScale:CGFloat!
         var spriteScale: CGFloat!

@@ -34,10 +34,10 @@ enum Color:Int {
     case pastelFontColor
 }
 
-let colorList: [UIColor] = [  blackTile, darkGrayTile, lightGrayTile, whiteTile, .gray, .red, .green,
-                                .blue, .cyan, .yellow, .magenta, .orange, .purple, .brown, .clear,
-                                blueTile, grayTile, greenTile, redTile, yellowTile, pastelForegroundTile, pastelBackgroundTile,
-                                    pastelFontColor ]
+let colorList: [UIColor] = [  blackTile, darkGrayTile, lightGrayTile, whiteTile, .gray, .red, .green, .blue, .cyan, .yellow, .magenta,
+    .orange, .purple, .brown, .clear, blueTile, grayTile, greenTile,
+    redTile, yellowTile, pastelForegroundTile, pastelBackgroundTile,
+    pastelFontColor ]
 
 enum NodeName: String {
     case scene = "Scene"
@@ -219,7 +219,7 @@ class AppTheme {
     func setViewColor(for view: UIView, tuple:(sceneColor: UIColor, backgroundColor: UIColor, fontColor: UIColor, alpha: CGFloat), mode: Mode) {
         for aview in view.subviews {
             view.backgroundColor = tuple.sceneColor
-            guard aview.restorationIdentifier != nil else { continue }
+            guard let _ = aview.restorationIdentifier else { continue }
             if aview.restorationIdentifier == "background" || aview.restorationIdentifier == "background_view" {
                 aview.backgroundColor = tuple.backgroundColor
                 aview.alpha = tuple.alpha
@@ -308,46 +308,48 @@ class AppTheme {
     func changeSceneElements(view: BaseScene, mode: String, fontColor: UIColor) {
         for nodeName in nodeList {
             let nodeSprite = view.scene?.childNode(withName: nodeName) as? SKSpriteNode
-            if ((nodeSprite?.texture) != nil) {
-                print("texture name: \(String(describing: nodeSprite?.name))")
-                if (nodeSprite?.name?.lowercased().contains("titleimage"))! {
-                    let texture = UIDevice.isiPad ? "apple-icon-144x144" : "apple-icon-76x76"
-                    nodeSprite?.texture = SKTexture(imageNamed: mode.contains("normal") ? texture : mode + texture)
-                } else if !mode.contains("normal") && !mode.contains("pastel") && !mode.contains("night") && (nodeSprite?.name?.lowercased().contains("link"))! {
-                    nodeSprite?.texture = SKTexture(imageNamed: mode + "awardLink")
-                } else {
-                    let rawString = nodeSprite?.texture?.description.components(separatedBy: "\'")
-                    let name = mode.contains("normal") ? rawString?[1] : String(mode + (rawString?[1])!)
-                    
-                    nodeSprite?.texture = SKTexture(imageNamed: name!)
-                }
+            let texture = nodeSprite?.texture
+            if nodeSprite != nil && texture != nil {
+            print("texture name: \(String(describing: nodeSprite?.name))")
+            if (nodeSprite?.name?.lowercased().contains("titleimage"))! {
+                let texture = UIDevice.isiPad ? "apple-icon-144x144" : "apple-icon-76x76"
+                nodeSprite?.texture = SKTexture(imageNamed: mode.contains("normal") ? texture : mode + texture)
+            } else if !mode.contains("normal") && !mode.contains("pastel") && !mode.contains("night") && (nodeSprite?.name?.lowercased().contains("link"))! {
+                nodeSprite?.texture = SKTexture(imageNamed: mode + "awardLink")
+            } else {
+                let rawString = nodeSprite?.texture?.description.components(separatedBy: "\'")
+                let name = mode.contains("normal") ? rawString?[1] : String(mode + (rawString?[1])!)
+                
+                nodeSprite?.texture = SKTexture(imageNamed: name!)
+            }
             }
             
-            let nodeLabel = view.scene?.childNode(withName: nodeName) as? SKLabelNode
-            if ((nodeLabel?.name) != nil) {
-                print("label name: \(String(describing: nodeLabel?.name))")
-                if (nodeLabel?.name?.lowercased().contains("title"))!
-                    || (nodeLabel?.name?.lowercased().contains("heading"))!
-                    || (nodeLabel?.name?.lowercased().contains("level"))!
-                    || (nodeLabel?.name?.lowercased().contains("text"))!
-                    || (nodeLabel?.name?.lowercased().contains("count"))!
-                    || (nodeLabel?.name?.lowercased().contains("continue"))!
-                    || (nodeLabel?.name?.lowercased().contains("start"))!
-                    || (nodeLabel?.name?.lowercased().contains("award"))!
-                    || (nodeLabel?.name?.lowercased().contains("settings"))!
-                    || (nodeLabel?.name?.lowercased().contains("purchase"))!
-                    || (nodeLabel?.name?.lowercased().contains("guide"))!
-                    || (nodeLabel?.name?.lowercased().contains("sound"))!
-                    || (nodeLabel?.name?.lowercased().contains("score"))!
-                    || (nodeLabel?.name?.lowercased().contains("timer"))!
-                    || (nodeLabel?.name?.lowercased().contains("mode"))!
-                    || (nodeLabel?.name?.lowercased().contains("pastel"))!
-                    || (nodeLabel?.name?.lowercased().contains("colorblind"))!
-                    || (nodeLabel?.name?.lowercased().contains("meaning"))!
-                    || (nodeLabel?.name?.lowercased().contains("action"))! {
-                    nodeLabel?.fontColor = fontColor
-                }
+            guard let nodeLabel = view.scene?.childNode(withName: nodeName) as? SKLabelNode,
+                let nodeLabelName = nodeLabel.name else { continue }
+            
+            print("label name: \(String(describing: nodeLabelName))")
+            if (nodeLabelName.lowercased().contains("title")
+                || nodeLabelName.lowercased().contains("heading")
+                || nodeLabelName.lowercased().contains("level")
+                || nodeLabelName.lowercased().contains("text")
+                || nodeLabelName.lowercased().contains("count")
+                || nodeLabelName.lowercased().contains("continue")
+                || nodeLabelName.lowercased().contains("start")
+                || nodeLabelName.lowercased().contains("award")
+                || nodeLabelName.lowercased().contains("settings")
+                || nodeLabelName.lowercased().contains("purchase")
+                || nodeLabelName.lowercased().contains("guide")
+                || nodeLabelName.lowercased().contains("sound")
+                || nodeLabelName.lowercased().contains("score")
+                || nodeLabelName.lowercased().contains("timer")
+                || nodeLabelName.lowercased().contains("mode")
+                || nodeLabelName.lowercased().contains("pastel")
+                || nodeLabelName.lowercased().contains("colorblind")
+                || nodeLabelName.lowercased().contains("meaning")
+                || nodeLabelName.lowercased().contains("action")) {
+                nodeLabel.fontColor = fontColor
             }
+           
         }
     }
     
@@ -370,9 +372,8 @@ class AppTheme {
     
     func changeSpriteNode(view: BaseScene, parentNode: String, nodeName: String, color: UIColor, alpha: CGFloat = 0.1) {
         let parentName = parentNode
-        let node = view.childNode(withName: parentName)
-        guard node != nil else { return }
-        for child in (node?.children)! {
+        guard let node = view.childNode(withName: parentName) else { return }
+        for child in node.children {
             if child.name == nodeName {
                 let sprite = child as! SKSpriteNode
                 sprite.color = color
@@ -383,9 +384,8 @@ class AppTheme {
 
     func changeShapeNode(view: BaseScene, parentNode: String, nodeName: String, color: UIColor, alpha: CGFloat = 0.1) {
         let parentName = parentNode
-        let node = view.childNode(withName: parentName)
-        guard node != nil else { return }
-        for child in (node?.children)! {
+        guard let node = view.childNode(withName: parentName) else { return }
+        for child in node.children {
             if child.name == nodeName {
                 let shape = child as! SKShapeNode
                 shape.fillColor = color
@@ -394,11 +394,11 @@ class AppTheme {
         }
     }
 
-    func changeLabelNode(view: BaseScene, parentNode: String, nodeName: String, fontName: String,  fontColor: UIColor = redTile, fontSize: CGFloat = 32, alpha: CGFloat = 0.1) {
+    func changeLabelNode(view: BaseScene, parentNode: String, nodeName: String, fontName: String,
+                         fontColor: UIColor = redTile, fontSize: CGFloat = 32, alpha: CGFloat = 0.1) {
         let parentName = parentNode
-        let node = view.childNode(withName: parentName)
-        guard node != nil else { return }
-        for child in (node?.children)! {
+        guard let node = view.childNode(withName: parentName) else { return }
+        for child in node.children {
             if child.name == nodeName {
                 let label = child as! SKLabelNode
                 label.fontName = fontName

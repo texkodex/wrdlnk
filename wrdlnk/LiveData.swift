@@ -8,9 +8,16 @@
 
 import Foundation
 
-struct LiveData {
+struct LiveData: Codable {
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let LiveDataArchiveURL = DocumentsDirectory.appendingPathComponent(StorageForLiveData)
+    
+    var filePath: String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        print("The url path in the document directory \(String(describing: url))")
+        return(url!.appendingPathComponent(StorageForLiveData).path)
+    }
     
     fileprivate struct info {
         static var index: Int = 0
@@ -23,7 +30,7 @@ struct LiveData {
     
     static var sharedInstance = LiveData()
     
-    private init() {
+    fileprivate init() {
         if debugInfo {
             info.liveDataList.removeAll()
             info.initialize = false
@@ -36,62 +43,46 @@ struct LiveData {
         self.position = position
         self.level = level
     }
-}
-
-extension LiveData {
-    class Coding: NSObject, NSCoding {
-        let liveData: LiveData?
-        
-        init(liveData: LiveData) {
-            self.liveData = liveData
-            super.init()
-        }
-        
-        required init?(coder aDecoder: NSCoder) {
-            guard let position = aDecoder.decodeObject(forKey: "position") as? String else {
-                return nil
-            }
-
-            let level = aDecoder.decodeInteger (forKey: "level")
-            
-            liveData = LiveData(position: position, level: level)
-            
-            super.init()
-        }
-        
-        public func encode(with aCoder: NSCoder) {
-            guard let liveData = liveData else {
-                return
-            }
-            
-            aCoder.encode(liveData.position, forKey: "position")
-            aCoder.encode(liveData.level, forKey: "level")
-        }
-    }
-}
-
-extension LiveData: Encodable {
-    var encoded: Decodable? {
-        return LiveData.Coding(liveData: self)
-    }
-}
-
-extension LiveData.Coding: Decodable {
-    var decoded: Encodable? {
-        return self.liveData
-    }
-}
-
-extension LiveData {
+    
     func isEmpty() -> Bool {
-        return info.liveDataList.isEmpty
+        return info.initialize == false
     }
     
-    func addItem(item: LiveData) {
+    mutating func addItem(item: LiveData) {
         return info.liveDataList.append(item)
     }
     
+    enum LiveDataKeys: String, CodingKey {
+        case position = "position"
+        case level = "level"
+    }
+}
+
+extension LiveData {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: LiveDataKeys.self)
+        try container.encode(position, forKey: .position)
+        try container.encode(level, forKey: .level)
+    }
+}
+
+extension LiveData {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: LiveDataKeys.self)
+        let position: String = try container.decode(String.self, forKey: .position)
+        let level: Int = try container.decode(Int.self, forKey: .level)
+                
+        self.init(position: position, level: level)
+    }
+}
+
+extension LiveData {
+    func allItems() -> [LiveData] {
+        return info.liveDataList
+    }
+    
     func contains(item: LiveData) -> Bool {
+        if isEmpty() { return false }
         for dataItem in info.liveDataList.enumerated() {
             if dataItem.element.position == item.position {
                 return true
@@ -105,33 +96,32 @@ extension LiveData {
         info.initialize = false
     }
     
-    func allItems() -> [LiveData] {
-        return info.liveDataList
-    }
-    
     mutating func deleteLiveData() {
         self.clear()
         self.saveLiveData()
     }
     
     mutating func loadLiveData() {
-        if info.initialize { return }
+        guard let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Data else { return }
         do {
-            let data = try Data(contentsOf: LiveData.LiveDataArchiveURL, options: .alwaysMapped)
-            if let back = (NSKeyedUnarchiver.unarchiveObject(with: data) as? [LiveData.Coding])?.decoded {
-                liveDataList(liveDataList: back as! [LiveData])
-            }
-        } catch let error {
-            print(error.localizedDescription)
+            let decoder = JSONDecoder()
+            let liveDataList = try decoder.decode([LiveData].self, from: data)
+            info.liveDataList = liveDataList
+            info.initialize = true
+        } catch {
+            print("loadLiveData Failed")
         }
     }
     
     mutating func saveLiveData() {
+        trace("\(#file ) \(#line)", {"saveLiveData - start: "})
         do {
-            let data = NSKeyedArchiver.archivedData(withRootObject: info.liveDataList.encoded)
-            try data.write(to: LiveData.LiveDataArchiveURL, options: .atomic)
-        } catch let error {
-            print(error.localizedDescription)
+            let livedata = info.liveDataList
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(livedata)
+            NSKeyedArchiver.archiveRootObject(data, toFile: filePath)
+        } catch {
+            print("saveLiveData Failed")
         }
     }
 
@@ -143,6 +133,67 @@ extension LiveData {
                     info.initialize = true
                 }
             }
+        }
+    }
+}
+
+class LiveDataBox {
+    private var liveDataInstance: LiveData!
+    let queue = DispatchQueue(label: "com.teknowsys.livedata.queue")
+    
+    static var sharedInstance = LiveDataBox()
+    
+    fileprivate init() {
+        queue.sync {
+            liveDataInstance = LiveData.sharedInstance
+        }
+    }
+    
+    func addItem(item: LiveData) {
+        queue.sync {
+            liveDataInstance.addItem(item: item)
+        }
+    }
+    
+    func allItems() -> [LiveData] {
+        return liveDataInstance.allItems()
+    }
+    
+    func contains(item: LiveData) -> Bool {
+        return liveDataInstance.contains(item: item)
+    }
+    
+    func isEmpty() -> Bool {
+        return liveDataInstance.isEmpty()
+    }
+    
+    func clear() {
+        queue.sync {
+            liveDataInstance.clear()
+        }
+    }
+    
+    func deleteLiveData() {
+        queue.sync {
+         liveDataInstance.deleteLiveData()
+        }
+    }
+    
+    func loadLiveData() {
+        queue.sync {
+          liveDataInstance.loadLiveData()
+        }
+    }
+    
+    func saveLiveData() {
+        queue.sync {
+            liveDataInstance.saveLiveData()
+        }
+    }
+    
+    func liveDataList(liveDataList: [LiveData]) {
+        queue.sync {
+           liveDataInstance.liveDataList(liveDataList: liveDataList)
         }
     }
 }

@@ -176,7 +176,7 @@ class MainMenuScene: BaseScene {
         if let name = touchedNode.name {
             if name == "titleImage" {
                 print("Touched titleImage")
-                let sequence = SKAction.sequence([.rotate(byAngle: .pi * 2, duration: 0.7)])
+                let sequence = SKAction.sequence([.rotate(byAngle: .pi * -2, duration: 0.7)])
                 touchedNode.run(sequence)
             }
         }

@@ -14,3 +14,6 @@
 // Twitter import
 #import <TwitterCore/TwitterCore.h>
 #import <TwitterKit/TwitterKit.h>
+
+// Google import
+#import <GoogleSignIn/GoogleSignIn.h>

@@ -23,9 +23,16 @@ protocol VowelCountData {
 let phraseSeparator = "|"
 
 // MARK:- VowelCount structure
-struct VowelCount {
+struct VowelCount: Codable {
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let CountersArchiveURL = DocumentsDirectory.appendingPathComponent(StorageForCounters)
+    
+    var filePath: String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        print("The url path in the document directory \(String(describing: url))")
+        return(url!.appendingPathComponent(StorageForCounters).path)
+    }
     
     public internal(set) var phrase: String
     public internal(set) var prefix: Int
@@ -81,6 +88,14 @@ struct VowelCount {
         
     }
     
+    mutating func setup(vowelCount: VowelCount) {
+        self = vowelCount
+    }
+    
+    func isEmpty() -> Bool {
+        return info.vowelCountList.count == 0 ? true : false
+    }
+    
     func wordphrase() -> String {
         return phrase
     }
@@ -121,60 +136,54 @@ struct VowelCount {
         return info.minClicks
     }
     
+    mutating func assignToVowelList() {
+        if !isEmpty() {
+            info.vowelCountList[0] = self
+        } else {
+            info.vowelCountList.append(self)
+        }
+    }
+    
     mutating func prefixDecrement() {
         if !prefixZero() {
             self.prefix -= 1
-            if !isEmpty() {
-                info.vowelCountList[0] = self
-            }
+            assignToVowelList()
         }
     }
     
     mutating func linkDecrement() {
         if !linkZero() {
             self.link -= 1
-            if !isEmpty() {
-                info.vowelCountList[0] = self
-            }
+            assignToVowelList()
         }
     }
     
     mutating func suffixDecrement() {
         if !suffixZero() {
             self.suffix -= 1
-            if !isEmpty() {
-                info.vowelCountList[0] = self
-            }
+            assignToVowelList()
         }
     }
     
     mutating func clickAttempt() {
         self.clicks += 1
-        if !isEmpty() {
-            info.vowelCountList[0] = self
-        }
+        assignToVowelList()
     }
     
     mutating func restoreMatch() {
         self.match += 1
-        if !isEmpty() {
-            info.vowelCountList[0] = self
-        }
+        assignToVowelList()
     }
     
     mutating func boardClickAttempt() {
         self.boardTileClick += 1
-        if !isEmpty() {
-            info.vowelCountList[0] = self
-        }
+        assignToVowelList()
     }
     
     mutating func clickMatch() {
         if match < total {
             self.match += 1
-            if !isEmpty() {
-                info.vowelCountList[0] = self
-            }
+            assignToVowelList()
         }
     }
     
@@ -188,114 +197,108 @@ struct VowelCount {
     func percentage() -> Float {
         return accuracy() * Float(100)
     }
-}
-
-extension VowelCount {
-    class Coding: NSObject, NSCoding {
-        let vowelCount: VowelCount?
-        
-        init(vowelCount: VowelCount) {
-            self.vowelCount = vowelCount
-            super.init()
-        }
-        
-        required init?(coder aDecoder: NSCoder) {
-            guard let phrase = aDecoder.decodeObject(forKey: "phrase") as? String else {
-                return nil
-            }
-            
-            let prefix = aDecoder.decodeInteger(forKey: "prefix")
-            let link = aDecoder.decodeInteger(forKey: "link")
-            let suffix = aDecoder.decodeInteger(forKey: "suffix")
-            let total = aDecoder.decodeInteger(forKey: "total")
-            let clicks = aDecoder.decodeInteger(forKey: "clicks")
-            let boardTileClick = aDecoder.decodeInteger (forKey: "boardTileClick")
-            let match = aDecoder.decodeInteger(forKey: "match")
-            let setTotal = aDecoder.decodeInteger(forKey: "setTotal")
-            let minimumClicks = aDecoder.decodeInteger(forKey: "minimumClicks")
-            let clickMultiple = aDecoder.decodeInteger(forKey: "clickMultiple")
-            
-            vowelCount = VowelCount(phrase: phrase, prefix: prefix, link: link, suffix: suffix,
-                                    total: total, clicks: clicks, boardTileClick: boardTileClick,
-                                    match: match, setTotal: setTotal, minimumClicks: minimumClicks,
-                                    clickMultiple: clickMultiple)
-            super.init()
-        }
-        
-        public func encode(with aCoder: NSCoder) {
-            guard let vowelCount = vowelCount else {
-                return
-            }
-            
-            aCoder.encode(vowelCount.phrase, forKey: "phrase")
-            aCoder.encode(vowelCount.prefix, forKey: "prefix")
-            aCoder.encode(vowelCount.link, forKey: "link")
-            aCoder.encode(vowelCount.suffix, forKey: "suffix")
-            aCoder.encode(vowelCount.total, forKey: "total")
-            aCoder.encode(vowelCount.clicks, forKey: "clicks")
-            aCoder.encode(vowelCount.boardTileClick, forKey: "boardTileClick")
-            aCoder.encode(vowelCount.match, forKey: "match")
-            aCoder.encode(vowelCount.setTotal, forKey: "setTotal")
-            aCoder.encode(vowelCount.minimumClicks, forKey: "minimumClicks")
-            aCoder.encode(vowelCount.clickMultiple, forKey: "clickMultiple")
-        }
-    }
-}
-
-extension VowelCount: Encodable {
-    var encoded: Decodable? {
-        return VowelCount.Coding(vowelCount: self)
-    }
-}
-
-extension VowelCount.Coding: Decodable {
-    var decoded: Encodable? {
-        return self.vowelCount
-    }
-}
-
-extension VowelCount {
-    func isEmpty() -> Bool {
-        return info.vowelCountList.isEmpty
-    }
     
+    enum VowelCountKeys: String, CodingKey {
+        case phrase = "phrase"
+        case prefix = "prefix"
+        case link = "link"
+        case suffix = "suffix"
+        case total = "total"
+        case clicks = "clicks"
+        case boardTileClick = "boardTileClick"
+        case match = "match"
+        case setTotal = "setTotal"
+        case minimumClicks = "minimumClicks"
+        case clickMultiple = "clickMultiple"
+    }
+}
+
+extension VowelCount {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: VowelCountKeys.self)
+        try container.encode(phrase, forKey: .phrase)
+        try container.encode(prefix, forKey: .prefix)
+        try container.encode(link, forKey: .link)
+        try container.encode(suffix, forKey: .suffix)
+        try container.encode(total, forKey: .total)
+        try container.encode(clicks, forKey: .clicks)
+        try container.encode(boardTileClick, forKey: .boardTileClick)
+        try container.encode(match, forKey: .match)
+        try container.encode(setTotal, forKey: .setTotal)
+        try container.encode(minimumClicks, forKey: .minimumClicks)
+        try container.encode(clickMultiple, forKey: .clickMultiple)
+    }
+}
+
+extension VowelCount {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: VowelCountKeys.self)
+        
+        let phrase: String = try container.decode(String.self, forKey: .phrase)
+        let prefix: Int = try container.decode(Int.self, forKey: .prefix)
+        let link: Int = try container.decode(Int.self, forKey: .link)
+        let suffix: Int = try container.decode(Int.self, forKey: .suffix)
+        let total: Int = try container.decode(Int.self, forKey: .total)
+        let clicks: Int = try container.decode(Int.self, forKey: .clicks)
+        let boardTileClick: Int = try container.decode(Int.self, forKey: .boardTileClick)
+        let match: Int = try container.decode(Int.self, forKey: .match)
+        let setTotal: Int = try container.decode(Int.self, forKey: .setTotal)
+        let minimumClicks: Int = try container.decode(Int.self, forKey: .minimumClicks)
+        let clickMultiple: Int = try container.decode(Int.self, forKey: .clickMultiple)
+        
+        self.init(phrase: phrase, prefix: prefix, link: link, suffix:suffix, total: total,
+                  clicks: clicks, boardTileClick: boardTileClick, match: match, setTotal: setTotal,
+                  minimumClicks: minimumClicks, clickMultiple: clickMultiple)
+        
+        if info.vowelCountList.count == 0 {
+            info.vowelCountList.append(self)
+        } else {
+            info.vowelCountList[0] = self
+        }
+    }
+}
+
+extension VowelCount {
     mutating func loadVowelCount() {
+        guard let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Data else { return }
         do {
-            let fileExists = (try? VowelCount.CountersArchiveURL.checkResourceIsReachable()) ?? false
-            if fileExists {
-                let data = try Data(contentsOf: VowelCount.CountersArchiveURL, options: .alwaysMapped)
-                if let back = (NSKeyedUnarchiver.unarchiveObject(with: data) as? [VowelCount.Coding])?.decoded {
-                    loadCountData(vowelCountList: back as! [VowelCount])
-                }
-            }
-            
-        } catch let error {
-            print(error.localizedDescription)
+            let decoder = JSONDecoder()
+            let vowels = try decoder.decode([VowelCount].self, from: data)
+            info.vowelCountList = vowels
+            if vowels.count > 0 { info.initialize = true }
+        } catch {
+            print("loadWordList Failed")
         }
     }
     
     mutating func saveVowelCount() {
+        trace("\(#file ) \(#line)", {"saveVowelCount - start: "})
         do {
-            let data = NSKeyedArchiver.archivedData(withRootObject: info.vowelCountList.encoded)
-            try data.write(to: VowelCount.CountersArchiveURL, options: .atomic)
-        } catch let error {
-            print(error.localizedDescription)
+            let vowels = info.vowelCountList
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(vowels)
+            NSKeyedArchiver.archiveRootObject(data, toFile: filePath)
+        } catch {
+            print("saveWordList Failed")
         }
     }
     
     mutating func clear() {
+        if isEmpty() { return }
+        trace("\(#file ) \(#line)", {"clear VowelCount - ...: "})
         info.vowelCountList.removeAll()
+        info.initialize = false
     }
     
     mutating func loadCountData(vowelCountList: [VowelCount]) {
-        if vowelCountList.count > 0 && !vowelCountList[0].phrase.contains("_unset_") {
+        if info.vowelCountList.count > 0 && !info.vowelCountList[0].phrase.contains("_unset_") {
             if info.vowelCountList.count == 1 {
                 info.vowelCountList[0].clicks += self.clicks
             } else if info.vowelCountList.count == 0 {
                 info.vowelCountList.append(self)
             }
         } else {
-            if vowelCountList.count == 0 {
+            if info.vowelCountList.count == 0 {
                 info.vowelCountList.append(self)
             } else {
                 info.vowelCountList[0] = self
@@ -309,4 +312,152 @@ extension VowelCount {
     }
 }
 
+class VowelCountBox {
+    private var vowelCountInstance: VowelCount!
+    private var queue = DispatchQueue(label: "com.teknowsys.vowelcount.queue")
+    
+    static var sharedInstance = VowelCountBox()
+    
+    fileprivate init() {
+        queue.sync {
+            vowelCountInstance = VowelCount.sharedInstance
+        }
+    }
+    
+    func setup(vowelCount: VowelCount) {
+        queue.sync {
+            vowelCountInstance.setup(vowelCount: vowelCount)
+        }
+    }
+    
+    func isEmpty() -> Bool {
+        return vowelCountInstance.isEmpty()
+    }
+    
+    func wordphrase() -> String {
+        return vowelCountInstance.wordphrase()
+    }
+    
+    func prefixZero() -> Bool {
+        return vowelCountInstance.prefixZero()
+    }
+    
+    func linkZero() -> Bool {
+        return vowelCountInstance.linkZero()
+    }
+    
+    func suffixZero() -> Bool {
+        return vowelCountInstance.suffixZero()
+    }
+    
+    func totalZero() -> Bool {
+        return vowelCountInstance.totalZero()
+    }
+    
+    func matchComplete() -> Bool {
+        return vowelCountInstance.matchComplete()
+    }
+    
+    func totalMatches() -> Int {
+        return vowelCountInstance.totalMatches()
+    }
+    
+    func totalClicks() -> Int {
+        return vowelCountInstance.totalClicks()
+    }
+    
+    func totalBoardTileClicks() -> Int {
+        return vowelCountInstance.totalBoardTileClicks()
+    }
+    
+    func minClicks() -> Int {
+        return vowelCountInstance.minClicks()
+    }
+    
+    func accuracy() -> Float {
+        return vowelCountInstance.accuracy()
+    }
+    
+    func percentage() -> Float {
+        return vowelCountInstance.percentage()
+    }
+    
+    func assignToVowelList() {
+        queue.sync {
+            vowelCountInstance.assignToVowelList()
+        }
+    }
+    
+    func prefixDecrement() {
+        queue.sync {
+            vowelCountInstance.prefixDecrement()
+        }
+    }
+    
+    func linkDecrement() {
+        queue.sync {
+            vowelCountInstance.linkDecrement()
+        }
+    }
+    
+    func suffixDecrement() {
+        queue.sync {
+            vowelCountInstance.suffixDecrement()
+        }
+    }
+    
+    func clickAttempt() {
+        queue.sync {
+            vowelCountInstance.clickAttempt()
+        }
+    }
+    
+    func restoreMatch() {
+        queue.sync {
+            vowelCountInstance.restoreMatch()
+        }
+    }
+    
+    func boardClickAttempt() {
+        queue.sync {
+            vowelCountInstance.boardClickAttempt()
+        }
+    }
+    
+    func clickMatch() {
+        queue.sync {
+            vowelCountInstance.clickMatch()
+        }
+    }
+    
+    func loadVowelCount() {
+       queue.sync {
+        vowelCountInstance.loadVowelCount()
+        }
+    }
+    
+    func saveVowelCount() {
+        queue.sync {
+            vowelCountInstance.saveVowelCount()
+        }
+    }
+    
+    func clear() {
+       queue.sync {
+            vowelCountInstance.clear()
+        }
+    }
+    
+    func loadCountData(vowelCountList: [VowelCount]) {
+        queue.sync {
+            return vowelCountInstance.loadCountData(vowelCountList: vowelCountList)
+        }
+    }
+    
+    func deleteVowelCount() {
+        queue.sync {
+            vowelCountInstance.deleteVowelCount()
+        }
+    }
+}
 

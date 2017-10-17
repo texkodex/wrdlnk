@@ -13,8 +13,15 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
-    var wordList = WordList.sharedInstance
-    var store = DataStore.sharedInstance
+    var wordList: WordListBox {
+        get { return WordListBox.sharedInstance }
+    }
+    
+    var statData: StatDataBox {
+        get { return StatDataBox.sharedInstance }
+    }
+    
+    var store = StatStore.sharedInstance
     
     var imageView: UIImageView!
     
@@ -78,15 +85,12 @@ class GameViewController: UIViewController {
         }
     }
     
-    private func saveData(stat: Stat) {
-        self.store.itemsStat.append(stat)
-        NSKeyedArchiver.archiveRootObject(self.store.itemsStat, toFile: filePath)
+    private func saveData() {
+        statData.saveData()
     }
 
     private func loadData() {
-        if let itemsStat = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [Stat] {
-            self.store.itemsStat = itemsStat
-        }
+        statData.loadData()
     }
     
     func setup() {

@@ -60,12 +60,10 @@ extension SKTileMapNode {
     
     func getLabelNode(nodesAtPoint: [SKNode]) -> SKLabelNode? {
         for mapNode in nodesAtPoint {
-            if mapNode.name != nil && (mapNode.name?.hasPrefix(tileNodeName))! {
-                for child in mapNode.children {
-                    if (child.name?.hasPrefix(letterNodeName))! {
-                        return child as? SKLabelNode
-                    }
-                }
+            guard let _ = mapNode.name?.hasPrefix(tileNodeName) else { continue }
+            for child in mapNode.children {
+                guard let _ = child.name?.hasPrefix(letterNodeName) else { continue }
+                return child as? SKLabelNode
             }
         }
         return nil
@@ -73,7 +71,7 @@ extension SKTileMapNode {
     
     func getSpriteNode(nodesAtPoint: [SKNode]) -> SKSpriteNode? {
         for mapNode in nodesAtPoint {
-            if mapNode.name != nil && (mapNode.name?.hasPrefix(tileNodeName))! {
+            if (mapNode.name?.hasPrefix(tileNodeName))! {
                 return mapNode as? SKSpriteNode
             }
         }
@@ -85,20 +83,17 @@ extension SKTileMapNode {
             && visible < CGFloat(0.1) {
             return true
         }
-        
         return false
     }
     
     func vowelLabelNode(nodesAtPoint: [SKNode]) -> Bool? {
         for mapNode in nodesAtPoint {
-            if mapNode.name != nil && (mapNode.name?.hasPrefix(tileNodeName))! {
-                for child in mapNode.children {
-                    if (child.name?.hasPrefix(letterNodeName))! {
-                        let labelChar = (child as! SKLabelNode).text?.characters.first
-                        let visible = (child as! SKLabelNode).alpha
-                        return isFreeVowelCell(text: labelChar!, visible: visible)
-                    }
-                }
+            guard let _ = mapNode.name?.hasPrefix(tileNodeName) else { continue }
+            for child in mapNode.children {
+                guard let _ = child.name?.hasPrefix(letterNodeName) else { continue }
+                let labelChar = (child as! SKLabelNode).text?.characters.first
+                let visible = (child as! SKLabelNode).alpha
+                return isFreeVowelCell(text: labelChar!, visible: visible)
             }
         }
         return false
@@ -258,9 +253,9 @@ extension SKTileMapNode {
         return VowelCount(
             phrase: linkWord.prefix + phraseSeparator
                 + linkWord.link + phraseSeparator + linkWord.suffix,
-            prefix: linkWord.prefix.characters.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count,
-            link: linkWord.link.characters.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count,
-            suffix: linkWord.suffix.characters.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count)
+            prefix: linkWord.prefix.characters.lazy.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count,
+            link: linkWord.link.characters.lazy.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count,
+            suffix: linkWord.suffix.characters.lazy.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count)
     }
     
     func clearWords() {

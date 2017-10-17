@@ -10,22 +10,21 @@ import Foundation
 
 // MARK:- Stat structure
 
-class Stat: NSObject, NSCoding {
-    struct Keys {
-        static let phrase = "phrase"
-        static let minimum = "minimum"
-        static let accuracy = "accuracy"
-        static let percentage = "percentage"
-        static let timeSpan = "timeSpan"
+struct Stat: Codable {
+    enum StatKeys: String, CodingKey{
+        case phrase = "phrase"
+        case minimum = "minimum"
+        case accuracy = "accuracy"
+        case percentage = "percentage"
+        case timeSpan = "timeSpan"
     }
     
-    private var _phrase: String? = ""
-    private var _accuracy: Float = 0
-    private var _minimum: Int = 0
-    private var _percentage: Float = 0
-    private var _timeSpan: TimeInterval = 0
+    var _phrase: String? = ""
+    var _accuracy: Float = 0
+    var _minimum: Int = 0
+    var _percentage: Float = 0
+    var _timeSpan: TimeInterval = 0
     
-    override init() {}
     
     init(phrase: String?, accuracy: Float, minimum: Int, percentage: Float, timeSpan: TimeInterval = 0) {
         self._phrase = phrase
@@ -34,25 +33,35 @@ class Stat: NSObject, NSCoding {
         self._percentage = percentage
         self._timeSpan = timeSpan
     }
-    
-    required convenience init(coder decoder: NSCoder) {
+}
+
+extension Stat {
+    func encode(to encoder: Encoder) throws {
+        // Store data
+        var container = encoder.container(keyedBy: StatKeys.self)
+        try container.encode(_phrase, forKey: .phrase)
+        try container.encode(_accuracy, forKey: .accuracy)
+        try container.encode(_minimum, forKey: .minimum)
+        try container.encode(_percentage, forKey: .percentage)
+        try container.encode(_timeSpan, forKey: .timeSpan)
+    }
+}
+
+extension Stat {
+    init(from decoder: Decoder) throws {
         // Retrieve data
-        self.init()
-        _phrase = decoder.decodeObject(forKey: Keys.phrase) as? String
-        _accuracy = decoder.decodeFloat(forKey: Keys.accuracy)
-        _minimum = decoder.decodeInteger(forKey: Keys.minimum)
-        _percentage = decoder.decodeFloat(forKey: Keys.percentage)
-        _timeSpan = decoder.decodeDouble(forKey: Keys.timeSpan)
+        let container = try decoder.container(keyedBy: StatKeys.self)
+        let _phrase: String = try container.decode(String.self, forKey: .phrase)
+        let _accuracy: Float = try container.decode(Float.self, forKey: .accuracy)
+        let _minimum: Int = try container.decode(Int.self, forKey: .minimum)
+        let _percentage: Float = try container.decode(Float.self, forKey: .percentage)
+        let _timeSpan: TimeInterval = try container.decode(TimeInterval.self, forKey: .timeSpan)
+        
+        self.init(phrase: _phrase, accuracy: _accuracy, minimum: _minimum, percentage: _percentage, timeSpan: _timeSpan)
     }
-    
-    func encode(with coder: NSCoder) {
-        coder.encode(_phrase, forKey: "phrase")
-        coder.encode(_accuracy, forKey: "accuracy")
-        coder.encode(_minimum, forKey: "minimum")
-        coder.encode(_percentage, forKey: "percentage")
-        coder.encode(_timeSpan, forKey: "timeSpan")
-    }
-    
+}
+
+extension Stat {
     var phrase: String? {
         get {
             return _phrase
@@ -61,7 +70,7 @@ class Stat: NSObject, NSCoding {
             _phrase = newValue
         }
     }
-    
+
     var accuracy: Float {
         get {
             return _accuracy
@@ -70,7 +79,7 @@ class Stat: NSObject, NSCoding {
             _accuracy = newValue
         }
     }
-    
+
     var minimum: Int {
         get {
             return _minimum
@@ -79,7 +88,7 @@ class Stat: NSObject, NSCoding {
             _minimum = newValue
         }
     }
-    
+
     var percentage: Float {
         get {
             return _percentage
@@ -88,7 +97,7 @@ class Stat: NSObject, NSCoding {
             _percentage = newValue
         }
     }
-    
+
     var timeSpan: TimeInterval {
         get {
             return _timeSpan
@@ -110,8 +119,8 @@ public struct Queue<T>: ExpressibleByArrayLiteral {
 }
 
 struct StatData {
-    
-    var store = DataStore.sharedInstance
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let LiveDataArchiveURL = DocumentsDirectory.appendingPathComponent(StorageForStatItem)
     
     var filePath: String {
         let manager = FileManager.default
@@ -122,49 +131,72 @@ struct StatData {
     
     fileprivate struct info {
         static var statQueue = Queue<Stat>()
-        static var initilize = false
+        static var initialize = false
     }
     
+    var store = StatStore.sharedInstance
+    
     static let sharedInstance = StatData()
+    
     private init() {
         if debugInfo {
             self.purge()
         }
-        if info.initilize { return }
+        if info.initialize { return }
         
         if AppDefinition.defaults.keyExist(key: preferenceGameStatKey)
             && AppDefinition.defaults.bool(forKey: preferenceGameStatKey) {
             if self.isEmpty() {
                 loadData()
-                info.initilize = true
+                info.initialize = true
             }
         }
     }
     
     func saveData() {
-        NSKeyedArchiver.archiveRootObject(info.statQueue.elements, toFile: filePath)
-        if !isEmpty() && !AppDefinition.defaults.keyExist(key: preferenceGameStatKey)
-            || !AppDefinition.defaults.bool(forKey: preferenceGameStatKey) {
-            AppDefinition.defaults.set(true, forKey: preferenceGameStatKey)
+        trace("\(#file ) \(#line)", {"saveWordList - start: "})
+        do {
+            let stats = info.statQueue.elements
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(stats)
+            NSKeyedArchiver.archiveRootObject(data, toFile: filePath)
+            
+            if !isEmpty() && !AppDefinition.defaults.keyExist(key: preferenceGameStatKey)
+                || !AppDefinition.defaults.bool(forKey: preferenceGameStatKey) {
+                AppDefinition.defaults.set(true, forKey: preferenceGameStatKey)
+            }
+        } catch {
+            print("saveData Stat Failed")
         }
     }
     
-    fileprivate func clearData() {
-        self.store.itemsStat.removeAll()
+    fileprivate mutating func clearData() {
+        if isEmpty() { return }
+        trace("\(#file ) \(#line)", {"clearData Stat - ...: "})
         self.purge()
-        NSKeyedArchiver.archiveRootObject(self.store.itemsStat, toFile: filePath)
+        NSKeyedArchiver.archiveRootObject(info.statQueue.elements, toFile: filePath)
+        info.initialize = false
         AppDefinition.defaults.set(false, forKey: preferenceGameStatKey)
     }
     
-    fileprivate func loadData() {
-        if info.initilize { return }
-        if let itemsStat = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [Stat] {
-            self.store.itemsStat = itemsStat
-            AppDefinition.defaults.set(true, forKey: preferenceGameStatKey)
+    fileprivate mutating func loadData() {
+        if info.initialize { return }
+        guard let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Data else { return }
+        do {
+            let decoder = JSONDecoder()
+            let itemsStat = try decoder.decode([Stat].self, from: data)
+            assignLoadData(statList: itemsStat)
+            if itemsStat.count > 0 { info.initialize = true }
+        } catch {
+            print("loadData Stat Failed")
         }
-        for stat in self.store.itemsStat {
-            print("reloaded phrase: \(String(describing: stat.phrase))")
-            self.push(element: Stat(phrase: stat.phrase, accuracy: stat.accuracy, minimum: stat.minimum, percentage: stat.percentage, timeSpan: stat.timeSpan))
+    }
+    
+    mutating func assignLoadData(statList: [Stat]) {
+        if isEmpty() {
+            for statItem in statList {
+                info.statQueue.push(value: statItem)
+            }
         }
     }
 }
@@ -182,13 +214,13 @@ extension StatData {
         return info.statQueue.elements
     }
     
-    func push(element: Stat) {
+    mutating func push(element: Stat) {
         prune()
         unique()
         info.statQueue.push(value: element)
     }
     
-    func pop() -> Stat? {
+    mutating func pop() -> Stat? {
         return info.statQueue.pop()
     }
     
@@ -207,7 +239,7 @@ extension StatData {
         }
     }
     
-    func prune() {
+    mutating func prune() {
         let isThreshold = info.statQueue.isThreshold
         var copyIndex = 0
         if isThreshold {
@@ -223,11 +255,11 @@ extension StatData {
         adjustThresholdIndices(isThreshold: isThreshold, copyIndex: copyIndex)
     }
     
-    func purge() {
+    mutating func purge() {
         while !isEmpty() {
             _ = pop()
         }
-        info.initilize = false
+        info.initialize = false
     }
     
     func unique() {
@@ -235,3 +267,71 @@ extension StatData {
     }
 }
 
+class StatDataBox {
+    private var statDataInstance: StatData!
+    let queue = DispatchQueue(label: "com.teknowsys.statdata.queue")
+    
+    static var sharedInstance = StatDataBox()
+    
+    fileprivate init() {
+        queue.sync {
+            statDataInstance = StatData.sharedInstance
+        }
+    }
+    
+    func isEmpty() -> Bool {
+        return statDataInstance.isEmpty()
+    }
+    
+    func count() -> Int {
+        return statDataInstance.count()
+    }
+    
+    func elements() -> [Stat] {
+        return statDataInstance.elements()
+    }
+    
+    func push(element: Stat) {
+        queue.sync {
+            statDataInstance.push(element: element)
+        }
+    }
+    
+    func pop() -> Stat? {
+        var result: Stat?
+        queue.sync {
+            result = statDataInstance.pop()
+        }
+        return result
+    }
+
+    func prune() {
+        queue.sync {
+            statDataInstance.prune()
+        }
+    }
+    
+    func purge() {
+        queue.sync {
+            statDataInstance.purge()
+        }
+    }
+    
+    func unique() {
+        queue.sync {
+            statDataInstance.unique()
+        }
+    }
+    
+    func loadData() {
+        queue.sync {
+            statDataInstance.loadData()
+        }
+    }
+    
+    func saveData() {
+        queue.sync {
+            statDataInstance.saveData()
+        }
+    }
+}

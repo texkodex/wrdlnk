@@ -61,9 +61,9 @@ extension GameScene {
     }
     
     func stop() {
-        if audioPlayer != nil {
-            audioPlayer.stop()
-            audioPlayer = nil
-        }
+        guard let _ = audioPlayer else { return }
+        
+        audioPlayer.stop()
+        audioPlayer = nil
     }
 }

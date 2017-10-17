@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Google
 
 class AppViewController: UIViewController {
     
@@ -57,15 +58,14 @@ class AppViewController: UIViewController {
 
     private func registerLogin() {
         assert(Thread.isMainThread)
-        let serialQueue = DispatchQueue(label: "com.wrdlnk.serialQueue", qos: .default)
-        
         let appDelegate: UIApplicationDelegate = UIApplication.shared.delegate!
         let vc = LoginViewController()
-        serialQueue.sync(execute: {
-            appDelegate.window!?.rootViewController = vc
+        appDelegate.window!?.rootViewController = vc
+        DispatchQueue.main.async(){
+            
             vc.willMove(toParentViewController: self)
             print("registerInitialLogin")
-        })
+        }
       
         print("Finished - registerInitialLogin")
     }
@@ -91,8 +91,14 @@ class AppViewController: UIViewController {
         
         let loadedInitialDefaults = AppDefinition.defaults.value(forKey: AppDefinition.InitialDefaults) as! Bool
         
-        
+        #if false
+            delay(CommonDelaySetting) {
+                self.launchFromStoryboard(name: StoryboardName.Main.rawValue, controller: "GameViewController")
+            }
+        #else
         if (Auth.auth().currentUser?.uid == nil) {
+            let displayName = Auth.auth().currentUser?.displayName
+            print("Display name: \(String(describing: displayName))")
             delay(CommonDelaySetting) {
                 self.registerLogin()
                 AppDefinition.defaults.set(false, forKey: AppDefinition.InitialLogin)
@@ -109,9 +115,10 @@ class AppViewController: UIViewController {
                 self.launchFromStoryboard(name: StoryboardName.Main.rawValue, controller: "GameViewController")
             }
         }
+        #endif
     }
     
-    func handleLogout() {
+    @objc func handleLogout() {
         do {
             try Auth.auth().signOut()
         } catch let logoutError {

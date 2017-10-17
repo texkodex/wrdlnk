@@ -8,50 +8,60 @@
 
 import Foundation
 
-class WordListArchiver: NSObject, NSCoding {
-    var wordBank: [Word] = []
+struct Word: Codable {
+    public internal(set) var prefix: String
+    public internal(set) var link: String
+    public internal(set) var suffix: String
+    public internal(set) var level: Int
     
-    static var sharedInstance = WordListArchiver()
-    
-    deinit {
-        self.wordBank.removeAll()
+    init(prefix: String, link: String, suffix: String, level: Int = 0) {
+        self.prefix = prefix
+        self.link = link
+        self.suffix = suffix
+        self.level = level
     }
     
-    override init() {}
-    
-    init(wordBank : [Word]) {
-        self.wordBank = wordBank
+    enum WordKeys: String, CodingKey {
+        case prefix = "prefix"
+        case link = "link"
+        case suffix = "suffix"
+        case level = "level"
     }
-    
-    required init(coder decoder: NSCoder) {
-        super.init()
-        var count = 0
-        // decodeBytesForKey() returns an UnsafePointer<Word>?, pointing to immutable data.
-        if let ptr = decoder.decodeBytes(forKey: WordListKey, returnedLength: &count) {
-            // If we convert it to a buffer pointer of the appropriate type and count ...
-            let numValues = count / MemoryLayout<Word>.stride
-            ptr.withMemoryRebound(to: Word.self, capacity: numValues) {
-                let buf = UnsafeBufferPointer<Word>(start: UnsafePointer($0), count: numValues)
-                wordBank = Array(buf)
-            }
-        }
+}
+
+extension Word {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: WordKeys.self)
+        try container.encode(prefix, forKey: .prefix)
+        try container.encode(link, forKey: .link)
+        try container.encode(suffix, forKey: .suffix)
+        try container.encode(level, forKey: .level)
     }
-    
-    public func encode(with coder: NSCoder) {
-        // This encodes both the number of bytes and the data itself.
-        let numBytes = wordBank.count * MemoryLayout<Word>.stride
-        wordBank.withUnsafeBufferPointer {
-            $0.baseAddress!.withMemoryRebound(to: UInt8.self, capacity: numBytes) {
-                coder.encodeBytes($0, length: numBytes, forKey: WordListKey)
-            }
-        }
+}
+
+extension Word {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: WordKeys.self)
+        let prefix: String = try container.decode(String.self, forKey: .prefix)
+        let link: String = try container.decode(String.self, forKey: .link)
+        let suffix: String = try container.decode(String.self, forKey: .suffix)
+        let level: Int = try container.decode(Int.self, forKey: .level)
+        
+        self.init(prefix: prefix, link: link, suffix: suffix, level: level)
     }
 }
 
 struct WordList {
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let WordListArchiveURL = DocumentsDirectory.appendingPathComponent(StorageForWordList)
+    let queue = DispatchQueue(label: "com.teknowsys.wordlist.queue")
     
+    var filePath: String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        print("The url path in the document directory \(String(describing: url))")
+        return(url!.appendingPathComponent(StorageForWordList).path)
+    }
     
     struct info {
         static var index: Int = 0
@@ -63,37 +73,151 @@ struct WordList {
     
     static var sharedInstance = WordList()
     
-    init() {
-        if debugInfo {
-            AppDefinition.defaults.set(0, forKey: preferenceWordListKey)
-            AppDefinition.defaults.purgeAll()
-            AppDefinition.defaults.set(true, forKey: preferenceContinueGameEnabledKey)
-        }
-        info.index =  AppDefinition.defaults.keyExist(key: preferenceWordListKey) ? AppDefinition.defaults.integer(forKey: preferenceWordListKey) : 0
-    }
-}
-
-
-public let random: (Int) -> Int = { Int(arc4random_uniform(UInt32($0))) }
-
-public extension Collection {
-    func shuffled() -> [Iterator.Element] {
-        var array = Array(self)
-        array.shuffle()
-        return array
-    }
-}
-
-
-public extension MutableCollection where Index == Int, IndexDistance == Int {
-    mutating func shuffle() {
-        guard count > 1 else { return }
-        
-        for i in 0..<count - 1 {
-            let j = random(count - i) + i
-            guard i != j else { continue }
-            swap(&self[i], &self[j])
+    private init() {
+        queue.sync {
+            if debugInfo {
+                AppDefinition.defaults.set(0, forKey: preferenceWordListKey)
+                AppDefinition.defaults.purgeAll()
+                AppDefinition.defaults.set(true, forKey: preferenceContinueGameEnabledKey)
+            }
+            info.index =  AppDefinition.defaults.keyExist(key: preferenceWordListKey) ? AppDefinition.defaults.integer(forKey: preferenceWordListKey) : 0
         }
     }
+    
+    func getListItems() -> [Word] {
+        return info.wordBank
+    }
 }
 
+class WordListBox {
+    private var wordListInstance: WordList!
+    private let queue = DispatchQueue(label: "com.teknowsys.wordlistbox.queue")
+    
+    static var sharedInstance = WordListBox()
+    
+    fileprivate init() {
+        queue.sync {
+            wordListInstance = WordList.sharedInstance
+        }
+    }
+    
+    deinit {
+        queue.sync {
+            wordListInstance.saveWordList()
+        }
+    }
+    
+    func getListItems() -> [Word] {
+        return wordListInstance.getListItems()
+    }
+    
+    func isEmpty() -> Bool {
+        return wordListInstance.isEmpty()
+    }
+    
+    func populateFromMemoryList() {
+        queue.sync {
+            wordListInstance.populateFromMemoryList()
+        }
+    }
+    
+    func setupWords() {
+        queue.sync {
+            wordListInstance.setupWords()
+        }
+    }
+    
+    func clearWordList() {
+        queue.sync {
+            wordListInstance.clearWordList()
+        }
+    }
+    
+    func loadWordList() {
+        queue.sync {
+            wordListInstance.loadWordList()
+        }
+    }
+    
+    func saveWordList() {
+        queue.sync {
+            wordListInstance.saveWordList()
+        }
+    }
+    
+    func setListDescription(listName: String = awardDescriptionPrefixDefaultString) {
+        wordListInstance.setListDescription(listName: listName)
+    }
+    
+    func networkLoad(wordList: [Word]) {
+        queue.sync {
+            wordListInstance.networkLoad(wordList: wordList)
+        }
+    }
+    
+    func getWords() -> Word? {
+        var word: Word?
+        queue.sync {
+            return word = wordListInstance.getWords()
+        }
+        return word
+    }
+    
+    func skip() {
+        wordListInstance.skip()
+    }
+    
+    func stay() {
+        wordListInstance.stay()
+    }
+    
+    func checkForListTraversal() {
+        wordListInstance.checkForListTraversal()
+    }
+    
+    func getCurrentWords() -> Word? {
+        return wordListInstance.getCurrentWords()
+    }
+    
+    func setSelectedRow(row: VowelRow?) {
+        queue.sync {
+            wordListInstance.setSelectedRow(row: row)
+        }
+    }
+    
+    func getSelectedRow() -> VowelRow? {
+        return wordListInstance.getSelectedRow()
+    }
+    
+    func currentIndex() -> Int? {
+        return wordListInstance.currentIndex()
+    }
+
+    func setMatchCondition() {
+        queue.sync {
+            wordListInstance.setMatchCondition()
+        }
+    }
+    
+    func clearMatchCondition() {
+        queue.sync {
+            wordListInstance.clearMatchCondition()
+        }
+    }
+    
+    func handledMatchCondition() {
+        queue.sync {
+            wordListInstance.handledMatchCondition()
+        }
+    }
+    
+    func getMatchCondition() -> Bool {
+        return wordListInstance.getMatchCondition()
+    }
+    
+    func reset() {
+        queue.sync {
+            wordListInstance.reset()
+        }
+    }
+}

@@ -25,6 +25,17 @@
 		CC1C64C71F44B44300A9E5C8 /* AwardScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC1C64C61F44B44300A9E5C8 /* AwardScene.sks */; };
 		CC1C64C91F44B47300A9E5C8 /* AwardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64C81F44B47300A9E5C8 /* AwardScene.swift */; };
 		CC1C64CE1F46B92400A9E5C8 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64CD1F46B92400A9E5C8 /* AppTheme.swift */; };
+		CC24C2761F966DEB000C5B29 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C2691F96697D000C5B29 /* GoogleSignIn.framework */; };
+		CC24C2771F966DF8000C5B29 /* GoogleAuthUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C26A1F96698B000C5B29 /* GoogleAuthUtilities.framework */; };
+		CC24C2781F966E0D000C5B29 /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C26C1F96698B000C5B29 /* GoogleAppUtilities.framework */; };
+		CC24C2791F966E42000C5B29 /* GoogleNetworkingUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C26B1F96698B000C5B29 /* GoogleNetworkingUtilities.framework */; };
+		CC24C27A1F966E46000C5B29 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C26D1F9669B3000C5B29 /* GoogleSymbolUtilities.framework */; };
+		CC24C27B1F966E49000C5B29 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C26E1F9669B3000C5B29 /* GoogleUtilities.framework */; };
+		CC24C27C1F966E8B000C5B29 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC13D0CC1F8DB7A200FC51C6 /* AddressBook.framework */; };
+		CC24C27D1F967F0E000C5B29 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC3A56E1F8D444E00530461 /* SafariServices.framework */; };
+		CC24C27E1F967F6B000C5B29 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC13D0D01F8DB7DF00FC51C6 /* libz.tbd */; };
+		CC24C2801F967F9C000C5B29 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C27F1F967F9C000C5B29 /* libc++.tbd */; };
+		CC24C2811F96800D000C5B29 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CC24C26F1F9669F0000C5B29 /* GoogleSignIn.bundle */; };
 		CC2F8E481F18830200463E37 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F8E471F18830100463E37 /* PlaySound.swift */; };
 		CC4494CD1F5628A100CB0906 /* wireIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC4494CC1F5628A100CB0906 /* wireIcon.xcassets */; };
 		CC4D21991F5CE3B600521254 /* LiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4D21981F5CE3B600521254 /* LiveData.swift */; };
@@ -49,13 +60,12 @@
 		CC7202BC1F19744C003394A0 /* biff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202BB1F19744C003394A0 /* biff.mp3 */; };
 		CC7202BE1F19745B003394A0 /* beepbeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202BD1F19745B003394A0 /* beepbeep.mp3 */; };
 		CC7202C01F1AAC95003394A0 /* yes.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC7202BF1F1AAC95003394A0 /* yes.mp3 */; };
-		CC7202C21F1D5D7D003394A0 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7202C11F1D5D7D003394A0 /* DataStore.swift */; };
+		CC7202C21F1D5D7D003394A0 /* StatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7202C11F1D5D7D003394A0 /* StatStore.swift */; };
 		CC7911BF1F55A3E3009E7B4A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7911BE1F55A3E3009E7B4A /* SplashViewController.swift */; };
 		CC7911C11F55A3F9009E7B4A /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7911C01F55A3F9009E7B4A /* LogoView.swift */; };
 		CC7911C31F55A408009E7B4A /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7911C21F55A408009E7B4A /* TileView.swift */; };
 		CC7911C51F55A494009E7B4A /* TileGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7911C41F55A494009E7B4A /* TileGridView.swift */; };
 		CC7911C71F55A587009E7B4A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7911C61F55A587009E7B4A /* Common.swift */; };
-		CC80F5511F86A80800BCD702 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC80F5501F86A80800BCD702 /* GoogleService-Info.plist */; };
 		CC80F5551F87CB7600BCD702 /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC80F5531F87CB7600BCD702 /* FirebaseAuth.framework */; };
 		CC80F5561F87CB7600BCD702 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC80F5541F87CB7600BCD702 /* GTMSessionFetcher.framework */; };
 		CC8BE4131EEB2D7100CDB4BB /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4121EEB2D7100CDB4BB /* ButtonNode.swift */; };
@@ -79,6 +89,7 @@
 		CCAD36271EE0CAE3001C6AFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCAD36251EE0CAE3001C6AFE /* LaunchScreen.storyboard */; };
 		CCAD36321EE0CAE3001C6AFE /* wrdlnkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAD36311EE0CAE3001C6AFE /* wrdlnkTests.swift */; };
 		CCAD363D1EE0CAE3001C6AFE /* wrdlnkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAD363C1EE0CAE3001C6AFE /* wrdlnkUITests.swift */; };
+		CCCE42731F917C46005F01D4 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE42721F917C46005F01D4 /* Array+Extensions.swift */; };
 		CCD90CE11F83EB2800C81D98 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD90CE01F83EB2800C81D98 /* UIApplication+Extension.swift */; };
 		CCDC23711F200DCE00371F1F /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCDC23701F200DCE00371F1F /* MenuScene.sks */; };
 		CCDC23731F200E3700371F1F /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC23721F200E3700371F1F /* MenuScene.swift */; };
@@ -89,6 +100,9 @@
 		CCDEA3E01F37A8690046C82D /* WalkThroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEA3DF1F37A8690046C82D /* WalkThroughPageViewController.swift */; };
 		CCE627F71F574D650018BD1C /* OverlayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCE627F61F574D650018BD1C /* OverlayScene.sks */; };
 		CCE627F91F574D890018BD1C /* OverlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE627F81F574D890018BD1C /* OverlayScene.swift */; };
+		CCEB14CA1F9481F100985641 /* ProcessTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEB14C91F9481F100985641 /* ProcessTile.swift */; };
+		CCEB14CF1F96611200985641 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCEB14CE1F965C2700985641 /* GoogleService-Info.plist */; };
+		CCEB14D01F96612000985641 /* GoogleService-firebase-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCEB14CD1F965B9300985641 /* GoogleService-firebase-Info.plist */; };
 		CCF0209E1F630D7D00FF6597 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474D1EE9DD1600468E0B /* Config.swift */; };
 		CCF0209F1F632B4800FF6597 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF8474B1EE9DC6D00468E0B /* Extensions.swift */; };
 		CCF020A01F632B4E00FF6597 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F90D01F51E9FE001BB049 /* Utility.swift */; };
@@ -131,6 +145,10 @@
 		CC1148E91F3841FC00F64550 /* WalkThroughLastPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkThroughLastPageViewController.swift; sourceTree = "<group>"; };
 		CC1148EB1F393E7100F64550 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		CC1148ED1F394D8500F64550 /* AppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
+		CC13D0CC1F8DB7A200FC51C6 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		CC13D0CE1F8DB7AB00FC51C6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CC13D0D01F8DB7DF00FC51C6 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		CC13D0D41F8DC7D000FC51C6 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = ../../sdk/google_signin_sdk_4_1_0/GoogleUtilities.framework; sourceTree = "<group>"; };
 		CC182F3A1F87D39A00EE5DA9 /* wrdlnk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wrdlnk-Bridging-Header.h"; sourceTree = "<group>"; };
 		CC182F3D1F880DCD00EE5DA9 /* LogoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		CC182F431F896C7D00EE5DA9 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -147,6 +165,14 @@
 		CC1C64C61F44B44300A9E5C8 /* AwardScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AwardScene.sks; sourceTree = "<group>"; };
 		CC1C64C81F44B47300A9E5C8 /* AwardScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardScene.swift; sourceTree = "<group>"; };
 		CC1C64CD1F46B92400A9E5C8 /* AppTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		CC24C2691F96697D000C5B29 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleSignIn.framework; sourceTree = "<group>"; };
+		CC24C26A1F96698B000C5B29 /* GoogleAuthUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAuthUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleAuthUtilities.framework; sourceTree = "<group>"; };
+		CC24C26B1F96698B000C5B29 /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
+		CC24C26C1F96698B000C5B29 /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleAppUtilities.framework; sourceTree = "<group>"; };
+		CC24C26D1F9669B3000C5B29 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		CC24C26E1F9669B3000C5B29 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleUtilities.framework; sourceTree = "<group>"; };
+		CC24C26F1F9669F0000C5B29 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleSignIn.bundle; path = ../../sdk/google_signin_sdk_4_0_0/GoogleSignIn.bundle; sourceTree = "<group>"; };
+		CC24C27F1F967F9C000C5B29 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		CC2F8E471F18830100463E37 /* PlaySound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 		CC4494CC1F5628A100CB0906 /* wireIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = wireIcon.xcassets; sourceTree = "<group>"; };
 		CC4D21981F5CE3B600521254 /* LiveData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveData.swift; sourceTree = "<group>"; };
@@ -173,13 +199,12 @@
 		CC7202BB1F19744C003394A0 /* biff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = biff.mp3; sourceTree = "<group>"; };
 		CC7202BD1F19745B003394A0 /* beepbeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beepbeep.mp3; sourceTree = "<group>"; };
 		CC7202BF1F1AAC95003394A0 /* yes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = yes.mp3; sourceTree = "<group>"; };
-		CC7202C11F1D5D7D003394A0 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		CC7202C11F1D5D7D003394A0 /* StatStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatStore.swift; sourceTree = "<group>"; };
 		CC7911BE1F55A3E3009E7B4A /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		CC7911C01F55A3F9009E7B4A /* LogoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		CC7911C21F55A408009E7B4A /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		CC7911C41F55A494009E7B4A /* TileGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileGridView.swift; sourceTree = "<group>"; };
 		CC7911C61F55A587009E7B4A /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
-		CC80F5501F86A80800BCD702 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CC80F5531F87CB7600BCD702 /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAuth.framework; sourceTree = "<group>"; };
 		CC80F5541F87CB7600BCD702 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GTMSessionFetcher.framework; sourceTree = "<group>"; };
 		CC8BE4121EEB2D7100CDB4BB /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
@@ -209,6 +234,10 @@
 		CCAD36381EE0CAE3001C6AFE /* wrdlnkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wrdlnkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCAD363C1EE0CAE3001C6AFE /* wrdlnkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wrdlnkUITests.swift; sourceTree = "<group>"; };
 		CCAD363E1EE0CAE3001C6AFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCC3A5641F8D299700530461 /* Google.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Google.h; sourceTree = "<group>"; };
+		CCC3A56E1F8D444E00530461 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		CCC3A5701F8D446900530461 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CCCE42721F917C46005F01D4 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		CCD90CE01F83EB2800C81D98 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		CCDC23701F200DCE00371F1F /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		CCDC23721F200E3700371F1F /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
@@ -219,6 +248,16 @@
 		CCDEA3DF1F37A8690046C82D /* WalkThroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkThroughPageViewController.swift; sourceTree = "<group>"; };
 		CCE627F61F574D650018BD1C /* OverlayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OverlayScene.sks; sourceTree = "<group>"; };
 		CCE627F81F574D890018BD1C /* OverlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayScene.swift; sourceTree = "<group>"; };
+		CCEB14C91F9481F100985641 /* ProcessTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTile.swift; sourceTree = "<group>"; };
+		CCEB14CB1F9652A400985641 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
+		CCEB14CD1F965B9300985641 /* GoogleService-firebase-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-firebase-Info.plist"; sourceTree = "<group>"; };
+		CCEB14CE1F965C2700985641 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CCEB14D61F96672B00985641 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = ../sdk/google_signin_sdk_4_0_0/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		CCEB14D71F96672B00985641 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = ../sdk/google_signin_sdk_4_0_0/GoogleUtilities.framework; sourceTree = "<group>"; };
+		CCEB14D81F96672B00985641 /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = ../sdk/google_signin_sdk_4_0_0/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
+		CCEB14D91F96672B00985641 /* GoogleAuthUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAuthUtilities.framework; path = ../sdk/google_signin_sdk_4_0_0/GoogleAuthUtilities.framework; sourceTree = "<group>"; };
+		CCEB14DA1F96672C00985641 /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppUtilities.framework; path = ../sdk/google_signin_sdk_4_0_0/GoogleAppUtilities.framework; sourceTree = "<group>"; };
+		CCEB14E01F96674800985641 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = ../sdk/google_signin_sdk_4_0_0/GoogleSignIn.framework; sourceTree = "<group>"; };
 		CCF3CC2F1F79AB3D00035B76 /* great2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = great2.mp3; sourceTree = "<group>"; };
 		CCF3CC311F79F94C00035B76 /* GameScene+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameScene+Extensions.swift"; sourceTree = "<group>"; };
 		CCF3CC331F79FA1600035B76 /* SKScene+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKScene+Extensions.swift"; sourceTree = "<group>"; };
@@ -238,6 +277,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC24C2801F967F9C000C5B29 /* libc++.tbd in Frameworks */,
+				CC24C27E1F967F6B000C5B29 /* libz.tbd in Frameworks */,
+				CC24C27C1F966E8B000C5B29 /* AddressBook.framework in Frameworks */,
+				CC24C27D1F967F0E000C5B29 /* SafariServices.framework in Frameworks */,
+				CC24C2761F966DEB000C5B29 /* GoogleSignIn.framework in Frameworks */,
+				CC24C2781F966E0D000C5B29 /* GoogleAppUtilities.framework in Frameworks */,
+				CC24C2771F966DF8000C5B29 /* GoogleAuthUtilities.framework in Frameworks */,
+				CC24C2791F966E42000C5B29 /* GoogleNetworkingUtilities.framework in Frameworks */,
+				CC24C27A1F966E46000C5B29 /* GoogleSymbolUtilities.framework in Frameworks */,
+				CC24C27B1F966E49000C5B29 /* GoogleUtilities.framework in Frameworks */,
 				CC6F27851F8693580099F7A3 /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				CC80F5561F87CB7600BCD702 /* GTMSessionFetcher.framework in Frameworks */,
 				CC182F4A1F896CAE00EE5DA9 /* FBSDKShareKit.framework in Frameworks */,
@@ -275,6 +324,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC13D0C91F8DB40D00FC51C6 /* Etc */ = {
+			isa = PBXGroup;
+			children = (
+				CC13D0D41F8DC7D000FC51C6 /* GoogleUtilities.framework */,
+			);
+			name = Etc;
+			sourceTree = "<group>";
+		};
 		CC182F3F1F896BDD00EE5DA9 /* Bolts */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +399,7 @@
 		CC6F27771F856F130099F7A3 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				CCEB14CD1F965B9300985641 /* GoogleService-firebase-Info.plist */,
 				CC6F278F1F8698130099F7A3 /* Firebase.h */,
 				CC80F5521F87CB3200BCD702 /* Auth */,
 				CC6F278A1F8693D40099F7A3 /* Database */,
@@ -372,11 +430,16 @@
 			name = Twitter;
 			sourceTree = "<group>";
 		};
-		CC6F277A1F856F3E0099F7A3 /* GoogleGroups */ = {
+		CC6F277A1F856F3E0099F7A3 /* GoogleSignIn */ = {
 			isa = PBXGroup;
 			children = (
+				CCC3A5641F8D299700530461 /* Google.h */,
+				CC24C26F1F9669F0000C5B29 /* GoogleSignIn.bundle */,
+				CC13D0C91F8DB40D00FC51C6 /* Etc */,
+				CCC3A5651F8D302B00530461 /* SignIn */,
+				CCC3A5661F8D30B000530461 /* SignInDependencies */,
 			);
-			name = GoogleGroups;
+			name = GoogleSignIn;
 			sourceTree = "<group>";
 		};
 		CC6F277B1F86932F0099F7A3 /* Analytics */ = {
@@ -418,7 +481,7 @@
 		CC80F54F1F86A7F200BCD702 /* GoogleService */ = {
 			isa = PBXGroup;
 			children = (
-				CC80F5501F86A80800BCD702 /* GoogleService-Info.plist */,
+				CCEB14CE1F965C2700985641 /* GoogleService-Info.plist */,
 			);
 			name = GoogleService;
 			sourceTree = "<group>";
@@ -463,6 +526,7 @@
 				CCAD36301EE0CAE3001C6AFE /* wrdlnkTests */,
 				CCAD363B1EE0CAE3001C6AFE /* wrdlnkUITests */,
 				CCAD36141EE0CAE3001C6AFE /* Products */,
+				CCC3A56D1F8D444D00530461 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -481,7 +545,7 @@
 			children = (
 				CC6F27901F8698890099F7A3 /* module.modulemap */,
 				CC80F54F1F86A7F200BCD702 /* GoogleService */,
-				CC6F277A1F856F3E0099F7A3 /* GoogleGroups */,
+				CC6F277A1F856F3E0099F7A3 /* GoogleSignIn */,
 				CC6F27791F856F2D0099F7A3 /* Twitter */,
 				CC6F27781F856F1F0099F7A3 /* Facebook */,
 				CC6F27771F856F130099F7A3 /* Firebase */,
@@ -596,6 +660,46 @@
 			name = Assets;
 			sourceTree = "<group>";
 		};
+		CCC3A5651F8D302B00530461 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				CC24C2691F96697D000C5B29 /* GoogleSignIn.framework */,
+			);
+			name = SignIn;
+			sourceTree = "<group>";
+		};
+		CCC3A5661F8D30B000530461 /* SignInDependencies */ = {
+			isa = PBXGroup;
+			children = (
+				CC24C26C1F96698B000C5B29 /* GoogleAppUtilities.framework */,
+				CC24C26A1F96698B000C5B29 /* GoogleAuthUtilities.framework */,
+				CC24C26B1F96698B000C5B29 /* GoogleNetworkingUtilities.framework */,
+				CC24C26D1F9669B3000C5B29 /* GoogleSymbolUtilities.framework */,
+				CC24C26E1F9669B3000C5B29 /* GoogleUtilities.framework */,
+			);
+			name = SignInDependencies;
+			sourceTree = "<group>";
+		};
+		CCC3A56D1F8D444D00530461 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CC24C27F1F967F9C000C5B29 /* libc++.tbd */,
+				CCEB14E01F96674800985641 /* GoogleSignIn.framework */,
+				CCEB14DA1F96672C00985641 /* GoogleAppUtilities.framework */,
+				CCEB14D91F96672B00985641 /* GoogleAuthUtilities.framework */,
+				CCEB14D81F96672B00985641 /* GoogleNetworkingUtilities.framework */,
+				CCEB14D61F96672B00985641 /* GoogleSymbolUtilities.framework */,
+				CCEB14D71F96672B00985641 /* GoogleUtilities.framework */,
+				CCEB14CB1F9652A400985641 /* libz.1.1.3.tbd */,
+				CC13D0D01F8DB7DF00FC51C6 /* libz.tbd */,
+				CC13D0CE1F8DB7AB00FC51C6 /* StoreKit.framework */,
+				CC13D0CC1F8DB7A200FC51C6 /* AddressBook.framework */,
+				CCC3A5701F8D446900530461 /* SystemConfiguration.framework */,
+				CCC3A56E1F8D444E00530461 /* SafariServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CCDEA3D21F36BECB0046C82D /* WalkThrough */ = {
 			isa = PBXGroup;
 			children = (
@@ -612,17 +716,19 @@
 		CCF8474A1EE9DC5B00468E0B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CCCE42721F917C46005F01D4 /* Array+Extensions.swift */,
 				CCF8474B1EE9DC6D00468E0B /* Extensions.swift */,
 				CCF8474D1EE9DD1600468E0B /* Config.swift */,
 				CC8BE4121EEB2D7100CDB4BB /* ButtonNode.swift */,
 				CC8BE4221EF22F0E00CDB4BB /* DataExchange.swift */,
-				CC7202C11F1D5D7D003394A0 /* DataStore.swift */,
 				CC95FA001F41D95B00E55483 /* WordList.swift */,
 				CC9D73A61F7C4C490084C15C /* WordList+Extensions.swift */,
 				CC4F90D01F51E9FE001BB049 /* Utility.swift */,
 				CC4D21981F5CE3B600521254 /* LiveData.swift */,
 				CCF3CC3F1F7AB0AC00035B76 /* VowelCount.swift */,
 				CCF3CC411F7AB16C00035B76 /* Stat.swift */,
+				CC7202C11F1D5D7D003394A0 /* StatStore.swift */,
+				CCEB14C91F9481F100985641 /* ProcessTile.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -690,22 +796,24 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = teknowsys;
 				TargetAttributes = {
 					CCAD36121EE0CAE3001C6AFE = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = B8FBKBQS3V;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					CCAD362C1EE0CAE3001C6AFE = {
 						CreatedOnToolsVersion = 8.3;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CCAD36121EE0CAE3001C6AFE;
 					};
 					CCAD36371EE0CAE3001C6AFE = {
 						CreatedOnToolsVersion = 8.3;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CCAD36121EE0CAE3001C6AFE;
 					};
@@ -736,9 +844,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC24C2811F96800D000C5B29 /* GoogleSignIn.bundle in Resources */,
+				CCEB14D01F96612000985641 /* GoogleService-firebase-Info.plist in Resources */,
+				CCEB14CF1F96611200985641 /* GoogleService-Info.plist in Resources */,
 				CC7202B81F197421003394A0 /* great.mp3 in Resources */,
 				CC7202B41F1973F1003394A0 /* awake.mp3 in Resources */,
-				CC80F5511F86A80800BCD702 /* GoogleService-Info.plist in Resources */,
 				CC7202C01F1AAC95003394A0 /* yes.mp3 in Resources */,
 				CCDC23711F200DCE00371F1F /* MenuScene.sks in Resources */,
 				AE39F6A91EE10C6B00D362C1 /* GameStatusScene.sks in Resources */,
@@ -810,9 +920,11 @@
 				CC5D16E01F8034C200414E8A /* SocialMediaManager.swift in Sources */,
 				CCAD361D1EE0CAE3001C6AFE /* GameScene.swift in Sources */,
 				CC9D73A71F7C4C490084C15C /* WordList+Extensions.swift in Sources */,
+				CCCE42731F917C46005F01D4 /* Array+Extensions.swift in Sources */,
 				CCF3CC3A1F79FB5000035B76 /* SKTileMapNode+Extensions.swift in Sources */,
 				CCAD361F1EE0CAE3001C6AFE /* GameViewController.swift in Sources */,
-				CC7202C21F1D5D7D003394A0 /* DataStore.swift in Sources */,
+				CC7202C21F1D5D7D003394A0 /* StatStore.swift in Sources */,
+				CCEB14CA1F9481F100985641 /* ProcessTile.swift in Sources */,
 				CCDEA3E01F37A8690046C82D /* WalkThroughPageViewController.swift in Sources */,
 				CCF3CC3E1F79FC4D00035B76 /* SKLabelNode+Extensions.swift in Sources */,
 				CC5D16DE1F80243C00414E8A /* ViewController+Extensions.swift in Sources */,
@@ -904,7 +1016,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -912,7 +1026,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -942,7 +1060,7 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				"OTHER_LDFLAGS[arch=*]" = "";
+				"OTHER_LDFLAGS[arch=*]" = "$(OTHER_LDFLAGS)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -960,7 +1078,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -968,7 +1088,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1009,16 +1133,23 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/wrdlnk",
+					/Users/sparkle/Documents/dev/code/swift/sdk/google_signin_sdk_4_0_0,
 				);
+				HEADER_SEARCH_PATHS = /Users/sparkle/Documents/dev/code/swift/sdk/google_signin_sdk_4_0_0;
 				INFOPLIST_FILE = wrdlnk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = /Users/sparkle/Documents/dev/code/swift/sdk/google_signin_sdk_4_0_0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teknowsys.wrdlnk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "wrdlnk/wrdlnk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_LDFLAGS = "-v";
 			};
 			name = Debug;
 		};
@@ -1032,15 +1163,22 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/wrdlnk",
+					/Users/sparkle/Documents/dev/code/swift/sdk/google_signin_sdk_4_0_0,
 				);
+				HEADER_SEARCH_PATHS = /Users/sparkle/Documents/dev/code/swift/sdk/google_signin_sdk_4_0_0;
 				INFOPLIST_FILE = wrdlnk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = /Users/sparkle/Documents/dev/code/swift/sdk/google_signin_sdk_4_0_0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teknowsys.wrdlnk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "wrdlnk/wrdlnk-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_LDFLAGS = "-v";
 			};
 			name = Release;
 		};
@@ -1053,7 +1191,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teknowsys.wrdlnkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wrdlnk.app/wrdlnk";
 			};
 			name = Debug;
@@ -1067,7 +1206,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teknowsys.wrdlnkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wrdlnk.app/wrdlnk";
 			};
 			name = Release;
@@ -1080,7 +1220,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teknowsys.wrdlnkUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = wrdlnk;
 			};
 			name = Debug;
@@ -1093,7 +1234,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teknowsys.wrdlnkUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = wrdlnk;
 			};
 			name = Release;

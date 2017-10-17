@@ -58,8 +58,8 @@ extension UIFont {
 private extension UIFontDescriptor {
     
     var monospacedDigitFontDescriptor: UIFontDescriptor {
-        let fontDescriptorFeatureSettings = [[UIFontFeatureTypeIdentifierKey: kNumberSpacingType, UIFontFeatureSelectorIdentifierKey: kMonospacedNumbersSelector]]
-        let fontDescriptorAttributes = [UIFontDescriptorFeatureSettingsAttribute: fontDescriptorFeatureSettings]
+        let fontDescriptorFeatureSettings = [[UIFontDescriptor.FeatureKey.featureIdentifier: kNumberSpacingType, UIFontDescriptor.FeatureKey.typeIdentifier: kMonospacedNumbersSelector]]
+        let fontDescriptorAttributes = [UIFontDescriptor.AttributeName.featureSettings: fontDescriptorFeatureSettings]
         let fontDescriptor = self.addingAttributes(fontDescriptorAttributes)
         return fontDescriptor
     }
@@ -91,3 +91,24 @@ extension Array where Element : Hashable {
     }
 }
 
+
+
+public extension Collection {
+    func shuffled() -> [Iterator.Element] {
+        var array = Array(self)
+        array.shuffle()
+        return array
+    }
+}
+
+public extension MutableCollection where Index == Int, IndexDistance == Int {
+    mutating func shuffle() {
+        guard count > 1 else { return }
+        
+        for i in 0..<count - 1 {
+            let j = random(count - i) + i
+            guard i != j else { continue }
+            self.swapAt(i, j)
+        }
+    }
+}

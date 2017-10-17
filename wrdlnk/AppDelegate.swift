@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import Firebase
+import Facebook
+import Google
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,13 +18,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
         initialize()
+        
+        firebaseAppOptions()
+    
+        GIDSignIn.initialize()
+        
         self.window?.makeKeyAndVisible()
         return true
     }
     
+    func firebaseAppOptions() {
+        let path = Bundle.main.path(forResource: AppDefinition.FirebaseConfigFile, ofType: AppDefinition.PropertyList);
+        let firebaseOptions = FirebaseOptions(contentsOfFile: path!)
+        FirebaseApp.configure(options: firebaseOptions!)
+    }
     
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        if(url.scheme!.isEqual("fbXXXXXXXXXXX")) {
+            return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+            
+        } else {
+            return GIDSignIn.sharedInstance().handle(url as URL!,
+                                                     sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!,
+                                                     annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        }
+    }
+
     func initialize()
     {
         AppDefinition.defaults.register(

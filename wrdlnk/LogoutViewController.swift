@@ -59,8 +59,8 @@ class LogoutViewController: UIViewController {
     var emailTextHeightAnchor: NSLayoutConstraint?
     var passwordTextHeightAnchor: NSLayoutConstraint?
     
-    func handleLoginRegisterChange() {
-        let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
+    @objc func handleLoginRegisterChange() {
+        _ = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
         
         // Change containerview
         containerViewHeightAnchor?.constant =  loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150

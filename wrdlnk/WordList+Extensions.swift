@@ -9,8 +9,9 @@
 import Foundation
 
 extension WordList {
+    
     func isEmpty() -> Bool {
-        return info.wordBank.isEmpty
+        return WordList.info.initialize == false
     }
     
     mutating func populateFromMemoryList() {
@@ -50,24 +51,34 @@ extension WordList {
         }
     }
     
+    mutating func clearWordList() {
+        if isEmpty() { return }
+        trace("\(#file ) \(#line)", {"clearWordList - ...: "})
+        info.wordBank.removeAll()
+        info.initialize = false
+    }
+    
     mutating func loadWordList() {
-        if info.initialize { return }
+        guard let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Data else { return }
         do {
-            let data = try Data(contentsOf: WordList.WordListArchiveURL, options: .alwaysMapped)
-            if let back = (NSKeyedUnarchiver.unarchiveObject(with: data) as? [Word.Coding])?.decoded {
-                networkLoad(wordList: back as! [Word])
-            }
-        } catch let error {
-            print(error.localizedDescription)
+            let decoder = JSONDecoder()
+            let wordList = try decoder.decode([Word].self, from: data)
+            if wordList.count > 0 { info.initialize = true }
+            info.wordBank = wordList
+        } catch {
+            print("loadWordList Failed")
         }
     }
     
     mutating func saveWordList() {
+        trace("\(#file ) \(#line)", {"saveWordList - start: "})
         do {
-            let data = NSKeyedArchiver.archivedData(withRootObject: info.wordBank.encoded)
-            try data.write(to: WordList.WordListArchiveURL, options: .atomic)
-        } catch let error {
-            print(error.localizedDescription)
+            let words = info.wordBank
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(words)
+            NSKeyedArchiver.archiveRootObject(data, toFile: filePath)
+        } catch {
+            print("saveWordList Failed")
         }
     }
     

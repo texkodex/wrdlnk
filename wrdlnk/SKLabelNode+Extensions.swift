@@ -28,7 +28,7 @@ extension SKLabelNode {
     func setLabelText(element: ViewElement?, words: Word, row: VowelRow?) -> String? {
         print("Entering \(#file):: \(#function) at line \(#line)")
         
-        guard (row != nil) else { return nil }
+        guard let _ = row else { return nil }
         
         switch element! {
         case .prefixMeaning:

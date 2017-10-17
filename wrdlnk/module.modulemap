@@ -71,3 +71,10 @@ framework module TwitterKit {
     link framework "CoreMedia"
     link framework "SafariServices"
 }
+
+// Google module map
+
+module Google {
+    header "Google.h"
+    export *
+}

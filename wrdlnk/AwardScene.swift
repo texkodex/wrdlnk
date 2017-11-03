@@ -66,9 +66,6 @@ class AwardScene: BaseScene {
         }
     }
 
-    var entities = [GKEntity()]
-    var graphs = [String:GKGraph]()
-    
     var nodes = [SKNode]()
     
     var statData = StatData.sharedInstance
@@ -77,8 +74,6 @@ class AwardScene: BaseScene {
 
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        entities.removeAll()
-        graphs.removeAll()
         nodes.removeAll()
         self.removeFromParent()
         self.removeAllChildren()

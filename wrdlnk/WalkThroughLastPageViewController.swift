@@ -34,9 +34,7 @@ class WalkThroughLastPageViewController: UIViewController {
     @IBOutlet weak var enterButton: UIButton!
     
     @IBAction func doneButtonTapped(sender: UIButton) {
-        //delay(CommonDelaySetting) {
-            self.delegate?.lastPageDone()
-        //}
+            delegate?.lastPageDone()
     }
     
     weak var delegate:WalkThroughLastPageViewControllerDelegate?

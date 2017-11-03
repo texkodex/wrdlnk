@@ -25,9 +25,6 @@ struct MakeVisibleParams {
 }
 
 class DefinitionScene: BaseScene {
-    var entities = [GKEntity()]
-    var graphs = [String:GKGraph]()
-    
     var nodes = [SKNode]()
     
     var wordList = WordList.sharedInstance
@@ -39,8 +36,6 @@ class DefinitionScene: BaseScene {
     
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        entities.removeAll()
-        graphs.removeAll()
         nodes.removeAll()
         self.removeFromParent()
         self.removeAllChildren()
@@ -114,7 +109,6 @@ class DefinitionScene: BaseScene {
         default:
             return
         }
-        
     }
     
     // MARK: - Word Check
@@ -125,7 +119,6 @@ class DefinitionScene: BaseScene {
         
         return misspelledRange.location == NSNotFound
     }
-    
     
     // MARK: - Touches
     func touchDown(atPoint pos : CGPoint) {
@@ -158,5 +151,4 @@ class DefinitionScene: BaseScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("Entering \(#file):: \(#function) at line \(#line)")
     }
-    
 }

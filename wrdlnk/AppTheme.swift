@@ -8,6 +8,11 @@
 import UIKit
 import SpriteKit
 
+let backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9058823529, blue: 0.9019607843, alpha: 1)
+let midgroundColor = #colorLiteral(red: 0.968627451, green: 0.8666666667, blue: 0.862745098, alpha: 1)
+let foregroundColor = #colorLiteral(red: 0.9333333333, green: 0.4823529412, blue: 0.4666666667, alpha: 1)
+let markBackgroundColor = #colorLiteral(red: 0.2352941176, green: 0.8196078431, blue: 0.6901960784, alpha: 1)
+
 enum Color:Int {
     case blackTile
     case darkGrayTile
@@ -32,12 +37,16 @@ enum Color:Int {
     case pastelForegroundTile
     case pastelBackgroundTile
     case pastelFontColor
+    case lightRedBackground
+    case nightModeBackground
+    case pastelBackground
+    case colorBlindBackground
 }
 
 let colorList: [UIColor] = [  blackTile, darkGrayTile, lightGrayTile, whiteTile, .gray, .red, .green, .blue, .cyan, .yellow, .magenta,
     .orange, .purple, .brown, .clear, blueTile, grayTile, greenTile,
-    redTile, yellowTile, pastelForegroundTile, pastelBackgroundTile,
-    pastelFontColor ]
+    redTile, yellowTile, pastelForegroundTile, pastelBackgroundTile, pastelFontColor,
+    lightRedBackground, nightModeBackground, pastelBackground, colorBlindBackground ]
 
 enum NodeName: String {
     case scene = "Scene"
@@ -66,23 +75,6 @@ func currentMode() -> Mode {
     if nightMode { return Mode.nightMode }
     if pastel { return Mode.pastel }
     return Mode.normal
-}
-
-func getBackgroundColor() -> UIColor {
-    switch currentMode() {
-    case Mode.colorBlind:
-        let alpha = 1.0
-        return blackTile.withAlphaComponent(CGFloat(alpha))
-    case Mode.nightMode:
-        let alpha = 1.0
-        return blackTile.withAlphaComponent(CGFloat(alpha))
-    case Mode.pastel:
-        let alpha = 1.0
-        return pastelBackgroundTile.withAlphaComponent(CGFloat(alpha))
-    case Mode.normal:
-        let alpha = 1.0
-        return whiteTile.withAlphaComponent(CGFloat(alpha))
-    }
 }
 
 class AppTheme {
@@ -147,6 +139,9 @@ class AppTheme {
                      "//world/switches/colorblind",
                      "//world/switches/colorblind/ColorBlindSwitch",
                      "//world/switches/colorblind/ColorBlindSwitch/focusRing",
+                     "//world/switches/signup",
+                     "//world/switches/signup/SignUpSwitch",
+                     "//world/switches/signup/SignUpSwitch/focusRing",
                      "//world/enter",
                      "//world/enter/EnterGame",
                      "//world/enter/EnterGame/focusRing",
@@ -186,32 +181,31 @@ class AppTheme {
                      
     ]
     
-
-    
     static let instance = AppTheme()
     
     func set(for view: UIView) {
         print("restoration id: \(String(describing: view.restorationIdentifier))")
         set(for: view, mode: currentMode())
+        view.backgroundColor = getBackgroundColor()
      }
     
     func set(for view: UIView, mode: Mode) {
         switch mode {
         case Mode.colorBlind:
             setViewColor(for: view, tuple: (sceneColor: blackTile,
-                                            backgroundColor: lightGrayTile, fontColor: whiteTile, alpha: 0.1), mode: mode)
+                                            backgroundColor: getBackgroundColor(), fontColor: whiteTile, alpha: 1.0), mode: mode)
             break
         case Mode.nightMode:
             setViewColor(for: view, tuple: (sceneColor: blackTile,
-                backgroundColor: grayTile, fontColor: colorList[Color.orange.rawValue], alpha: 0.3), mode: mode)
+                backgroundColor: getBackgroundColor(), fontColor: colorList[Color.orange.rawValue], alpha: 1.0), mode: mode)
             break
         case Mode.pastel:
             setViewColor(for: view, tuple: (sceneColor: colorList[Color.pastelBackgroundTile.rawValue],
-                backgroundColor: colorList[Color.pastelForegroundTile.rawValue], fontColor: colorList[Color.pastelFontColor.rawValue], alpha: 1.0), mode: mode)
+                backgroundColor: getBackgroundColor(), fontColor: colorList[Color.pastelFontColor.rawValue], alpha: 1.0), mode: mode)
             break
         case Mode.normal:
             setViewColor(for: view, tuple: (sceneColor: whiteTile,
-                backgroundColor: colorList[Color.red.rawValue], fontColor: colorList[Color.red.rawValue], alpha: 0.1), mode: mode)
+                backgroundColor: getBackgroundColor(), fontColor: colorList[Color.red.rawValue], alpha: 1.0), mode: mode)
             break
         }
     }
@@ -241,6 +235,7 @@ class AppTheme {
     
     func set(for view: BaseScene) {
         set(for: view, mode: currentMode())
+        view.backgroundColor = getBackgroundColor()
     }
     
     func set(for view: BaseScene, mode: Mode) {
@@ -248,22 +243,22 @@ class AppTheme {
         case Mode.colorBlind:
             changeNodes(view: view, mode: Mode.colorBlind,
                         sceneColor: blackTile,
-                        backgroundColor: lightGrayTile, fontColor: whiteTile, alpha: 0.1)
+                        backgroundColor: getBackgroundColor(), fontColor: whiteTile, alpha: 1.0)
             break
         case Mode.nightMode:
             changeNodes(view: view, mode: Mode.nightMode,
                         sceneColor: blackTile,
-                        backgroundColor: grayTile, fontColor: colorList[Color.orange.rawValue], alpha: 0.3)
+                        backgroundColor: getBackgroundColor(), fontColor: colorList[Color.orange.rawValue], alpha: 1.0)
             break
         case Mode.pastel:
             changeNodes(view: view, mode: Mode.pastel,
                         sceneColor: colorList[Color.pastelBackgroundTile.rawValue],
-                        backgroundColor: colorList[Color.pastelForegroundTile.rawValue], fontColor: colorList[Color.pastelFontColor.rawValue], alpha: 1.0)
+                        backgroundColor: getBackgroundColor(), fontColor: colorList[Color.pastelFontColor.rawValue], alpha: 1.0)
             break
         case Mode.normal:
             changeNodes(view: view, mode: Mode.normal,
                         sceneColor: whiteTile,
-                        backgroundColor: colorList[Color.red.rawValue], fontColor: colorList[Color.red.rawValue], alpha: 0.1)
+                        backgroundColor: getBackgroundColor(), fontColor: colorList[Color.red.rawValue], alpha: 1.0)
             break
         }
     }
@@ -284,13 +279,78 @@ class AppTheme {
     func backgroundColor() -> UIColor {
         switch currentMode() {
         case Mode.colorBlind:
-            return darkGrayTile
+            return colorBlindBackground
         case Mode.nightMode:
-            return grayTile
+            return nightModeBackground
+        case Mode.pastel:
+            return pastelBackground
+        case Mode.normal:
+            return lightRedBackground
+        }
+    }
+    
+    func getBackgroundColor() -> UIColor {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return colorBlindBackground
+        case Mode.nightMode:
+            return nightModeBackground
+        case Mode.pastel:
+            return pastelBackground
+        case Mode.normal:
+            return lightRedBackground
+        }
+    }
+    
+    func modeSceneColor() -> UIColor {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return whiteTile
+        case Mode.nightMode:
+            return lightGrayTile
         case Mode.pastel:
             return colorList[Color.pastelBackgroundTile.rawValue]
         case Mode.normal:
             return whiteTile
+        }
+    }
+    
+    func modeBackgroundColor() -> UIColor {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return lightGrayTile
+        case Mode.nightMode:
+            return grayTile
+        case Mode.pastel:
+            return colorList[Color.pastelForegroundTile.rawValue]
+        case Mode.normal:
+            return colorList[Color.red.rawValue].withAlphaComponent(0.1)
+        }
+    }
+    
+    func modeFontColor() -> UIColor {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return blackTile.withAlphaComponent(0.3)
+        case Mode.nightMode:
+            return colorList[Color.orange.rawValue].withAlphaComponent(0.3)
+        case Mode.pastel:
+            return colorList[Color.pastelFontColor.rawValue].withAlphaComponent(1.0)
+        case Mode.normal:
+            return colorList[Color.red.rawValue].withAlphaComponent(0.5)
+        }
+    }
+    
+    func modeButtonColor() -> UIColor {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return darkGrayTile
+        case Mode.nightMode:
+            return darkGrayTile
+        case Mode.pastel:
+            return pastelBackgroundTile
+        case Mode.normal:
+            return blueTile
         }
     }
     
@@ -345,11 +405,11 @@ class AppTheme {
                 || nodeLabelName.lowercased().contains("mode")
                 || nodeLabelName.lowercased().contains("pastel")
                 || nodeLabelName.lowercased().contains("colorblind")
+                || nodeLabelName.lowercased().contains("signup")
                 || nodeLabelName.lowercased().contains("meaning")
                 || nodeLabelName.lowercased().contains("action")) {
                 nodeLabel.fontColor = fontColor
             }
-           
         }
     }
     

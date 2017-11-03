@@ -9,9 +9,21 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import GoogleMobileAds
 
-
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, GADBannerViewDelegate {
+    
+    var bannerAdMob: GADBannerView!
+    
+    let bannerView: GADBannerView = {
+        let _view = GADBannerView()
+        _view.backgroundColor = AppTheme.instance.modeBackgroundColor()
+        _view.adSize = kGADAdSizeBanner
+        _view.layer.cornerRadius = 0
+        _view.layer.masksToBounds = true
+        _view.translatesAutoresizingMaskIntoConstraints = false
+        return _view
+    }()
     
     var wordList: WordListBox {
         get { return WordListBox.sharedInstance }
@@ -41,7 +53,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         setImageView()
-        
+
         AppDefinition.defaults.set(true, forKey: preferenceMemoryDataFileKey)
         
         if AppDefinition.defaults.keyExist(key: preferenceRemoteDataSiteKey) {
@@ -67,7 +79,6 @@ class GameViewController: UIViewController {
                 self.setup()
             }
         }
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -99,10 +110,6 @@ class GameViewController: UIViewController {
             // Get the SKScene from the loaded GKScene
             if let sceneNode = scene.rootNode as! MainMenuScene? {
                 
-                // Copy gameplay related content over to the scene
-                sceneNode.entities = scene.entities
-                sceneNode.graphs = scene.graphs
-
                 // Set the scale mode to scale to fit the window
                 sceneNode.scaleMode = .aspectFill
                 
@@ -120,9 +127,82 @@ class GameViewController: UIViewController {
                         view.showsNodeCount = true
                     #endif
                     removeImageView()
+                    //initBanner(productionADs: false) // Change for production
                 }
             }
         }
+    }
+
+    func initBanner(productionADs: Bool) {
+        if AppDefinition.defaults.bool(forKey: preferenceAppRemoveADsKey) { return }
+        // AdMob setup
+        bannerAdMob = bannerView
+        bannerAdMob.adSize = kGADAdSizeBanner
+        if productionADs {
+            bannerAdMob.adUnitID = "ca-app-pub-4627466505633159/8228554714" // wrdlnk adUnitID
+        } else {
+            bannerAdMob.adUnitID = "ca-app-pub-3940256099942544/6300978111" // Test adUnitID
+        }
+        
+        bannerAdMob.rootViewController = self
+        bannerAdMob.delegate = self
+        bannerAdMob.load(GADRequest())
+        setupDeviceTest()
+        setupBannerView(banner: bannerAdMob)
+    }
+    
+    // MARK: - Ad Banner
+    func setupDeviceTest() {
+        let request = GADRequest()
+        request.testDevices = [ kGADSimulatorID,                       // All simulators
+            "2077ef9a63d2b398840261c8221a0c9b" ];  // Sample device ID
+    }
+    
+    func setupBannerView(banner: GADBannerView) {
+        view.addSubview(banner)
+        
+        banner.centerXAnchor.constraint(equalTo: (self.view?.centerXAnchor)!).isActive = true
+        banner.topAnchor.constraint(equalTo: (self.view?.bottomAnchor)!, constant: -50).isActive = true
+        banner.widthAnchor.constraint(equalToConstant: 320).isActive = true
+        banner.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    /// Tells the delegate an ad request loaded an ad.
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("adViewDidReceiveAd")
+        bannerView.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            bannerView.alpha = 1
+        })
+    }
+    
+    /// Tells the delegate an ad request failed.
+    func adView(_ bannerView: GADBannerView,
+                didFailToReceiveAdWithError error: GADRequestError) {
+        bannerView.isHidden = true
+        print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+    
+    /// Tells the delegate that a full screen view will be presented in response
+    /// to the user clicking on an ad.
+    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
+        print("adViewWillPresentScreen")
+    }
+    
+    /// Tells the delegate that the full screen view will be dismissed.
+    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
+        print("adViewWillDismissScreen")
+    }
+    
+    /// Tells the delegate that the full screen view has been dismissed.
+    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
+        print("adViewDidDismissScreen")
+    }
+    
+    /// Tells the delegate that a user click will open another app (such as
+    /// the App Store), backgrounding the current app.
+    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
+        print("adViewWillLeaveApplication")
     }
     
     override var shouldAutorotate: Bool {

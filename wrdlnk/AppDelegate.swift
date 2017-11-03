@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import Facebook
 import Google
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         firebaseAppOptions()
     
         GIDSignIn.initialize()
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-4627466505633159~8389649892")
         
         self.window?.makeKeyAndVisible()
         return true

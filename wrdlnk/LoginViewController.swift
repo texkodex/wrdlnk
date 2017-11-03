@@ -13,87 +13,123 @@ import Google
 enum Login:String {
     case email = "Email"
     case facebook = "Facebook"
-    case googlegroups = "GoogleGroups"
+    case google = "Google"
     case twitter = "Twitter"
 }
 
-class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
+
+class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
     
-    let mainImageView: UIImageView = {
+    var bounds: CGRect!
+    
+    let markImageView: UIImageView = {
         let _imageView = UIImageView()
-        let _image = UIImage(named: "apple-icon-76x76")
+        let _image = UIImage(named: "pdf/mark")
         _imageView.image = _image
         _imageView.contentMode = .scaleAspectFill
         _imageView.translatesAutoresizingMaskIntoConstraints = false
         return _imageView
     }()
     
+    let wrdlnkImageView: UIImageView = {
+        let _imageView = UIImageView()
+        let _image = UIImage(named: "pdf/WrdLnk")
+        _imageView.image = _image
+        _imageView.contentMode = .scaleAspectFill
+        _imageView.translatesAutoresizingMaskIntoConstraints = false
+        return _imageView
+    }()
+    
+    let backgroundView: UIView = {
+        let _view = UIView()
+        _view.backgroundColor = backgroundColor
+        _view.layer.cornerRadius = 0
+        _view.layer.masksToBounds = true
+        _view.translatesAutoresizingMaskIntoConstraints = false
+        return _view
+    }()
+    
     let containerView: UIView = {
         let _view = UIView()
-        _view.backgroundColor = UIColor.white
+        _view.backgroundColor = backgroundColor
         _view.layer.cornerRadius = 4
         _view.layer.masksToBounds = true
         _view.translatesAutoresizingMaskIntoConstraints = false
         return _view
     }()
     
-    lazy var registerButton: UIButton = {
+    let errorView: UIView = {
+        let _view = UIView()
+        _view.backgroundColor = foregroundColor
+        _view.layer.cornerRadius = 0
+        _view.layer.masksToBounds = true
+        _view.translatesAutoresizingMaskIntoConstraints = false
+        return _view
+    }()
+    
+    let errorLabel: UILabel = {
+        let _errorLabel = UILabel()
+        _errorLabel.text = "Enter a valid email address."
+        _errorLabel.textColor = .white
+        _errorLabel.backgroundColor = foregroundColor
+        _errorLabel.font = UIFont.systemFont(ofSize: 14)
+        _errorLabel.textAlignment = .center
+        _errorLabel.layer.cornerRadius = 0
+        _errorLabel.layer.masksToBounds = true
+        _errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        return _errorLabel
+    }()
+    
+    let wrdlnkLabel: UILabel = {
+        let _wrdlnkLabel = UILabel()
+        _wrdlnkLabel.text = "WrdLnk"
+        _wrdlnkLabel.textColor = foregroundColor
+        _wrdlnkLabel.font = UIFont.systemFont(ofSize: 25)
+        _wrdlnkLabel.textAlignment = .center
+        _wrdlnkLabel.layer.cornerRadius = 0
+        _wrdlnkLabel.layer.masksToBounds = true
+        _wrdlnkLabel.translatesAutoresizingMaskIntoConstraints = false
+        return _wrdlnkLabel
+    }()
+    
+    lazy var yesButton: UIButton = {
         let _button = UIButton(type: .system)
-        _button.backgroundColor = UIColor(r: 80, g: 101, b: 161, alpha: 1)
-        _button.setTitle("Register", for: .normal)
-        _button.setTitleColor(UIColor.white, for: .normal)
-        _button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        let _imageView = UIImageView(image: UIImage(named: "pdf/yes"))
         _button.layer.cornerRadius = 4
         _button.layer.masksToBounds = true
         _button.translatesAutoresizingMaskIntoConstraints = false
         _button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        _button.addSubview(_imageView)
         return _button
     }()
     
-    let facebookButton: UIButton = {
+    let googleView: UIView = {
+        let _view = UIView()
+        _view.backgroundColor = midgroundColor
+        _view.layer.cornerRadius = 0
+        _view.layer.masksToBounds = true
+        _view.translatesAutoresizingMaskIntoConstraints = false
+        return _view
+    }()
+    
+    lazy var googleButton: UIButton = {
         let _button = UIButton(type: .system)
-        _button.backgroundColor = UIColor(r: 80, g: 101, b: 161, alpha: 1)
-        _button.setTitle("Login Facebook", for: .normal)
-        _button.setTitleColor(UIColor.white, for: .normal)
-        _button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        _button.layer.cornerRadius = 4
+        _button.setTitle("Sign In With Google", for: .normal)
+        let _imageView = UIImageView(image: UIImage(named: "pdf/google_g"))
+        _button.tintColor = foregroundColor
+        _button.layer.cornerRadius = 0
         _button.layer.masksToBounds = true
         _button.translatesAutoresizingMaskIntoConstraints = false
-        _button.addTarget(self, action: #selector(handleFacebookLogin), for: .touchUpInside)
-        return _button
-    }()
-    
-    
-    let googlegroupsButton: GIDSignInButton = {
-        let _button = GIDSignInButton()
-        _button.frame = CGRect(x: 0, y: 0, width: 100, height: 36)
-        _button.backgroundColor = UIColor(r: 80, g: 101, b: 161, alpha: 1)
-        _button.style = GIDSignInButtonStyle.standard
-        _button.layer.cornerRadius = 4
-        _button.layer.masksToBounds = true
-        _button.translatesAutoresizingMaskIntoConstraints = false
-        //_button.addTarget(self, action: #selector(handleGoogleLogin), for: .touchUpInside)
-        return _button
-    }()
-    
-    let twitterButton: UIButton = {
-        let _button = UIButton(type: .system)
-        _button.backgroundColor = UIColor(r: 80, g: 101, b: 161, alpha: 1)
-        _button.setTitle("Login Twitter", for: .normal)
-        _button.setTitleColor(UIColor.white, for: .normal)
-        _button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        _button.layer.cornerRadius = 4
-        _button.layer.masksToBounds = true
-        _button.translatesAutoresizingMaskIntoConstraints = false
-        _button.addTarget(self, action: #selector(handleTwitterLogin), for: .touchUpInside)
+        _button.addTarget(self, action: #selector(handleGoogleSignIn), for: .touchUpInside)
+        _button.addSubview(_imageView)
         return _button
     }()
     
     let guestButton: UIButton = {
         let _button = UIButton(type: .system)
-        _button.backgroundColor = UIColor(r: 80, g: 101, b: 161, alpha: 1)
+        _button.backgroundColor = AppTheme.instance.modeButtonColor()
         _button.setTitle("Sign Up Later", for: .normal)
-        _button.setTitleColor(UIColor.white, for: .normal)
+        _button.setTitleColor(AppTheme.instance.modeFontColor(), for: .normal)
         _button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         _button.layer.cornerRadius = 4
         _button.layer.masksToBounds = true
@@ -101,61 +137,33 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
         _button.addTarget(self, action: #selector(handleGuest), for: .touchUpInside)
         return _button
     }()
-    
-    let orLabel: UILabel = {
-        let _orLabel = UILabel()
-        _orLabel.text = "OR"
-        _orLabel.textColor = UIColor.white
-        _orLabel.backgroundColor = .red
-        _orLabel.textAlignment = .center
-        _orLabel.layer.cornerRadius = 4
-        _orLabel.layer.masksToBounds = true
-        _orLabel.translatesAutoresizingMaskIntoConstraints = false
-        return _orLabel
-    }()
-    
-    let nameLabel: UILabel = {
-        let _nameLabel = UILabel()
-        _nameLabel.text = "Name"
-        _nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        return _nameLabel
-    }()
-    
-    lazy var nameText: UITextField = {
-        let _nameText = UITextField()
-        _nameText.placeholder = "Name"
-        _nameText.contentMode = .center
-        _nameText.autocapitalizationType = UITextAutocapitalizationType.none
-        _nameText.translatesAutoresizingMaskIntoConstraints = false
-        return _nameText
-    }()
-    
-    let separatorNameView: UIImageView = {
-        let _view = UIImageView()
-        _view.backgroundColor = UIColor(r: 220, g: 220, b: 220, alpha: 1)
-        _view.translatesAutoresizingMaskIntoConstraints = false
-        return _view
-    }()
+ 
     
     let emailLabel: UILabel = {
         let _emailLabel = UILabel()
         _emailLabel.text = "Email"
+        _emailLabel.font = UIFont.systemFont(ofSize: 13)
+        _emailLabel.textColor = foregroundColor
         _emailLabel.translatesAutoresizingMaskIntoConstraints = false
         return _emailLabel
     }()
     
     let emailText: UITextField = {
         let _emailText = UITextField()
-        _emailText.placeholder = "Email"
+        _emailText.attributedPlaceholder = NSAttributedString(string: "explore@wildlands.com",
+                                                              attributes: [NSAttributedStringKey.foregroundColor: foregroundColor])
+        _emailText.font = UIFont.systemFont(ofSize: 14)
         _emailText.autocapitalizationType = UITextAutocapitalizationType.none
         _emailText.contentMode = .center
         _emailText.translatesAutoresizingMaskIntoConstraints = false
+        _emailText.textColor = foregroundColor
+        _emailText.autocorrectionType = .no
         return _emailText
     }()
     
     let separatorEmailView: UIImageView = {
         let _view = UIImageView()
-        _view.backgroundColor = UIColor(r: 220, g: 220, b: 220, alpha: 1)
+        _view.backgroundColor = foregroundColor
         _view.translatesAutoresizingMaskIntoConstraints = false
         return _view
     }()
@@ -163,58 +171,186 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     let passwordLabel: UILabel = {
         let _passwordLabel = UILabel()
         _passwordLabel.text = "Password"
+        _passwordLabel.font = UIFont.systemFont(ofSize: 13)
+        _passwordLabel.textColor = foregroundColor
         _passwordLabel.translatesAutoresizingMaskIntoConstraints = false
         return _passwordLabel
     }()
     
     let passwordText: UITextField = {
         let _passwordText = UITextField()
-        _passwordText.placeholder = "Password - at least 6 characters"
+        _passwordText.attributedPlaceholder = NSAttributedString(string: "............",
+                                                              attributes: [NSAttributedStringKey.foregroundColor: foregroundColor])
+        _passwordText.font = UIFont.systemFont(ofSize: 14)
         _passwordText.autocapitalizationType = UITextAutocapitalizationType.none
         _passwordText.isSecureTextEntry = true
         _passwordText.contentMode = .center
         _passwordText.translatesAutoresizingMaskIntoConstraints = false
+        _passwordText.textColor = foregroundColor
+        _passwordText.autocorrectionType = .no
         return _passwordText
     }()
     
-    lazy var loginRegisterSegmentedControl: UISegmentedControl = {
-        let _segmentedControl = UISegmentedControl(items: ["Login", "Register"])
-        _segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        _segmentedControl.tintColor = .white
-        _segmentedControl.selectedSegmentIndex = 1
-        _segmentedControl.addTarget(self, action: #selector(handleLoginRegisterChange), for: .valueChanged)
-        return _segmentedControl
+    let separatorPasswordView: UIImageView = {
+        let _view = UIImageView()
+        _view.backgroundColor = foregroundColor
+        _view.translatesAutoresizingMaskIntoConstraints = false
+        return _view
     }()
     
     var containerViewHeightAnchor: NSLayoutConstraint?
+    var backgroundViewHeightAnchor: NSLayoutConstraint?
     var nameTextHeightAnchor: NSLayoutConstraint?
     var emailTextHeightAnchor: NSLayoutConstraint?
     var passwordTextHeightAnchor: NSLayoutConstraint?
+
+    func setupErrorView() {
+        errorView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        errorView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        errorView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        errorView.heightAnchor.constraint(equalToConstant: errorHeight()).isActive = true
+    }
     
-    @objc func handleLoginRegisterChange() {
-        let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
-        registerButton.setTitle(title, for: .normal)
-        
-        nameText.placeholder
-            = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? "" : "Name"
-        passwordText.placeholder
-            = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? "Password" : "Password - at least 6 characters"
-        
-        // Change containerview
-        containerViewHeightAnchor?.constant =  loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 72 : 108
-        
-        // Change height of nameText
-        nameTextHeightAnchor?.isActive = false
-        nameTextHeightAnchor = nameText.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
-        nameTextHeightAnchor?.isActive = true
-        
-        emailTextHeightAnchor?.isActive = false
-        emailTextHeightAnchor = emailText.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+    func setupErrorLabel() {
+        errorLabel.centerXAnchor.constraint(equalTo: errorView.centerXAnchor).isActive = true
+        errorLabel.centerYAnchor.constraint(equalTo: errorView.centerYAnchor).isActive = true
+        errorLabel.widthAnchor.constraint(equalTo: errorView.widthAnchor).isActive = true
+        errorLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    }
+
+    func setupMarkView() {
+        markImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        markImageView.topAnchor.constraint(equalTo: errorView.bottomAnchor, constant: 40).isActive = true
+        markImageView.widthAnchor.constraint(equalToConstant: 87).isActive = true
+        markImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+    }
+    
+    func setupWrdlnkLabelView() {
+        wrdlnkLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        wrdlnkLabel.topAnchor.constraint(equalTo: markImageView.topAnchor, constant: 115).isActive = true
+        wrdlnkLabel.widthAnchor.constraint(equalToConstant: 126).isActive = true
+        wrdlnkLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+    }
+    
+    // MARK: Container view
+    func setupEmailLabel() {
+        emailLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        emailLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 2).isActive = true
+        emailLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        emailLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
+    }
+    
+    func setupEmailText() {
+        emailText.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        emailText.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25).isActive = true
+        emailText.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        emailTextHeightAnchor = emailText.heightAnchor.constraint(equalToConstant: 14)
         emailTextHeightAnchor?.isActive = true
-        
-        passwordTextHeightAnchor?.isActive = false
-        passwordTextHeightAnchor = passwordText.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+    }
+    
+    func setupSeparatorEmail() {
+        separatorEmailView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        separatorEmailView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 58).isActive = true
+        separatorEmailView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -96).isActive = true
+        separatorEmailView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
+    
+    func setupPasswordLabel() {
+        passwordLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        passwordLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 92).isActive = true
+        passwordLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        passwordLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
+    }
+    
+    func setupPasswordText() {
+        passwordText.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        passwordText.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 123).isActive = true
+        passwordText.widthAnchor.constraint(equalToConstant: 162).isActive = true
+        passwordTextHeightAnchor = passwordText.heightAnchor.constraint(equalToConstant: 14)
         passwordTextHeightAnchor?.isActive = true
+    }
+    
+    func setupSeparatorPassword() {
+        separatorPasswordView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        separatorPasswordView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 148).isActive = true
+        separatorPasswordView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -96).isActive = true
+        separatorPasswordView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
+    
+    func setupContainerView() {
+        containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 308).isActive = true
+        containerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -96).isActive = true
+        containerViewHeightAnchor = containerView.heightAnchor.constraint(equalToConstant: 150)
+        containerViewHeightAnchor?.isActive = true
+        
+        view.addSubview(emailLabel)
+        view.addSubview(emailText)
+        view.addSubview(separatorEmailView)
+        view.addSubview(passwordLabel)
+        view.addSubview(passwordText)
+        view.addSubview(separatorPasswordView)
+        
+        setupEmailLabel()
+        setupEmailText()
+        setupSeparatorEmail()
+        
+        setupPasswordLabel()
+        setupPasswordText()
+        setupSeparatorPassword()
+    }
+    
+    func setupYesView() {
+        yesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        yesButton.topAnchor.constraint(equalTo: separatorPasswordView.topAnchor, constant: 52).isActive = true
+        yesButton.widthAnchor.constraint(equalToConstant: 46).isActive = true
+        yesButton.heightAnchor.constraint(equalToConstant: 46).isActive = true
+    }
+    
+    // MARK: Google view
+    func setupGoogleView() {
+        googleView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        googleView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        googleView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        googleView.heightAnchor.constraint(equalToConstant: googleHeight()).isActive = true
+        
+        googleView.addSubview(googleButton)
+        
+        googleButton.centerXAnchor.constraint(equalTo: googleView.centerXAnchor).isActive = true
+        googleButton.centerYAnchor.constraint(equalTo: googleView.centerYAnchor).isActive = true
+        googleButton.widthAnchor.constraint(equalTo: googleView.widthAnchor, constant: -184).isActive = true
+        googleButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+    }
+
+//
+//    func setupGuestButton() {
+//        guestButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        guestButton.centerYAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: buttonHeight()).isActive = true
+//        guestButton.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
+//        guestButton.heightAnchor.constraint(equalToConstant: buttonHeight()).isActive = true
+//    }
+//
+    
+    
+    // MARK: Container view for registration
+    func setupBackgroundView() {
+        backgroundView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        backgroundView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -60).isActive = true
+        backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 8/10).isActive = true
+    }
+    
+    private func googleLoginSetup() {
+        let kClientID = "479275272918-u3q9qclriagqiqdjlieo3tiun10tr4ii.apps.googleusercontent.com"
+        
+        GIDSignIn.sharedInstance().scopes = [ "profile", "email" ]
+        GIDSignIn.sharedInstance().shouldFetchBasicProfile = true
+        GIDSignIn.sharedInstance().clientID = kClientID
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().delegate = self
+        
+        //setupGoogleButton()
+        //setupGuestButton()
     }
     
     deinit {
@@ -224,77 +360,65 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bounds = UIScreen.main.bounds
+        
         DispatchQueue.main.async(){
-            self.view.restorationIdentifier = "LoginViewController"
-            AppTheme.instance.set(for: self.view)
-            
-            self.view.backgroundColor = .lightGray
             self.setupView()
             self.googleLoginSetup()
+            self.textFieldSetDelegate()
         }
     }
-    
-    private func googleLoginSetup() {
-        let kClientID = "479275272918-u3q9qclriagqiqdjlieo3tiun10tr4ii.apps.googleusercontent.com"
-        
-        //GIDSignIn.sharedInstance().scopes.append("googleapis.com/aut‌​h/plus.login")
-        //GIDSignIn.sharedInstance().scopes.append("googleapis.com/aut‌​h/plus.me")
-        GIDSignIn.sharedInstance().scopes = [ "profile", "email" ]
-        GIDSignIn.sharedInstance().shouldFetchBasicProfile = true
-        GIDSignIn.sharedInstance().clientID = kClientID
-        GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().delegate = self
-        
-//        let signinButton = GIDSignInButton()
-//        signinButton.frame = CGRect(x: 0, y: 0, width: 100, height: 36)
-//        signinButton.center = self.view.center
-//        signinButton.style = GIDSignInButtonStyle.standard
-//
-         view.addSubview(facebookButton)
-         view.addSubview(googlegroupsButton)
-//         view.addSubview(twitterButton)
-        
-                setupFacebookButton()
-                setupGoogleGroupsButton()
-        //        setupTwitterButton()
-        //        setupGuestButton()
+
+    // MARK:- setup view
+    func buttonHeight() -> CGFloat {
+        return UIDevice.isiPad ? 66 : 36
     }
     
-    // MARK:- setup view
+    func errorHeight() -> CGFloat {
+         let heightRatio = 0.081522
+        return CGFloat(heightRatio) * bounds.height
+    }
+    
+    func googleHeight() -> CGFloat {
+        let heightRatio = 0.179348
+        return CGFloat(heightRatio) * bounds.height
+    }
+    
     func setupView() {
-        view.addSubview(mainImageView)
-        view.addSubview(loginRegisterSegmentedControl)
+        view.backgroundColor = backgroundColor
+        view.addSubview(errorView)
+        view.addSubview(errorLabel)
+        view.addSubview(markImageView)
+        view.addSubview(googleView)
+        view.addSubview(wrdlnkLabel)
         view.addSubview(containerView)
-        view.addSubview(registerButton)
-        view.addSubview(orLabel)
+        view.addSubview(yesButton)
         
-        view.addSubview(guestButton)
+        setupErrorView()
+        setupErrorLabel()
+        setupMarkView()
+        setupWrdlnkLabelView()
         setupContainerView()
-        setupImageViewView()
-        
-        
-        setupRegisterButton()
-        setupOrLabel()
-
-        
-        setupLoginRegisterSegmentedControl()
+        setupGoogleView()
+        setupYesView()
+    }
+    
+    // MARK:- textfield delegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.emailText.resignFirstResponder()
+        self.passwordText.resignFirstResponder()
+        return true
+    }
+    
+    private func textFieldSetDelegate() {
+        emailText.delegate = self
+        passwordText.delegate = self
     }
     
     // MARK:- handlers
-    func handleLoginRegister() {
-        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
-            handleLogin()
-        } else {
-            handleRegister()
-        }
-    }
-    
-    @objc func handleFacebookLogin() {
-        print("Facebook Login")
-    }
-    
-    @objc func handleGoogleLogin() {
-        print("Google Login")
+    @objc func handleGoogleSignIn() {
+        GIDSignIn.sharedInstance().signIn()
     }
     
     @objc func handleTwitterLogin() {
@@ -302,6 +426,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     }
     
     func handleLogin() {
+        AppDefinition.defaults.set(false, forKey: preferenceLoggedInAppKey)
         guard let email = emailText.text, let password = passwordText.text else {
             print("Invalid email or password")
             return
@@ -313,18 +438,23 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                 return
             }
             // successfully user login
+            AppDefinition.defaults.set(true, forKey: preferenceLoggedInAppKey)
             self.enterApp()
         }
     }
     
     @objc func handleRegister() {
-        
-        guard let name = nameText.text, let email = emailText.text, let password = passwordText.text else {
+        AppDefinition.defaults.set(false, forKey: preferenceLoggedInAppKey)
+        guard let email = emailText.text, let password = passwordText.text else {
             print("Invalid email or password")
             return
         }
         
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+        createUserInFirebase(email: email, password: password)
+    }
+    
+    private func createUserInFirebase(email: String, password: String) {
+            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             
             if error != nil {
                 print(error!)
@@ -336,14 +466,14 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             print("Successful registration")
             let ref = Database.database().reference(fromURL: "https://testfirebase-a055f.firebaseio.com/")
             let usersRef = ref.child("users").child(uid)
-            let values = ["name": name, "email": email]
+            let values = ["email": email]
             usersRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
                 
                 if error != nil {
                     print(error!)
                     return
                 }
-                
+                AppDefinition.defaults.set(true, forKey: preferenceLoggedInAppKey)
                 self.enterApp()
             })
         }
@@ -354,161 +484,36 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             self.launchFromStoryboard(name: StoryboardName.Main.rawValue, controller: "GameViewController")
         }
     }
-    
-    // MARK:- Layout view elements
-    func setupImageViewView() {
-        mainImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        mainImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 12).isActive = true
-        mainImageView.widthAnchor.constraint(equalToConstant: 76).isActive = true
-        mainImageView.heightAnchor.constraint(equalToConstant: 76).isActive = true
-    }
-    
-    func setupLoginRegisterSegmentedControl() {
-        loginRegisterSegmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        loginRegisterSegmentedControl.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -12).isActive = true
-        loginRegisterSegmentedControl.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 1/2).isActive = true
-        loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 36).isActive = true
-    }
-    
-    // MARK: Container view for registration
-    func setupContainerView() {
-        containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -140).isActive = true
-        containerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        containerViewHeightAnchor = containerView.heightAnchor.constraint(equalToConstant: 108)
-        containerViewHeightAnchor?.isActive = true
-        
-        containerView.addSubview(nameText)
-        containerView.addSubview(separatorNameView)
-        containerView.addSubview(emailText)
-        containerView.addSubview(separatorEmailView)
-        containerView.addSubview(passwordText)
-        
-        setupNameText()
-        setupEmailText()
-        setupPasswordText()
-        setupSeparatorName()
-        setupSeparatorEmail()
-    }
-    
-    func setupNameLabel() {
-        nameLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 12).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
-        nameLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        nameLabel.heightAnchor.constraint(equalToConstant: 36).isActive = true
-    }
-    
-    func setupNameText() {
-        nameText.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 12).isActive = true
-        nameText.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        nameText.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        nameTextHeightAnchor = nameText.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 1/3)
-        nameTextHeightAnchor?.isActive = true
-    }
-    
-    func setupSeparatorName() {
-        separatorNameView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        separatorNameView.topAnchor.constraint(equalTo: nameText.bottomAnchor).isActive = true
-        separatorNameView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        separatorNameView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    }
-    
-    func setupEmailLabel() {
-        emailLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 12).isActive = true
-        emailLabel.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        emailLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        emailLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
-    }
-    
-    func setupEmailText() {
-        emailText.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 12).isActive = true
-        emailText.topAnchor.constraint(equalTo: nameText.bottomAnchor).isActive = true
-        emailText.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        emailTextHeightAnchor = emailText.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 1/3)
-        emailTextHeightAnchor?.isActive = true
-    }
-    
-    func setupSeparatorEmail() {
-        separatorEmailView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        separatorEmailView.topAnchor.constraint(equalTo: emailText.bottomAnchor).isActive = true
-        separatorEmailView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        separatorEmailView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    }
-    
-    func setupPasswordLabel() {
-        passwordLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 12).isActive = true
-        passwordLabel.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        passwordLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        passwordLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
-    }
-    
-    func setupPasswordText() {
-        passwordText.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 12).isActive = true
-        passwordText.topAnchor.constraint(equalTo: emailText.bottomAnchor).isActive = true
-        passwordText.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        passwordTextHeightAnchor = passwordText.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 1/3)
-        passwordTextHeightAnchor?.isActive = true
-    }
-    
-    func setupRegisterButton() {
-        registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        registerButton.centerYAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 36).isActive = true
-        registerButton.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        registerButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-    }
-    
-    func setupOrLabel() {
-        orLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        orLabel.centerYAnchor.constraint(equalTo: registerButton.bottomAnchor, constant: 36).isActive = true
-        orLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        orLabel.heightAnchor.constraint(equalToConstant: 36).isActive = true
-    }
-    
-    func setupFacebookButton() {
-        facebookButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        facebookButton.centerYAnchor.constraint(equalTo: orLabel.bottomAnchor, constant: 36).isActive = true
-        facebookButton.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        facebookButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-    }
-    
-    func setupGoogleGroupsButton() {
-        googlegroupsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        googlegroupsButton.centerYAnchor.constraint(equalTo: orLabel.bottomAnchor, constant: 36).isActive = true
-        googlegroupsButton.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        googlegroupsButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-    }
-    
-    func setupTwitterButton() {
-        twitterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        twitterButton.centerYAnchor.constraint(equalTo: googlegroupsButton.bottomAnchor, constant: 36).isActive = true
-        twitterButton.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        twitterButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-    }
-    
-    func setupGuestButton() {
-        guestButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        guestButton.centerYAnchor.constraint(equalTo: twitterButton.bottomAnchor, constant: 36).isActive = true
-        guestButton.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        guestButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
-    }
-    
+ 
     // MARK:- Google SignIn delegate methods
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        AppDefinition.defaults.set(false, forKey: preferenceLoggedInAppKey)
         if (error == nil) {
-            #if false
-            // Perform any operations on signed in user here.
-            let userId = user.userID                  // For client-side use only!
-            let idToken = user.authentication.idToken // Safe to send to the server
-            let fullName = user.profile.name
-            let givenName = user.profile.givenName
-            let familyName = user.profile.familyName
-            let email = user.profile.email
-            // ...
             guard let authentication = user.authentication else { return }
-            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                          accessToken: authentication.accessToken)
-            #endif
+            // Perform any operations on signed in user here.
+            guard let userID = user.userID else { return }
+            guard let idToken = authentication.idToken  else { return }
+             guard let accessToken = authentication.accessToken  else { return }
+            let fullName = user.profile.name
+            let _ = user.profile.givenName
+            let _ = user.profile.familyName
+            let email = user.profile.email
+            //
+            let credentials = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                          accessToken: accessToken)
+            
+            Auth.auth().signIn(with: credentials, completion: {
+                (user, error) in
+                if let err = error {
+                    print("Login failed with Google account: ", err)
+                }
+                AppDefinition.defaults.set(true, forKey: preferenceLoggedInAppKey)
+                print("Successful Firebase login with Google credentials", userID)
+            })
+            
+            print("Username: \(String(describing: fullName)) and email: \(String(describing: email))")
         } else {
+            print("Failed to login with Google")
             print("\(error.localizedDescription)")
         }
     }
@@ -516,6 +521,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
         // ...
+        AppDefinition.defaults.set(false, forKey: preferenceLoggedInAppKey)
+        print("User logged out from App")
     }
     
     // MARK:- Enter application after login

@@ -107,6 +107,17 @@ extension SKTileMapNode {
         return 0
     }
     
+    func offsetTilePosition(word: String, adjust: Bool = false) -> CGFloat {
+        if adjust {
+            if (self.numberOfColumns % 2 == 0 && word.utf8.count % 2 != 0) {
+                return -tileWidth * 1.5
+            } else if (self.numberOfColumns % 2 != 0 && word.utf8.count % 2 == 0) {
+                return tileWidth / 2
+            }
+        }
+        return 0
+    }
+    
     func tileColor(name: String = "board", vowel: Bool = false) -> UIColor {
         let mode = currentMode()
         if name == "board" {
@@ -176,8 +187,7 @@ extension SKTileMapNode {
     
     // To place words in center of screen
     func placeWord(word: String, row: Int, adjust: Bool = false) {
-        for (rawIndex, letter) in word.characters.enumerated() {
-            let index = rawIndex + offsetInRow(word: word, adjust: adjust)
+        for (index, letter) in word.characters.enumerated() {
             let tileNode = self.childNode(withName: nodeName(node: self, col: index, row: row)) as! SKSpriteNode
             let condition = VowelCharacter(rawValue: letter)?.rawValue == letter
             tileNode.color = tileColor(vowel: condition)
@@ -189,14 +199,32 @@ extension SKTileMapNode {
             let label = SKLabelNode(fontNamed: fontName)
             label.text = "\(letter)"
             label.name = String(format:letterNodeColRow, index, row)
+            label.fontName = fontName
             label.fontColor = tileFontColor(vowel: condition)
             label.alpha = VowelCharacter(rawValue: letter)?.rawValue == letter ? CGFloat(0.0) : CGFloat(1.0)
-            label.fontSize = 20
+            label.fontSize = 32
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             tileNode.addChild(label)
             prepareHighlightForCharacter(tileNode: tileNode, letter: letter)
+            
+            if word.utf8.count < numberOfColumns {
+                let rowWidth = UIScreen.main.bounds.width
+                let cellWidth = rowWidth / CGFloat(numberOfColumns)
+                let indent = CGFloat(numberOfColumns - word.utf8.count) * (cellWidth / 2)
+                
+                tileNode.position = CGPoint(x: tileNode.position.x + indent, y: tileNode.position.y)
+            }
         }
+        
+    }
+    
+    func anchorPointAdjustment(word: String) -> CGFloat {
+        let length = word.utf8.count
+        if (length % 2 == 0) {
+           return -tileWidth / 2
+        }
+        return -tileWidth * 1.5
     }
     
     func prepareHighlightForCharacter(tileNode: SKSpriteNode, letter: Character, buttonNode: Bool = false) {
@@ -230,7 +258,6 @@ extension SKTileMapNode {
     
     func addWords(word: Word) -> VowelCount {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        
         let linkWord = word
         let rows: [VowelRow] = [VowelRow.suffix, VowelRow.link, VowelRow.prefix]
         for row in rows {
@@ -332,6 +359,7 @@ extension SKTileMapNode {
         let label = SKLabelNode(fontNamed: fontName)
         label.name = name
         label.text = "\(text)"
+        label.fontName = fontName
         label.fontSize = fontSize
         label.fontColor = AppTheme.instance.fontColor()
         label.position = position
@@ -426,6 +454,7 @@ extension SKTileMapNode {
             let firstPhrase = components?.dropLast(1).map(String.init).joined(separator: " ")
             textLabel.text = firstPhrase
         }
+        textLabel.fontName = fontName
         textLabel.fontColor = AppTheme.instance.fontColor()
         textLabel.alpha = 0.5
         textLabel.fontSize = 20

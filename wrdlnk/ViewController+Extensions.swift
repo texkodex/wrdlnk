@@ -23,8 +23,27 @@ extension UIViewController {
         return image
     }
     
+    func viewWidthandHeight() ->(height: CGFloat, width: CGFloat) {
+        let platform = getPlatformNameString()
+        if platform.contains("iPad Pro (12.9)") || UIDevice.isiPadPro129 {
+            return (2732,2048)
+        } else if platform.contains("iPad Pro") || UIDevice.isiPadPro97 {
+            return (2224,1668)
+        } else if platform.contains("iPad Air 2") || UIDevice.isiPad {
+            return (2048,1536)
+        } else if platform.contains("iPad Air")  || UIDevice.isiPad {
+            return (2048,1536)
+        }
+        else if platform.contains("iPhone SE") || UIDevice.isiPhone5 {
+            return (1136,640)
+        } else {
+            return (1920,1080)
+        }
+    }
+    
     func setImageView() {
-        let imageView = UIImageView(image: getImageWithColor(color: getBackgroundColor(), size: CGSize(width: 750, height: 1335)))
+        let deviceViewSize = viewWidthandHeight()
+        let imageView = UIImageView(image: getImageWithColor(color: AppTheme.instance.backgroundColor(), size: CGSize(width: deviceViewSize.width, height: deviceViewSize.height)))
         imageView.contentMode = .scaleAspectFill
         self.view.addSubview(imageView)
     }
@@ -54,6 +73,17 @@ extension UIViewController {
         }
     }
     
+    func launchLoginViewController() {
+        AppTheme.instance.set(for: self.view)
+        let appDelegate: UIApplicationDelegate = UIApplication.shared.delegate!
+        let vc = LoginViewController()
+        appDelegate.window!?.rootViewController = vc
+        DispatchQueue.main.async(){
+            vc.willMove(toParentViewController: self)
+            print("Launched Login ViewController")
+        }
+    }
+    
     private func addSubview(vc: UIViewController, name: String, controller: String) {
         if !name.lowercased().contains("main") || !name.lowercased().contains("onboarding") { return }
         let launchScreen = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
@@ -61,7 +91,8 @@ extension UIViewController {
             if launchScreen?.restorationIdentifier == "LaunchScreen" {
                 vc.view.addSubview(launchView)
             } else if view.restorationIdentifier == "WalkThroughPageViewController" {
-                let imageView = UIImageView(image: getImageWithColor(color: getBackgroundColor(), size: CGSize(width: 750, height: 1335)))
+                let deviceViewSize = viewWidthandHeight()
+                let imageView = UIImageView(image: getImageWithColor(color: AppTheme.instance.backgroundColor(), size: CGSize(width: deviceViewSize.width, height: deviceViewSize.height)))
                 vc.view.addSubview(imageView)
             }
         }
@@ -82,7 +113,7 @@ extension UIViewController {
         if platform.contains("iPad Pro (12.9)") || UIDevice.isiPadPro129 {
             infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:500, height: 889))
         } else if platform.contains("iPad Pro") || UIDevice.isiPadPro97 {
-            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:350, height: 623))
+            infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:339, height: 603))
         } else if platform.contains("iPad Air 2") || UIDevice.isiPad {
             infoImage = imageResize(imageObj: UIImage(named: infoImageFileName)!, sizeChange: CGSize(width:305, height: 542))
         } else if platform.contains("iPad Air")  || UIDevice.isiPad {

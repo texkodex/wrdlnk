@@ -10,9 +10,6 @@ import SpriteKit
 import GameplayKit
 
 class GameStatusScene: BaseScene {
-    var entities = [GKEntity()]
-    var graphs = [String:GKGraph]()
-    
     var nodes = [SKNode]()
     
     var wordList = WordList.sharedInstance
@@ -23,8 +20,6 @@ class GameStatusScene: BaseScene {
 
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        entities.removeAll()
-        graphs.removeAll()
         nodes.removeAll()
         self.removeFromParent()
         self.removeAllChildren()

@@ -35,18 +35,18 @@ enum StoryboardName : String {
 let debugInfo = false
 
 // "SF Mono" or "Helvetica" or "Arial"
-let fontName = "SF Pro Display Regular"
+let fontName = ".SFUIDisplay" // UIFont.systemFont(ofSize: 32).fontName
 
 let defaultTileWidth: CGFloat = 42
 let defaultTileHeight: CGFloat = 42
 let defaultTileInnerWidth: CGFloat = 40.0
 let defaultTileInnerHeight: CGFloat = 40.0
 
-let tileWidth: CGFloat = 28
-let tileHeight: CGFloat = 28
+let tileWidth: CGFloat = 38
+let tileHeight: CGFloat = 38
 
-let tileWidthLess2: CGFloat = 26.0
-let tileHeightLess2: CGFloat = 26.0
+let tileWidthLess2: CGFloat = 36.0
+let tileHeightLess2: CGFloat = 36.0
 
 let VisibleStateCount = 7
 let StatDataSize = 5000
@@ -91,6 +91,7 @@ let timerNodePath = "//world/switches/timer"
 let nightModeNodePath = "//world/switches/mode"
 let pastelNodePath = "//world/switches/pastel"
 let colorBlindNodePath = "//world/switches/colorblind"
+let signUpNodePath = "//world/switches/signup"
 
 let purchaseOneNodePath = "//world/switches/purchaseOne"
 let purchaseTwoNodePath = "//world/switches/purchaseTwo"
@@ -144,6 +145,9 @@ let preferenceSetTimerEnabledKey = "preference_set_timer_enabled"
 let preferenceNightModeEnabledKey = "preference_night_mode_enabled"
 let preferencePastelEnabledKey = "preference_pastel_enabled"
 let preferenceColorBlindEnabledKey = "preference_color_blind_enabled"
+let preferencePdfEnabledKey = "preference_pdf_enabled"
+
+let preferenceSignUpEnabledKey = "preference_sign_up_enabled"
 
 let preferencePurchaseDescriptionEnabledKey = "preference_purchase_description_enabled"
 let preferencePurchaseOneEnabledKey = "preference_purchase_one_enabled"
@@ -169,6 +173,10 @@ let preferenceStartTimeKey = "preference_start_time"
 let preferenceRemoteDataSiteKey = "preference_remote_data_site"
 
 let preferenceMemoryDataFileKey = "preference_memory_data_file"
+
+let preferenceLoggedInAppKey = "preference_logged_in_app"
+
+let preferenceAppRemoveADsKey = "preference_app_remove_ads"
 
 let awardDescriptionPrefixDefaultString = "with default: "
 let awardDescriptionPrefixString = "with group: "
@@ -214,6 +222,10 @@ let pastelForegroundTile = #colorLiteral(red: 1, green: 0.8509803922, blue: 0.66
 let pastelBackgroundTile = #colorLiteral(red: 0.9882352941, green: 0.9921568627, blue: 0.8745098039, alpha: 1)
 let pastelFontColor = #colorLiteral(red: 0.368627451, green: 0.7215686275, blue: 0.6470588235, alpha: 1)
 let pastelFontColor2 = #colorLiteral(red: 0.8392156863, green: 0.8705882353, blue: 1, alpha: 1)
+let lightRedBackground = #colorLiteral(red: 0.9843137255, green: 0.9058823529, blue: 0.9019607843, alpha: 1)
+let nightModeBackground = #colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.1764705882, alpha: 1)
+let pastelBackground = #colorLiteral(red: 0.9764705882, green: 0.8549019608, blue: 0.6901960784, alpha: 1)
+let colorBlindBackground = #colorLiteral(red: 0.07843137255, green: 0.07843137255, blue: 0.07843137255, alpha: 1)
 
 // Mode colors
 let grayCanvas = #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1)
@@ -254,6 +266,8 @@ enum ViewElement:String {
     case pastelSwitch = "PastelSwitch"
     case colorblind = "colorblind"
     case colorBlindSwitch = "ColorBlindSwitch"
+    case signup = "signup"
+    case signUpSwitch = "SignUpSwitch"
     case enter = "enter"
     case enterGame = "EnterGame"
     
@@ -301,6 +315,7 @@ enum ViewElement:String {
                          mode,          nightModeSwitch,
                          pastel,        pastelSwitch,
                          colorblind,    colorBlindSwitch,
+                         signup,        signUpSwitch,
                          enter,         enterGame,
                          
                          start,         startNewGame,

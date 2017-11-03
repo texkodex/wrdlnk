@@ -54,6 +54,15 @@ func getTraceFunc(_ name:String, traceSyncQueue: DispatchQueue, showTraceOutput:
 let trace = getTraceFunc("wrdlnk", traceSyncQueue: traceSyncQueue, showTraceOutput: showTraceOutput)
 
 // Device sizes
+struct Platform {
+    static let isSimulator: Bool = {
+        #if arch(i386) || arch(x86_64)
+            return true
+        #endif
+        return false
+    }()
+}
+
 extension UIDevice {
     var iPhone: Bool {
         return UIDevice().userInterfaceIdiom == .phone
@@ -166,30 +175,24 @@ public extension UIDevice {
 }
 
 func getPlatformNameString() -> String {
-    #if (arch(i386) || arch(x86_64)) && os(iOS)
-        let DEVICE_IS_SIMULATOR = true
-    #else
-        let DEVICE_IS_SIMULATOR = false
-    #endif
     
     var machineSwiftString : String = ""
     
-    #if USE_SIMULATOR
-        if DEVICE_IS_SIMULATOR == true
-        {
-            if let dir = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
-                machineSwiftString = dir
-            }
-        } else {
-            var size : size_t = 0
-            
-            sysctlbyname("hw.machine", nil, &size, nil, 0)
-            var machine = [CChar](repeating: 0, count: Int(size))
-            sysctlbyname("hw.machine", &machine, &size, nil, 0)
-            machineSwiftString = String(cString:machine)
+    if Platform.isSimulator
+    {
+        if let dir = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
+            machineSwiftString = dir
         }
-        print("machine is \(machineSwiftString)")
-    #endif
+    } else {
+        var size : size_t = 0
+        
+        sysctlbyname("hw.machine", nil, &size, nil, 0)
+        var machine = [CChar](repeating: 0, count: Int(size))
+        sysctlbyname("hw.machine", &machine, &size, nil, 0)
+        machineSwiftString = String(cString:machine)
+    }
+    print("machine is \(machineSwiftString)")
+    
     
     return platformName(identifier: machineSwiftString)
 }

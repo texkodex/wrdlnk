@@ -78,10 +78,6 @@ class GameScene: BaseScene {
     }
     
     // MARK:- Data structures
-    var entities = [GKEntity()]
-    
-    var graphs = [String:GKGraph]()
-    
     var wordList: WordListBox {
         get { return WordListBox.sharedInstance }
     }
@@ -174,8 +170,6 @@ class GameScene: BaseScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
         preserve()
         readyForInit()
-        entities.removeAll()
-        graphs.removeAll()
         spriteNodeList.removeAll()
         matchList.removeAll()
         self.removeFromParent()
@@ -443,7 +437,7 @@ class GameScene: BaseScene {
     }
     
     // MARK: - Gesture recognizer
-    @objc func handleTapFrom(recognizer: UITapGestureRecognizer) {
+    func handleTapFrom(recognizer: UITapGestureRecognizer) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         if recognizer.state != .ended {
             return

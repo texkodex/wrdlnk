@@ -14,7 +14,7 @@ import GameplayKit
 extension SKScene {
     
     func resizeIfNeeded() {
-        let rootNode = childNode(withName: "//world")!
+        let rootNode = self
         let platform = getPlatformNameString()
         if platform.contains("iPad Pro (12.9)") || UIDevice.isiPadPro129 {
             rootNode.yScale = 2.0
@@ -28,7 +28,7 @@ extension SKScene {
             rootNode.yScale = 0.8
             rootNode.xScale = 0.8
         } else {
-            // not resize needed
+            // no resize needed
         }
         
     }
@@ -63,6 +63,13 @@ extension SKScene {
                 instructionController.launchFromStoryboard(name: StoryboardName.Onboarding.rawValue, controller: "WalkThroughPageViewController")
             }
             return
+        case .SignUp:
+            let signupController = UIViewController()
+            
+            delay(CommonDelaySetting) {
+                signupController.launchLoginViewController()
+            }
+            return
         case .Overlay:
             scene = OverlayScene(fileNamed: "OverlayScene")!
         }
@@ -70,6 +77,7 @@ extension SKScene {
         scene.size = (view?.bounds.size)!
         
         scene.scaleMode = SKSceneScaleMode.aspectFill
+        
         sendingScene.view!.presentScene(scene, transition: transition)
         sendingScene.removeFromParent()
     }

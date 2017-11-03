@@ -58,14 +58,17 @@ extension BaseScene: ButtonNodeResponderType {
                 toggleColorBlind(button: button)
                 transitionToScene(destination: SceneType.Menu, sendingScene: self)
             break
-            case .continueGame:
+            case .signUpSwitch:
+                transitionToScene(destination: SceneType.SignUp, sendingScene: self)
+            break
+            case .continueGame, .pdfYes:
                 let continueGame = AppDefinition.defaults.bool(forKey: preferenceContinueGameEnabledKey)
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self, continueGame: continueGame)
             break
             case .actionYesSwitch:
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self, startNewGame: true)
             break
-            case .startNewGame:
+            case .startNewGame :
                 transitionToScene(destination: SceneType.Overlay, sendingScene: self)
             case .actionNoSwitch:
                 transitionToScene(destination: SceneType.MainMenu, sendingScene: self)

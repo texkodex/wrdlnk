@@ -20,6 +20,7 @@ enum SceneType {
     case InAppPurchase
     case GameAward
     case Instructions
+    case SignUp
     case Overlay
 }
 

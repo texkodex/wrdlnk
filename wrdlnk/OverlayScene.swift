@@ -12,7 +12,6 @@ import GameplayKit
 class OverlayScene: BaseScene {
     
     // MARK:- Buttons
-    
     override var backgroundNodeOne: SKNode? {
         return childNode(withName: overlayActionNoNodePath)!
     }
@@ -119,5 +118,3 @@ class OverlayScene: BaseScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
     }
 }
-
-

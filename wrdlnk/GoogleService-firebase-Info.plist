@@ -23,17 +23,19 @@
 	<key>STORAGE_BUCKET</key>
 	<string>testfirebase-a055f.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
-	<key>GOOGLE_APP_ID</key>
+	<true/>
+	<key>GOOGLE_APP_ID_PREV</key>
 	<string>1:730447993965:ios:53ece51a975c5953</string>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:479275272918:ios:53ece51a975c5953</string>
 	<key>DATABASE_URL</key>
 	<string>https://testfirebase-a055f.firebaseio.com</string>
 </dict>

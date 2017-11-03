@@ -58,15 +58,8 @@ class AppViewController: UIViewController {
 
     private func registerLogin() {
         assert(Thread.isMainThread)
-        let appDelegate: UIApplicationDelegate = UIApplication.shared.delegate!
-        let vc = LoginViewController()
-        appDelegate.window!?.rootViewController = vc
-        DispatchQueue.main.async(){
-            
-            vc.willMove(toParentViewController: self)
-            print("registerInitialLogin")
-        }
-      
+        let signupController = UIViewController()
+        signupController.launchLoginViewController()
         print("Finished - registerInitialLogin")
     }
     
@@ -88,15 +81,9 @@ class AppViewController: UIViewController {
             AppDefinition.defaults.purgeAll()
         }
         
-        
         let loadedInitialDefaults = AppDefinition.defaults.value(forKey: AppDefinition.InitialDefaults) as! Bool
         
-        #if false
-            delay(CommonDelaySetting) {
-                self.launchFromStoryboard(name: StoryboardName.Main.rawValue, controller: "GameViewController")
-            }
-        #else
-        if (Auth.auth().currentUser?.uid == nil) {
+        if (!AppDefinition.defaults.bool(forKey: preferenceLoggedInAppKey)) {
             let displayName = Auth.auth().currentUser?.displayName
             print("Display name: \(String(describing: displayName))")
             delay(CommonDelaySetting) {
@@ -115,7 +102,6 @@ class AppViewController: UIViewController {
                 self.launchFromStoryboard(name: StoryboardName.Main.rawValue, controller: "GameViewController")
             }
         }
-        #endif
     }
     
     @objc func handleLogout() {
@@ -125,8 +111,8 @@ class AppViewController: UIViewController {
             print(logoutError)
         }
         
-        let loginViewController = LoginViewController()
-        present(loginViewController, animated:true, completion: nil)
+        let logoutViewController = LogoutViewController()
+        present(logoutViewController, animated:true, completion: nil)
     }
     
     open override var prefersStatusBarHidden : Bool {

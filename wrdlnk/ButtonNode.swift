@@ -27,6 +27,7 @@ enum ButtonIdentifier: String {
     case nightModeSwitch = "NightModeSwitch"
     case pastelSwitch = "PastelSwitch"
     case colorBlindSwitch = "ColorBlindSwitch"
+    case signUpSwitch = "SignUpSwitch"
     case enterGame = "EnterGame"
         
     case startNewGame = "StartNewGame"
@@ -46,12 +47,15 @@ enum ButtonIdentifier: String {
     
     case shareSwitch = "ShareSwitch"
     
+    case pdfYes = "pdf/yes"
+    
     static let allButtonIdentifiers: [ButtonIdentifier]
         = [ .titleImage,
             .proceedToNextScene,    .provideMeaning,
             .showGraph,             .appSettings,
             .cancel,                .moreInfo,
-            .soundSwitch, .scoreSwitch, .timerSwitch,
+            .soundSwitch,           .scoreSwitch,
+            .timerSwitch,           .signUpSwitch,
             .enterGame,
             
             .startNewGame,          .continueGame,
@@ -64,9 +68,8 @@ enum ButtonIdentifier: String {
             .awardDetail,
             
             .actionYesSwitch,       .actionNoSwitch,
-            .shareSwitch
+            .shareSwitch, .pdfYes
     ]
-    
     
     var selectedTextureName: String? {
         switch self {
@@ -96,6 +99,8 @@ enum ButtonIdentifier: String {
             return fullTextureName("pastelOn")
         case .colorBlindSwitch:
             return fullTextureName("colorBlindOn")
+        case .signUpSwitch:
+            return fullTextureName("signUpOn")
         case .enterGame:
             return fullTextureName("enterOn")
         case .startNewGame:
@@ -124,6 +129,8 @@ enum ButtonIdentifier: String {
             return fullTextureName("exitOn")
         case .shareSwitch:
             return fullTextureName("share")
+        case .pdfYes:
+            return "pdf/yes"
         }
     }
     
@@ -155,6 +162,8 @@ enum ButtonIdentifier: String {
             return fullTextureName("pastelOff")
         case .colorBlindSwitch:
             return fullTextureName("colorBlindOff")
+        case .signUpSwitch:
+            return fullTextureName("signUpOff")
         case .enterGame:
             return fullTextureName("enterOn")
         case .startNewGame:
@@ -183,9 +192,10 @@ enum ButtonIdentifier: String {
             return fullTextureName("exitOn")
         case .shareSwitch:
             return fullTextureName("share")
+        case .pdfYes:
+            return "pdf/yes"
         }
     }
-
 }
 
 class ButtonNode: SKSpriteNode {
@@ -295,7 +305,6 @@ class ButtonNode: SKSpriteNode {
     }
     
     // MARK:- Responder
-    
     /// UIResponder touch handling.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -329,5 +338,4 @@ class ButtonNode: SKSpriteNode {
             return touchedNode === self || touchedNode.inParentHierarchy(self)
         }
     }
-
 }

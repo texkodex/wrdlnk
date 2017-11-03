@@ -12,7 +12,6 @@ import GameplayKit
 class IAPurchaseScene: BaseScene {
     
     // MARK:- Buttons
-    
     override var backgroundNodeOne: SKNode? {
         return childNode(withName: purchaseOneNodePath)!
     }
@@ -37,7 +36,6 @@ class IAPurchaseScene: BaseScene {
         return backgroundNodeThree?.childNode(withName: ButtonIdentifier.purchaseThreeSwitch.rawValue) as? ButtonNode
     }
 
-    
     let nodeMap = [ ViewElement.switches.rawValue,
                     ViewElement.purchaseOne.rawValue,
                     ViewElement.purchaseOneSwitch.rawValue,
@@ -114,16 +112,12 @@ class IAPurchaseScene: BaseScene {
         let touchedNode = self.atPoint(positionInScene)
         
         if let name = touchedNode.name {
-            if name == "purchaseOneSwitch" || name == "purchaseTwoSwitch" {
-                
-//                for product in list {
-//                    var prodID = product.productIdentifier
-//                    if(prodID == "iAp id here") {
-//                        p = product
-//                        buyProduct()  //This is one of the functions we added earlier
-//                        break;
-//                    }
-//                }
+            if name == "purchaseOneSwitch" { // Remove ads from App
+                // For each product in the product list
+                // given the product identifier
+                // if the in App purchase identifier found
+                // get the product
+                // buy the product
             }
         }
     }

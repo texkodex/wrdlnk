@@ -23,11 +23,10 @@ enum IAPurchaseManagerAlertType{
     }
 }
 
-
 class IAPurchaseManager: NSObject {
     static let shared = IAPurchaseManager()
     
-    let CONSUMABLE_PURCHASE_PRODUCT_ID = "testpurchase"
+    let CONSUMABLE_PURCHASE_PRODUCT_ID = "none_defined_itunes"
     let NON_CONSUMABLE_PURCHASE_PRODUCT_ID = "non.consumable"
     
     fileprivate var productID = ""
@@ -60,7 +59,6 @@ class IAPurchaseManager: NSObject {
         SKPaymentQueue.default().add(self)
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
-    
     
     // MARK: - FETCH AVAILABLE IAP PRODUCTS
     func fetchAvailableProducts(){
@@ -106,7 +104,6 @@ extension IAPurchaseManager: SKProductsRequestDelegate, SKPaymentTransactionObse
                     SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                     purchaseStatusBlock?(.purchased)
                     break
-                    
                 case .failed:
                     print("failed")
                     SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
@@ -117,6 +114,8 @@ extension IAPurchaseManager: SKProductsRequestDelegate, SKPaymentTransactionObse
                     break
                     
                 default: break
-                }}}
+                }
+            }
+        }
     }
 }

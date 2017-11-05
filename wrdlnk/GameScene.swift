@@ -11,26 +11,24 @@ import GameplayKit
 
 class GameScene: BaseScene {
     
+    // MARK:- Top nodes
+    let mark = SKSpriteNode(imageNamed: "pdf/mark")
+    
     // MARK:- Nodes
     override var backgroundNodeOne: SKNode? {
-        return childNode(withName: meaningNodePath)!
+        return nil
     }
     
-    override var backgroundNodeTwo: SKNode? {
-        return childNode(withName: graphNodePath)!
-    }
     
     override var backgroundNodeThree: SKNode? {
-        return childNode(withName: settingsNodePath)!
+        return nil
     }
     
     var definitionButton: ButtonNode? {
         return backgroundNodeOne?.childNode(withName: ButtonIdentifier.provideMeaning.rawValue) as? ButtonNode
     }
     
-    var graphButton: ButtonNode? {
-        return backgroundNodeTwo?.childNode(withName: ButtonIdentifier.showGraph.rawValue) as? ButtonNode
-    }
+    let graphButton: ButtonNode = ButtonNode(imageNamed: "pdf/scores")
     
     var settingsButton: ButtonNode? {
         return backgroundNodeThree?.childNode(withName: ButtonIdentifier.appSettings.rawValue) as? ButtonNode
@@ -45,11 +43,10 @@ class GameScene: BaseScene {
     
     var graphOff = false {
         didSet {
-            let imageName = graphOff ? "graphOff" : "graphOn"
-            graphButton?.selectedTexture = SKTexture(imageNamed: imageName)
+            let imageName = graphOff ? "pdf/scores" : "pdf/scores"
+            graphButton.selectedTexture = SKTexture(imageNamed: imageName)
             
             AppDefinition.defaults.set(graphOff, forKey: preferenceShowGraphKey)
-            
         }
     }
     
@@ -62,19 +59,19 @@ class GameScene: BaseScene {
     
     // MARK:- SKLabelNode
     override var backgroundNodeFour: SKNode? {
-        return childNode(withName: statNodePath)!
+        return nil
     }
     
     var playerScoreLabel: SKLabelNode? {
-        return backgroundNodeFour?.childNode(withName: statScoreNodePath) as? SKLabelNode
+        return nil
     }
     
     var highScoreLabel: SKLabelNode? {
-        return backgroundNodeFour?.childNode(withName: statHighScoreNodePath) as? SKLabelNode
+        return nil
     }
     
     var playerTimerLabel: SKLabelNode? {
-        return backgroundNodeFour?.childNode(withName: statTimerNodePath) as? SKLabelNode
+        return nil
     }
     
     // MARK:- Data structures
@@ -191,6 +188,9 @@ class GameScene: BaseScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
+        placeAssets()
+        setupGameSceneResources()
+        
         resizeIfNeeded()
         let tapBoardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapFrom(recognizer:)))
         tapBoardGestureRecognizer.numberOfTapsRequired = 1
@@ -292,22 +292,20 @@ class GameScene: BaseScene {
         }
     }
     
-    override func sceneDidLoad() {
-        super.sceneDidLoad()
+    private func setupGameSceneResources() {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        
         resetForNewGame()
         
         if testIfInit() {
-            setup(nodeMap: nodeMap, completionHandler: makeVisible(params:))
             initComplete()
         }
         
         wordList.setSelectedRow(row: nil)
         
-        loadSavedSettings()
         // Enable buttons if data available
         initializeScreenButtons()
+        
+        loadSavedSettings()
         
         // Update player score
         playerScoreUpdate()
@@ -316,6 +314,24 @@ class GameScene: BaseScene {
         highScoreLabel?.text = "HighScore: " + AppDefinition.defaults.integer(forKey: "highscore").description
         
         replaySelection()
+    }
+    
+    func placeAssets() {
+        var position: CGPoint!
+        position = CGPoint(x: size.width * 0, y: size.height * 0.4185)
+        mark.name = "mark"
+        mark.scale(to: CGSize(width: 65, height: 60))
+        mark.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        mark.position = position
+        mark.zPosition = 10
+        addChild(mark)
+        
+        position = CGPoint(x: size.width * 0.35, y: size.height * -0.4185)
+        let buttonParam: SceneButtonParam =
+            SceneButtonParam(buttonNode: graphButton, spriteNodeName: "ShowGraph",
+                             position: position,
+                             defaultTexture: "pdf/scores", selectedTexture: "pdf/scores")
+        sceneButtonSetup(param: buttonParam)
     }
     
     private func loadSavedSettings() {
@@ -330,8 +346,14 @@ class GameScene: BaseScene {
     }
     
     func initializeScreenButtons() {
+        
         disableButton(button: definitionButton)
-        wordList.currentIndex()! > 0 && !statData.isEmpty()  ? enableButton(button: graphButton) : disableButton(button: graphButton)
+        if debugInfo {
+            wordList.currentIndex()! > 0 && !statData.isEmpty()  ? enableButton(button: graphButton) : disableButton(button: graphButton)
+        } else {
+            enableButton(button: graphButton)
+        }
+        
         enableButton(button: settingsButton)
     }
     
@@ -437,7 +459,7 @@ class GameScene: BaseScene {
     }
     
     // MARK: - Gesture recognizer
-    func handleTapFrom(recognizer: UITapGestureRecognizer) {
+    @objc func handleTapFrom(recognizer: UITapGestureRecognizer) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         if recognizer.state != .ended {
             return
@@ -510,7 +532,7 @@ class GameScene: BaseScene {
     
     func wordRowSelected(name: String, wordlist: WordListBox) {
         print("word row name is: \(name)")
-        let parts = name.characters.split{$0 == "_"}.map(String.init)
+        let parts = name.split{$0 == "_"}.map(String.init)
         let column = Int(parts[parts.count - 1])!
         print("extract column is: \(column)")
         let vowelRow = VowelRow(rawValue: column)!

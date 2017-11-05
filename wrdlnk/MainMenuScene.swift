@@ -12,6 +12,7 @@ import GameplayKit
 class MainMenuScene: BaseScene {
     
     let mark = SKSpriteNode(imageNamed: "pdf/mark")
+    let base = SKSpriteNode(imageNamed: "pdf/base")
     
     // MARK:- Buttons
     let continues = SKLabelNode(text: "Resume Game")
@@ -43,7 +44,7 @@ class MainMenuScene: BaseScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
-        print("System font name: \(UIFont.systemFont(ofSize: 32).fontName)")
+        print("System font name: \(UIFont.systemFont(ofSize: 26).fontName)")
         placeAssets()
         resizeIfNeeded()
         initializeButtons()
@@ -54,39 +55,61 @@ class MainMenuScene: BaseScene {
     func placeAssets() {
         mark.name = "mark"
         mark.scale(to: CGSize(width: 65, height: 60))
-        mark.position = CGPoint(x: size.width * 0, y: size.height * 0.337)
+        mark.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        mark.position = CGPoint(x: size.width * 0, y: size.height * 0.4185)
         mark.zPosition = 10
         addChild(mark)
         
-        var position = CGPoint(x: size.width * -0.4, y: size.height * 0.15)
-        sceneNodeSetup(labelNode: continues, labelNodeName: "continue",
-                               buttonNode: continueGameButton, spriteNodeName: "ContinueGame", position: position,
-                               defaultTexture: "pdf/resume", selectedTexture: "pdf/resume")
+        base.name = "base"
+        base.scale(to: CGSize(width: size.width * 0.7874, height: size.height * 0.4891))
+        base.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        base.position = CGPoint(x: size.width * 0, y: size.height * 0.2962)
+        base.zPosition = 0
+        addChild(base)
         
-        position.y = size.height * 0.075
-        sceneNodeSetup(labelNode: start, labelNodeName: "start",
+        let xadjust = base.frame.minX + base.frame.width * 0.1074
+        var position = CGPoint(x: xadjust, y: mark.position.y + size.height * -0.1712)
+        var param: SceneNodeParam =
+            SceneNodeParam(labelNode: continues, labelNodeName: "continue",
+                           buttonNode: continueGameButton, spriteNodeName: "ContinueGame",
+                           position: position, frame: base.frame,
+                           defaultTexture: "pdf/resume", selectedTexture: "pdf/resume")
+        sceneNodeSetup(param: param)
+        
+        
+        position.y = position.y + size.height * -0.0747
+        param = SceneNodeParam(labelNode: start, labelNodeName: "start",
                                buttonNode: startNewGameButton, spriteNodeName: "StartNewGame", position: position,
-                               defaultTexture: "pdf/new", selectedTexture: "pdf/new")
+                               frame: base.frame, defaultTexture: "pdf/new", selectedTexture: "pdf/new")
+        sceneNodeSetup(param: param)
         
-        position.y = 0.0
-        sceneNodeSetup(labelNode: award, labelNodeName: "award",
-                               buttonNode: gameAwardButton, spriteNodeName: "GameAward", position: position,
+        position.y = position.y + size.height * -0.0747
+        param = SceneNodeParam(labelNode: award, labelNodeName: "award",
+                               buttonNode: gameAwardButton, spriteNodeName: "GameAward",
+                               position: position, frame: base.frame,
                                defaultTexture: "pdf/award", selectedTexture: "pdf/award")
+        sceneNodeSetup(param: param)
         
-        position.y = size.height * -0.075
-        sceneNodeSetup(labelNode: settings, labelNodeName: "settings",
-                               buttonNode: gameSettingsButton, spriteNodeName: "GameSettings", position: position,
+        position.y = position.y + size.height * -0.0747
+        param = SceneNodeParam(labelNode: settings, labelNodeName: "settings",
+                               buttonNode: gameSettingsButton, spriteNodeName: "GameSettings",
+                               position: position, frame: base.frame,
                                defaultTexture: "pdf/settings", selectedTexture: "pdf/settings")
+        sceneNodeSetup(param: param)
         
-        position.y = size.height * -0.15
-        sceneNodeSetup(labelNode: purchase, labelNodeName: "purchase",
-                               buttonNode: inAppPurchaseButton, spriteNodeName: "InAppPurchase", position: position,
+        position.y = position.y + size.height * -0.0747
+        param = SceneNodeParam(labelNode: purchase, labelNodeName: "purchase",
+                               buttonNode: inAppPurchaseButton, spriteNodeName: "InAppPurchase",
+                               position: position, frame: base.frame,
                                defaultTexture: "pdf/purchase", selectedTexture: "pdf/purchase")
+        sceneNodeSetup(param: param)
         
-        position.y = size.height * -0.225
-        sceneNodeSetup(labelNode: guide, labelNodeName: "guide",
-                               buttonNode: instructionsButton, spriteNodeName: "Instructions", position: position,
+        position.y = position.y + size.height * -0.0747
+        param = SceneNodeParam(labelNode: guide, labelNodeName: "guide",
+                               buttonNode: instructionsButton, spriteNodeName: "Instructions",
+                               position: position, frame: base.frame,
                                defaultTexture: "pdf/info", selectedTexture: "pdf/info")
+        sceneNodeSetup(param: param)
     }
     
     func initializeButtons() {

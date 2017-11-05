@@ -417,11 +417,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     }
     
     // MARK:- handlers
-    @objc func handleGoogleSignIn() {
+     func handleGoogleSignIn() {
         GIDSignIn.sharedInstance().signIn()
     }
     
-    @objc func handleTwitterLogin() {
+     func handleTwitterLogin() {
         print("Twitter Login")
     }
     

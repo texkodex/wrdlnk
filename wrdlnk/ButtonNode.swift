@@ -51,14 +51,14 @@ enum ButtonIdentifier: String {
     
     static let allButtonIdentifiers: [ButtonIdentifier]
         = [ .titleImage,
-            .proceedToNextScene,    .provideMeaning,
+            .startNewGame,          .continueGame,
             .showGraph,             .appSettings,
+            .proceedToNextScene,    .provideMeaning,
             .cancel,                .moreInfo,
             .soundSwitch,           .scoreSwitch,
             .timerSwitch,           .signUpSwitch,
             .enterGame,
-            
-            .startNewGame,          .continueGame,
+    
             .gameSettings,          .inAppPurchase,
             .instructions,
             

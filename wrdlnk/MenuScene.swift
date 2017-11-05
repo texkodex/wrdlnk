@@ -11,8 +11,9 @@ import GameplayKit
 
 class MenuScene: BaseScene {
     
-    // MARK:- Buttons
+    // MARK:- Top nodes
     let mark = SKSpriteNode(imageNamed: "pdf/mark")
+    let base = SKSpriteNode(imageNamed: "pdf/base")
     
     // MARK:- Buttons
     let sound = SKLabelNode(text: "Sound")
@@ -60,52 +61,73 @@ class MenuScene: BaseScene {
     func  setGameLevelTime() { }
     
     func placeAssets() {
-        mark.name = "mark"
-        //mark.scale(to: CGSize(width: 65, height: 60))
-        mark.position = CGPoint(x: size.width * 0, y: size.height * 0.444)
-        mark.zPosition = 10
+        mark.name = layoutRatio.markName
+        mark.scale(to: CGSize(width: layoutRatio.markScaleWidth, height: layoutRatio.makeScaleHeight))
+        mark.anchorPoint = CGPoint(x: layoutRatio.markXAnchorPoint, y: layoutRatio.markYAnchorPoiint)
+        mark.position = CGPoint(x: size.width * layoutRatio.markPositionSizeWidth,
+                                y: size.height * layoutRatio.markPositionSizeHeightFromTop)
+        mark.zPosition = layoutRatio.markZPosition
         addChild(mark)
         
-        var position = CGPoint(x: size.width * -0.4, y: size.height * 0.15)
-        sceneNodeSetup(labelNode: sound, labelNodeName: "sound",
-                               buttonNode: soundButton, spriteNodeName: "SoundSwitch", position: position,
-                               defaultTexture: "pdf/volume-x", selectedTexture: "pdf/volume")
+        base.name = layoutRatio.baseName
+        base.scale(to: CGSize(width: size.width * layoutRatio.baseScaleWidth, height: size.height * layoutRatio.baseScaleHeight))
+        base.anchorPoint = CGPoint(x: layoutRatio.baseXAnchorPoint, y: layoutRatio.baseYAnchorPoiint)
+        base.position = CGPoint(x: size.width * layoutRatio.basePositionSizeWidth, y: size.height * layoutRatio.basePositionSizeHeight)
+        base.zPosition = layoutRatio.baseZPosition
+        addChild(base)
         
-        position.y = size.height * 0.075
-        sceneNodeSetup(labelNode: score, labelNodeName: "score",
+        let xadjust = base.frame.minX + base.frame.width * layoutRatio.labelNodeHorizontalIndent
+        var position = CGPoint(x: xadjust, y: mark.position.y + size.height * -layoutRatio.labelNodeVerticalIndent)
+        var param: SceneNodeParam = SceneNodeParam(labelNode: sound, labelNodeName: "sound",
+                                                   buttonNode: soundButton, spriteNodeName: "SoundSwitch",
+                                                   position: position,
+                                                   frame: base.frame, defaultTexture: "pdf/volume-x",
+                                                   selectedTexture: "pdf/volume")
+        sceneNodeSetup(param: param)
+        
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
+        param = SceneNodeParam(labelNode: score, labelNodeName: "score",
                                buttonNode: scoreButton, spriteNodeName: "ScoreSwitch", position: position,
-                               defaultTexture: "pdf/award", selectedTexture: "pdf/award")
+                               frame: base.frame, defaultTexture: "pdf/award", selectedTexture: "pdf/award")
+        sceneNodeSetup(param: param)
         
-        position.y = 0.0
-        sceneNodeSetup(labelNode: timer, labelNodeName: "timer",
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
+        param = SceneNodeParam(labelNode: timer, labelNodeName: "timer",
                                buttonNode: timerButton, spriteNodeName: "TimerSwitch", position: position,
-                               defaultTexture: "pdf/clock", selectedTexture: "pdf/clock")
+                               frame: base.frame, defaultTexture: "pdf/clock", selectedTexture: "pdf/clock")
+        sceneNodeSetup(param: param)
         
-        position.y = size.height * -0.075
-        sceneNodeSetup(labelNode: nightMode, labelNodeName: "nightMode",
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
+        param = SceneNodeParam(labelNode: nightMode, labelNodeName: "nightMode",
                                buttonNode: nightModeButton, spriteNodeName: "NightModeSwitch", position: position,
-                               defaultTexture: "pdf/moon", selectedTexture: "pdf/moon")
+                               frame: base.frame, defaultTexture: "pdf/moon", selectedTexture: "pdf/moon")
+        sceneNodeSetup(param: param)
         
-        position.y = size.height * -0.15
-        sceneNodeSetup(labelNode: pastel, labelNodeName: "pastel",
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
+        param = SceneNodeParam(labelNode: pastel, labelNodeName: "pastel",
                                buttonNode: pastelButton, spriteNodeName: "PastelSwitch", position: position,
-                               defaultTexture: "pdf/droplet", selectedTexture: "pdf/droplet")
+                               frame: base.frame, defaultTexture: "pdf/droplet", selectedTexture: "pdf/droplet")
+        sceneNodeSetup(param: param)
         
-        position.y = size.height * -0.225
-        sceneNodeSetup(labelNode: colorBlind, labelNodeName: "colorBlind",
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
+        param = SceneNodeParam(labelNode: colorBlind, labelNodeName: "colorBlind",
                                buttonNode: colorBlindButton, spriteNodeName: "ColorBlindSwitch", position: position,
-                               defaultTexture: "pdf/eye", selectedTexture: "pdf/eye")
+                               frame: base.frame, defaultTexture: "pdf/eye", selectedTexture: "pdf/eye")
+        sceneNodeSetup(param: param)
         
-        position.y = size.height * -0.3
-        sceneNodeSetup(labelNode: signup, labelNodeName: "signup",
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
+        param = SceneNodeParam(labelNode: signup, labelNodeName: "signup",
                                buttonNode: signupButton, spriteNodeName: "SignUpSwitch", position: position,
-                               defaultTexture: "pdf/user", selectedTexture: "pdf/user")
+                               frame: base.frame, defaultTexture: "pdf/user", selectedTexture: "pdf/user")
+        sceneNodeSetup(param: param)
         
-        position.y = position.y + size.height * -0.0794
-        position.x = 0.0
-        sceneButtonSetup(buttonNode: enterButton, spriteNodeName: "EnterGame",  position: position,
-                         defaultTexture: "pdf/chevron-down", selectedTexture: "pdf/chevron-down")
-        
+        let yPos = base.frame.minY + size.height * -layoutRatio.enterButtonVerticalFromMinBase
+        position = CGPoint(x: layoutRatio.enterButtonXPosition, y: yPos)
+        let buttonParam: SceneButtonParam =
+            SceneButtonParam(buttonNode: enterButton, spriteNodeName: "EnterGame",
+                             position: position,
+                             defaultTexture: "pdf/chevron-down", selectedTexture: "pdf/chevron-down")
+        sceneButtonSetup(param: buttonParam)
     }
     
     func initializeButtons() {
@@ -142,52 +164,5 @@ class MenuScene: BaseScene {
     }
     
     func makeVisible(element: ViewElement, node: SKSpriteNode){
-    }
-}
-
-extension BaseScene {
-    func sceneNodeSetup(labelNode: SKLabelNode, labelNodeName: String, buttonNode: ButtonNode, spriteNodeName: String, position: CGPoint, defaultTexture: String, selectedTexture: String) {
-        labelNode.name = labelNodeName
-        labelNode.position = position
-        labelNode.fontName = UIFont.systemFont(ofSize: 26).fontName
-        labelNode.fontSize = 26.0
-        labelNode.fontColor = foregroundColor
-        labelNode.verticalAlignmentMode = .center
-        labelNode.horizontalAlignmentMode =  .left
-        labelNode.zPosition = 0
-        self.addChild(labelNode)
-        
-        buttonNode.name = spriteNodeName
-        buttonNode.defaultTexture = SKTexture(imageNamed: defaultTexture)
-        buttonNode.selectedTexture = SKTexture(imageNamed: selectedTexture)
-        buttonNode.buttonIdentifier = ButtonIdentifier(rawValue: spriteNodeName)
-        buttonNode.size = CGSize(width: 26, height: 26)
-        let spriteNodeWidthAdjust = buttonNode.size.width / 2
-        buttonNode.position = CGPoint(x: size.width * 0.8 - spriteNodeWidthAdjust, y: 0)
-        buttonNode.zPosition = 10
-        labelNode.addChild(buttonNode)
-        
-        let focusRing = SKSpriteNode(texture: SKTexture(imageNamed: "focusRingRed"))
-        focusRing.scale(to: CGSize(width: buttonNode.size.width + 2.0, height: buttonNode.size.height + 2.0))
-        focusRing.name = "focusRing"
-        buttonNode.addChild(focusRing)
-        focusRing.position = buttonNode.position
-    }
-    
-    func sceneButtonSetup(buttonNode: ButtonNode, spriteNodeName: String, position: CGPoint, defaultTexture: String, selectedTexture: String) {
-        
-        self.addChild(buttonNode)
-        buttonNode.name = spriteNodeName
-        buttonNode.defaultTexture = SKTexture(imageNamed: defaultTexture)
-        buttonNode.selectedTexture = SKTexture(imageNamed: selectedTexture)
-        buttonNode.buttonIdentifier = ButtonIdentifier(rawValue: spriteNodeName)
-        buttonNode.position = position
-        buttonNode.zPosition = 10
-        
-        let focusRing = SKSpriteNode(texture: SKTexture(imageNamed: "focusRingRed"))
-        focusRing.scale(to: CGSize(width: buttonNode.size.width + 2.0, height: buttonNode.size.height + 2.0))
-        focusRing.name = "focusRing"
-        buttonNode.addChild(focusRing)
-        focusRing.position = position
     }
 }

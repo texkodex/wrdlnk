@@ -40,6 +40,7 @@
 		CC4494CD1F5628A100CB0906 /* wireIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC4494CC1F5628A100CB0906 /* wireIcon.xcassets */; };
 		CC47B5531F9E68E900BE5DB8 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC47B5521F9E68E900BE5DB8 /* GoogleMobileAds.framework */; };
 		CC47B5541F9E9EA100BE5DB8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC13D0CE1F8DB7AB00FC51C6 /* StoreKit.framework */; };
+		CC4991F91FAE147300D74034 /* LayoutDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4991F81FAE147300D74034 /* LayoutDefinition.swift */; };
 		CC4D21991F5CE3B600521254 /* LiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4D21981F5CE3B600521254 /* LiveData.swift */; };
 		CC4F90CF1F51D637001BB049 /* PlayNotification.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC4F90CE1F51D637001BB049 /* PlayNotification.plist */; };
 		CC4F90D11F51E9FE001BB049 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F90D01F51E9FE001BB049 /* Utility.swift */; };
@@ -177,6 +178,7 @@
 		CC47B5561F9FA2F000BE5DB8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CC47B5571F9FA2FC00BE5DB8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC47B5581F9FA30500BE5DB8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CC4991F81FAE147300D74034 /* LayoutDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutDefinition.swift; sourceTree = "<group>"; };
 		CC4D21981F5CE3B600521254 /* LiveData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveData.swift; sourceTree = "<group>"; };
 		CC4F90CE1F51D637001BB049 /* PlayNotification.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlayNotification.plist; sourceTree = "<group>"; };
 		CC4F90D01F51E9FE001BB049 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
@@ -646,8 +648,8 @@
 				AE39F6A61EE10AC300D362C1 /* GameStatusScene.swift */,
 				CC1C64C21F44AA6D00A9E5C8 /* IAPurchaseScene.sks */,
 				CC1C64C41F44AE2800A9E5C8 /* IAPurchaseScene.swift */,
-				CC95F9FE1F3A3F1700E55483 /* MainMenuScene.swift */,
 				CCE07BFF1FABF09700DBE56F /* MainMenuScene.sks */,
+				CC95F9FE1F3A3F1700E55483 /* MainMenuScene.swift */,
 				CCDC23701F200DCE00371F1F /* MenuScene.sks */,
 				CCDC23721F200E3700371F1F /* MenuScene.swift */,
 				CC4F90CE1F51D637001BB049 /* PlayNotification.plist */,
@@ -746,6 +748,7 @@
 				CCF3CC411F7AB16C00035B76 /* Stat.swift */,
 				CC7202C11F1D5D7D003394A0 /* StatStore.swift */,
 				CCEB14C91F9481F100985641 /* ProcessTile.swift */,
+				CC4991F81FAE147300D74034 /* LayoutDefinition.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -969,6 +972,7 @@
 				CC8BE42F1F044CBE00CDB4BB /* DefinitionScene.swift in Sources */,
 				CCF3CC3C1F79FBFB00035B76 /* SKSpriteNode+Extensions.swift in Sources */,
 				CCF3CC341F79FA1600035B76 /* SKScene+Extensions.swift in Sources */,
+				CC4991F91FAE147300D74034 /* LayoutDefinition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

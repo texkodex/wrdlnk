@@ -354,6 +354,38 @@ class AppTheme {
         }
     }
     
+    // MARK: For graphs
+    func fillColor() -> UIColor? {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return .lightGray
+        case Mode.pastel:
+            return pastelBackgroundTile
+        default:
+            return redTile
+        }
+    }
+    
+    func strokeColor() -> UIColor? {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return .darkGray
+        case Mode.pastel:
+            return pastelBackgroundTile
+        default:
+            return AppTheme.instance.fontColor()
+        }
+    }
+    
+    func arrowColor() -> UIColor? {
+        switch currentMode() {
+        case Mode.colorBlind:
+            return .darkGray
+        default:
+            return greenTile
+        }
+    }
+    
     func changeNodes(view: BaseScene, mode: Mode, sceneColor: UIColor, backgroundColor: UIColor, fontColor: UIColor, alpha: CGFloat = 0.3) {
         view.scene?.backgroundColor = sceneColor
         

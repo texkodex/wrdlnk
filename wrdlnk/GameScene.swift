@@ -30,9 +30,7 @@ class GameScene: BaseScene {
     
     let graphButton: ButtonNode = ButtonNode(imageNamed: "pdf/scores")
     
-    var settingsButton: ButtonNode? {
-        return backgroundNodeThree?.childNode(withName: ButtonIdentifier.appSettings.rawValue) as? ButtonNode
-    }
+    let settingsButton: ButtonNode = ButtonNode(imageNamed: "pdf/settings")
     
     var definitionOff = false {
         didSet {
@@ -50,13 +48,6 @@ class GameScene: BaseScene {
         }
     }
     
-    var settingsOff = false {
-        didSet {
-            let imageName = settingsOff ? "settingsOff" : "settingsOn"
-            settingsButton?.selectedTexture = SKTexture(imageNamed: imageName)
-        }
-    }
-    
     // MARK:- SKLabelNode
     override var backgroundNodeFour: SKNode? {
         return nil
@@ -71,7 +62,7 @@ class GameScene: BaseScene {
     }
     
     var playerTimerLabel: SKLabelNode? {
-        return nil
+        return SKLabelNode()
     }
     
     // MARK:- Data structures
@@ -191,7 +182,7 @@ class GameScene: BaseScene {
         placeAssets()
         setupGameSceneResources()
         
-        resizeIfNeeded()
+        //resizeIfNeeded()
         let tapBoardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapFrom(recognizer:)))
         tapBoardGestureRecognizer.numberOfTapsRequired = 1
         view.addGestureRecognizer(tapBoardGestureRecognizer)
@@ -319,19 +310,147 @@ class GameScene: BaseScene {
     func placeAssets() {
         var position: CGPoint!
         position = CGPoint(x: size.width * 0, y: size.height * 0.4185)
+        var scaledWidth = size.width * layoutRatio.markWidthScale
+        var scaledHeight = size.height * layoutRatio.makeHeightScale
+        
         mark.name = "mark"
-        mark.scale(to: CGSize(width: 65, height: 60))
+        mark.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
         mark.anchorPoint = CGPoint(x: 0.5, y: 1.0)
         mark.position = position
         mark.zPosition = 10
         addChild(mark)
         
-        position = CGPoint(x: size.width * 0.35, y: size.height * -0.4185)
-        let buttonParam: SceneButtonParam =
+        var xPos = size.width * (layoutRatio.xAnchor - layoutRatio.indentForGameButtonFromSideEdge)
+        let yPos = size.height * (layoutRatio.yAnchor - layoutRatio.indentForGameButtonFromTopEdge)
+        position = CGPoint(x: xPos, y: yPos)
+        
+        scaledWidth = size.width * layoutRatio.buttonGraphWidthScale
+        scaledHeight = size.height * layoutRatio.buttonGraphHeightScale
+        graphButton.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
+        var buttonParam: SceneButtonParam =
             SceneButtonParam(buttonNode: graphButton, spriteNodeName: "ShowGraph",
                              position: position,
                              defaultTexture: "pdf/scores", selectedTexture: "pdf/scores")
         sceneButtonSetup(param: buttonParam)
+        
+        xPos = size.width * -(layoutRatio.xAnchor - layoutRatio.indentForGameButtonFromSideEdge)
+        position.x = xPos
+        
+        scaledWidth = size.width * layoutRatio.buttonSettingsWidthScale
+        scaledHeight = size.height * layoutRatio.buttonSettingsHeightScale
+        settingsButton.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
+        buttonParam =
+        SceneButtonParam(buttonNode: settingsButton, spriteNodeName: "GameSettings",
+        position: position,
+        defaultTexture: "pdf/settings", selectedTexture: "pdf/settings")
+        sceneButtonSetup(param: buttonParam)
+        placeBoard()
+        placeButtons()
+    }
+    
+    func placeBoard() {
+        let getWords = wordList.getWords()!
+        let lettersPerRow = [getWords.prefix.utf8.count, getWords.link.utf8.count, getWords.suffix.utf8.count]
+        
+        let maxTiles = lettersPerRow.map { $0 }.max()!
+        var position: CGPoint!
+        var tile: SKSpriteNode!
+        let tileWidth = size.width * layoutRatio.tileWidthToScreen
+        let tileHeight = size.height * layoutRatio.tileHeightToScreen
+        let tileInnerSpace = size.width * layoutRatio.spaceBetweenInnerTileInRow
+        
+        let xPos = size.width * -(layoutRatio.xAnchor - layoutRatio.indentToFirstBoardTile)
+        let yPos = size.height * (layoutRatio.yAnchor - layoutRatio.indentFromTopEdgeFirstBoardRow)
+        position = CGPoint(x: xPos, y: yPos)
+        
+        let maxAvailableTiles = Int(size.width / (tileWidth + tileInnerSpace))
+        
+        if maxAvailableTiles < maxTiles {
+            print("Cannot display all tiles")
+            return
+        }
+        
+        
+        
+        
+        let wordsForRow = [getWords.prefix, getWords.link, getWords.suffix]
+        let fontSize = tileHeight * layoutRatio.textSizeToTileHeight
+        
+        for row in 1...3 {
+            // Adjust for less than max row tiles
+            let tileAdjustment = (CGFloat(maxAvailableTiles) - CGFloat(lettersPerRow[row - 1])) / CGFloat(2.0)
+            let xPosAdjustment = CGFloat(tileAdjustment) * (tileWidth + tileInnerSpace)
+            
+            for column in 1...lettersPerRow[row - 1] {
+                
+                
+                tile = SKSpriteNode(texture: SKTexture(imageNamed: "pdf/tile"))
+                
+                position = CGPoint(x: position.x, y: position.y)
+                tile.name = "board_tile_\(row)_\(column)"
+                tile.scale(to: CGSize(width: tileWidth, height: tileHeight))
+                tile.position = CGPoint(x: position.x + xPosAdjustment, y: position.y)
+                tile.zPosition = 10
+                addChild(tile)
+                
+                // Add the word letter to board
+                let currentWord = wordsForRow[row - 1]
+                let index = currentWord.index(currentWord.startIndex, offsetBy: column - 1)
+                
+                let labelNode = SKLabelNode()
+                labelNode.name = "board_letter_\(column)"
+                labelNode.position = CGPoint(x: tile.centerRect.midX, y: tile.centerRect.midY)
+                labelNode.text = "\(currentWord[index])"
+                labelNode.fontSize = fontSize
+                labelNode.fontName = fontName
+                labelNode.verticalAlignmentMode = .center
+                labelNode.horizontalAlignmentMode = .center
+                labelNode.zPosition = 10
+                tile.addChild(labelNode)
+                
+                position.x = position.x + tileWidth + tileInnerSpace
+            }
+            let yOffset = size.height * layoutRatio.spaceBetweenRowsInScreen
+            position.x = xPos
+            position.y = position.y - yOffset
+        }
+    }
+    
+    func placeButtons() {
+        var position: CGPoint!
+        let tileWidth = size.width * layoutRatio.tileWidthToScreen
+        let tileHeight = size.height * layoutRatio.tileHeightToScreen
+        let tileInnerSpace = size.width * layoutRatio.spaceBetweenInnerTileInRow
+        let fontSize = tileHeight * layoutRatio.textSizeToTileHeight
+        let xPos = size.width * -(layoutRatio.xAnchor - layoutRatio.indentToCenterOfFirstButtonTile)
+        let yPos = size.height * (layoutRatio.yAnchor - layoutRatio.indentFromTopEdgeToCenterOfButton)
+        position = CGPoint(x: xPos, y: yPos)
+        
+        let labels = ["A", "E", "I", "O", "U", "Y"]
+        
+        for column in 1...layoutRatio.numberOfVowels {
+            let tile = SKSpriteNode(texture: SKTexture(imageNamed: "pdf/tile"))
+            
+            position = CGPoint(x: position.x, y: position.y)
+            tile.name = "button_tile_\(column)"
+            tile.scale(to: CGSize(width: tileWidth, height: tileHeight))
+            tile.position = position
+            tile.zPosition = 10
+            addChild(tile)
+            
+            let labelNode = SKLabelNode()
+            labelNode.name = "button_label_\(labels[column - 1])"
+            labelNode.position = CGPoint(x: tile.centerRect.midX, y: tile.centerRect.midY)
+            labelNode.text = "\(labels[column - 1])"
+            labelNode.fontSize = fontSize
+            labelNode.fontName = fontName
+            labelNode.verticalAlignmentMode = .center
+            labelNode.horizontalAlignmentMode = .center
+            labelNode.zPosition = 10
+            tile.addChild(labelNode)
+            
+            position.x = position.x + tileWidth + tileInnerSpace
+        }
     }
     
     private func loadSavedSettings() {
@@ -348,11 +467,8 @@ class GameScene: BaseScene {
     func initializeScreenButtons() {
         
         disableButton(button: definitionButton)
-        if debugInfo {
-            wordList.currentIndex()! > 0 && !statData.isEmpty()  ? enableButton(button: graphButton) : disableButton(button: graphButton)
-        } else {
-            enableButton(button: graphButton)
-        }
+        
+        wordList.currentIndex()! > 0 && !statData.isEmpty()  ? enableButton(button: graphButton) : disableButton(button: graphButton)
         
         enableButton(button: settingsButton)
     }

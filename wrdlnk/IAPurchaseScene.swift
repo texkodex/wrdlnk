@@ -55,7 +55,7 @@ class IAPurchaseScene: BaseScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
-        resizeIfNeeded()
+        //resizeIfNeeded()
         initializeButtons()
         AppTheme.instance.set(for: self)
     }

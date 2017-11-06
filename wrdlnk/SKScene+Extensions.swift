@@ -14,6 +14,7 @@ import GameplayKit
 extension SKScene {
     
     func resizeIfNeeded() {
+        return
         let rootNode = self
         let platform = getPlatformNameString()
         if platform.contains("iPad Pro (12.9)") || UIDevice.isiPadPro129 {

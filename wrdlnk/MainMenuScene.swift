@@ -46,29 +46,32 @@ class MainMenuScene: BaseScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
         print("System font name: \(UIFont.systemFont(ofSize: 26).fontName)")
         placeAssets()
-        resizeIfNeeded()
+        //resizeIfNeeded()
         initializeButtons()
         setGameLevelTime()
         AppTheme.instance.set(for: self)
     }
     
     func placeAssets() {
-        mark.name = "mark"
-        mark.scale(to: CGSize(width: 65, height: 60))
-        mark.anchorPoint = CGPoint(x: 0.5, y: 1.0)
-        mark.position = CGPoint(x: size.width * 0, y: size.height * 0.4185)
-        mark.zPosition = 10
+        mark.name = layoutRatio.markName
+        let scaledWidth = size.width * layoutRatio.markWidthScale
+        let scaledHeight = size.height * layoutRatio.makeHeightScale
+        mark.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
+        mark.anchorPoint = CGPoint(x: layoutRatio.markXAnchorPoint, y: layoutRatio.markYAnchorPoiint)
+        mark.position = CGPoint(x: size.width * layoutRatio.markPositionSizeWidth,
+                                y: size.height * layoutRatio.markPositionSizeHeightFromTop)
+        mark.zPosition = layoutRatio.markZPosition
         addChild(mark)
         
-        base.name = "base"
-        base.scale(to: CGSize(width: size.width * 0.7874, height: size.height * 0.4891))
-        base.anchorPoint = CGPoint(x: 0.5, y: 1.0)
-        base.position = CGPoint(x: size.width * 0, y: size.height * 0.2962)
-        base.zPosition = 0
+        base.name = layoutRatio.baseName
+        base.scale(to: CGSize(width: size.width * layoutRatio.baseScaleWidth, height: size.height * layoutRatio.baseScaleHeightWithSixRows))
+        base.anchorPoint = CGPoint(x: layoutRatio.baseXAnchorPoint, y: layoutRatio.baseYAnchorPoiint)
+        base.position = CGPoint(x: size.width * layoutRatio.basePositionSizeWidth, y: size.height * layoutRatio.basePositionSizeHeight)
+        base.zPosition = layoutRatio.baseZPosition
         addChild(base)
         
-        let xadjust = base.frame.minX + base.frame.width * 0.1074
-        var position = CGPoint(x: xadjust, y: mark.position.y + size.height * -0.1712)
+        let xadjust = base.frame.minX + base.frame.width * layoutRatio.labelNodeHorizontalIndent
+        var position = CGPoint(x: xadjust, y: mark.position.y + size.height * -layoutRatio.labelNodeVerticalIndent)
         var param: SceneNodeParam =
             SceneNodeParam(labelNode: continues, labelNodeName: "continue",
                            buttonNode: continueGameButton, spriteNodeName: "ContinueGame",
@@ -77,34 +80,34 @@ class MainMenuScene: BaseScene {
         sceneNodeSetup(param: param)
         
         
-        position.y = position.y + size.height * -0.0747
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
         param = SceneNodeParam(labelNode: start, labelNodeName: "start",
                                buttonNode: startNewGameButton, spriteNodeName: "StartNewGame", position: position,
                                frame: base.frame, defaultTexture: "pdf/new", selectedTexture: "pdf/new")
         sceneNodeSetup(param: param)
         
-        position.y = position.y + size.height * -0.0747
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
         param = SceneNodeParam(labelNode: award, labelNodeName: "award",
                                buttonNode: gameAwardButton, spriteNodeName: "GameAward",
                                position: position, frame: base.frame,
                                defaultTexture: "pdf/award", selectedTexture: "pdf/award")
         sceneNodeSetup(param: param)
         
-        position.y = position.y + size.height * -0.0747
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
         param = SceneNodeParam(labelNode: settings, labelNodeName: "settings",
                                buttonNode: gameSettingsButton, spriteNodeName: "GameSettings",
                                position: position, frame: base.frame,
                                defaultTexture: "pdf/settings", selectedTexture: "pdf/settings")
         sceneNodeSetup(param: param)
         
-        position.y = position.y + size.height * -0.0747
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
         param = SceneNodeParam(labelNode: purchase, labelNodeName: "purchase",
                                buttonNode: inAppPurchaseButton, spriteNodeName: "InAppPurchase",
                                position: position, frame: base.frame,
                                defaultTexture: "pdf/purchase", selectedTexture: "pdf/purchase")
         sceneNodeSetup(param: param)
         
-        position.y = position.y + size.height * -0.0747
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
         param = SceneNodeParam(labelNode: guide, labelNodeName: "guide",
                                buttonNode: instructionsButton, spriteNodeName: "Instructions",
                                position: position, frame: base.frame,

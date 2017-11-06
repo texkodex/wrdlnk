@@ -115,11 +115,14 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
                 
                 // Present the scene
                 if let view = self.view as! SKView? {
-                    let transition = SKTransition.fade(with: self.view.backgroundColor!, duration: CommonDelaySetting)
-                    view.presentScene(sceneNode, transition: transition)
                     
                     // Adjust scene size to view bounds
                     sceneNode.size = view.bounds.size
+                    
+                    let transition = SKTransition.fade(with: self.view.backgroundColor!, duration: CommonDelaySetting)
+                    view.presentScene(sceneNode, transition: transition)
+                    
+
                     
                     view.ignoresSiblingOrder = true
                     #if SHOW_PERFORMANCE

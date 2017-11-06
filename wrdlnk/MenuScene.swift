@@ -52,7 +52,7 @@ class MenuScene: BaseScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
         print("System font name: \(UIFont.systemFont(ofSize: 32).fontName)")
         placeAssets()
-        resizeIfNeeded()
+        //resizeIfNeeded()
         initializeButtons()
         setGameLevelTime()
         AppTheme.instance.set(for: self)
@@ -62,7 +62,9 @@ class MenuScene: BaseScene {
     
     func placeAssets() {
         mark.name = layoutRatio.markName
-        mark.scale(to: CGSize(width: layoutRatio.markScaleWidth, height: layoutRatio.makeScaleHeight))
+        let scaledWidth = size.width * layoutRatio.markWidthScale
+        let scaledHeight = size.height * layoutRatio.makeHeightScale
+        mark.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
         mark.anchorPoint = CGPoint(x: layoutRatio.markXAnchorPoint, y: layoutRatio.markYAnchorPoiint)
         mark.position = CGPoint(x: size.width * layoutRatio.markPositionSizeWidth,
                                 y: size.height * layoutRatio.markPositionSizeHeightFromTop)
@@ -126,6 +128,7 @@ class MenuScene: BaseScene {
         let buttonParam: SceneButtonParam =
             SceneButtonParam(buttonNode: enterButton, spriteNodeName: "EnterGame",
                              position: position,
+                             anchor: CGPoint(x: 0.5, y: 0.5),
                              defaultTexture: "pdf/chevron-down", selectedTexture: "pdf/chevron-down")
         sceneButtonSetup(param: buttonParam)
     }

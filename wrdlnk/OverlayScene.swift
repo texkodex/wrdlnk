@@ -32,14 +32,17 @@ class OverlayScene: BaseScene {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
         placeAssets()
-        resizeIfNeeded()
+        //resizeIfNeeded()
         initializeButtons()
         AppTheme.instance.set(for: self)
     }
     
     func placeAssets() {
+        let scaledWidth = size.width * layoutRatio.markWidthScale
+        let scaledHeight = size.height * layoutRatio.makeHeightScale
+        
         mark.name = "mark"
-        mark.scale(to: CGSize(width: 65, height: 60))
+        mark.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
         mark.anchorPoint = CGPoint(x: 0.5, y: 1.0)
         mark.position = CGPoint(x: size.width * 0, y: size.height * 0.4185)
         mark.zPosition = 10

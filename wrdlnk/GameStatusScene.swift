@@ -40,7 +40,7 @@ class GameStatusScene: BaseScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
         placeAssets()
         
-        //resizeIfNeeded()
+        
         initializeButtons()
         AppTheme.instance.set(for: self)
     }
@@ -48,7 +48,7 @@ class GameStatusScene: BaseScene {
     func placeAssets() {
         print("Entering \(#file):: \(#function) at line \(#line)")
         let scaledWidth = size.width * layoutRatio.markWidthScale
-        let scaledHeight = size.height * layoutRatio.makeHeightScale
+        let scaledHeight = size.height * layoutRatio.markHeightScale
         
         mark.name = "mark"
         mark.scale(to: CGSize(width: scaledWidth, height: scaledHeight))

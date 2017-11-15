@@ -425,6 +425,7 @@ class VowelCountBox {
     }
     
     func clickMatch() {
+        if localToggle { print("Entering \(#file):: \(#function) at line \(#line)") }
         queue.sync {
             vowelCountInstance.clickMatch()
         }

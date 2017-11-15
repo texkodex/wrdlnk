@@ -14,8 +14,10 @@ class OverlayScene: BaseScene {
     let mark = SKSpriteNode(imageNamed: "pdf/mark")
     let base = SKSpriteNode(imageNamed: "pdf/base")
     
-    // MARK:- Buttons
+    // MARK:- Label
     let title = SKLabelNode(text: "New Game?")
+    
+    // MARK:- Buttons
     let yesNewGameButton = ButtonNode(imageNamed: "pdf/yes")
     
     let noResumeGameButton = ButtonNode(imageNamed: "pdf/no")
@@ -32,14 +34,14 @@ class OverlayScene: BaseScene {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
         placeAssets()
-        //resizeIfNeeded()
+       
         initializeButtons()
         AppTheme.instance.set(for: self)
     }
     
     func placeAssets() {
         let scaledWidth = size.width * layoutRatio.markWidthScale
-        let scaledHeight = size.height * layoutRatio.makeHeightScale
+        let scaledHeight = size.height * layoutRatio.markHeightScale
         
         mark.name = "mark"
         mark.scale(to: CGSize(width: scaledWidth, height: scaledHeight))

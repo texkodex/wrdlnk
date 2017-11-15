@@ -34,6 +34,8 @@ enum StoryboardName : String {
 // MARK:- Defines
 let debugInfo = false
 
+let localToggle = true
+
 // "SF Mono" or "Helvetica" or "Arial"
 let fontName = ".SFUIDisplay" // UIFont.systemFont(ofSize: 32).fontName
 
@@ -67,6 +69,23 @@ let WordListKey = "wordListKey"
 
 let buttonsTileMap = "buttons"
 let boardTileMap = "board"
+
+let nameDoubleSlashPrex = "//"
+let highlightPrefix = "highlight_"
+let unhighlightPrefix = "unhighlight_"
+let boardPrefix = "board"
+let buttonPrefix = "button"
+let tilePrefix = "tile"
+
+let boardTileName = "board_tile_"
+let boardLetterName = "board_letter_"
+let buttonTileName = "button_tile_"
+let highlightButtonTileName = "highlight_button_tile_"
+let buttonLetterName = "button_letter_"
+
+let turnOnVisibility = CGFloat(1.0)
+let turnOffVisibility = CGFloat(0.0)
+
 let tileNodeName = "tileNode_"
 let tileNodeColRow = "tileNode_%d_%d"
 let tileNodeNameColRow = "tileNode_%@_%d_%d"
@@ -363,9 +382,9 @@ let TileColor = [ whiteTile, blackTile, darkGrayTile, lightGrayTile, grayTile, b
 
 // TileMap cell (0,0) in lower left hand corner
 enum VowelRow: Int {
-    case prefix = 4
-    case link = 2
-    case suffix = 0
+    case prefix = 0
+    case link = 1
+    case suffix = 2
     
     static let types = [prefix, link, suffix]
 }

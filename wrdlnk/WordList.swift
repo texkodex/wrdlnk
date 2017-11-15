@@ -67,7 +67,7 @@ struct WordList {
         static var index: Int = 0
         static var initialize: Bool = false
         static var wordBank = [Word]()
-        static var selectedRow: VowelRow? = nil
+        static var selectedRow: Int? = nil
         static var matchCondition: Bool? = nil
     }
     
@@ -179,13 +179,13 @@ class WordListBox {
         return wordListInstance.getCurrentWords()
     }
     
-    func setSelectedRow(row: VowelRow?) {
+    func setSelectedRow(row: Int?) {
         queue.sync {
             wordListInstance.setSelectedRow(row: row)
         }
     }
     
-    func getSelectedRow() -> VowelRow? {
+    func getSelectedRow() -> Int? {
         return wordListInstance.getSelectedRow()
     }
     

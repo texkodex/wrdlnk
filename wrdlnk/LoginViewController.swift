@@ -215,73 +215,73 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         errorLabel.centerXAnchor.constraint(equalTo: errorView.centerXAnchor).isActive = true
         errorLabel.centerYAnchor.constraint(equalTo: errorView.centerYAnchor).isActive = true
         errorLabel.widthAnchor.constraint(equalTo: errorView.widthAnchor).isActive = true
-        errorLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        errorLabel.heightAnchor.constraint(equalToConstant: layoutRatio.errorLabelHeight).isActive = true
     }
 
     func setupMarkView() {
         markImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        markImageView.topAnchor.constraint(equalTo: errorView.bottomAnchor, constant: 40).isActive = true
-        markImageView.widthAnchor.constraint(equalToConstant: 87).isActive = true
-        markImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        markImageView.topAnchor.constraint(equalTo: errorView.bottomAnchor, constant: layoutRatio.loginMarkTopAnchorErrorView).isActive = true
+        markImageView.widthAnchor.constraint(equalToConstant: layoutRatio.loginMarkWidthAnchor).isActive = true
+        markImageView.heightAnchor.constraint(equalToConstant: layoutRatio.loginMarkHeightAnchor).isActive = true
     }
     
     func setupWrdlnkLabelView() {
         wrdlnkLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        wrdlnkLabel.topAnchor.constraint(equalTo: markImageView.topAnchor, constant: 115).isActive = true
-        wrdlnkLabel.widthAnchor.constraint(equalToConstant: 126).isActive = true
-        wrdlnkLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        wrdlnkLabel.topAnchor.constraint(equalTo: markImageView.topAnchor, constant: layoutRatio.loginWrdlnkLabelTopAnchor).isActive = true
+        wrdlnkLabel.widthAnchor.constraint(equalToConstant: layoutRatio.loginWrdlnkLabelWidthAnchor).isActive = true
+        wrdlnkLabel.heightAnchor.constraint(equalToConstant: layoutRatio.loginWrdlnkLabelHeightAnchor).isActive = true
     }
     
     // MARK: Container view
     func setupEmailLabel() {
         emailLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
         emailLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 2).isActive = true
-        emailLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        emailLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
+        emailLabel.widthAnchor.constraint(equalToConstant: layoutRatio.loginEmailLabelWidthAnchor).isActive = true
+        emailLabel.heightAnchor.constraint(equalToConstant: layoutRatio.loginEmailLabelHeightAnchor).isActive = true
     }
     
     func setupEmailText() {
         emailText.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        emailText.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25).isActive = true
-        emailText.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        emailTextHeightAnchor = emailText.heightAnchor.constraint(equalToConstant: 14)
+        emailText.topAnchor.constraint(equalTo: containerView.topAnchor, constant: layoutRatio.loginEmailTextTopAnchor).isActive = true
+        emailText.widthAnchor.constraint(equalToConstant: layoutRatio.loginEmailTextWidthAnchor).isActive = true
+        emailTextHeightAnchor = emailText.heightAnchor.constraint(equalToConstant: layoutRatio.loginEmailTextHeightAnchor)
         emailTextHeightAnchor?.isActive = true
     }
     
     func setupSeparatorEmail() {
         separatorEmailView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        separatorEmailView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 58).isActive = true
-        separatorEmailView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -96).isActive = true
-        separatorEmailView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        separatorEmailView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: layoutRatio.loginSeparatorEmailLabelTopAnchor).isActive = true
+        separatorEmailView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: layoutRatio.loginSeparatorEmailLabelWidthAnchor).isActive = true
+        separatorEmailView.heightAnchor.constraint(equalToConstant: layoutRatio.loginSeparatorEmailLabelHeightAnchor).isActive = true
     }
     
     func setupPasswordLabel() {
         passwordLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        passwordLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 92).isActive = true
-        passwordLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        passwordLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
+        passwordLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: layoutRatio.loginPasswordLabelTopAnchor).isActive = true
+        passwordLabel.widthAnchor.constraint(equalToConstant: layoutRatio.loginPasswordLabelWidthAnchor).isActive = true
+        passwordLabel.heightAnchor.constraint(equalToConstant: layoutRatio.loginPasswordLabelHeightAnchor).isActive = true
     }
     
     func setupPasswordText() {
         passwordText.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        passwordText.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 123).isActive = true
-        passwordText.widthAnchor.constraint(equalToConstant: 162).isActive = true
-        passwordTextHeightAnchor = passwordText.heightAnchor.constraint(equalToConstant: 14)
+        passwordText.topAnchor.constraint(equalTo: containerView.topAnchor, constant: layoutRatio.loginPasswordTextTopAnchor).isActive = true
+        passwordText.widthAnchor.constraint(equalToConstant: layoutRatio.loginPasswordTextWidthAnchor).isActive = true
+        passwordTextHeightAnchor = passwordText.heightAnchor.constraint(equalToConstant: layoutRatio.loginPasswordTextHeightAnchor)
         passwordTextHeightAnchor?.isActive = true
     }
     
     func setupSeparatorPassword() {
         separatorPasswordView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        separatorPasswordView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 148).isActive = true
-        separatorPasswordView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -96).isActive = true
+        separatorPasswordView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: layoutRatio.loginSeparatorPasswordLabelTopAnchor).isActive = true
+        separatorPasswordView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: layoutRatio.loginSeparatorPasswordLabelWidthAnchor).isActive = true
         separatorPasswordView.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
     func setupContainerView() {
         containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 308).isActive = true
-        containerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -96).isActive = true
-        containerViewHeightAnchor = containerView.heightAnchor.constraint(equalToConstant: 150)
+        containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: layoutRatio.loginContainerViewTopAnchor).isActive = true
+        containerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: layoutRatio.loginContainerViewWidthAnchor).isActive = true
+        containerViewHeightAnchor = containerView.heightAnchor.constraint(equalToConstant: layoutRatio.loginContainerViewHeightAnchor)
         containerViewHeightAnchor?.isActive = true
         
         view.addSubview(emailLabel)
@@ -302,9 +302,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     
     func setupYesView() {
         yesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        yesButton.topAnchor.constraint(equalTo: separatorPasswordView.topAnchor, constant: 52).isActive = true
-        yesButton.widthAnchor.constraint(equalToConstant: 46).isActive = true
-        yesButton.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        yesButton.topAnchor.constraint(equalTo: separatorPasswordView.topAnchor, constant: layoutRatio.loginYesViewTopAnchor).isActive = true
+        yesButton.widthAnchor.constraint(equalToConstant: layoutRatio.loginYesViewWidthAnchor).isActive = true
+        yesButton.heightAnchor.constraint(equalToConstant: layoutRatio.loginYesViewHeightAnchor).isActive = true
     }
     
     // MARK: Google view
@@ -318,26 +318,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         
         googleButton.centerXAnchor.constraint(equalTo: googleView.centerXAnchor).isActive = true
         googleButton.centerYAnchor.constraint(equalTo: googleView.centerYAnchor).isActive = true
-        googleButton.widthAnchor.constraint(equalTo: googleView.widthAnchor, constant: -184).isActive = true
-        googleButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        googleButton.widthAnchor.constraint(equalTo: googleView.widthAnchor, constant: layoutRatio.loginGoogleButtonWidthAnchor).isActive = true
+        googleButton.heightAnchor.constraint(equalToConstant: layoutRatio.loginGoogleButtonHeightAnchor).isActive = true
     }
 
-//
-//    func setupGuestButton() {
-//        guestButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        guestButton.centerYAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: buttonHeight()).isActive = true
-//        guestButton.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-//        guestButton.heightAnchor.constraint(equalToConstant: buttonHeight()).isActive = true
-//    }
-//
+
+    func setupGuestButton() {
+        guestButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        guestButton.centerYAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: buttonHeight()).isActive = true
+        guestButton.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
+        guestButton.heightAnchor.constraint(equalToConstant: buttonHeight()).isActive = true
+    }
+
     
     
     // MARK: Container view for registration
     func setupBackgroundView() {
         backgroundView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        backgroundView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -60).isActive = true
-        backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 8/10).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: layoutRatio.loginBackgroundViewTopAnchor).isActive = true
+        backgroundView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: layoutRatio.loginBackgroundViewWidthAnchor).isActive = true
+        backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: layoutRatio.loginBackgroundViewHeightAnchor).isActive = true
     }
     
     private func googleLoginSetup() {
@@ -348,9 +348,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         GIDSignIn.sharedInstance().clientID = kClientID
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
-        
-        //setupGoogleButton()
-        //setupGuestButton()
     }
     
     deinit {
@@ -417,7 +414,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     }
     
     // MARK:- handlers
-     func handleGoogleSignIn() {
+    @objc func handleGoogleSignIn() {
         GIDSignIn.sharedInstance().signIn()
     }
     

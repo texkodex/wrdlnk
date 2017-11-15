@@ -151,11 +151,11 @@ extension WordList {
         return isEmpty() ? nil : info.wordBank[info.index]
     }
     
-    mutating func setSelectedRow(row: VowelRow?) {
+    mutating func setSelectedRow(row: Int?) {
         info.selectedRow = row
     }
     
-    func getSelectedRow() -> VowelRow? {
+    func getSelectedRow() -> Int? {
         return info.selectedRow
     }
     

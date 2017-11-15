@@ -12,6 +12,29 @@ import SpriteKit
 import GameplayKit
 
 extension SKLabelNode {
+    
+    func highlight(labelName: String) {
+        let name = "highlight_\(labelName)"
+        print("labelName for highlight \(name)")
+        for node in self.children {
+            if node.name == name {
+                node.alpha = CGFloat(1.0)
+                return
+            }
+        }
+    }
+    
+    func unhighlight(labelName: String) {
+        let name = "highlight_\(labelName)"
+        print("labelName for unhighlight \(name)")
+        for node in self.children {
+            if node.name == name {
+                node.alpha = CGFloat(0.0)
+                return
+            }
+        }
+    }
+    
     func vowelAvailable() -> Bool {
         print("vowelAvailable \(self.alpha)")
         return self.alpha > -0.1 &&  self.alpha < 0.1 ? true : false
@@ -25,7 +48,7 @@ extension SKLabelNode {
         return (label!.text != nil && self.text == label!.text) ? true : false
     }
     
-    func setLabelText(element: ViewElement?, words: Word, row: VowelRow?) -> String? {
+    func setLabelText(element: ViewElement?, words: Word, row: Int?) -> String? {
         print("Entering \(#file):: \(#function) at line \(#line)")
         
         guard let _ = row else { return nil }
@@ -33,16 +56,17 @@ extension SKLabelNode {
         switch element! {
         case .prefixMeaning:
             switch row! {
-            case .prefix:
+            case 1: //.prefix:
                 self.text = words.prefix
                 break
-            case .link:
+            case 2: //.link:
                 self.text = words.link
                 break
-            case .suffix:
+            case 3: //.suffix:
                 self.text = words.suffix
                 break
-                
+            default:
+                self.text =  nil
             }
             break
         default:

@@ -11,45 +11,59 @@ import GameplayKit
 import Social
 
 class AwardScene: BaseScene {
-    // MARK:- Nodes
-    override var backgroundNodeOne: SKNode? {
-        return childNode(withName: awardCountNodePath)!
-    }
+    // MARK:- Top nodes
+    let mark = ButtonNode(imageNamed: "pdf/mark")
     
-    override var backgroundNodeTwo: SKNode? {
-        return childNode(withName: socialNodePath)!
-    }
+    // MARK:- Top
+    let base = SKSpriteNode(imageNamed: "pdf/base")
     
     // MARK:- ButtonNode
-    var shareButton: ButtonNode? {
-        return backgroundNodeTwo?.childNode(withName: ButtonIdentifier.shareSwitch.rawValue) as? ButtonNode
-    }
+    var shareButton = ButtonNode(imageNamed: "pdf/share")
+    
+    var awardGoldAccuracy = SKSpriteNode(imageNamed: "pdf/award")
+    
+    var awardSilverAccuracy = SKSpriteNode(imageNamed: "pdf/award")
+    
+    var awardBronzeAccuracy = SKSpriteNode(imageNamed: "pdf/award")
+    
+    var awardGoldTime = SKSpriteNode(imageNamed: "pdf/award")
+    
+    var awardSilverTime = SKSpriteNode(imageNamed: "pdf/award")
+    
+    var awardBronzeTime = SKSpriteNode(imageNamed: "pdf/award")
     
     // MARK:- SKLabelNode
-    var accuracyGoldCountLabel: SKLabelNode? {
-        return backgroundNodeOne?.childNode(withName: accuracyGoldCountNodePath) as? SKLabelNode
-    }
+    let  awardTitleLabel = SKLabelNode(text: "WrdLnk Award")
+    let  awardTitleDescriptionLabel = SKLabelNode(text: "Using default list")
+    let  accuracyTitleLabel = SKLabelNode(text: "Accuracy")
+    let  timeTitleLabel = SKLabelNode(text: "Speed")
     
-    var accuracySilverCountLabel: SKLabelNode? {
-        return backgroundNodeOne?.childNode(withName: accuracySilverCountNodePath) as? SKLabelNode
-    }
+    let  accuracyGoldDescriptionLabel = SKLabelNode(text: "Gold")
     
-    var accuracyBronzeCountLabel: SKLabelNode? {
-        return backgroundNodeOne?.childNode(withName: accuracyBronzeCountNodePath) as? SKLabelNode
-    }
+    let accuracySilverDescriptionLabel = SKLabelNode(text: "Silver")
+    
+    let accuracyBronzeDescriptionLabel = SKLabelNode(text: "Bronze")
+    
+    let timeGoldDescriptionLabel = SKLabelNode(text: "Gold")
+    
+    let timeSilverDescriptionLabel = SKLabelNode(text: "Silver")
+    
+    let timeBronzeDescriptionLabel = SKLabelNode(text: "Bronze")
+    
+    let accuracyGoldCountLabel = SKLabelNode(text: "0")
+    
+    let accuracySilverCountLabel = SKLabelNode(text: "0")
+    
+    let accuracyBronzeCountLabel = SKLabelNode(text: "0")
 
-    var timeGoldCountLabel: SKLabelNode? {
-        return backgroundNodeOne?.childNode(withName: timeGoldCountNodePath) as? SKLabelNode
-    }
+    let timeGoldCountLabel = SKLabelNode(text: "0")
     
-    var timeSilverCountLabel: SKLabelNode? {
-        return backgroundNodeOne?.childNode(withName: timeSilverCountNodePath) as? SKLabelNode
-    }
+    let timeSilverCountLabel = SKLabelNode(text: "0")
     
-    var timeBronzeCountLabel: SKLabelNode? {
-        return backgroundNodeOne?.childNode(withName: timeBronzeCountNodePath) as? SKLabelNode
-    }
+    let timeBronzeCountLabel = SKLabelNode(text: "0")
 
+    // MARK:- Varaiables
+    
     var maxNumberOfPlays:Int {
         get { return AppDefinition.defaults.integer(forKey: preferenceMaxNumberOfDataPlaysKey) }
     }
@@ -65,8 +79,6 @@ class AwardScene: BaseScene {
                     + AppDefinition.defaults.integer(forKey: preferenceAccuracyBronzeCountKey) > MinimumAwardLevelForSharing
         }
     }
-
-    var nodes = [SKNode]()
     
     var statData = StatData.sharedInstance
     
@@ -74,7 +86,6 @@ class AwardScene: BaseScene {
 
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
-        nodes.removeAll()
         self.removeFromParent()
         self.removeAllChildren()
         self.removeAllActions()
@@ -84,17 +95,150 @@ class AwardScene: BaseScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
-        resizeIfNeeded()
+        
+        let labelNode = self.scene?.childNode(withName: awardDescriptionLabelNodePath) as? SKLabelNode
+        labelNode?.text = AppDefinition.defaults.string(forKey: preferenceAwardDescriptionInfoKey)
+        
+        placeAssets()
+        
+        initializeButtons()
+        
+        AppTheme.instance.set(for: self)
         
         processScores()
     }
 
-    private func initializeScreenButtons() {
+    func placeAssets() {
+        
+        var position: CGPoint!
+        position = CGPoint(x: size.width * layoutRatio.markPositionSizeWidth, y: size.height * layoutRatio.markPositionSizeHeightFromTop)
+        var scaledWidth = size.width * layoutRatio.markWidthScale
+        var scaledHeight = size.height * layoutRatio.markHeightScale
+        
+        mark.name = "mark"
+        mark.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
+        
+        var buttonParam: SceneButtonParam =
+            SceneButtonParam(buttonNode: mark, spriteNodeName: "titleImage",
+                             position: position,
+                             defaultTexture: "pdf/mark", selectedTexture: "pdf/mark")
+        sceneButtonSetup(param: buttonParam)
+        
+        base.name = layoutRatio.baseName
+        base.scale(to: CGSize(width: size.width * layoutRatio.baseScaleWidth, height: size.height * layoutRatio.baseScaleHeight))
+        base.anchorPoint = CGPoint(x: layoutRatio.baseXAnchorPoint, y: layoutRatio.baseYAnchorPoiint)
+        base.position = CGPoint(x: size.width * layoutRatio.basePositionSizeWidth, y: size.height * layoutRatio.basePositionSizeHeight)
+        base.zPosition = layoutRatio.baseZPosition
+        base.isHidden = true
+        addChild(base)
+ 
+        var yPos = base.frame.maxY + base.frame.size.height * -layoutRatio.labelVerticalSpacing
+        
+        setupAccuracyAward(yPos: &yPos)
+        
+        yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
+        
+        setupSpeedAward(yPos: &yPos)
+        
+        // Share button positioning
+        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
+        position.x = 0
+        
+        scaledWidth = size.width * layoutRatio.buttonSettingsWidthScale
+        scaledHeight = size.height * layoutRatio.buttonSettingsHeightScale
+        shareButton.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
+        buttonParam =
+            SceneButtonParam(buttonNode: shareButton, spriteNodeName: "ShareSwitch",
+                             position: position,
+                             defaultTexture: "pdf/share", selectedTexture: "pdf/share")
+        sceneButtonSetup(param: buttonParam)
+    }
+    
+    func setupAccuracyAward(yPos: inout CGFloat ) {
+        // Accuracy Title label
+        let xPos = base.frame.minX + base.frame.width * 0.5
+        
+        var labelParam:SceneLabelParam = SceneLabelParam(labelNode: awardTitleLabel, labelNodeName: "awardTitleLabel", position: CGPoint(x: xPos, y: yPos), fontSize: 32.0)
+        sceneLabelSetup(param: labelParam)
+        
+        yPos = yPos + base.frame.size.height * -layoutRatio.labelVerticalSpacing
+        labelParam = SceneLabelParam(labelNode: awardTitleDescriptionLabel, labelNodeName: "awardTitleDescriptionLabel", position: CGPoint(x: xPos, y: yPos))
+        sceneLabelSetup(param: labelParam)
+        
+        yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
+        labelParam = SceneLabelParam(labelNode: accuracyTitleLabel, labelNodeName: "accuracyTitleLabel", position: CGPoint(x: xPos, y: yPos), fontSize: 26.0)
+        sceneLabelSetup(param: labelParam)
+        
+        // Accuracy Award
+        let xadjust = base.frame.minX + base.frame.size.height * layoutRatio.labelNodeHorizontalIndent
+        yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
+        
+        
+        var param:SceneSpriteLabelLabelParam = SceneSpriteLabelLabelParam(spriteNode: awardGoldAccuracy, spriteNodeName: "awardGoldAccuracy",
+                                                                          labelNode: accuracyGoldDescriptionLabel, labelNodeName: "accuracyGoldDescriptionLabel",
+                                                                          labelNode2: accuracyGoldCountLabel, labelNodeName2: "accuracyGoldCountLabel",
+                                                                          position: CGPoint(x: xadjust, y: yPos),
+                                                                          frame: base.frame)
+        sceneSpriteLabelLabelSetup(param: param)
+        
+        yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
+        param = SceneSpriteLabelLabelParam(spriteNode: awardSilverAccuracy, spriteNodeName: "awardSilverAccuracy",
+                                           labelNode: accuracySilverDescriptionLabel, labelNodeName: "accuracySilverDescriptionLabel",
+                                           labelNode2: accuracySilverCountLabel, labelNodeName2: "accuracySilverCountLabel",
+                                           position: CGPoint(x: xadjust, y: yPos),
+                                           frame: base.frame)
+        sceneSpriteLabelLabelSetup(param: param)
+        
+        yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
+        param = SceneSpriteLabelLabelParam(spriteNode: awardBronzeAccuracy, spriteNodeName: "awardBronzeAccuracy",
+                                           labelNode: accuracyBronzeDescriptionLabel, labelNodeName: "accuracyBronzeDescriptionLabel",
+                                           labelNode2: accuracyBronzeCountLabel, labelNodeName2: "accuracyBronzeCountLabel",
+                                           position: CGPoint(x: xadjust, y: yPos), frame: base.frame)
+        sceneSpriteLabelLabelSetup(param: param)
+    }
+    
+    func setupSpeedAward(yPos: inout CGFloat) {
+        
+        yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
+        let xPos = base.frame.minX + base.frame.width * 0.5
+        let labelParam = SceneLabelParam(labelNode: timeTitleLabel, labelNodeName: "timeTitleLabel", position: CGPoint(x: xPos, y: yPos), fontSize: 26.0)
+        sceneLabelSetup(param: labelParam)
+        
+        // Time Award
+        let xadjust = base.frame.minX + base.frame.size.height * layoutRatio.labelNodeHorizontalIndent
+        yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
+        
+        var param:SceneSpriteLabelLabelParam = SceneSpriteLabelLabelParam(spriteNode: awardGoldTime, spriteNodeName: "awardGoldTime",
+                                                                          labelNode: timeGoldDescriptionLabel, labelNodeName: "timeGoldDescriptionLabel",
+                                                                          labelNode2: timeGoldCountLabel, labelNodeName2: "timeGoldCountLabel",
+                                                                          position: CGPoint(x: xadjust, y: yPos),
+                                                                          frame: base.frame)
+        sceneSpriteLabelLabelSetup(param: param)
+        
+        yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
+        param = SceneSpriteLabelLabelParam(spriteNode: awardSilverTime, spriteNodeName: "awardSilverTime",
+                                           labelNode: timeSilverDescriptionLabel, labelNodeName: "timeSilverDescriptionLabel",
+                                           labelNode2: timeSilverCountLabel, labelNodeName2: "timeSilverCountLabel",
+                                           position: CGPoint(x: xadjust, y: yPos),
+                                           frame: base.frame)
+        sceneSpriteLabelLabelSetup(param: param)
+        
+        yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
+        param = SceneSpriteLabelLabelParam(spriteNode: awardBronzeTime, spriteNodeName: "awardBronzeTime",
+                                           labelNode: timeBronzeDescriptionLabel, labelNodeName: "timeBronzeDescriptionLabel",
+                                           labelNode2: timeBronzeCountLabel, labelNodeName2: "timeBronzeCountLabel",
+                                           position: CGPoint(x: xadjust, y: yPos), frame: base.frame)
+        sceneSpriteLabelLabelSetup(param: param)
+    }
+    
+    private func initializeButtons() {
         if minimumAwardLevelForSharing {
             enableButton(button: shareButton)
         } else {
             disableButton(button: shareButton)
         }
+        
+        enableButton(button: mark)
     }
     
     private func processScores() {
@@ -103,18 +247,7 @@ class AwardScene: BaseScene {
         }
         processTimeScores()
     }
-    
-    override func sceneDidLoad() {
-        super.sceneDidLoad()
-        print("Entering \(#file):: \(#function) at line \(#line)")        
-        let labelNode = self.scene?.childNode(withName: awardDescriptionLabelNodePath) as? SKLabelNode
-        labelNode?.text = AppDefinition.defaults.string(forKey: preferenceAwardDescriptionInfoKey)
-
-        initializeScreenButtons()
-        
-        AppTheme.instance.set(for: self)
-    }
-    
+ 
     override func update(_ currentTime: TimeInterval) {
         let state = AppDefinition.defaults.bool(forKey: preferenceShareSocialEnabledKey)
         if state && minimumAwardLevelForSharing {
@@ -174,9 +307,9 @@ class AwardScene: BaseScene {
             AppDefinition.defaults.set(silverCount, forKey: preferenceAccuracySilverCountKey)
             AppDefinition.defaults.set(bronzeCount, forKey: preferenceAccuracyBronzeCountKey)
         }
-        accuracyGoldCountLabel?.text = "\(goldCount)"
-        accuracySilverCountLabel?.text = "\(silverCount)"
-        accuracyBronzeCountLabel?.text = "\(bronzeCount)"
+        accuracyGoldCountLabel.text = "\(goldCount)"
+        accuracySilverCountLabel.text = "\(silverCount)"
+        accuracyBronzeCountLabel.text = "\(bronzeCount)"
     }
     
     func processTimeScores() {
@@ -235,9 +368,9 @@ class AwardScene: BaseScene {
             AppDefinition.defaults.set(bronzeCount, forKey: preferenceTimeBronzeCountKey)
         }
         
-        timeGoldCountLabel?.text = "\(goldCount)"
-        timeSilverCountLabel?.text = "\(silverCount)"
-        timeBronzeCountLabel?.text = "\(bronzeCount)"
+        timeGoldCountLabel.text = "\(goldCount)"
+        timeSilverCountLabel.text = "\(silverCount)"
+        timeBronzeCountLabel.text = "\(bronzeCount)"
     }
     
     func actionButton() {

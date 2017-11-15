@@ -7,17 +7,69 @@
 //
 import SpriteKit
 
+struct BoardTileParam {
+    let textureName = "pdf/tile"
+    let textureBlueRedName = "pdf/tile_blue_red"
+    let textureGreenRedName = "pdf/tile_green_red"
+    let textureBlueBlackName = "pdf/tile_blue_black"
+    let textureGreenBlackName = "pdf/tile_green_black"
+    
+    let boardTileNameTemplate = "board_tile_%@_%@"
+    let boardLetterNameTemplate = "board_letter_%@"
+    var row: Int!
+    var column: Int!
+    var position: CGPoint!
+    var xPosAdjustment: CGFloat!
+    var zPosition: CGFloat!
+    var tileWidth: CGFloat!
+    var tileHeight: CGFloat!
+    var currentWord: String!
+    var currentIndex: Int!
+    var fontSize: CGFloat!
+    var fontName: String!
+    var fontColor: UIColor!
+    
+    init() {}
+    
+    init(row: Int, column :Int, position: CGPoint,
+         xPosAdjustment: CGFloat, zPosition: CGFloat,
+         tileWidth: CGFloat, tileHeight: CGFloat,
+         currentWord: String, currentIndex: Int,
+         fontSize: CGFloat, fontName: String, fontColor: UIColor = .red) {
+        self.row = row
+        self.column = column
+        self.position = position
+        self.xPosAdjustment = xPosAdjustment
+        self.zPosition = zPosition
+        self.tileWidth = tileWidth
+        self.tileHeight = tileHeight
+        self.currentWord = currentWord
+        self.currentIndex = currentIndex
+        
+        self.fontSize = fontSize
+        self.fontName = fontName
+        self.fontColor = fontColor
+    }
+}
+
 // Ratios based on iPhone 8 Plus with:
 // Width = 414 and Height = 736
 struct LayoutRatio {
     
+    let defaultScreenWidth = CGFloat(414.0)
+    let defaultScreenHeight = CGFloat(736.0)
     let screenWidth = CGFloat(UIScreen.main.bounds.width)
     let screenHeight = CGFloat(UIScreen.main.bounds.height)
+    
+    let currentWidthScaleFactor = CGFloat(UIScreen.main.bounds.width / 414.0)
+    let currentHeightScaleFactor = CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let defaultFontSize = CGFloat(26.0)
     
     // For mark
     let markName = "mark"
     let markWidthScale = CGFloat(0.157)
-    let makeHeightScale = CGFloat(0.08152)
+    let markHeightScale = CGFloat(0.08152)
     let markXAnchorPoint = CGFloat(0.5)
     let markYAnchorPoiint = CGFloat(1.0)
     // mark has anchorPoint = CGPoint(x: 0.5, y: 1.0)
@@ -31,6 +83,7 @@ struct LayoutRatio {
     let baseYAnchorPoiint = CGFloat(1.0)
     let baseScaleWidth = CGFloat(0.7874)
     let baseScaleHeight = CGFloat(0.581)
+    let baseScaleHeightLarge = CGFloat(0.8581)
     let baseScaleHeightWithSixRows = CGFloat(0.5042)
     let basePositionSizeWidth = CGFloat(0.0)
     let basePositionSizeHeight = CGFloat(0.2962)
@@ -74,7 +127,139 @@ struct LayoutRatio {
     let buttonSettingsWidthScale = CGFloat(0.0628)
     let buttonSettingsHeightScale = CGFloat(0.0353)
     let buttonGraphWidthScale = CGFloat(0.0628)
-    let buttonGraphHeightScale = CGFloat(0.07)
+    let buttonGraphHeightScale = CGFloat(0.0353)
+    
+    // Game Scene Score counter and Timer display
+    let gameScoreName="gamescore"
+    let indentForScoreLabelFromLeftSideEdge = CGFloat(0.16908)
+    let indentForScoreLabelFromTopEdge = CGFloat(0.2038)
+    
+    let gameTimerName="gametimer"
+    let indentForTimerLabelFromRightSideEdge = CGFloat(0.3019)
+    let indentForTimerLabelFromTopEdge = CGFloat(0.2038)
+    
+    // Award Screen
+    
+    // Distance between horizontal labels
+    let labelAwardVerticalSpacing = CGFloat(0.085)
+    
+    // Login Screen
+    let viewCornerRadius = CGFloat(4.0)
+    
+    let errorLabelFontSize = CGFloat(14.0)
+    
+    let wrdlnkLabelFontSize = CGFloat(25.0)
+    
+    let guestButtonFontSize = CGFloat(16.0)
+    
+    let emailLabelFontSize = CGFloat(13.0)
+    
+    let emailTextFontSize = CGFloat(14.0)
+    
+    let passwordLabelFontSize = CGFloat(13.0)
+    
+    let passwordTextFontSize = CGFloat(14.0)
+    
+    let errorLabelHeight = CGFloat(20.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginMarkTopAnchorErrorView = CGFloat(40.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginMarkWidthAnchor = CGFloat(87.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginMarkHeightAnchor = CGFloat(80.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginWrdlnkLabelTopAnchor = CGFloat(115.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginWrdlnkLabelWidthAnchor = CGFloat(126.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginWrdlnkLabelHeightAnchor = CGFloat(25.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginEmailLabelTopAnchor = CGFloat(2.0)
+    
+    let loginEmailLabelWidthAnchor = CGFloat(120.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginEmailLabelHeightAnchor = CGFloat(13.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginEmailTextTopAnchor = CGFloat(25.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginEmailTextWidthAnchor = CGFloat(200.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginEmailTextHeightAnchor = CGFloat(14.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginSeparatorEmailLabelTopAnchor = CGFloat(58.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginSeparatorEmailLabelWidthAnchor = CGFloat(-96.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginSeparatorEmailLabelHeightAnchor = CGFloat(1.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginPasswordLabelTopAnchor = CGFloat(92.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginPasswordLabelWidthAnchor = CGFloat(120.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginPasswordLabelHeightAnchor = CGFloat(13.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginPasswordTextTopAnchor = CGFloat(123.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginPasswordTextWidthAnchor = CGFloat(162.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginPasswordTextHeightAnchor = CGFloat(14.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginSeparatorPasswordLabelTopAnchor = CGFloat(148.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginSeparatorPasswordLabelWidthAnchor = CGFloat(-96.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginSeparatorPasswordLabelHeightAnchor = CGFloat(1.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginContainerViewTopAnchor = CGFloat(308.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginContainerViewWidthAnchor = CGFloat(-96.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginContainerViewHeightAnchor = CGFloat(150.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginYesViewTopAnchor = CGFloat(52.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginYesViewWidthAnchor = CGFloat(46.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginYesViewHeightAnchor = CGFloat(46.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginBackgroundViewTopAnchor = CGFloat(100.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginBackgroundViewWidthAnchor = CGFloat(-60.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginBackgroundViewHeightAnchor = CGFloat(0.8)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginGoogleViewTopAnchor = CGFloat(52.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginGoogleViewWidthAnchor = CGFloat(46.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginGoogleViewHeightAnchor = CGFloat(46.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginGoogleButtonWidthAnchor = CGFloat(-184.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    
+    let loginGoogleButtonHeightAnchor = CGFloat(25.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    
+    let loginViewErrorHeightRatio = CGFloat(0.081522)
+    
+    let loginViewHeightRatio = CGFloat(0.179348)
+    
+    // Overlay graph scene
+    let graphTopIndentSize = CGFloat(0.201)
+    
+    let graphLeftOrRightIndent = CGFloat(0.10386)
+    
+    let graphTopWidthIndent = CGFloat(0.2126)
+    
+    let graphWidthSize = CGFloat(0.7899)
+    
+    let graphHeightSize = CGFloat(0.5679)
+    
+    let graphTopHeightIndent = CGFloat(0.4334)
+    
+    let graphBottomHeightIndent = CGFloat(0.23097)
+    
+    let graphCornerRadius = CGFloat(12.0) *
+        CGFloat(UIScreen.main.bounds.height / 736.0)
+    
 }
 
 var layoutRatio: LayoutRatio = LayoutRatio()
@@ -111,6 +296,39 @@ struct SceneNodeParam {
     }
 }
 
+struct SceneSpriteLabelLabelParam {
+    var spriteNode: SKSpriteNode!
+    var spriteNodeName: String!
+    var labelNode: SKLabelNode!
+    var labelNodeName: String!
+    var labelNode2: SKLabelNode!
+    var labelNodeName2: String!
+    var position: CGPoint!
+    var zposition: CGFloat
+    var anchor: CGPoint!
+    var frame: CGRect!
+    var fontSize: CGFloat!
+    
+    init(spriteNode: SKSpriteNode, spriteNodeName: String,
+         labelNode: SKLabelNode, labelNodeName: String,
+         labelNode2: SKLabelNode, labelNodeName2: String,
+         position: CGPoint, zposition: CGFloat = 10,
+         anchor: CGPoint =  CGPoint(x: 0.5, y: 1.0), frame: CGRect,
+         fontSize: CGFloat = 20.0) {
+        
+        self.spriteNode = spriteNode
+        self.spriteNodeName = spriteNodeName
+        self.labelNode = labelNode
+        self.labelNodeName = labelNodeName
+        self.labelNode2 = labelNode2
+        self.labelNodeName2 = labelNodeName2
+        self.position = position
+        self.zposition = zposition
+        self.anchor = anchor
+        self.frame = frame
+        self.fontSize = fontSize
+    }
+}
 struct SceneButtonParam {
     var buttonNode: ButtonNode!
     var spriteNodeName: String!
@@ -125,7 +343,7 @@ struct SceneButtonParam {
     init(buttonNode: ButtonNode, spriteNodeName: String,
          position: CGPoint, zposition: CGFloat = 10,
          anchor: CGPoint =  CGPoint(x: 0.5, y: 1.0),
-         defaultTexture: String, selectedTexture: String, fontSize: CGFloat = 20.0) {
+         defaultTexture: String, selectedTexture: String, fontSize: CGFloat = 26.0) {
         self.buttonNode = buttonNode
         self.spriteNodeName = spriteNodeName
         self.position = position
@@ -159,10 +377,10 @@ struct GraphParam {
     var zeroPos: CGPoint!
     var gridFrame: CGRect!
     
-    let graphSpaceRatioOfGrid = CGFloat(0.1227)
-    let graphWidthRatioOfGrid = CGFloat(0.0491)
+    let graphSpaceRatioOfGrid = CGFloat(0.1227)  * layoutRatio.currentWidthScaleFactor
+    let graphWidthRatioOfGrid = CGFloat(0.0491)   * layoutRatio.currentWidthScaleFactor
     let maxGraphHeightRatioInGrid = CGFloat(0.735)
-    let maxNumberOfGraphsInGrid = Int( 1 / 0.1227) - 2
+    let maxNumberOfGraphsInGrid = Int(( 1 / 0.1227) * layoutRatio.currentWidthScaleFactor)
     let cornerRadiusRatioToWidth = CGFloat(0.25)
     
     init() {
@@ -183,7 +401,7 @@ extension BaseScene {
         param.labelNode.name = param.labelNodeName
         param.labelNode.position = param.position
         param.labelNode.fontName = UIFont.systemFont(ofSize: param.fontSize).fontName
-        param.labelNode.fontSize = param.fontSize
+        param.labelNode.fontSize = param.fontSize * layoutRatio.currentHeightScaleFactor
         param.labelNode.fontColor = foregroundColor
         param.labelNode.verticalAlignmentMode = .top
         param.labelNode.horizontalAlignmentMode =  .left
@@ -230,11 +448,40 @@ extension BaseScene {
         param.labelNode.name = param.labelNodeName
         param.labelNode.position = param.position
         param.labelNode.fontName = UIFont.systemFont(ofSize: param.fontSize).fontName
-        param.labelNode.fontSize = param.fontSize
+        param.labelNode.fontSize = param.fontSize * layoutRatio.currentHeightScaleFactor
         param.labelNode.fontColor = foregroundColor
         param.labelNode.verticalAlignmentMode = .bottom
         param.labelNode.horizontalAlignmentMode =  .center
         param.labelNode.zPosition = param.zposition
         self.addChild(param.labelNode)
+    }
+    
+    func sceneSpriteLabelLabelSetup(param: SceneSpriteLabelLabelParam) {
+        param.spriteNode.name = param.spriteNodeName
+        param.spriteNode.position = param.position
+        param.spriteNode.anchorPoint = param.anchor // CGPoint(x: 0.5, y: 1.0)
+        param.spriteNode.zPosition = param.zposition // 10
+        self.addChild(param.spriteNode)
+        
+        param.labelNode.name = param.labelNodeName
+        param.labelNode.position = CGPoint(x: param.spriteNode.position.x + param.frame.width * 0.6, y: 0)
+        param.labelNode.fontName = UIFont.systemFont(ofSize: param.fontSize).fontName
+        param.labelNode.fontSize = param.fontSize * layoutRatio.currentHeightScaleFactor
+        param.labelNode.fontColor = foregroundColor
+        param.labelNode.verticalAlignmentMode = .top
+        param.labelNode.horizontalAlignmentMode =  .left
+        param.labelNode.zPosition = param.zposition
+        param.spriteNode.addChild(param.labelNode)
+        
+        param.labelNode2.name = param.labelNodeName2
+        param.labelNode2.position = CGPoint(x: param.labelNode.position.x + param.frame.width * 0.25, y: 0)
+        param.labelNode2.fontName = UIFont.systemFont(ofSize: param.fontSize).fontName
+        param.labelNode2.fontSize = param.fontSize * layoutRatio.currentHeightScaleFactor
+        param.labelNode2.fontColor = foregroundColor
+        param.labelNode2.verticalAlignmentMode = .top
+        param.labelNode2.horizontalAlignmentMode =  .left
+        param.labelNode2.zPosition = param.zposition
+        param.labelNode.addChild(param.labelNode2)
+        
     }
 }

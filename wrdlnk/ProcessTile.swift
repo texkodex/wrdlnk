@@ -10,45 +10,45 @@ import SpriteKit
 
 struct ProcessTile {
     public internal(set) var wordList: WordList
-    public internal(set) var sprite: SKSpriteNode?
-    public internal(set) var spriteNodeList: [SKSpriteNode]
+    public internal(set) var label: SKLabelNode?
+    public internal(set) var spriteNodeList: [SKLabelNode]
     public internal(set) var name: String
-    init(wordList: WordList, sprite: SKSpriteNode?, spriteNodeList: [SKSpriteNode], name: String) {
+    init(wordList: WordList, label: SKLabelNode?, spriteNodeList: [SKLabelNode], name: String) {
         self.wordList = wordList
-        self.sprite = sprite
+        self.label = label
         self.spriteNodeList = spriteNodeList
         self.name = name
     }
 }
 
 extension ProcessTile {
-    func process(spriteNodeList: inout [SKSpriteNode]) {
-        guard let spriteNode = sprite, let spriteNodeName = spriteNode.name,
-            let parentName = sprite?.parent?.name else {
+    func process(spriteNodeList: inout [SKLabelNode]) {
+        guard let labelNode = label, let labelNodeName = labelNode.name,
+            let parentName = label?.parent?.name else {
                 return
         }
         
-        if let index = uniqueSpriteList(name: parentName, spriteNodeList: spriteNodeList) {
-            let lastSprite = spriteNodeList.remove(at: index)
-            lastSprite.unhighlight(spriteName: lastSprite.name!)
+        if let index = uniqueLabelList(name: parentName, spriteNodeList: spriteNodeList) {
+            let lastLabel = spriteNodeList.remove(at: index)
+            lastLabel.unhighlight(labelName: lastLabel.name!)
         }
         
-        if (inMatchList(list: spriteNodeList + [spriteNode])) { return }
+        if (inMatchList(list: spriteNodeList + [labelNode])) { return }
         
-        spriteNode.highlight(spriteName: spriteNodeName)
+        labelNode.highlight(labelName: labelNodeName)
     }
     
-    func inMatchList(list: [SKSpriteNode]) -> Bool {
+    func inMatchList(list: [SKLabelNode]) -> Bool {
         
         return false
     }
     
-    func uniqueSpriteList(name: String, spriteNodeList: [SKSpriteNode]) -> Int? {
+    func uniqueLabelList(name: String, spriteNodeList: [SKLabelNode]) -> Int? {
         
         return 0
     }
     
-    func checkForSpriteMatch(spriteList: inout [SKSpriteNode]) {
+    func checkForLabelMatch(labelList: inout [SKLabelNode]) {
         
     }
     
@@ -56,20 +56,20 @@ extension ProcessTile {
         
     }
     
-    func processTileSprite(sprite: SKSpriteNode?, wordlist: WordList, spriteNodeList: inout [SKSpriteNode], handler:(String,WordList)->Void) {
-        guard let spriteNode = sprite, let spriteNodeName = spriteNode.name,
-            let parentName = sprite?.parent?.name else {
+    func processTileSprite(label: SKLabelNode?, wordlist: WordList, spriteNodeList: inout [SKLabelNode], handler:(String,WordList)->Void) {
+        guard let labelNode = label, let labelNodeName = labelNode.name,
+            let parentName = label?.parent?.name else {
                 return
         }
-        if let index = uniqueSpriteList(name: parentName, spriteNodeList: spriteNodeList) {
-            let lastSprite = spriteNodeList.remove(at: index)
-            lastSprite.unhighlight(spriteName: lastSprite.name!)
+        if let index = uniqueLabelList(name: parentName, spriteNodeList: spriteNodeList) {
+            let lastLabel = spriteNodeList.remove(at: index)
+            lastLabel.unhighlight(labelName: lastLabel.name!)
         }
-        if (inMatchList(list: spriteNodeList + [spriteNode])) { return }
-        spriteNode.highlight(spriteName: spriteNodeName)
-        handler(spriteNodeName, wordlist)
-        spriteNodeList.append(spriteNode)
-        checkForSpriteMatch(spriteList: &spriteNodeList)
+        if (inMatchList(list: spriteNodeList + [labelNode])) { return }
+        labelNode.highlight(labelName: labelNodeName)
+        handler(labelNodeName, wordlist)
+        spriteNodeList.append(labelNode)
+        checkForLabelMatch(labelList: &spriteNodeList)
         showDefinitionButton()
     }
     

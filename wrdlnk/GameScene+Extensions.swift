@@ -41,16 +41,16 @@ extension GameScene {
             if timeMin  / 60 <= 9 { leadingZeroMin = "0" } else { leadingZeroMin = "" }
             if timesecond <= 9 { leadingZero = "0" } else { leadingZero = "" }
             
-            self.playerTimerLabel?.text = "Time [ \(leadingZeroMin)\(timeMin/60) : \(leadingZero)\(timesecond) ]"
+            self.playerTimerLabel.text = "Time [ \(leadingZeroMin)\(timeMin/60) : \(leadingZero)\(timesecond) ]"
         })
-        self.playerTimerLabel?.run(SKAction.repeatForever(SKAction.sequence([actionwait,actionrun])))
+        self.playerTimerLabel.run(SKAction.repeatForever(SKAction.sequence([actionwait,actionrun])))
     }
     
     private func countIndicator() {
         if  self.startTime > 0 { self.startTime -= 1 }
-        self.playerTimerLabel?.text = timerString()
-        if ((self.playerTimerLabel?.alpha)! < CGFloat(1.0)) {
-            self.playerTimerLabel?.alpha = 1
+        self.playerTimerLabel.text = timerString()
+        if ((self.playerTimerLabel.alpha) < CGFloat(1.0)) {
+            self.playerTimerLabel.alpha = 1
         }
     }
     

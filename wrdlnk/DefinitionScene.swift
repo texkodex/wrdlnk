@@ -46,7 +46,7 @@ class DefinitionScene: BaseScene {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
-        resizeIfNeeded()
+        
         setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
         AppTheme.instance.set(for: self)
     }

@@ -52,7 +52,7 @@ class MenuScene: BaseScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
         print("System font name: \(UIFont.systemFont(ofSize: 32).fontName)")
         placeAssets()
-        //resizeIfNeeded()
+        
         initializeButtons()
         setGameLevelTime()
         AppTheme.instance.set(for: self)
@@ -63,7 +63,7 @@ class MenuScene: BaseScene {
     func placeAssets() {
         mark.name = layoutRatio.markName
         let scaledWidth = size.width * layoutRatio.markWidthScale
-        let scaledHeight = size.height * layoutRatio.makeHeightScale
+        let scaledHeight = size.height * layoutRatio.markHeightScale
         mark.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
         mark.anchorPoint = CGPoint(x: layoutRatio.markXAnchorPoint, y: layoutRatio.markYAnchorPoiint)
         mark.position = CGPoint(x: size.width * layoutRatio.markPositionSizeWidth,

@@ -48,7 +48,7 @@ extension SKSpriteNode {
         for child in self.children {
             if (child.name?.hasPrefix(letterNodeName))! {
                 let label = child as? SKLabelNode
-                return label?.text?.characters.first
+                return label?.text?.first
             }
         }
         return nil

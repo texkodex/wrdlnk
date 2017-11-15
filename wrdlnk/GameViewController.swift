@@ -6,13 +6,14 @@
 //  Copyright © 2017 teknowsys. All rights reserved.
 //
 
+import SceneKit
 import UIKit
 import SpriteKit
 import GameplayKit
 import GoogleMobileAds
 
 class GameViewController: UIViewController, GADBannerViewDelegate {
-    
+   
     var bannerAdMob: GADBannerView!
     
     let bannerView: GADBannerView = {
@@ -49,8 +50,17 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         self.removeFromParentViewController()
     }
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let backgroundColor = self.view.backgroundColor
+        
+        self.view = SKView()
+        let skView = view as! SKView
+        self.view.backgroundColor = backgroundColor
+        
+        commonGameParam = CommonGameParam(skView: skView, controller: self)
         
         setImageView()
 

@@ -91,7 +91,7 @@ extension SKTileMapNode {
             guard let _ = mapNode.name?.hasPrefix(tileNodeName) else { continue }
             for child in mapNode.children {
                 guard let _ = child.name?.hasPrefix(letterNodeName) else { continue }
-                let labelChar = (child as! SKLabelNode).text?.characters.first
+                let labelChar = (child as! SKLabelNode).text?.first
                 let visible = (child as! SKLabelNode).alpha
                 return isFreeVowelCell(text: labelChar!, visible: visible)
             }
@@ -118,76 +118,9 @@ extension SKTileMapNode {
         return 0
     }
     
-    func tileColor(name: String = "board", vowel: Bool = false) -> UIColor {
-        let mode = currentMode()
-        if name == "board" {
-            switch mode {
-            case Mode.colorBlind:
-                return vowel ? lightGrayTile
-                    : darkGrayTile
-            case Mode.nightMode:
-                return vowel ? darkGrayTile
-                    : lightGrayTile
-            case Mode.pastel:
-                return vowel ? pastelBackgroundTile
-                    : pastelFontColor2
-            default:
-                return vowel ? greenTile : blueTile
-            }
-        } else {
-            switch mode {
-            case Mode.colorBlind:
-                return lightGrayTile
-            case Mode.nightMode:
-                return darkGrayTile
-            case Mode.pastel:
-                return pastelBackgroundTile
-            default:
-                return greenTile
-            }
-        }
-    }
-    
-    func tileFontColor(name: String = "board", vowel: Bool = false) -> UIColor {
-        let mode = currentMode()
-        if name == "board" {
-            switch mode {
-            case Mode.colorBlind:
-                return vowel ? UIColor.white
-                    : lightGrayTile
-            case Mode.nightMode:
-                return vowel ? UIColor.orange
-                    : whiteTile
-            case Mode.pastel:
-                return vowel ? pastelFontColor
-                    : whiteTile
-            default:
-                return vowel ? UIColor.red : UIColor.white
-            }
-        } else {
-            switch mode {
-            case Mode.colorBlind:
-                return UIColor.white
-            case Mode.nightMode:
-                return UIColor.orange
-            case Mode.pastel:
-                return pastelFontColor
-            default:
-                return UIColor.red
-            }
-        }
-    }
-    
-    func tileNodeColorClickable(color: UIColor) -> Bool {
-        return color == lightGrayTile
-            || color == darkGrayTile
-            || color == pastelBackgroundTile
-            || color == greenTile
-    }
-    
     // To place words in center of screen
     func placeWord(word: String, row: Int, adjust: Bool = false) {
-        for (index, letter) in word.characters.enumerated() {
+        for (index, letter) in word.enumerated() {
             let tileNode = self.childNode(withName: nodeName(node: self, col: index, row: row)) as! SKSpriteNode
             let condition = VowelCharacter(rawValue: letter)?.rawValue == letter
             tileNode.color = tileColor(vowel: condition)
@@ -233,17 +166,8 @@ extension SKTileMapNode {
         }
     }
     
-    private func getControlPadPathName() -> String {
-        switch currentMode() {
-        case Mode.pastel:
-            return Mode.pastel.rawValue + "/" + "ControlPad"
-        default:
-            return "ControlPad"
-        }
-    }
-    
     func addHighlightForSprite(spriteNode: SKSpriteNode) {
-        let texture = SKTexture(imageNamed: getControlPadPathName())
+        let texture = SKTexture(imageNamed: super.getControlPadPathName())
         let sprite = SKSpriteNode()
         sprite.name = "highlight_\((spriteNode.name)!)"
         sprite.alpha = CGFloat(0.0)
@@ -280,9 +204,9 @@ extension SKTileMapNode {
         return VowelCount(
             phrase: linkWord.prefix + phraseSeparator
                 + linkWord.link + phraseSeparator + linkWord.suffix,
-            prefix: linkWord.prefix.characters.lazy.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count,
-            link: linkWord.link.characters.lazy.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count,
-            suffix: linkWord.suffix.characters.lazy.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count)
+            prefix: linkWord.prefix.lazy.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count,
+            link: linkWord.link.lazy.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count,
+            suffix: linkWord.suffix.lazy.filter { VowelCharacter(rawValue: $0)?.rawValue == $0 }.count)
     }
     
     func clearWords() {
@@ -331,7 +255,7 @@ extension SKTileMapNode {
         for tile in self.children {
             for child in tile.children {
                 if (child.name?.hasPrefix(letterNodeName))! {
-                    let labelChar = (child as! SKLabelNode).text?.characters.first
+                    let labelChar = (child as! SKLabelNode).text?.first
                     let visible = (child as! SKLabelNode).alpha
                     return isFreeVowelCell(text: labelChar!, visible: visible)
                 }
@@ -416,7 +340,7 @@ extension SKTileMapNode {
         let textLabel = SKLabelNode(fontNamed: fontName)
         textLabel.zRotation = CGFloat.pi / 2
         if text != nil {
-            let components = text?.characters.split(separator: "|")
+            let components = text?.split(separator: "|")
             let firstPhrase = components?.dropLast(1).map(String.init).joined(separator: " ")
             textLabel.text = firstPhrase
         }

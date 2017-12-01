@@ -4,15 +4,15 @@
 <array>
 	<dict>
 		<key>page_icon1</key>
-		<string>apple-icon-76x76.png</string>
+		<string>pdf/mark</string>
 		<key>main_title_text</key>
-		<string>WELCOME TO WRDLNK</string>
+		<string>Welcome To WrdLnk</string>
 		<key>info_image_filename</key>
 		<string>wrdlnk_gamescene.png</string>
 		<key>sub_title1_text</key>
-		<string>IN WRDLNK YOUR CHALLENGE IS TO FIND THE RELATED WORDS IN A GRID.</string>
+		<string>In WrdLnK your challenge is to find the related words in a grid. Words join to make other words.</string>
 		<key>sub_title2_text</key>
-		<string>WORDS JOIN TO MAKE OTHER WORDS.</string>
+		<string></string>
 		<key>next_page_text</key>
 		<string>FIND OUT MORE &gt;</string>
 		<key>next_page_button</key>
@@ -20,15 +20,15 @@
 	</dict>
 	<dict>
 		<key>page_icon1</key>
-		<string>apple-icon-76x76.png</string>
+		<string>pdf/mark</string>
 		<key>info_image_filename</key>
 		<string>wrdlnk_gamestatus.png</string>
 		<key>main_title_text</key>
-		<string>TOUCH TO LINK WORD</string>
+		<string>Touch To Link Word</string>
 		<key>sub_title1_text</key>
-		<string>WHEN YOU KNOW A WORD JUST SELECT THE MISSING LETTER TO COMPLETE THE WORD.</string>
+		<string>When you know a word just select the missing letter to complete the word. The words are related in some way.</string>
 		<key>sub_title2_text</key>
-		<string>THE WORDS ARE RELATED IN SOME WAY.</string>
+		<string></string>
 		<key>next_page_text</key>
 		<string>NEXT &gt;</string>
 		<key>next_page_button</key>
@@ -36,15 +36,15 @@
 	</dict>
 	<dict>
 		<key>page_icon1</key>
-		<string>apple-icon-76x76.png</string>
+		<string>pdf/mark</string>
 		<key>main_title_text</key>
-		<string>MISSING LETTERS</string>
+		<string>Missing Letters</string>
 		<key>info_image_filename</key>
 		<string>wrdlnk_mainmenu_colorblind.png</string>
 		<key>sub_title1_text</key>
-		<string>COLLECT POINTS FOR ACCURACY OR SPEED.</string>
+		<string>Collect points for accuracy or speed. You can change your game scene.</string>
 		<key>sub_title2_text</key>
-		<string>YOU CAN CHANGE YOUR GAME SCENE.</string>
+		<string></string>
 		<key>next_page_text</key>
 		<string>NEXT &gt;</string>
 		<key>next_page_button</key>
@@ -52,17 +52,17 @@
 	</dict>
 	<dict>
 		<key>page_icon1</key>
-		<string>loveHeart.png</string>
+		<string>pdf/mark</string>
 		<key>main_title_text</key>
-		<string>A WAY TO PLAY</string>
+		<string>A Way To Play</string>
 		<key>info_image_filename</key>
 		<string>wrdlnk_settings_nightmode</string>
 		<key>sub_title1_text</key>
-		<string>YOU MAY ATTEMPT TO FIND THE MIDDLE WORD FIRST.</string>
+		<string>A small hint: attempt to find the middle word first. We hope you enjoy WrdLnk as much as we do.</string>
 		<key>sub_title2_text</key>
-		<string>WE HOPE YOU ENJOY WRDLNK AS MUCH AS WE DO.</string>
+		<string></string>
 		<key>next_page_text</key>
-		<string>ENTER Wrdlnk &gt;</string>
+		<string>Enter WrdLnk &gt;</string>
 		<key>next_page_button</key>
 		<string></string>
 	</dict>

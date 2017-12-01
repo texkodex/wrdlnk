@@ -18,7 +18,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     
     let bannerView: GADBannerView = {
         let _view = GADBannerView()
-        _view.backgroundColor = AppTheme.instance.modeBackgroundColor()
+        _view.backgroundColor = AppTheme.instance.backgroundColor()
         _view.adSize = kGADAdSizeBanner
         _view.layer.cornerRadius = 0
         _view.layer.masksToBounds = true

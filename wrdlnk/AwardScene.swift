@@ -18,23 +18,23 @@ class AwardScene: BaseScene {
     let base = SKSpriteNode(imageNamed: "pdf/base")
     
     // MARK:- ButtonNode
-    var shareButton = ButtonNode(imageNamed: "pdf/share")
+    let shareButton = ButtonNode(imageNamed: "pdf/share")
     
-    var awardGoldAccuracy = SKSpriteNode(imageNamed: "pdf/award")
+    let awardGoldAccuracy = SKSpriteNode(imageNamed: "pdf/link")
     
-    var awardSilverAccuracy = SKSpriteNode(imageNamed: "pdf/award")
+    let awardSilverAccuracy = SKSpriteNode(imageNamed: "pdf/link")
     
-    var awardBronzeAccuracy = SKSpriteNode(imageNamed: "pdf/award")
+    let awardBronzeAccuracy = SKSpriteNode(imageNamed: "pdf/link")
     
-    var awardGoldTime = SKSpriteNode(imageNamed: "pdf/award")
+    let awardGoldTime = SKSpriteNode(imageNamed: "pdf/link")
     
-    var awardSilverTime = SKSpriteNode(imageNamed: "pdf/award")
+    let awardSilverTime = SKSpriteNode(imageNamed: "pdf/link")
     
-    var awardBronzeTime = SKSpriteNode(imageNamed: "pdf/award")
+    let awardBronzeTime = SKSpriteNode(imageNamed: "pdf/link")
     
     // MARK:- SKLabelNode
     let  awardTitleLabel = SKLabelNode(text: "WrdLnk Award")
-    let  awardTitleDescriptionLabel = SKLabelNode(text: "Using default list")
+    let  awardTitleDescriptionLabel = SKLabelNode(text: "Using general list")
     let  accuracyTitleLabel = SKLabelNode(text: "Accuracy")
     let  timeTitleLabel = SKLabelNode(text: "Speed")
     
@@ -96,6 +96,8 @@ class AwardScene: BaseScene {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
         
+        self.name = "AwardScene"
+        
         let labelNode = self.scene?.childNode(withName: awardDescriptionLabelNodePath) as? SKLabelNode
         labelNode?.text = AppDefinition.defaults.string(forKey: preferenceAwardDescriptionInfoKey)
         
@@ -103,7 +105,7 @@ class AwardScene: BaseScene {
         
         initializeButtons()
         
-        AppTheme.instance.set(for: self)
+        AppTheme.instance.set(for: self, sceneType: "AwardScene")
         
         processScores()
     }
@@ -149,14 +151,14 @@ class AwardScene: BaseScene {
         shareButton.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
         buttonParam =
             SceneButtonParam(buttonNode: shareButton, spriteNodeName: "ShareSwitch",
-                             position: position,
+                             position: CGPoint(x: position.x, y: size.height * (layoutRatio.yAnchor - layoutRatio.indentForGameButtonFromTopEdge)),
                              defaultTexture: "pdf/share", selectedTexture: "pdf/share")
         sceneButtonSetup(param: buttonParam)
     }
     
     func setupAccuracyAward(yPos: inout CGFloat ) {
         // Accuracy Title label
-        let xPos = base.frame.minX + base.frame.width * 0.5
+        var xPos = base.frame.minX + base.frame.width * 0.5
         
         var labelParam:SceneLabelParam = SceneLabelParam(labelNode: awardTitleLabel, labelNodeName: "awardTitleLabel", position: CGPoint(x: xPos, y: yPos), fontSize: 32.0)
         sceneLabelSetup(param: labelParam)
@@ -166,6 +168,9 @@ class AwardScene: BaseScene {
         sceneLabelSetup(param: labelParam)
         
         yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
+        xPos = CGFloat(0)
+        accuracyTitleLabel.horizontalAlignmentMode = .center
+        accuracyTitleLabel.verticalAlignmentMode = .center
         labelParam = SceneLabelParam(labelNode: accuracyTitleLabel, labelNodeName: "accuracyTitleLabel", position: CGPoint(x: xPos, y: yPos), fontSize: 26.0)
         sceneLabelSetup(param: labelParam)
         
@@ -200,7 +205,9 @@ class AwardScene: BaseScene {
     func setupSpeedAward(yPos: inout CGFloat) {
         
         yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
-        let xPos = base.frame.minX + base.frame.width * 0.5
+        let xPos = CGFloat(0)
+        timeTitleLabel.horizontalAlignmentMode = .center
+        timeTitleLabel.verticalAlignmentMode = .center
         let labelParam = SceneLabelParam(labelNode: timeTitleLabel, labelNodeName: "timeTitleLabel", position: CGPoint(x: xPos, y: yPos), fontSize: 26.0)
         sceneLabelSetup(param: labelParam)
         
@@ -216,6 +223,7 @@ class AwardScene: BaseScene {
         sceneSpriteLabelLabelSetup(param: param)
         
         yPos = yPos + base.frame.size.height * -layoutRatio.labelAwardVerticalSpacing
+        
         param = SceneSpriteLabelLabelParam(spriteNode: awardSilverTime, spriteNodeName: "awardSilverTime",
                                            labelNode: timeSilverDescriptionLabel, labelNodeName: "timeSilverDescriptionLabel",
                                            labelNode2: timeSilverCountLabel, labelNodeName2: "timeSilverCountLabel",
@@ -232,7 +240,7 @@ class AwardScene: BaseScene {
     }
     
     private func initializeButtons() {
-        if minimumAwardLevelForSharing {
+        if false {
             enableButton(button: shareButton)
         } else {
             disableButton(button: shareButton)

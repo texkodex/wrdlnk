@@ -51,11 +51,12 @@ class MenuScene: BaseScene {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
         print("System font name: \(UIFont.systemFont(ofSize: 32).fontName)")
+        self.name = "MenuScene"
         placeAssets()
         
         initializeButtons()
         setGameLevelTime()
-        AppTheme.instance.set(for: self)
+        AppTheme.instance.set(for: self, sceneType: "SettingScene")
     }
     
     func  setGameLevelTime() { }
@@ -65,7 +66,7 @@ class MenuScene: BaseScene {
         let scaledWidth = size.width * layoutRatio.markWidthScale
         let scaledHeight = size.height * layoutRatio.markHeightScale
         mark.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
-        mark.anchorPoint = CGPoint(x: layoutRatio.markXAnchorPoint, y: layoutRatio.markYAnchorPoiint)
+        mark.anchorPoint = CGPoint(x: layoutRatio.markXAnchorPoint, y: layoutRatio.markYAnchorPoint)
         mark.position = CGPoint(x: size.width * layoutRatio.markPositionSizeWidth,
                                 y: size.height * layoutRatio.markPositionSizeHeightFromTop)
         mark.zPosition = layoutRatio.markZPosition
@@ -80,12 +81,16 @@ class MenuScene: BaseScene {
         
         let xadjust = base.frame.minX + base.frame.width * layoutRatio.labelNodeHorizontalIndent
         var position = CGPoint(x: xadjust, y: mark.position.y + size.height * -layoutRatio.labelNodeVerticalIndent)
+        
+        
         var param: SceneNodeParam = SceneNodeParam(labelNode: sound, labelNodeName: "sound",
                                                    buttonNode: soundButton, spriteNodeName: "SoundSwitch",
                                                    position: position,
                                                    frame: base.frame, defaultTexture: "pdf/volume-x",
                                                    selectedTexture: "pdf/volume")
         sceneNodeSetup(param: param)
+      
+        let volumeTexture = SKTexture(imageNamed: "pdf/volume")
         
         position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
         param = SceneNodeParam(labelNode: score, labelNodeName: "score",

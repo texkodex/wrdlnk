@@ -49,13 +49,13 @@ extension GameScene {
     private func countIndicator() {
         if  self.startTime > 0 { self.startTime -= 1 }
         self.playerTimerLabel.text = timerString()
-        if ((self.playerTimerLabel.alpha) < CGFloat(1.0)) {
-            self.playerTimerLabel.alpha = 1
+        if ((self.playerTimerLabel.alpha) < CGFloat(turnOnVisibility)) {
+            self.playerTimerLabel.alpha = CGFloat(turnOnVisibility)
         }
     }
     
     func timerString() -> String? {
-        let timeString = String(format: ". %02d:%02d .", ((lround(Double(self.startTime)) / 60) % 60), lround(Double(self.startTime)) % 60)
+        let timeString = String(format: "%02d:%02d", ((lround(Double(self.startTime)) / 60) % 60), lround(Double(self.startTime)) % 60)
         return timeString
         
     }

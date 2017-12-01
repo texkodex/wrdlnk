@@ -35,7 +35,7 @@ struct BoardTileParam {
          xPosAdjustment: CGFloat, zPosition: CGFloat,
          tileWidth: CGFloat, tileHeight: CGFloat,
          currentWord: String, currentIndex: Int,
-         fontSize: CGFloat, fontName: String, fontColor: UIColor = .red) {
+         fontSize: CGFloat, fontName: String = UIFont.systemFont(ofSize: 32).fontName, fontColor: UIColor = .red) {
         self.row = row
         self.column = column
         self.position = position
@@ -71,7 +71,7 @@ struct LayoutRatio {
     let markWidthScale = CGFloat(0.157)
     let markHeightScale = CGFloat(0.08152)
     let markXAnchorPoint = CGFloat(0.5)
-    let markYAnchorPoiint = CGFloat(1.0)
+    let markYAnchorPoint = CGFloat(1.0)
     // mark has anchorPoint = CGPoint(x: 0.5, y: 1.0)
     let markPositionSizeHeightFromTop = CGFloat(0.4185)
     let markPositionSizeWidth = CGFloat(0.0)
@@ -103,16 +103,21 @@ struct LayoutRatio {
     // where yPos = base.frame.minY + size.height * -0.0747
     let enterButtonVerticalFromMinBase = CGFloat(0.0747)
     
+    // Setting scene
+    let settingIndentFromTopEdgeToBase = CGFloat(0.201)
+    let settingIndentToFirstRowFromTopIndent = CGFloat(0.2527)
+    let settingFromBaseTopToFirstRowTop = CGFloat(0.0516)
+    
     // For GameScene
     let indentFromTopEdgeFirstBoardRow = CGFloat(0.3043)
-    let tileWidthToScreen = CGFloat(0.099)
-    let tileHeightToScreen = CGFloat(0.0557)
-    let spaceBetweenInnerTileInRow = CGFloat(0.00966)
+    let tileWidthToScreen = CGFloat(0.1111)
+    let tileHeightToScreen = CGFloat(0.0625)
+    let spaceBetweenInnerTileInRow = CGFloat(0.012)
     let markTopFirstRowInScreen = CGFloat(0.1957)
     let spaceBetweenRowsInScreen = CGFloat(0.1182)
     let spaceBetweenLastBoardRowAndButtonsInScreen = CGFloat(0.2038)
-    let indentToFirstBoardTile = CGFloat(0.06039)
-    let indentToFirstButtonTile = CGFloat(0.1691)
+    let indentToFirstBoardTile = CGFloat(0.0628)
+    let indentToFirstButtonTile = CGFloat(0.1739)
     let indentToCenterOfFirstButtonTile = CGFloat(0.2198)
     let indentFromTopEdgeToCenterOfButton = CGFloat(0.8003)
     let indentFromLeftEdgeLowerButton = CGFloat(0.082)
@@ -128,6 +133,8 @@ struct LayoutRatio {
     let buttonSettingsHeightScale = CGFloat(0.0353)
     let buttonGraphWidthScale = CGFloat(0.0628)
     let buttonGraphHeightScale = CGFloat(0.0353)
+    
+    let overalyDismissButtonFrontButtonEdge = CGFloat(0.1196)
     
     // Game Scene Score counter and Timer display
     let gameScoreName="gamescore"
@@ -178,13 +185,13 @@ struct LayoutRatio {
     
     let loginEmailLabelWidthAnchor = CGFloat(120.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
     
-    let loginEmailLabelHeightAnchor = CGFloat(13.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    let loginEmailLabelHeightAnchor = CGFloat(20.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
     
     let loginEmailTextTopAnchor = CGFloat(25.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
     
-    let loginEmailTextWidthAnchor = CGFloat(200.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    let loginEmailTextWidthAnchor = CGFloat(360.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
     
-    let loginEmailTextHeightAnchor = CGFloat(14.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    let loginEmailTextHeightAnchor = CGFloat(20.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
     
     let loginSeparatorEmailLabelTopAnchor = CGFloat(58.0) * CGFloat(UIScreen.main.bounds.height / 736.0)
     
@@ -194,7 +201,7 @@ struct LayoutRatio {
     
     let loginPasswordLabelTopAnchor = CGFloat(92.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
     
-    let loginPasswordLabelWidthAnchor = CGFloat(120.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
+    let loginPasswordLabelWidthAnchor = CGFloat(300.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
     
     let loginPasswordLabelHeightAnchor = CGFloat(13.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
     
@@ -236,7 +243,7 @@ struct LayoutRatio {
     
     let loginGoogleButtonWidthAnchor = CGFloat(-184.0) * CGFloat(UIScreen.main.bounds.width / 414.0)
     
-    let loginGoogleButtonHeightAnchor = CGFloat(25.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
+    let loginGoogleButtonHeightAnchor = CGFloat(24.0)  * CGFloat(UIScreen.main.bounds.height / 736.0)
     
     let loginViewErrorHeightRatio = CGFloat(0.081522)
     
@@ -260,9 +267,30 @@ struct LayoutRatio {
     let graphCornerRadius = CGFloat(12.0) *
         CGFloat(UIScreen.main.bounds.height / 736.0)
     
+    // Overlay setting scene
+    let settingTopIndentSize = CGFloat(0.2514)
 }
 
 var layoutRatio: LayoutRatio = LayoutRatio()
+
+struct LayoutColor {
+    let greenPinkTileFill = SKColor(hue: 0.463, saturation: 0.713, brightness: 0.82, alpha: 1)
+    let greenPinkTileStroke = SKColor(hue: 0.009, saturation: 0.073, brightness: 0.973, alpha: 1)
+    let bluePinkTileFill = SKColor(hue: 0.551, saturation: 0.465, brightness: 0.92, alpha: 1)
+    let bluePinkTileStroke = SKColor(hue: 0.009, saturation: 0.073, brightness: 0.973, alpha: 1)
+    let greenBlackTileFill = SKColor(hue: 0.463, saturation: 0.713, brightness: 0.82, alpha: 1)
+    let greenBlackTileStroke = SKColor(hue: 0.573, saturation: 0.455, brightness: 0.216, alpha: 1)
+    let blueBlackTileFill = SKColor(hue: 0.551, saturation: 0.465, brightness: 0.92, alpha: 1)
+    let blueBlackTileStroke = SKColor(hue: 0.573, saturation: 0.455, brightness: 0.216, alpha: 1)
+    let brandLight = SKColor(hue: 0.009, saturation: 0.073, brightness: 0.973, alpha: 1)
+    let branddarkBlack = SKColor(hue: 0.573, saturation: 0.455, brightness: 0.216, alpha: 1)
+    let brandDefault = SKColor(hue: 0.006, saturation: 0.5, brightness: 0.933, alpha: 1)
+    let brandDark1 = SKColor(hue: 0.006, saturation: 0.5, brightness: 0.933, alpha: 1)
+    let brandDark2 = SKColor(hue: 0.006, saturation: 0.504, brightness: 0.467, alpha: 1)
+    let highlightDefault = SKColor(hue: 1.00, saturation: 1.00, brightness: 1.00, alpha: 1)
+}
+
+var layoutColor: LayoutColor = LayoutColor()
 
 struct SceneNodeParam {
     var labelNode: SKLabelNode!
@@ -313,7 +341,7 @@ struct SceneSpriteLabelLabelParam {
          labelNode: SKLabelNode, labelNodeName: String,
          labelNode2: SKLabelNode, labelNodeName2: String,
          position: CGPoint, zposition: CGFloat = 10,
-         anchor: CGPoint =  CGPoint(x: 0.5, y: 1.0), frame: CGRect,
+         anchor: CGPoint =  CGPoint(x: 0.5, y: 0.75), frame: CGRect,
          fontSize: CGFloat = 20.0) {
         
         self.spriteNode = spriteNode
@@ -380,7 +408,7 @@ struct GraphParam {
     let graphSpaceRatioOfGrid = CGFloat(0.1227)  * layoutRatio.currentWidthScaleFactor
     let graphWidthRatioOfGrid = CGFloat(0.0491)   * layoutRatio.currentWidthScaleFactor
     let maxGraphHeightRatioInGrid = CGFloat(0.735)
-    let maxNumberOfGraphsInGrid = Int(( 1 / 0.1227) * layoutRatio.currentWidthScaleFactor)
+    let maxNumberOfGraphsInGrid = Int(( 1 / 0.1227) * layoutRatio.currentWidthScaleFactor) - 1
     let cornerRadiusRatioToWidth = CGFloat(0.25)
     
     init() {
@@ -402,7 +430,6 @@ extension BaseScene {
         param.labelNode.position = param.position
         param.labelNode.fontName = UIFont.systemFont(ofSize: param.fontSize).fontName
         param.labelNode.fontSize = param.fontSize * layoutRatio.currentHeightScaleFactor
-        param.labelNode.fontColor = foregroundColor
         param.labelNode.verticalAlignmentMode = .top
         param.labelNode.horizontalAlignmentMode =  .left
         param.labelNode.zPosition = param.zposition
@@ -417,7 +444,7 @@ extension BaseScene {
         param.buttonNode.zPosition = param.zposition // 10
         param.labelNode.addChild(param.buttonNode)
         
-        let focusRing = SKSpriteNode(texture: SKTexture(imageNamed: "focusRingRed"))
+        let focusRing = SKSpriteNode(texture: SKTexture(imageNamed: "pdf/focusRing"))
         focusRing.scale(to: CGSize(width: param.buttonNode.size.width + 2.0, height: param.buttonNode.size.height + 2.0))
         focusRing.name = "focusRing"
         focusRing.anchorPoint = CGPoint(x: 0.5, y: 1.0)
@@ -436,7 +463,7 @@ extension BaseScene {
         param.buttonNode.zPosition = param.zposition
         self.addChild(param.buttonNode)
         
-        let focusRing = SKSpriteNode(texture: SKTexture(imageNamed: "focusRingRed"))
+        let focusRing = SKSpriteNode(texture: SKTexture(imageNamed: "pdf/focusRing"))
         focusRing.scale(to: CGSize(width: param.buttonNode.size.width + 2.0, height: param.buttonNode.size.height + 2.0))
         focusRing.name = "focusRing"
         focusRing.alpha = 0
@@ -449,7 +476,6 @@ extension BaseScene {
         param.labelNode.position = param.position
         param.labelNode.fontName = UIFont.systemFont(ofSize: param.fontSize).fontName
         param.labelNode.fontSize = param.fontSize * layoutRatio.currentHeightScaleFactor
-        param.labelNode.fontColor = foregroundColor
         param.labelNode.verticalAlignmentMode = .bottom
         param.labelNode.horizontalAlignmentMode =  .center
         param.labelNode.zPosition = param.zposition
@@ -467,7 +493,6 @@ extension BaseScene {
         param.labelNode.position = CGPoint(x: param.spriteNode.position.x + param.frame.width * 0.6, y: 0)
         param.labelNode.fontName = UIFont.systemFont(ofSize: param.fontSize).fontName
         param.labelNode.fontSize = param.fontSize * layoutRatio.currentHeightScaleFactor
-        param.labelNode.fontColor = foregroundColor
         param.labelNode.verticalAlignmentMode = .top
         param.labelNode.horizontalAlignmentMode =  .left
         param.labelNode.zPosition = param.zposition
@@ -477,7 +502,6 @@ extension BaseScene {
         param.labelNode2.position = CGPoint(x: param.labelNode.position.x + param.frame.width * 0.25, y: 0)
         param.labelNode2.fontName = UIFont.systemFont(ofSize: param.fontSize).fontName
         param.labelNode2.fontSize = param.fontSize * layoutRatio.currentHeightScaleFactor
-        param.labelNode2.fontColor = foregroundColor
         param.labelNode2.verticalAlignmentMode = .top
         param.labelNode2.horizontalAlignmentMode =  .left
         param.labelNode2.zPosition = param.zposition

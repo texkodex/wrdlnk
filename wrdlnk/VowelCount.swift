@@ -24,6 +24,7 @@ let phraseSeparator = "|"
 
 // MARK:- VowelCount structure
 struct VowelCount: Codable {
+    let queue = DispatchQueue(label: "com.teknowsys.vowelcount.queue")
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let CountersArchiveURL = DocumentsDirectory.appendingPathComponent(StorageForCounters)
     
@@ -42,6 +43,7 @@ struct VowelCount: Codable {
     public internal(set) var clicks: Int
     public internal(set) var boardTileClick: Int
     public internal(set) var match: Int
+    public internal(set) var restoreMatchCount: Int
     public internal(set) var setTotal: Int
     public internal(set) var minimumClicks: Int
     public internal(set) var clickMultiple: Int
@@ -66,13 +68,14 @@ struct VowelCount: Codable {
         self.clicks = 0
         self.boardTileClick = 0
         self.match = 0
+        self.restoreMatchCount = 0
         self.setTotal = 0
         self.minimumClicks = 0
         self.clickMultiple = 2
     }
     
     init (phrase: String = "_unset_", prefix: Int = 0, link: Int = 0, suffix: Int = 0, total: Int = 0,
-          clicks: Int = 0, boardTileClick: Int = 0, match: Int = 0, setTotal: Int = 0, minimumClicks: Int = 1, clickMultiple: Int = 2) {
+          clicks: Int = 0, boardTileClick: Int = 0, match: Int = 0, restoreMatchCount: Int = 0, setTotal: Int = 0, minimumClicks: Int = 1, clickMultiple: Int = 2) {
         self.phrase = phrase
         self.prefix = prefix
         self.link  = link
@@ -81,6 +84,7 @@ struct VowelCount: Codable {
         self.clicks = clicks
         self.boardTileClick = boardTileClick
         self.match = match
+        self.restoreMatchCount = restoreMatchCount
         self.setTotal = setTotal
         info.minClicks = (prefix + link + suffix) * clickMultiple
         self.minimumClicks = (prefix + link + suffix) * clickMultiple
@@ -125,7 +129,7 @@ struct VowelCount: Codable {
     }
     
     func totalClicks() -> Int {
-        return !isEmpty() ? info.vowelCountList[0].clicks : 0
+        return self.clicks
     }
     
     func totalBoardTileClicks() -> Int {
@@ -137,61 +141,89 @@ struct VowelCount: Codable {
     }
     
     mutating func assignToVowelList() {
+        let currentValue = self
         if !isEmpty() {
-            info.vowelCountList[0] = self
+            queue.async {
+                info.vowelCountList[0] = currentValue
+            }
         } else {
-            info.vowelCountList.append(self)
+            queue.async {
+                info.vowelCountList.append(currentValue)
+            }
         }
+       
     }
     
     mutating func prefixDecrement() {
         if !prefixZero() {
-            self.prefix -= 1
-            assignToVowelList()
+            queue.sync {
+                self.prefix -= 1
+                assignToVowelList()
+            }
         }
     }
     
     mutating func linkDecrement() {
         if !linkZero() {
-            self.link -= 1
-            assignToVowelList()
+            queue.sync {
+                self.link -= 1
+                assignToVowelList()
+            }
         }
     }
     
     mutating func suffixDecrement() {
         if !suffixZero() {
-            self.suffix -= 1
-            assignToVowelList()
+            queue.sync {
+                self.suffix -= 1
+                assignToVowelList()
+            }
         }
     }
     
     mutating func clickAttempt() {
-        self.clicks += 1
-        assignToVowelList()
-    }
-    
-    mutating func restoreMatch() {
-        self.match += 1
-        assignToVowelList()
-    }
-    
-    mutating func boardClickAttempt() {
-        self.boardTileClick += 1
-        assignToVowelList()
-    }
-    
-    mutating func clickMatch() {
-        if match < total {
-            self.match += 1
+        queue.sync {
+            self.clicks += 1
             assignToVowelList()
         }
     }
     
+    mutating func restoreMatch() {
+        if self.restoreMatchCount < self.total {
+            queue.sync {
+                self.restoreMatchCount += 1
+                assignToVowelList()
+            }
+        }
+    }
+    
+    mutating func boardClickAttempt() {
+        queue.sync {
+            self.boardTileClick += 1
+            assignToVowelList()
+        }
+    }
+    
+    mutating func clickMatch() {
+        if self.match < self.total {
+            queue.sync {
+                self.match += 1
+                assignToVowelList()
+            }
+        }
+    }
+    
+    
     func accuracy() -> Float {
-        print("total: \(total)")
-        print("minimumClicks: \(minimumClicks)")
-        print("clicks: \(clicks)")
-        return Float(clicks > 0 ? min(Float(minClicks()) / Float(totalClicks()), 1.0) : 0)
+        var accuracy: Float?
+        queue.sync {
+            print("total: \(total)")
+            print("minimumClicks: \(minimumClicks)")
+            print("clicks: \(clicks)")
+            
+            accuracy =  Float(totalClicks() > 0 ? min(Float(minClicks()) / Float(totalClicks()), 1.0) : 0)
+        }
+        return accuracy!
     }
     
     func percentage() -> Float {
@@ -207,6 +239,7 @@ struct VowelCount: Codable {
         case clicks = "clicks"
         case boardTileClick = "boardTileClick"
         case match = "match"
+        case restoreMatchCount = "restoreMatchCount"
         case setTotal = "setTotal"
         case minimumClicks = "minimumClicks"
         case clickMultiple = "clickMultiple"
@@ -224,6 +257,7 @@ extension VowelCount {
         try container.encode(clicks, forKey: .clicks)
         try container.encode(boardTileClick, forKey: .boardTileClick)
         try container.encode(match, forKey: .match)
+        try container.encode(restoreMatchCount, forKey: .restoreMatchCount)
         try container.encode(setTotal, forKey: .setTotal)
         try container.encode(minimumClicks, forKey: .minimumClicks)
         try container.encode(clickMultiple, forKey: .clickMultiple)
@@ -242,12 +276,13 @@ extension VowelCount {
         let clicks: Int = try container.decode(Int.self, forKey: .clicks)
         let boardTileClick: Int = try container.decode(Int.self, forKey: .boardTileClick)
         let match: Int = try container.decode(Int.self, forKey: .match)
+        let restoreMatchCount: Int = try container.decode(Int.self, forKey: .restoreMatchCount)
         let setTotal: Int = try container.decode(Int.self, forKey: .setTotal)
         let minimumClicks: Int = try container.decode(Int.self, forKey: .minimumClicks)
         let clickMultiple: Int = try container.decode(Int.self, forKey: .clickMultiple)
         
         self.init(phrase: phrase, prefix: prefix, link: link, suffix:suffix, total: total,
-                  clicks: clicks, boardTileClick: boardTileClick, match: match, setTotal: setTotal,
+                  clicks: clicks, boardTileClick: boardTileClick, match: match, restoreMatchCount: restoreMatchCount, setTotal: setTotal,
                   minimumClicks: minimumClicks, clickMultiple: clickMultiple)
         
         if info.vowelCountList.count == 0 {
@@ -264,7 +299,10 @@ extension VowelCount {
         do {
             let decoder = JSONDecoder()
             let vowels = try decoder.decode([VowelCount].self, from: data)
-            info.vowelCountList = vowels
+            
+            loadValues(vowelCountList: vowels)
+            loadCountData(vowelCountList: vowels)
+            
             if vowels.count > 0 { info.initialize = true }
         } catch {
             print("loadWordList Failed")
@@ -284,24 +322,42 @@ extension VowelCount {
     }
     
     mutating func clear() {
-        if isEmpty() { return }
         trace("\(#file ) \(#line)", {"clear VowelCount - ...: "})
+        self.clicks = 0
+        self.match = 0
+        self.boardTileClick = 0
+        self.restoreMatchCount = 0
         info.vowelCountList.removeAll()
         info.initialize = false
     }
     
-    mutating func loadCountData(vowelCountList: [VowelCount]) {
-        if info.vowelCountList.count > 0 && !info.vowelCountList[0].phrase.contains("_unset_") {
-            if info.vowelCountList.count == 1 {
-                info.vowelCountList[0].clicks += self.clicks
-            } else if info.vowelCountList.count == 0 {
-                info.vowelCountList.append(self)
-            }
-        } else {
-            if info.vowelCountList.count == 0 {
-                info.vowelCountList.append(self)
+    mutating func loadValues(vowelCountList: [VowelCount]) {
+        if vowelCountList.count > 0 && !vowelCountList[0].phrase.contains("_unset_") {
+            self.phrase = vowelCountList[0].phrase
+            self.prefix = vowelCountList[0].prefix
+            self.link = vowelCountList[0].link
+            self.suffix = vowelCountList[0].suffix
+            self.total = vowelCountList[0].total
+            self.clicks = vowelCountList[0].clicks
+            self.boardTileClick = vowelCountList[0].boardTileClick
+            if vowelCountList[0].match < vowelCountList[0].total {
+                self.match = vowelCountList[0].match
             } else {
-                info.vowelCountList[0] = self
+                self.match = vowelCountList[0].total
+            }
+            self.restoreMatchCount = vowelCountList[0].restoreMatchCount
+            self.setTotal = vowelCountList[0].setTotal
+            self.minimumClicks = vowelCountList[0].minimumClicks
+            self.clickMultiple = vowelCountList[0].clickMultiple
+        }
+    }
+    
+    mutating func loadCountData(vowelCountList: [VowelCount]) {
+        if vowelCountList.count > 0 && !vowelCountList[0].phrase.contains("_unset_") {
+            if info.vowelCountList.count > 0 {
+                info.vowelCountList[0] = vowelCountList[0]
+            } else if info.vowelCountList.isEmpty {
+                info.vowelCountList.append(vowelCountList[0])
             }
         }
     }

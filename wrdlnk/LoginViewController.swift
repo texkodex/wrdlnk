@@ -21,6 +21,11 @@ enum Login:String {
 class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
     
     var bounds: CGRect!
+    var containerViewHeightAnchor: NSLayoutConstraint?
+    var backgroundViewHeightAnchor: NSLayoutConstraint?
+    var nameTextHeightAnchor: NSLayoutConstraint?
+    var emailTextHeightAnchor: NSLayoutConstraint?
+    var passwordTextHeightAnchor: NSLayoutConstraint?
     
     let markImageView: UIImageView = {
         let _imageView = UIImageView()
@@ -72,7 +77,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         _errorLabel.text = "Enter a valid email address."
         _errorLabel.textColor = .white
         _errorLabel.backgroundColor = foregroundColor
-        _errorLabel.font = UIFont.systemFont(ofSize: 14)
+        _errorLabel.font = UIFont.systemFont(ofSize: 13)
         _errorLabel.textAlignment = .center
         _errorLabel.layer.cornerRadius = 0
         _errorLabel.layer.masksToBounds = true
@@ -115,21 +120,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     lazy var googleButton: UIButton = {
         let _button = UIButton(type: .system)
         _button.setTitle("Sign In With Google", for: .normal)
-        let _imageView = UIImageView(image: UIImage(named: "pdf/google_g"))
+        _button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         _button.tintColor = foregroundColor
         _button.layer.cornerRadius = 0
         _button.layer.masksToBounds = true
-        _button.translatesAutoresizingMaskIntoConstraints = false
+        _button.frame =  CGRect(x: 90, y: 0, width: 220, height: 26)
+        _button.setImage(UIImage(named: "pdf/google_g"), for: .normal)
+        _button.imageView?.frame.size.width = 23
+        _button.imageView?.frame.size.height = 24
+        _button.imageEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
+        _button.titleEdgeInsets = UIEdgeInsets(top: 0,left: 15,bottom: 2,right: 0)
         _button.addTarget(self, action: #selector(handleGoogleSignIn), for: .touchUpInside)
-        _button.addSubview(_imageView)
+        _button.translatesAutoresizingMaskIntoConstraints = false
         return _button
     }()
     
     let guestButton: UIButton = {
         let _button = UIButton(type: .system)
-        _button.backgroundColor = AppTheme.instance.modeButtonColor()
+        _button.backgroundColor = backgroundColor
         _button.setTitle("Sign Up Later", for: .normal)
-        _button.setTitleColor(AppTheme.instance.modeFontColor(), for: .normal)
+        _button.setTitleColor(backgroundColor, for: .normal)
         _button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         _button.layer.cornerRadius = 4
         _button.layer.masksToBounds = true
@@ -179,7 +189,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     
     let passwordText: UITextField = {
         let _passwordText = UITextField()
-        _passwordText.attributedPlaceholder = NSAttributedString(string: "............",
+        let passwordDots = String(repeating: "\u{25cf}", count: 6)
+        _passwordText.attributedPlaceholder = NSAttributedString(string: passwordDots,
                                                               attributes: [NSAttributedStringKey.foregroundColor: foregroundColor])
         _passwordText.font = UIFont.systemFont(ofSize: 14)
         _passwordText.autocapitalizationType = UITextAutocapitalizationType.none
@@ -198,12 +209,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         return _view
     }()
     
-    var containerViewHeightAnchor: NSLayoutConstraint?
-    var backgroundViewHeightAnchor: NSLayoutConstraint?
-    var nameTextHeightAnchor: NSLayoutConstraint?
-    var emailTextHeightAnchor: NSLayoutConstraint?
-    var passwordTextHeightAnchor: NSLayoutConstraint?
-
     func setupErrorView() {
         errorView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         errorView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -246,6 +251,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         emailText.widthAnchor.constraint(equalToConstant: layoutRatio.loginEmailTextWidthAnchor).isActive = true
         emailTextHeightAnchor = emailText.heightAnchor.constraint(equalToConstant: layoutRatio.loginEmailTextHeightAnchor)
         emailTextHeightAnchor?.isActive = true
+        
+        if AppDefinition.defaults.keyExist(key: preferenceEmailOfUserKey) {
+            emailText.placeholder =  AppDefinition.defaults.string(forKey: preferenceEmailOfUserKey)!
+        }
     }
     
     func setupSeparatorEmail() {
@@ -303,8 +312,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     func setupYesView() {
         yesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         yesButton.topAnchor.constraint(equalTo: separatorPasswordView.topAnchor, constant: layoutRatio.loginYesViewTopAnchor).isActive = true
-        yesButton.widthAnchor.constraint(equalToConstant: layoutRatio.loginYesViewWidthAnchor).isActive = true
-        yesButton.heightAnchor.constraint(equalToConstant: layoutRatio.loginYesViewHeightAnchor).isActive = true
+        yesButton.widthAnchor.constraint(equalToConstant: 46).isActive = true
+        yesButton.heightAnchor.constraint(equalToConstant: 46).isActive = true
     }
     
     // MARK: Google view
@@ -425,6 +434,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     func handleLogin() {
         AppDefinition.defaults.set(false, forKey: preferenceLoggedInAppKey)
         guard let email = emailText.text, let password = passwordText.text else {
+            errorLabel.text = "Invalid email or password"
             print("Invalid email or password")
             return
         }
@@ -436,6 +446,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
             }
             // successfully user login
             AppDefinition.defaults.set(true, forKey: preferenceLoggedInAppKey)
+            
             self.enterApp()
         }
     }
@@ -443,6 +454,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     @objc func handleRegister() {
         AppDefinition.defaults.set(false, forKey: preferenceLoggedInAppKey)
         guard let email = emailText.text, let password = passwordText.text else {
+            errorLabel.text = "Invalid email or password"
             print("Invalid email or password")
             return
         }
@@ -455,12 +467,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
             
             if error != nil {
                 print(error!)
+                self.errorLabel.text = error.debugDescription.components(separatedBy: "\"")[1]
                 return
             }
             
             guard let uid = user?.uid else { return }
             
             print("Successful registration")
+            self.errorLabel.text = "Successful registration"
             let ref = Database.database().reference(fromURL: "https://testfirebase-a055f.firebaseio.com/")
             let usersRef = ref.child("users").child(uid)
             let values = ["email": email]
@@ -468,9 +482,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
                 
                 if error != nil {
                     print(error!)
+                    self.errorLabel.text = error.debugDescription.components(separatedBy: "\"")[1]
                     return
                 }
                 AppDefinition.defaults.set(true, forKey: preferenceLoggedInAppKey)
+                AppDefinition.defaults.set(email, forKey: preferenceEmailOfUserKey)
                 self.enterApp()
             })
         }
@@ -503,6 +519,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
                 (user, error) in
                 if let err = error {
                     print("Login failed with Google account: ", err)
+                    self.errorLabel.text = error.debugDescription.components(separatedBy: "\"")[1]
                 }
                 AppDefinition.defaults.set(true, forKey: preferenceLoggedInAppKey)
                 print("Successful Firebase login with Google credentials", userID)
@@ -510,6 +527,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
             
             print("Username: \(String(describing: fullName)) and email: \(String(describing: email))")
         } else {
+            self.errorLabel.text = "Failed to login with Google"
             print("Failed to login with Google")
             print("\(error.localizedDescription)")
         }
@@ -520,6 +538,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         // ...
         AppDefinition.defaults.set(false, forKey: preferenceLoggedInAppKey)
         print("User logged out from App")
+        errorLabel.text = "User logged out from App"
     }
     
     // MARK:- Enter application after login
@@ -534,3 +553,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     }
 }
 
+class TextField: UITextField {
+    override var placeholder: String? {
+        didSet {
+            let placeholderString = NSAttributedString(string: placeholder!, attributes: [NSAttributedStringKey.foregroundColor: UIColor.red])
+            self.attributedPlaceholder = placeholderString
+        }
+    }
+}

@@ -36,7 +36,7 @@ extension SKScene {
     func transitionToScene(destination: SceneType, sendingScene: SKScene, startNewGame : Bool = false, continueGame: Bool = false) {
         let transDuration = CommonDelaySetting
         let transition = SKTransition.fade(with: sendingScene.backgroundColor, duration: transDuration)
-        
+
         unowned var scene = SKScene()
         
         switch destination {

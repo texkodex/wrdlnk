@@ -22,7 +22,7 @@ class LogoutViewController: UIViewController {
     
     let backgroundView: UIView = {
         let _view = UIView()
-        _view.backgroundColor = AppTheme.instance.modeBackgroundColor()
+        _view.backgroundColor = AppTheme.instance.backgroundColor()
         _view.layer.cornerRadius = 0
         _view.layer.masksToBounds = true
         _view.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +31,7 @@ class LogoutViewController: UIViewController {
     
     let containerView: UIView = {
         let _view = UIView()
-        _view.backgroundColor = AppTheme.instance.modeSceneColor()
+        _view.backgroundColor = AppTheme.instance.backgroundColor()
         _view.layer.cornerRadius = 4
         _view.layer.masksToBounds = true
         _view.translatesAutoresizingMaskIntoConstraints = false
@@ -40,9 +40,9 @@ class LogoutViewController: UIViewController {
     
     let logoutButton: UIButton = {
         let _button = UIButton(type: .system)
-        _button.backgroundColor = AppTheme.instance.modeButtonColor()
+        _button.backgroundColor = AppTheme.instance.backgroundColor()
         _button.setTitle("Log Out", for: .normal)
-        _button.setTitleColor(AppTheme.instance.modeFontColor(), for: .normal)
+        _button.setTitleColor(AppTheme.instance.backgroundColor(), for: .normal)
         _button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         _button.layer.cornerRadius = 4
         _button.layer.masksToBounds = true
@@ -63,7 +63,7 @@ class LogoutViewController: UIViewController {
         
         DispatchQueue.main.async(){
             self.view.restorationIdentifier = "LogoutViewController"
-            self.view.backgroundColor = AppTheme.instance.modeSceneColor()
+            self.view.backgroundColor = AppTheme.instance.backgroundColor()
             self.setupView()
         }
     }

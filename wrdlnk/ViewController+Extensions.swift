@@ -74,7 +74,10 @@ extension UIViewController {
     }
     
     func launchLoginViewController() {
-        AppTheme.instance.set(for: self.view)
+        
+        #if false
+            AppTheme.instance.set(for: self, viewType: "LoginView")
+        #endif
         let appDelegate: UIApplicationDelegate = UIApplication.shared.delegate!
         let vc = LoginViewController()
         appDelegate.window!?.rootViewController = vc

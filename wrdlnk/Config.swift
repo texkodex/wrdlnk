@@ -24,6 +24,8 @@ struct AppDefinition {
     static let WalkthroughContent = "WalkThrough"
     static let PlayNotification = "PlayNotification"
     static let FirebaseConfigFile = "GoogleService-firebase-Info"
+    
+    
 }
 
 enum StoryboardName : String {
@@ -161,6 +163,10 @@ let preferenceScoreEnabledKey = "preference_score_enabled"
 let preferenceTimerEnabledKey = "preference_timer_enabled"
 let preferenceSetTimerEnabledKey = "preference_set_timer_enabled"
 
+let preferenceObserverSoundEnabledKey = "preference_observer_sound_enabled"
+let preferenceObserverScoreEnabledKey = "preference_observer_score_enabled"
+let preferenceObserverTimerEnabledKey = "preference_observer_timer_enabled"
+
 let preferenceNightModeEnabledKey = "preference_night_mode_enabled"
 let preferencePastelEnabledKey = "preference_pastel_enabled"
 let preferenceColorBlindEnabledKey = "preference_color_blind_enabled"
@@ -194,6 +200,7 @@ let preferenceRemoteDataSiteKey = "preference_remote_data_site"
 let preferenceMemoryDataFileKey = "preference_memory_data_file"
 
 let preferenceLoggedInAppKey = "preference_logged_in_app"
+let preferenceEmailOfUserKey = "preference_email_of_user"
 
 let preferenceAppRemoveADsKey = "preference_app_remove_ads"
 
@@ -389,25 +396,40 @@ enum VowelRow: Int {
     static let types = [prefix, link, suffix]
 }
 
-enum SoundEvent:String {
-    case awake = "awake"
-    case beep = "beep"
-    case beepbeep = "beepbeep"
-    case bang = "bang"
-    case biff = "biff"
-    case yes = "yes"
-    case no = "no"
-    case error = "error"
-    case warning = "warning"
-    case great = "great"
-    case great2 = "great2"
-    case good = "good"
-    case again = "again"
-    case end = "end"
-    case upgrade = "upgrade"
+enum GeneralSoundEvent:Int {
+    case awake
+    case beep
+    case beepbeep
+    case bang
+    case biff
+    case yes
+    case no
+    case error
+    case warning
+    case great
+    case great2
+    case good
+    case again
+    case end
+    case upgrade
+    case totalCount
     
     static let types = [awake, beep, beepbeep, bang, biff, yes, no, error,
                         warning, great, great2, good, again,
                         end, upgrade]
+}
+
+enum SoundEvent:Int {
+    case beepbeep = 0
+    case beep
+    case biff
+    case yes
+    case good
+    case great2
+    case error
+    case totalCount
+    
+    static let types = [beep, beepbeep, biff, yes, good,
+                        great2, error ]
 }
 

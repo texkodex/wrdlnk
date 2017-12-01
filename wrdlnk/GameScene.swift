@@ -10,6 +10,7 @@ import SpriteKit
 import GameplayKit
 import GameKit
 
+
 enum GameSceneState: Int {
     case before = 0
     case play
@@ -20,22 +21,146 @@ enum GameSceneState: Int {
     static let Count = done.rawValue + 1
 }
 
-class GameScene: BaseScene {
+struct  NameCache {
+    static var previousName: String? = nil
+    static var previousPreviousName: String? = nil
+    
+    static func reset() {
+        NameCache.previousName = nil
+        NameCache.previousPreviousName = nil
+    }
+}
+
+struct CurrentHighlight {
+    static var boardHightlight: String? = nil
+    static var boardHightlightText: String? = nil
+    static var buttonHighlight: String? = nil
+    static var buttonHightlightText: String? = nil
+    
+    static func reset() {
+        CurrentHighlight.boardHightlight = nil
+        CurrentHighlight.boardHightlightText = nil
+        CurrentHighlight.buttonHighlight = nil
+        CurrentHighlight.buttonHightlightText = nil
+    }
+}
+
+struct TileParam {
+    var letter: String
+    var tileName: String
+    var letterName: String
+    var condition: Bool
+    var fontSize: CGFloat
+    var fontColor: SKColor
+    var frame: CGRect
+    var cornerRadius: CGFloat
+    var tilePosition: CGPoint
+    var letterPosition: CGPoint
+    var zPosition: CGFloat
+    var translate: CGPoint
+    var fillColor: SKColor
+    var lineWidth: CGFloat
+    var fillRule: CGPathFillRule
+    var strokeColor: SKColor
+    var highlightColor: SKColor
+    
+    init(letter: String, tileName: String, letterName: String, condition: Bool = false,
+         fontSize: CGFloat = CGFloat(26), fontColor: SKColor = .white,
+         frame: CGRect = CGRect(x: 0, y: 0, width: defaultTileWidth, height: defaultTileHeight),
+         cornerRadius: CGFloat = CGFloat(8.0), tilePosition: CGPoint = CGPoint(x: 0, y: 0),
+         letterPosition: CGPoint = CGPoint(x: 0, y: 0), zPosition: CGFloat = CGFloat(10),
+         translate: CGPoint = CGPoint(x: CGFloat(-568.0), y: CGFloat(359.0)),
+         fillColor: SKColor = layoutColor.greenPinkTileFill, lineWidth: CGFloat = CGFloat(2.0),
+         fillRule: CGPathFillRule = CGPathFillRule.evenOdd, strokeColor: SKColor = layoutColor.greenPinkTileStroke,
+         highlightColor: SKColor = layoutColor.highlightDefault) {
+        
+        self.letter = letter
+        self.tileName = tileName
+        self.letterName = letterName
+        self.condition = condition
+        self.fontSize = fontSize
+        self.fontColor = fontColor
+        self.frame = frame
+        self.cornerRadius = cornerRadius
+        self.tilePosition = tilePosition
+        self.letterPosition = letterPosition
+        self.zPosition = zPosition
+        self.translate = translate
+        self.fillColor = fillColor
+        self.lineWidth = lineWidth
+        self.fillRule = fillRule
+        self.strokeColor = strokeColor
+        self.highlightColor = highlightColor
+    }
+}
+
+typealias BoardParamType = TileParam
+typealias ButtonParamType = TileParam
+
+protocol GameSceneDelegate: class {
+    func toggleSetting(settingName: String?)
+}
+
+
+
+class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGestureRecognizerDelegate, GameSceneDelegate {
     
     var commonGameController: CommonGameController?
     
     // MARK:- Top nodes
+    lazy var gameRoot = childNode(withName: "//gameRoot")
+    lazy var graphRoot = childNode(withName: "//graphRoot")
+    lazy var settingRoot = childNode(withName: "//settingRoot")
+    lazy var soundRoot = SKAudioNode()
+    
     let mark = ButtonNode(imageNamed: "pdf/mark")
+    
+    let graphButton: SKSpriteNode = SKSpriteNode(imageNamed: "pdf/scores")
+    let settingsButton: SKSpriteNode = SKSpriteNode(imageNamed: "pdf/settings")
     
     // MARK:- Nodes
     var definitionButton: ButtonNode? {
         return backgroundNodeOne?.childNode(withName: ButtonIdentifier.provideMeaning.rawValue) as? ButtonNode
     }
     
-    let graphButton: ButtonNode = ButtonNode(imageNamed: "pdf/scores")
+    // Sound effects
+    private var beepbeepSound: SKAudioNode!
+    private var biffSound: SKAudioNode!
+    private var yesSound: SKAudioNode!
+    private var goodSound: SKAudioNode!
+    private var great2Sound: SKAudioNode!
+    private var errorSound: SKAudioNode!
+
+    // audio
+    private var audioSources = [SKAudioNode](repeatElement(SKAudioNode(), count: SoundEvent.totalCount.rawValue))
     
-    let settingsButton: ButtonNode = ButtonNode(imageNamed: "pdf/settings")
+    // MARK: - Audio
     
+    func playSound(_ audioName: SoundEvent) {
+        gameRoot?.addChild(audioSources[audioName.rawValue])
+    }
+    
+    private func loadSounds() {
+        beepbeepSound = SKAudioNode(fileNamed: "beepbeep.mp3")
+        beepbeepSound.isPositional = false
+        
+        biffSound = SKAudioNode(fileNamed: "beep.mp3")
+        biffSound.isPositional = false
+        
+        yesSound = SKAudioNode(fileNamed: "yes.mp3")
+        yesSound.isPositional = false
+        
+        goodSound = SKAudioNode(fileNamed: "good.mp3")
+        goodSound.isPositional = false
+        
+        great2Sound = SKAudioNode(fileNamed: "great2.mp3")
+        great2Sound.isPositional = false
+        
+        errorSound = SKAudioNode(fileNamed: "error.mp3")
+        errorSound.isPositional = false
+    }
+    
+    // MARK:- End of sound setup
     var definitionOff = false {
         didSet {
             let imageName = definitionOff ? "questionOff" : "questionOn"
@@ -43,14 +168,15 @@ class GameScene: BaseScene {
         }
     }
     
-    var graphOff = false {
+    var installObervers: Bool = false {
         didSet {
-            let imageName = graphOff ? "pdf/scores" : "pdf/scores"
-            graphButton.selectedTexture = SKTexture(imageNamed: imageName)
-            
-            AppDefinition.defaults.set(graphOff, forKey: preferenceShowGraphKey)
+            print("The value of installObervers changed from \(oldValue) to \(installObervers)")
         }
     }
+    
+    weak private var graphOverlay: GraphOverlay?
+    
+    weak private var settingOverlay: SettingOverlay?
     
     // MARK:- SKLabelNode
     let playerScoreLabel = SKLabelNode(text: "0")
@@ -59,7 +185,7 @@ class GameScene: BaseScene {
         return nil
     }
     
-    var playerTimerLabel = SKLabelNode(text: ". %02d:%02d .")
+    var playerTimerLabel = SKLabelNode(text: "%02d:%02d")
     
     // MARK:- Overlay scenes
     var gameState: GameSceneState = .before {
@@ -95,7 +221,7 @@ class GameScene: BaseScene {
     let nodeMap = [ViewElement.main.rawValue, ViewElement.board.rawValue,
                    ViewElement.control.rawValue, ViewElement.buttons.rawValue]
     
-    var tileNodeList: [SKSpriteNode] = []
+    var tileNodeList: [SKShapeNode] = []
     
     var matchList: [String] = []
     
@@ -105,6 +231,13 @@ class GameScene: BaseScene {
     var notificationMessageList: [String] = []
     var awardMessageList: [String] = []
     var completedMessageList: [String] = []
+    
+    // MARK:- delegate
+    weak var graphOverlayDelegate: GraphOverlayDelegate?
+    
+    weak private var settingOverlayDelegate: SettingOverlayDelegate?
+    
+    weak private var gameSceneDelegate: GameSceneDelegate?
     
     var resetCounters:Bool {
         get {
@@ -130,14 +263,17 @@ class GameScene: BaseScene {
         }
     }
     
-    
     var playerScore:Int {
         get {
             return AppDefinition.defaults.integer(forKey: preferenceCurrentScoreKey)
         }
         set {
             playerScoreLabel.text = "\(newValue)"
-            AppDefinition.defaults.set(newValue, forKey: preferenceCurrentScoreKey)
+            let value = newValue
+            DispatchQueue.main.async() { [value] in
+                AppDefinition.defaults.set(value, forKey: preferenceCurrentScoreKey)
+            }
+            
         }
     }
     
@@ -166,23 +302,40 @@ class GameScene: BaseScene {
     class func labelWithText(_ text: String, andSize textSize: CGFloat, color: UIColor = foregroundColor) -> SKLabelNode {
         let fontName = UIFont.systemFont(ofSize: textSize).fontName
         let _label = SKLabelNode(fontNamed: fontName)
-        
         _label.text = text
         _label.fontSize = textSize
         _label.fontColor = color
-        
         return _label
     }
     
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
+        cleanup()
+        self.view?.presentScene(nil)
+    }
+    
+    private func cleanup() {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        graphOverlayDelegate = nil
+        settingOverlayDelegate = nil
+        gameSceneDelegate = nil
+        
         preserve()
+        
+        gameRoot?.removeFromParent()
+        gameRoot = nil
+        settingRoot?.removeFromParent()
+        settingRoot = nil
+        graphRoot?.removeFromParent()
+        graphRoot = nil
         tileNodeList.removeAll()
         matchList.removeAll()
+        
+        removeObservers()
+        
         self.removeFromParent()
         self.removeAllChildren()
         self.removeAllActions()
-        self.view?.presentScene(nil)
     }
     
     private func preserve() {
@@ -210,18 +363,18 @@ class GameScene: BaseScene {
     
     // MARK:- Popover scenes
     private func willShowPopScene(_ gameState: GameSceneState) {
-//        self.graphOverlayNode?.removeFromParent()
-//
-//        switch gameState {
-//        case .before:
-//            self.hidePopOverUI(true)
-//        case .graph:
-//            self.graphOverlayNode = GraphOverlay(size: self.frame.size)
-//            self.addChild(self.graphOverlayNode!)
-//
-//        default:
-//            return
-//        }
+        //        self.graphOverlayNode?.removeFromParent()
+        //
+        //        switch gameState {
+        //        case .before:
+        //            self.hidePopOverUI(true)
+        //        case .graph:
+        //            self.graphOverlayNode = GraphOverlay(size: self.frame.size)
+        //            self.addChild(self.graphOverlayNode!)
+        //
+        //        default:
+        //            return
+        //        }
         
     }
     
@@ -230,7 +383,8 @@ class GameScene: BaseScene {
         case .before:
             self.hidePopOverUI(true)
         case .graph:
-            self.graphOverlayNode?.touchAtPoint(location)
+            //            self.graphOverlayNode?.touchAtPoint(location)
+            print("complete case .graph")
         default:
             return
         }
@@ -245,22 +399,82 @@ class GameScene: BaseScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
+        
+        self.name = "GameScene"
+        
         placeAssets()
         setupCountersAndWords()
         setupGameSceneResources()
+        setupHighlight()
+        loadSounds()
+        setupGraphOverlay()
+        setupSettingOverlay()
         
-       
+        
         let tapBoardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapFrom(recognizer:)))
         tapBoardGestureRecognizer.numberOfTapsRequired = 1
         view.addGestureRecognizer(tapBoardGestureRecognizer)
+        tapBoardGestureRecognizer.delegate = self
+        
+        let overlayGestureRecognizer = OverlayTapGestureRecognizer(target: self, action: #selector(self.handleOverlayTapFrom(recognizer:)))
+        overlayGestureRecognizer.numberOfTapsRequired = 1
+        overlayGestureRecognizer.scene = self
+        overlayGestureRecognizer.graphOverlayDelegate = graphOverlayDelegate
+        overlayGestureRecognizer.settingOverlayDelegate = settingOverlayDelegate
+        overlayGestureRecognizer.gameSceneDelegate = gameSceneDelegate
+        view.addGestureRecognizer(overlayGestureRecognizer)
+        overlayGestureRecognizer.delegate = self
+        
+        // If overaly service first
+        tapBoardGestureRecognizer.require(toFail: overlayGestureRecognizer)
+        
+        // GameScene delegate
+        gameSceneDelegate = self
         
         playNotification()
         // Start game timer
         setupTimer()
         
-        testGraphOverlay()
+        setupObservers()
         
-        AppTheme.instance.set(for: self)
+        AppTheme.instance.set(for: self, sceneType: "SettingScene")
+    }
+    
+    func setupObservers() {
+        UserDefaults.standard.addObserver(self, forKeyPath: preferenceObserverSoundEnabledKey, options: NSKeyValueObservingOptions.new, context: nil)
+        UserDefaults.standard.addObserver(self, forKeyPath: preferenceObserverScoreEnabledKey, options: NSKeyValueObservingOptions.new, context: nil)
+        UserDefaults.standard.addObserver(self, forKeyPath: preferenceObserverTimerEnabledKey, options: NSKeyValueObservingOptions.new, context: nil)
+        installObervers = true
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        if keyPath == preferenceObserverSoundEnabledKey {
+             print("Toggle sound")
+        } else if keyPath == preferenceObserverScoreEnabledKey {
+             print("Toggle score")
+        } else if keyPath == preferenceObserverTimerEnabledKey {
+            print("Toggle timer")
+        }
+    }
+    
+    func toggleSetting(settingName: String?) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+    }
+    
+    func removeObservers() {
+        if installObervers {
+            if UserDefaults.standard.keyExist(key: preferenceObserverSoundEnabledKey) {
+                UserDefaults.standard.removeObserver(self, forKeyPath: preferenceObserverSoundEnabledKey)
+            }
+            if UserDefaults.standard.keyExist(key: preferenceObserverScoreEnabledKey) {
+            UserDefaults.standard.removeObserver(self, forKeyPath: preferenceObserverScoreEnabledKey)
+            }
+            if UserDefaults.standard.keyExist(key: preferenceObserverTimerEnabledKey) {
+                UserDefaults.standard.removeObserver(self, forKeyPath: preferenceObserverTimerEnabledKey)
+            }
+            installObervers = false
+        }
     }
     
     func setupTimer() {
@@ -268,17 +482,22 @@ class GameScene: BaseScene {
             startTime = AppDefinition.defaults.integer(forKey: preferenceGameLevelTimeKey)
             AppDefinition.defaults.set(false, forKey: preferenceSetTimerEnabledKey)
         }
+        self.playerTimerLabel.name = "playerTimer"
         self.playerTimerLabel.text = timerString()
+        self.playerTimerLabel.fontName = UIFont.systemFont(ofSize: 14).fontName
         countTime()
     }
     
     func modePrefixString() -> String {
+        #if false
         if currentMode().rawValue.contains("normal") {
             return ""
         }
         else {
             return currentMode().rawValue + "/"
         }
+        #endif
+        return ""
     }
     
     func playNotification() {
@@ -322,7 +541,7 @@ class GameScene: BaseScene {
         return nil
     }
     
-    func completedMessage()->String? {
+    func completedMessage() -> String? {
         let count = completedMessageList.count
         if count > 0 {
             return completedMessageList[random(count)]
@@ -378,6 +597,77 @@ class GameScene: BaseScene {
         replaySelection()
     }
     
+    private func setupHighlight() {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        if CurrentHighlight.boardHightlight != nil {
+            highlightTileNode(labelName: CurrentHighlight.boardHightlight!)
+        }
+        if CurrentHighlight.buttonHighlight != nil {
+            highlightTileNode(labelName: CurrentHighlight.buttonHighlight)
+        }
+    }
+    
+    func drawAppTileWith(param: TileParam) -> SKShapeNode {
+        do {
+            /// greenpinktile
+            let greenpinktile = SKShapeNode()
+            greenpinktile.name = param.tileName
+            greenpinktile.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: param.frame.width * layoutRatio.currentWidthScaleFactor, height: param.frame.height * layoutRatio.currentHeightScaleFactor), cornerRadius: param.cornerRadius * layoutRatio.currentHeightScaleFactor).cgPath
+            greenpinktile.position = param.tilePosition
+            greenpinktile.zPosition = param.zPosition
+            if param.condition && param.tileName.hasPrefix(boardTileName){
+                greenpinktile.fillColor = AppTheme.instance.colorFillAndStrokeBoardAndButton(condition: param.condition).fill!
+                greenpinktile.lineWidth = param.lineWidth * layoutRatio.currentWidthScaleFactor
+                greenpinktile.strokeColor =
+                    AppTheme.instance.colorFillAndStrokeBoardAndButton(condition: param.condition).stroke!
+            } else if param.tileName.hasPrefix(boardTileName) {
+                greenpinktile.fillColor = AppTheme.instance.colorFillAndStrokeBoardAndButton().fill!
+                greenpinktile.lineWidth = param.lineWidth * layoutRatio.currentWidthScaleFactor
+                greenpinktile.strokeColor =
+                    AppTheme.instance.colorFillAndStrokeBoardAndButton().stroke!
+            }
+            greenpinktile.userData = [:]
+            // If board tile node is a vowel:
+            // hide it and make it clickable
+            if param.condition {
+                greenpinktile.userData = [tileUserDataClickName: true]
+            }
+            
+            if param.tileName.hasPrefix(buttonTileName) {
+                greenpinktile.userData = [tileUserDataClickName: true]
+                greenpinktile.fillColor = AppTheme.instance.colorFillAndStrokeBoardAndButton(board: false).fill!
+            }
+            
+            let letter = SKLabelNode(text: param.letter)
+            letter.name = param.letterName
+            letter.fontName = UIFont.systemFont(ofSize: param.fontSize).fontName
+            letter.fontSize = param.fontSize * layoutRatio.currentHeightScaleFactor
+            letter.fontColor = param.fontColor
+            letter.position = letter.convert(CGPoint(x: greenpinktile.frame.midX, y: greenpinktile.frame.midY), to: greenpinktile)
+            letter.zPosition = param.zPosition
+            if param.condition {
+                letter.alpha = CGFloat(0.0)
+            }
+            letter.horizontalAlignmentMode = .center
+            letter.verticalAlignmentMode = .center
+            
+            greenpinktile.addChild(letter)
+            
+            // highlight
+            let highlightTile = SKShapeNode()
+            highlightTile.name = "highlight_\(param.tileName)"
+            highlightTile.path = UIBezierPath(arcCenter: CGPoint(x: letter.frame.midX, y: letter.frame.midY), radius: CGFloat(greenpinktile.frame.width * layoutRatio.currentWidthScaleFactor / 2), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true).cgPath
+            highlightTile.position = highlightTile.convert(CGPoint(x: greenpinktile.frame.midX, y: greenpinktile.frame.midY), to: letter)
+            highlightTile.zPosition = letter.zPosition + 1
+            
+            highlightTile.fillColor = AppTheme.instance.colorFillAndStrokeBoardAndButton(board: false, condition: true).fill!
+            highlightTile.alpha = CGFloat(0.0)
+            greenpinktile.addChild(highlightTile)
+            return greenpinktile
+            
+        }
+    }
+    
     func placeAssets() {
         var position: CGPoint!
         position = CGPoint(x: size.width * layoutRatio.markPositionSizeWidth, y: size.height * layoutRatio.markPositionSizeHeightFromTop)
@@ -386,8 +676,8 @@ class GameScene: BaseScene {
         
         mark.name = "mark"
         mark.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
-
-        var buttonParam: SceneButtonParam =
+        
+        let buttonParam =
             SceneButtonParam(buttonNode: mark, spriteNodeName: "titleImage",
                              position: position,
                              defaultTexture: "pdf/mark", selectedTexture: "pdf/mark")
@@ -395,7 +685,7 @@ class GameScene: BaseScene {
         
         var xPos = size.width * -(layoutRatio.xAnchor - layoutRatio.indentForScoreLabelFromLeftSideEdge)
         var yPos = size.height * (layoutRatio.yAnchor - layoutRatio.indentForScoreLabelFromTopEdge)
-
+        
         position = CGPoint(x: xPos, y: yPos)
         var param: SceneLabelParam =
             SceneLabelParam(labelNode: playerScoreLabel, labelNodeName: layoutRatio.gameScoreName, position: position)
@@ -414,10 +704,12 @@ class GameScene: BaseScene {
         scaledWidth = size.width * layoutRatio.buttonGraphWidthScale
         scaledHeight = size.height * layoutRatio.buttonGraphHeightScale
         graphButton.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
-        buttonParam = SceneButtonParam(buttonNode: graphButton, spriteNodeName: "ShowGraph",
-                             position: position,
-                             defaultTexture: "pdf/scores", selectedTexture: "pdf/scores")
-        sceneButtonSetup(param: buttonParam)
+        graphButton.texture = SKTexture(imageNamed: "pdf/scores")
+        graphButton.name = "ShowGraph"
+        graphButton.position = position
+        graphButton.zPosition = 10
+        graphButton.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        addChild(graphButton)
         
         xPos = size.width * -(layoutRatio.xAnchor - layoutRatio.indentForGameButtonFromSideEdge)
         position.x = xPos
@@ -425,46 +717,60 @@ class GameScene: BaseScene {
         scaledWidth = size.width * layoutRatio.buttonSettingsWidthScale
         scaledHeight = size.height * layoutRatio.buttonSettingsHeightScale
         settingsButton.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
-        buttonParam =
-        SceneButtonParam(buttonNode: settingsButton, spriteNodeName: "GameSettings",
-        position: position,
-        defaultTexture: "pdf/settings", selectedTexture: "pdf/settings")
-        sceneButtonSetup(param: buttonParam)
+        settingsButton.texture = SKTexture(imageNamed: "pdf/settings")
+        settingsButton.name = "GameSettings"
+        settingsButton.position = position
+        settingsButton.zPosition = 10
+        settingsButton.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        addChild(settingsButton)
         
-        placeBoard()
+        getWordsAndPlace()
         placeButtons()
+        
     }
     
-    func placeBoard() {
+    func getWordsAndPlace() {
+        repeat  {
+            if placeBoard() == false {
+                _ = wordList.skip()
+            } else {
+                break
+            }
+        } while(true)
+    }
+    
+    func placeBoard() -> Bool {
         let getWords = wordList.getCurrentWords()!
         let lettersPerRow = [getWords.prefix.utf8.count, getWords.link.utf8.count, getWords.suffix.utf8.count]
         
         let maxTiles = lettersPerRow.map { $0 }.max()!
         var position: CGPoint!
-        let tileWidth = size.width * layoutRatio.tileWidthToScreen
-        let tileHeight = size.height * layoutRatio.tileHeightToScreen
-        let tileInnerSpace = size.width * layoutRatio.spaceBetweenInnerTileInRow
-        
-        let xPos = size.width * -(layoutRatio.xAnchor - layoutRatio.indentToFirstBoardTile)
-        let yPos = size.height * (layoutRatio.yAnchor - layoutRatio.indentFromTopEdgeFirstBoardRow)
-        position = CGPoint(x: xPos, y: yPos)
-        
+        let tileWidth = CGFloat(size.width * layoutRatio.tileWidthToScreen)
+        let tileHeight = CGFloat(size.height * layoutRatio.tileHeightToScreen)
+        let tileInnerSpace = CGFloat(size.width * layoutRatio.spaceBetweenInnerTileInRow)
         let maxAvailableTiles = Int(size.width / (tileWidth + tileInnerSpace))
         
-        if maxAvailableTiles < maxTiles {
+        if maxAvailableTiles <= maxTiles {
             print("Cannot display all tiles")
-            return
+            return false
         }
         
         var param: BoardTileParam = BoardTileParam()
         
         let wordsForRow = [getWords.prefix, getWords.link, getWords.suffix]
         let fontSize = tileHeight * layoutRatio.textSizeToTileHeight
-        
+        let yPos = size.height * (layoutRatio.yAnchor - layoutRatio.indentFromTopEdgeFirstBoardRow)
+        position = CGPoint(x: CGFloat(0), y: yPos )
         for row in 1...3 {
+            
             // Adjust for less than max row tiles
-            let tileAdjustment = (CGFloat(maxAvailableTiles) - CGFloat(lettersPerRow[row - 1])) / CGFloat(2.0)
-            let xPosAdjustment = CGFloat(tileAdjustment) * (tileWidth + tileInnerSpace)
+            let lettersOnRow = CGFloat(lettersPerRow[row - 1])
+            let totalRowSpaceUsed = (tileWidth * lettersOnRow) + (lettersOnRow - 1) * tileInnerSpace
+            let spaceOnEachRowSide = (frame.size.width - totalRowSpaceUsed) / CGFloat(2)
+            let xPosAdjustment = CGFloat(0)
+            let xPos = size.width * -(layoutRatio.xAnchor) + spaceOnEachRowSide
+            position.x = xPos
+            
             
             for column in 1...lettersPerRow[row - 1] {
                 param.row = row
@@ -479,109 +785,62 @@ class GameScene: BaseScene {
                 param.currentWord = wordsForRow[row - 1]
                 param.fontSize = fontSize
                 param.fontName = fontName
-    
-                placeBoardTile(param: param)
                 
+                placeBoardTile(param: param)
                 position.x = position.x + tileWidth + tileInnerSpace
             }
             let yOffset = size.height * layoutRatio.spaceBetweenRowsInScreen
             position.x = xPos
             position.y = position.y - yOffset
         }
+        return true
     }
     
     func placeBoardTile(param: BoardTileParam) {
+        
         let index = param.currentWord.index(param.currentWord.startIndex, offsetBy: param.column - 1)
-        
-        // Create board tile
-        let tile = SKSpriteNode(texture: SKTexture(imageNamed: param.textureBlueRedName))
-        
-        tile.name = "board_tile_\((param.row)!)_\((param.column)!)"
-        tile.scale(to: CGSize(width: param.tileWidth, height: param.tileHeight))
-        tile.position = CGPoint(x: param.position.x + param.xPosAdjustment, y: param.position.y)
-        tile.zPosition = param.zPosition
-        tile.userData = [:]
-        // If board tile node is a vowel:
-        // hide it and make it clickable
         let condition =  VowelCharacter(rawValue: param.currentWord[index])?.rawValue == param.currentWord[index]
-        if condition {
-            tile.userData = [tileUserDataClickName: true]
-            tile.texture = SKTexture(imageNamed: param.textureGreenRedName)
-        }
         
-        addChild(tile)
-        
-        // Add the word letter to board
-        let labelNode = SKLabelNode(fontNamed: param.fontName)
-        labelNode.name = "board_letter_\((param.row)!)_\((param.column)!)"
-        labelNode.position = CGPoint(x: tile.centerRect.midX, y: tile.centerRect.midY)
-        labelNode.text = "\(param.currentWord[index])"
-        if condition {
-            labelNode.alpha = CGFloat(0.0)
-        }
-        labelNode.fontColor = .white
-        labelNode.fontSize = param.fontSize
-        labelNode.verticalAlignmentMode = .center
-        labelNode.horizontalAlignmentMode = .center
-        labelNode.zPosition = param.zPosition
-        tile.addChild(labelNode)
-        
-        // Add highlight and set to invisible  for vowel
-        if condition {
-            addHighlight(tile: tile)
-        }
-    }
-    
-    func addHighlight(tile: SKSpriteNode) {
-        let texture = SKTexture(imageNamed: super.getControlPadPathName())
-        let hightlightNode = SKSpriteNode()
-        hightlightNode.name = "highlight_\((tile.name)!)"
-        hightlightNode.alpha = CGFloat(0.0)
-        hightlightNode.zPosition = 10
-        hightlightNode.size = CGSize(width: tile.size.width, height: tile.size.height)
-        hightlightNode.run(SKAction.setTexture(texture))
-        tile.addChild(hightlightNode)
+        let tileName = "board_tile_\((param.row)!)_\((param.column)!)"
+        let letterName = "board_letter_\((param.row)!)_\((param.column)!)"
+      
+        gameRoot?.addChild(drawAppTileWith(param: BoardParamType(
+            letter: "\(param.currentWord[index])",
+            tileName: tileName, letterName: letterName,
+            condition: condition,
+            tilePosition: param.position,
+            fillColor: AppTheme.instance.colorFillAndStrokeBoardAndButton(board: true, condition: condition).fill!,
+            strokeColor: AppTheme.instance.colorFillAndStrokeBoardAndButton(board: true, condition: condition).stroke!
+            )))
     }
     
     func placeButtons() {
         var position: CGPoint!
         let tileWidth = size.width * layoutRatio.tileWidthToScreen
-        let tileHeight = size.height * layoutRatio.tileHeightToScreen
         let tileInnerSpace = size.width * layoutRatio.spaceBetweenInnerTileInRow
-        let fontSize = tileHeight * layoutRatio.textSizeToTileHeight
-        let xPos = size.width * -(layoutRatio.xAnchor - layoutRatio.indentToCenterOfFirstButtonTile)
+        let lettersOnRow = CGFloat(6)
+        let totalRowSpaceUsed = (tileWidth * lettersOnRow) + (lettersOnRow - 1) * tileInnerSpace
+        let spaceOnEachRowSide = (frame.size.width - totalRowSpaceUsed) / CGFloat(2)
+        let xPos = size.width * -(layoutRatio.xAnchor) + spaceOnEachRowSide
         let yPos = size.height * (layoutRatio.yAnchor - layoutRatio.indentFromTopEdgeToCenterOfButton)
         position = CGPoint(x: xPos, y: yPos)
         
         let labels = ["A", "E", "I", "O", "U", "Y"]
         
         for column in 1...layoutRatio.numberOfVowels {
-            let tile = SKSpriteNode(texture: SKTexture(imageNamed: "pdf/tile"))
+            let tileName = "button_tile_\(column)"
+            let letterName = "button_letter_\(column)"
             
-            position = CGPoint(x: position.x, y: position.y)
-            tile.name = "button_tile_\(column)"
-            tile.scale(to: CGSize(width: tileWidth, height: tileHeight))
-            tile.position = position
-            tile.zPosition = 10
-            tile.userData = [tileUserDataClickName : true ]
-            addChild(tile)
-            
-            let labelNode = SKLabelNode(fontNamed: fontName)
-            labelNode.name = "button_letter_\(labels[column - 1])"
-            labelNode.position = CGPoint(x: tile.centerRect.midX, y: tile.centerRect.midY)
-            labelNode.text = "\(labels[column - 1])"
-            labelNode.fontSize = fontSize
-            labelNode.verticalAlignmentMode = .center
-            labelNode.horizontalAlignmentMode = .center
-            labelNode.zPosition = 10
-            tile.addChild(labelNode)
-            
-            addHighlight(tile: tile)
-            
+            gameRoot?.addChild(drawAppTileWith(param: BoardParamType(
+                letter: "\(labels[column - 1])",
+                tileName: tileName, letterName: letterName,
+                tilePosition: position,
+                fillColor: AppTheme.instance.colorFillAndStrokeBoardAndButton(board: false).fill!,
+                strokeColor: AppTheme.instance.colorFillAndStrokeBoardAndButton(board: false).stroke!)))
+
             position.x = position.x + tileWidth + tileInnerSpace
         }
     }
-    
     
     func addWords(word: Word) -> VowelCount {
         print("Entering \(#file):: \(#function) at line \(#line)")
@@ -615,9 +874,9 @@ class GameScene: BaseScene {
         
         disableButton(button: definitionButton)
         
-        wordList.currentIndex()! > 0 && !statData.isEmpty()  ? enableButton(button: graphButton) : disableButton(button: graphButton)
+        graphButton.isHidden = (wordList.currentIndex()! > 0 && !statData.isEmpty()  ? false :  true)
         
-        enableButton(button: settingsButton)
+        settingsButton.isHidden = false
         
         enableButton(button: mark)
     }
@@ -639,15 +898,10 @@ class GameScene: BaseScene {
     override func transitionReloadScene(scene: SKScene, continueGame: Bool = true) {
         transitionToScene(destination: SceneType.GameScene, sendingScene: scene, continueGame: continueGame)
     }
-
-    
-    func update(_ currentTime: TimeInterval, for scene: SKScene) {
-        
-    }
     
     override func update(_ currentTime: TimeInterval) {
     }
-  
+    
     func progressSummary() {
         let diffTime = self.levelTime - self.startTime
         print("Performance for word link")
@@ -661,25 +915,65 @@ class GameScene: BaseScene {
                                     timeSpan: TimeInterval(diffTime)))
     }
     
-    func findAvailableSpriteNode(nodeList: [SKNode]) -> (tileName: String?, tileNode: SKSpriteNode?, labelNode: SKLabelNode?)? {
-        for node in nodeList {
-            if debugInfo { print("node in list: \((node.name)!)") }
-            guard let spriteNode = node as? SKSpriteNode else { continue }
-            if ((spriteNode.userData?.value(forKeyPath: tileUserDataClickName)) != nil) {
-                print("Found Clickable Node")
-                for child in spriteNode.children {
-                    if (child.name?.contains("board_letter"))! ||
-                        (child.name?.contains("button_letter"))! {
-                        return (spriteNode.name, spriteNode, child as? SKLabelNode)
-                    }
-                }
+    // "<SKLabelNode> name:\'board_letter_1_1\' text:\'I\' fontName:\'.SFUIDisplay\' position:{16.23199462890625, 16.206901550292969}"
+    // "<SKShapeNode> name:\'highlight_board_tile_1_1\' accumulatedFrame:{{0.98400002717971802, 0.95899999141693115}, {31.496999740600586, 31.496999740600586}}"
+    func findAvailableSpriteNode(node: SKNode) -> SKLabelNode? {
+        if node.children.count == 0 {
+            if (node.name?.contains("board_letter"))! ||
+                (node.name?.contains("button_letter"))! {
+                return node as? SKLabelNode
             }
         }
-        print("Not a Clickable Node")
-        return (nil, nil, nil)
+        for child in node.children {
+            if (child.name?.contains("board_letter"))! ||
+                (child.name?.contains("button_letter"))! {
+                return child as? SKLabelNode
+            }
+        }
+        return nil
     }
     
     // MARK: - Gesture recognizer
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func checkIfOverlaySelection(sceneNode: SKNode, nodes: [SKNode]) -> Bool {
+        
+        if sceneNode.name == "settingOverlay" {
+            settingOverlayDelegate?.hideOverlaySetting()
+            return true
+        } else if sceneNode.name == "graphOverlay" {
+            graphOverlayDelegate?.hideOverlayGraph()
+            return true
+        }
+        return false
+    }
+    
+    @objc func handleOverlayTapFrom(recognizer: UITapGestureRecognizer) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        if recognizer.state != .ended {
+            return
+        }
+        
+        let recognizorLocation = recognizer.location(in: self.scene?.view)
+        let location = self.convertPoint(fromView: recognizorLocation)
+        
+        let nodeAtScene = scene?.atPoint(location)
+        if (nodeAtScene == nil || nodeAtScene?.name == "backgroundBase") {
+            return
+        } else {
+            print("name of overlay node: \(String(describing: nodeAtScene?.name))")
+        }
+        
+        let nodesAtPoint = self.nodes(at: location)
+        if nodesAtPoint.count == 0  { return }
+        
+        if checkIfOverlaySelection(sceneNode: nodeAtScene!, nodes: nodesAtPoint) {
+            return
+        }
+    }
+    
     @objc func handleTapFrom(recognizer: UITapGestureRecognizer) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         if recognizer.state != .ended {
@@ -689,13 +983,17 @@ class GameScene: BaseScene {
         let recognizorLocation = recognizer.location(in: self.scene?.view)
         let location = self.convertPoint(fromView: recognizorLocation)
         
-        let nodesAtPoint = self.nodes(at: location)
-        if nodesAtPoint.count == 0  { return }
-        print("Node selected")
+        let nodeAtScene = scene?.atPoint(location)
+        if (nodeAtScene == nil || nodeAtScene?.name == "backgroundBase" ||  nodeAtScene?.name == "gameScene") {
+            return
+        } else if nodeAtScene?.name == "titleImage" {
+            cleanup()
+            return
+        } else {
+            print("name of node at scene: \(String(describing: nodeAtScene?.name))")
+        }
         
-        guard let nodeGroup = findAvailableSpriteNode(nodeList: nodesAtPoint) else { return }
-        
-        guard let _ = nodeGroup.tileName,  let labelNode = nodeGroup.labelNode, let tileNode = nodeGroup.tileNode else { return }
+        guard let labelNode = findAvailableSpriteNode(node: nodeAtScene!) else { return }
         
         /*
          if nodes is a vowel from the board that has not been selected before
@@ -712,41 +1010,137 @@ class GameScene: BaseScene {
             print("node previously selected")
             return
         }
-        print("new tile Node: \(String(describing: tileNode.name!)) selected")
+        print("new tile Node: \(String(describing: labelNode.name!)) selected")
         
-//        clickCount(tileName: tileNode.name)
-//
-//        highlightSelection(nodeGroup: nodeGroup)
-//
-//        processTileSelection(nodeGroup: nodeGroup)
+        clickCount(labelName: labelNode.name)
         
-        // Test graph overlay
-        toggleGraphOverlay()
+        highlightSelection(labelNode: labelNode)
         
+        processTileSelection(labelName: labelNode.name)
     }
     
+    func getTileNamefromLabelName(labelName: String?) -> String? {
+        return labelName?.replacingOccurrences(of: "letter", with: "tile")
+    }
+    
+    func selectableNode(labelName: String) -> Bool {
+        let tileName = getTileNamefromLabelName(labelName: labelName)
+        let node = gameRoot?.childNode(withName: "//" + tileName!)
+        if node?.userData?.count == 0 {
+            return false
+        }
+        return true
+    }
+    
+    func getTileNodeFromLabelName(labelName: String) -> SKNode? {
+        let tileName = getTileNamefromLabelName(labelName: labelName)
+        return gameRoot?.childNode(withName: "//" + tileName!)
+    }
+   
+    func checkHighlightMatch() -> Bool {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        // check board highlight
+        // check button highlight
+        // if equal
+        // register match and check for complete match
+        if CurrentHighlight.boardHightlight != nil && CurrentHighlight.buttonHighlight != nil {
+            print("board highlight: \((CurrentHighlight.boardHightlight)!)")
+            print("button highlight: \((CurrentHighlight.buttonHighlight)!)")
+            if CurrentHighlight.boardHightlightText == CurrentHighlight.buttonHightlightText {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func unhiglightPrevious(previousLabelName: String?) {
+        let tileName = getTileNamefromLabelName(labelName: previousLabelName)
+        let highlightLabel = gameRoot?.childNode(withName: "//highlight_\((tileName)!)")
+        if (highlightLabel?.isKind(of: SKShapeNode.self))! {
+            highlightLabel?.alpha = CGFloat(turnOffVisibility)
+        }
+    }
+    
+    func processTileSelection(labelName: String?) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        if checkHighlightMatch() {
+            print("Match between: \((CurrentHighlight.boardHightlight)!) and \((CurrentHighlight.buttonHighlight)!)")
+            
+            // reveal matched letter and mark board cell occupied
+            let tileNode = gameRoot?.childNode(withName: nameDoubleSlashPrex + CurrentHighlight.boardHightlight!)
+            tileNode?.alpha = CGFloat(turnOnVisibility)
+            
+            // clear highlighted cells
+            unhighlightTileNode(labelName: CurrentHighlight.boardHightlight!)
+            unhighlightTileNode(labelName: CurrentHighlight.buttonHighlight!)
 
-    private var graphOverlay: GraphOverlay?
+            // increment match count
+            counters.clickMatch()
+            
+            // record position to restore
+            liveData.addItem(item: LiveData(position: CurrentHighlight.boardHightlight!))
+            
+            // reset CurrentHighlight structure contents
+            CurrentHighlight.reset()
+            
+            // check if completed match
+            checkForAllMatches()
+        }
+    }
     
-    func testGraphOverlay()  {
+    // MARK:- overlay views
+    func setupGraphOverlay()  {
+        print("Entering \(#file):: \(#function) at line \(#line)")
         
-        graphOverlay = GraphOverlay(size: CGSize(width: (self.view?.bounds.size.width)!, height: (self.view?.bounds.size.height)!))
-        self.addChild(graphOverlay!)
+        let rootNode: GraphOverlay = GraphOverlay(size: CGSize(width: (self.view?.bounds.size.width)!, height: (self.view?.bounds.size.height)!))
+        graphOverlayDelegate = rootNode
+        graphRoot?.addChild(rootNode)
     }
     
-    
-    func toggleGraphOverlay() {
-       graphOverlay?.toggleGraphOverlay()
+    func showOverlayGraph() {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        self.isUserInteractionEnabled = false
+        self.isPaused = true
+        graphOverlayDelegate?.showOverlayGraph()
     }
     
-    func clickCount(tileName: String?) {
-        if ((tileName?.hasPrefix(boardTileName))!
-            || (tileName?.hasPrefix(boardLetterName))!) {
-            let tileNode = childNode(withName: "//" + tileName!)
-            if (tileNode?.userData?.value(forKeyPath: tileUserDataClickName) as? Bool)!  {
-                    counters.clickAttempt()
-                    print("click count: \(counters.totalClicks())")
-                }
+    func hideOverlayGraph() {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        self.isUserInteractionEnabled = true
+        self.isPaused = false
+        graphOverlayDelegate?.hideOverlayGraph()
+    }
+    
+    func setupSettingOverlay()  {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        
+        let rootNode: SettingOverlay = SettingOverlay(size: CGSize(width: (self.view?.bounds.size.width)!, height: (self.view?.bounds.size.height)!))
+        settingOverlayDelegate = rootNode
+        settingRoot?.addChild(rootNode)
+    }
+    
+    func showOverlaySetting() {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        self.isUserInteractionEnabled = false
+        self.isPaused = true
+        settingOverlayDelegate?.showOverlaySetting()
+    }
+    
+    func hideOverlaySetting() {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        self.isUserInteractionEnabled = true
+        self.isPaused = false
+        settingOverlayDelegate?.hideOverlaySetting()
+    }
+    
+    func clickCount(labelName: String?) {
+        if ((labelName?.hasPrefix(boardLetterName))! == true
+            || (labelName?.hasPrefix(buttonLetterName))! == true) {
+            let tileNode = getTileNodeFromLabelName(labelName: labelName!)
+            if (tileNode?.userData?.count != 0 && (tileNode?.userData?.value(forKeyPath: tileUserDataClickName) as? Bool)!)  {
+                counters.clickAttempt()
+                print("click count: \(counters.totalClicks())")
+            }
         }
     }
     
@@ -759,7 +1153,7 @@ class GameScene: BaseScene {
      */
     
     func foundLetter(nodeName: String?) -> (letter: String?, nodeName: String?) {
-        let childrenList = childNode(withName: (nodeName)!)?.children
+        let childrenList = gameRoot?.childNode(withName: (nodeName)!)?.children
         for child in childrenList! {
             if (child.name?.contains(boardLetterName))!
                 || (child.name?.contains(buttonLetterName))! {
@@ -774,7 +1168,7 @@ class GameScene: BaseScene {
     
     func unhighlightTileNodeByName(name: String?) {
         if localToggle { print("Entering \(#file):: \(#function) at line \(#line)") }
-        let previousNode = childNode(withName: (name)!)
+        let previousNode = gameRoot?.childNode(withName: (name)!)
         let childNodeList = previousNode?.children
         for child in childNodeList! {
             if (child.name?.contains(highlightPrefix))! {
@@ -785,11 +1179,11 @@ class GameScene: BaseScene {
     
     func unhighlightAllExcept(tileNameList: [String?]) {
         if localToggle { print("Entering \(#file):: \(#function) at line \(#line)") }
-        let buttonList = children.filter{ ($0.name?.contains(buttonTileName))! }
-        for buttonNode in buttonList {
-            let node = childNode(withName: buttonNode.name!)
+        let buttonList = gameRoot?.children.filter{ ($0.name?.contains(buttonTileName))! }
+        for buttonNode in buttonList! {
+            let node = gameRoot?.childNode(withName: buttonNode.name!)
             for child in (node?.children)! {
-
+                
                 var match: Bool!
                 for (_, tileName) in tileNameList.enumerated() {
                     match = child.name?.range(of: tileName!) != nil
@@ -805,9 +1199,9 @@ class GameScene: BaseScene {
     
     func unhighlightButtonTiles() {
         if localToggle { print("Entering \(#file):: \(#function) at line \(#line)") }
-        let buttonList = children.filter{ ($0.name?.contains(buttonTileName))! }
-        for buttonNode in buttonList {
-            let node = childNode(withName: buttonNode.name!)
+        let buttonList = gameRoot?.children.filter{ ($0.name?.contains(buttonTileName))! }
+        for buttonNode in buttonList! {
+            let node = gameRoot?.childNode(withName: buttonNode.name!)
             for child in (node?.children)! {
                 if (child.name?.contains(highlightPrefix))! {
                     child.alpha = CGFloat(turnOffVisibility)
@@ -818,9 +1212,9 @@ class GameScene: BaseScene {
     
     func unhighlightBoardTiles() {
         if localToggle { print("Entering \(#file):: \(#function) at line \(#line)") }
-        let tileList = children.filter{ ($0.name?.contains(boardTileName))! }
-        for tileNode in tileList {
-            let node = childNode(withName: tileNode.name!)
+        let tileList = gameRoot?.children.filter{ ($0.name?.contains(boardTileName))! }
+        for tileNode in tileList! {
+            let node = gameRoot?.childNode(withName: tileNode.name!)
             for child in (node?.children)! {
                 if (child.name?.contains(highlightPrefix))! {
                     child.alpha = CGFloat(turnOffVisibility)
@@ -840,85 +1234,17 @@ class GameScene: BaseScene {
         if localToggle { print("Entering \(#file):: \(#function) at line \(#line)") }
         let tileLetterName = tileList.filter{ ($0?.contains(boardLetterName))! }.first!
         if !((tileLetterName?.isEmpty)!) {
-            let tileNode = childNode(withName: nameDoubleSlashPrex + tileLetterName!)
+            let tileNode = gameRoot?.childNode(withName: nameDoubleSlashPrex + tileLetterName!)
             tileNode?.alpha = CGFloat(turnOnVisibility)
         }
     }
     
     func restoreBoardState(liveDataItems: [LiveData]) {
         for (_, selection) in liveDataItems.enumerated() {
-            if selection.position.lowercased().contains(buttonPrefix) { continue }
-            if selection.position.lowercased().contains(highlightPrefix) { continue }
-            if selection.position.lowercased().contains(tilePrefix) {
-                let node = childNode(withName: nameDoubleSlashPrex + selection.position)?.children
-                for child in node! {
-                    if (child.name?.contains(boardLetterName))! {
-                        let letterNode = child as? SKLabelNode
-                        print("Restored letter from \((child.name)!) found: \((letterNode?.text)!)")
-                        child.alpha = CGFloat(turnOnVisibility)
-                        counters.restoreMatch()
-                    }
-                }
-             }
-        }
-    }
-    
-    func processTileSelection(nodeGroup: (tileName: String?, tileNode: SKSpriteNode?, labelNode: SKLabelNode?)) {
-        
-        if tileNodeList.count == 0 {
-            tileNodeList.append(nodeGroup.tileNode!)
-        } else if tileNodeList.count == 1 {
-             print ("Selected label name: \(String(describing: (nodeGroup.labelNode?.name)!)) and previous tile: \(tileNodeList[0].name!)" )
-            
-            let parentNode = (nodeGroup.labelNode?.name?.split{$0 == "_"}.map(String.init).first)!
-           
-            let previousParentNode = (tileNodeList[0].name?.split{$0 == "_"}.map(String.init).first)!
-            
-            print("Comparing parent group: \(String(describing: parentNode)) and tile: \(tileNodeList[0].name!)")
-            
-            // check if button tile selected - ensure it will be the only
-            // button tile highlighted
-            
-            if (parentNode == previousParentNode) {
-                // unhighlight previous and remove all from list
-                let previousLabelNode = tileNodeList.last
-                tileNodeList.removeAll()
-               
-                unhighlightTileNodeByName(name: (previousLabelNode?.name)!)
-                
-                // add most recent to list
-                tileNodeList.append(nodeGroup.tileNode!)
-            } else  {
-                // board selection and button selection comparison
-                // check if tile letter and button letter match
-                // if match:
-                //  reveal letter in board and unhighlight both cells
-                //  empty selection list
-                // if no match:
-                //  remove oldest selection from list.
-                //  unhighlight oldest selection
-                //  add to list most recent selection
-                //  and highlight.
-                
-                // When all matches found clean and present new initial screen.
-                
-                /*
-                 Button selected: button_tile_2
-                 Selected label name: button_letter_E and previous tile: board_tile_1_4
-                 Comparing parent group: button and tile: board_tile_1_4
-                 */
-                var foundLetterList = [String]()
-                
-                let foundLetterAndNodeName1 = foundLetter(nodeName: (tileNodeList.last?.name)!)
-                let foundLetterAndNodeName2 = foundLetter(nodeName: (nodeGroup.tileNode?.name)!)
-                foundLetterList.append(foundLetterAndNodeName1.letter!)
-                foundLetterList.append(foundLetterAndNodeName2.letter!)
-                
-                handleTileButtonMatch(foundLetterList: foundLetterList,
-                                      foundLetterAndNodeName1: foundLetterAndNodeName1,
-                                      foundLetterAndNodeName2: foundLetterAndNodeName2,
-                                      previousNodeName: (tileNodeList.last?.name)!,
-                                      currentNodeName: (nodeGroup.tileNode?.name)!)
+            if selection.position.lowercased().contains(boardLetterName) {
+                let tileNode = gameRoot?.childNode(withName: nameDoubleSlashPrex + selection.position)
+                tileNode?.alpha = CGFloat(turnOnVisibility)
+                counters.restoreMatch()
             }
         }
     }
@@ -928,7 +1254,7 @@ class GameScene: BaseScene {
                                foundLetterAndNodeName2: (letter: String?, nodeName: String?),
                                previousNodeName: String,
                                currentNodeName: String
-                               ) {
+        ) {
         
         if (foundLetterList.count == 2 && foundLetterList.first == foundLetterList.last) {
             print("Match found, letter: \((foundLetterList.first)!)")
@@ -936,11 +1262,11 @@ class GameScene: BaseScene {
             unhightlighAllTiles()
             //let queue = DispatchQueue(label: "com.teknowsys.wrdlnk.handleTileButtonMatchTrue")
             //queue.sync {
-                showBoardMatchTileLetter(tileList: [foundLetterAndNodeName1.nodeName, foundLetterAndNodeName2.nodeName])
-                if (inMatchList(list: foundLetterList)) { return }
-                matchListAdd(matchListItems: &matchList, list: [previousNodeName, currentNodeName])
-                counters.clickMatch()
-                checkForAllMatches()
+            showBoardMatchTileLetter(tileList: [foundLetterAndNodeName1.nodeName, foundLetterAndNodeName2.nodeName])
+            if (inMatchList(list: foundLetterList)) { return }
+            matchListAdd(matchListItems: &matchList, list: [previousNodeName, currentNodeName])
+            counters.clickMatch()
+            checkForAllMatches()
             //}
         } else {
             unhighlightAllExcept(tileNameList: [previousNodeName, currentNodeName])
@@ -970,18 +1296,46 @@ class GameScene: BaseScene {
         if localToggle { print("Entering \(#file):: \(#function) at line \(#line)") }
         //let queue = DispatchQueue(label: "com.teknowsys.wrdlnk.matchlistadd")
         //queue.sync {
-            for (index, _) in list.enumerated() {
-                guard let _ = list[index]?.hasPrefix(boardPrefix), let name = list[index] else { continue }
-                
-                if matchListItems.isEmpty || !matchListItems.contains(name) {
-                    matchListItems.append(name)
-                }
-                
-                if liveData.isEmpty() || !liveData.contains(item: LiveData(position: name)) {
-                    liveData.addItem(item: LiveData(position: name))
-                }
+        for (index, _) in list.enumerated() {
+            guard let _ = list[index]?.hasPrefix(boardPrefix), let name = list[index] else { continue }
+            
+            if matchListItems.isEmpty || !matchListItems.contains(name) {
+                matchListItems.append(name)
             }
+            
+            if liveData.isEmpty() || !liveData.contains(item: LiveData(position: name)) {
+                liveData.addItem(item: LiveData(position: name))
+            }
+        }
         //}
+    }
+    
+    func unlightOneofThreeNodes(newNode: String?, newNodeText: String?, previousNode: String?, previousPreviousNode: String?) {
+        // button button board
+        // board board button
+        if (newNode?.contains(boardLetterName))!  {
+            if (previousNode != nil) && (previousNode?.contains(boardLetterName))! {
+                unhighlightTileNode(labelName:previousNode!)
+            } else if (previousPreviousNode != nil) && (previousPreviousNode?.contains(boardLetterName))! {
+                unhighlightTileNode(labelName:previousPreviousNode!)
+                NameCache.previousPreviousName = NameCache.previousName
+            }
+            unhighlightBoardTiles()
+            highlightTileNode(labelName:newNode!)
+            CurrentHighlight.boardHightlight = newNode
+            CurrentHighlight.boardHightlightText = newNodeText
+        } else if (newNode?.contains(buttonLetterName))!  {
+            if (previousNode != nil) && (previousNode?.contains(buttonLetterName))! {
+                unhighlightTileNode(labelName:previousNode!)
+            } else if (previousPreviousNode != nil) && (previousPreviousNode?.contains(buttonLetterName))! {
+                unhighlightTileNode(labelName:previousPreviousNode!)
+                NameCache.previousPreviousName = NameCache.previousName
+            }
+            unhighlightButtonTiles()
+            highlightTileNode(labelName:newNode!)
+            CurrentHighlight.buttonHighlight = newNode
+            CurrentHighlight.buttonHightlightText = newNodeText
+        }
     }
     
     // MARK:- New Highlighting method
@@ -990,26 +1344,31 @@ class GameScene: BaseScene {
     //        let buttonLetterName = "button_letter_" // SKLabelNode
     //        let boardTileName = "board_tile"  // SKSpriteNode
     //        let highNodePrefix = "highlight_"
-    func highlightSelection(nodeGroup: (tileName: String?, tileNode: SKSpriteNode?, labelNode: SKLabelNode?)?) {
-        let tileNode = nodeGroup?.tileNode
-        let tileName = nodeGroup?.tileName
-        if (tileName?.contains(boardTileName))! {
-            print("Board selected: \((tileName)!)")
-            for child in (tileNode?.children)! {
-                if (child.name?.contains("highlight_"))! {
-                    child.alpha = CGFloat(turnOnVisibility)
-                    break
-                }
+    func highlightSelection(labelNode: SKLabelNode?) {
+        if !selectableNode(labelName: (labelNode?.name)!) {
+            return
+        }
+        
+        unlightOneofThreeNodes(newNode: labelNode?.name, newNodeText: labelNode?.text, previousNode: NameCache.previousName, previousPreviousNode: NameCache.previousPreviousName)
+       
+        NameCache.previousName = labelNode?.name
+    }
+    
+    func highlightTileNode(labelName: String?) {
+        if (labelName?.contains(boardLetterName))! || (labelName?.contains(buttonLetterName))! {
+            let tileName = getTileNamefromLabelName(labelName: labelName!)
+            let highlightLabel = gameRoot?.childNode(withName: "//highlight_\((tileName)!)")
+            if (highlightLabel?.isKind(of: SKShapeNode.self))! {
+                highlightLabel?.alpha = CGFloat(turnOnVisibility)
             }
         }
-        else if (tileName?.contains(buttonTileName))! {
-            print("Button selected: \((tileName)!)")
-            for child in (tileNode?.children)! {
-                if (child.name?.contains("highlight_"))! {
-                    child.alpha = CGFloat(turnOnVisibility)
-                    break
-                }
-            }
+    }
+    
+    func unhighlightTileNode(labelName: String?) {
+        let tileName = getTileNamefromLabelName(labelName: labelName!)
+        let highlightLabel = gameRoot?.childNode(withName: "//highlight_\((tileName)!)")
+        if (highlightLabel?.isKind(of: SKShapeNode.self))! {
+            highlightLabel?.alpha = CGFloat(turnOffVisibility)
         }
     }
     
@@ -1026,14 +1385,14 @@ class GameScene: BaseScene {
     func toggleHighlightBoardTile(nodeName: String, hidden: Bool = true) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         let hightlightNodeName = "//highlight_\(nodeName)"
-        let highlightNode = childNode(withName: hightlightNodeName)
+        let highlightNode = gameRoot?.childNode(withName: hightlightNodeName)
         highlightNode?.isHidden = hidden
     }
     
     func toggleHighlightButtonTile(nodeName: String, hidden: Bool = true) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         let hightlightNodeName = "//highlight_\(nodeName)"
-        let highlightNode = childNode(withName: hightlightNodeName)
+        let highlightNode = gameRoot?.childNode(withName: hightlightNodeName)
         highlightNode?.isHidden = hidden
     }
     
@@ -1049,7 +1408,7 @@ class GameScene: BaseScene {
         prevLabelNode = labelNode
         return same
     }
- 
+    
     func unhighlightAll(tileList: inout [SKSpriteNode]) {
         let count = tileList.count
         for _ in 0..<count {
@@ -1065,13 +1424,15 @@ class GameScene: BaseScene {
             matchLabel?.vowelSet()
         }
     }
-   
+    
     func messageFrequency() -> Double {
         let displayOptional = random(9)
         print("displayOptional is: \(displayOptional)")
         var pause:Double = 0.3
+        
         let condition = displayOptional % 3 == 0
             && counters.accuracy() > Float(MesssageDisplayThreshold)
+        
         if  condition {
             playTextAnimated(fileName: completedMessage())
             pause = 2.0
@@ -1096,13 +1457,12 @@ class GameScene: BaseScene {
                 self.liveData.deleteLiveData()
                 self.counters.deleteVowelCount()
                 self.stopAudio(delay: 0.2)
-                self.transitionReloadScene(scene: self)
                 self.resetTimer = true
                 AppDefinition.defaults.set(true, forKey: preferenceContinueGameEnabledKey)
+                self.transitionReloadScene(scene: self)
             }
-            _ = wordList.getWords()
             
-            return
+            _ = wordList.getWords()
         } else {
             playSoundForEvent(soundEvent: .yes)
             if !wordList.isEmpty() {
@@ -1146,16 +1506,13 @@ class GameScene: BaseScene {
             AppDefinition.defaults.set(playerScore, forKey: preferenceHighScoreKey)
         }
         playerScoreLabel.text = "\(playerScore)"
-        
+        playerScoreLabel.fontName = UIFont.systemFont(ofSize: 14).fontName
     }
+    
     
     // MARK:- Timer
     func playerTimerUpdate() {
-        if AppDefinition.defaults.bool(forKey: preferenceTimerEnabledKey) {
-            playerTimerLabel.text = "\(playerTimer)"
-        } else {
-            playerTimerLabel.isHidden = true
-        }
+        playerTimerVisible()
         
         if resetTimer {
             startTime = AppDefinition.defaults.integer(forKey: preferenceGameLevelTimeKey)
@@ -1164,6 +1521,14 @@ class GameScene: BaseScene {
             wordList.clearMatchCondition()
         } else {
             startTime = AppDefinition.defaults.integer(forKey: preferenceStartTimeKey)
+        }
+    }
+    
+    private func playerTimerVisible() {
+        if AppDefinition.defaults.bool(forKey: preferenceTimerEnabledKey) {
+            playerTimerLabel.text = "\(playerTimer)"
+        } else {
+            playerTimerLabel.isHidden = true
         }
     }
     
@@ -1176,30 +1541,36 @@ class GameScene: BaseScene {
         var groupAction:[SKAction] = []
         let texture = SKTexture(imageNamed: fileName!)
         let messageNode = SKSpriteNode(texture: texture, size:CGSize(width: texture.size().width, height: texture.size().height))
+        messageNode.name = "animatedText"
+        messageNode.color = AppTheme.instance.colorFillAndStrokeBoardAndButton(board: false, condition: true).stroke!
+        messageNode.colorBlendFactor = 1
+        
+        messageNode.zPosition = self.playerTimerLabel.zPosition + 1
         
         if UIDevice.isiPad {
             positionScale = 1.3
             spriteScale = 1.5
-            messageNode.scale(to: CGSize(width: texture.size().width * spriteScale,
-                                         height: texture.size().height * spriteScale))
+            messageNode.scale(to: CGSize(width: texture.size().width * layoutRatio.currentWidthScaleFactor,
+                                         height: texture.size().height * layoutRatio.currentHeightScaleFactor))
             groupAction = [.scale(to: spriteScale, duration: 0.3)]
         } else {
             positionScale = 0.9
-            spriteScale = 1.0
+            spriteScale = layoutRatio.currentHeightScaleFactor
             groupAction = [.scale(to: spriteScale, duration: 0.3)]
         }
         
         let bgframe = self.frame
-        let moveToArray = [CGPoint(x: bgframe.midX + (2 * tileWidth), y: bgframe.minY * positionScale),
-                           CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.minY * positionScale),
-                           CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.minY * positionScale) ]
+        let moveToArray = [CGPoint(x: bgframe.midX + (1 * tileWidth), y: bgframe.minY * positionScale),
+                           CGPoint(x: bgframe.midX - (1 * tileWidth), y: bgframe.minY * positionScale),
+                           CGPoint(x: bgframe.midX - (1 * tileWidth), y: bgframe.minY * positionScale) ]
         
-        let moveFromArray = [CGPoint(x: bgframe.midX + (2 * tileWidth), y: max(bgframe.midY + (7 * tileHeight), bgframe.maxY - tileHeight)),
-                             CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.maxY * positionScale),
-                             CGPoint(x: bgframe.midX - (2 * tileWidth), y: bgframe.maxY * positionScale) ]
+        let moveFromArray = [CGPoint(x: bgframe.midX + (1 * tileWidth), y: max(bgframe.midY + (7 * tileHeight), bgframe.maxY - tileHeight)),
+                             CGPoint(x: bgframe.midX - (1 * tileWidth), y: bgframe.maxY * positionScale),
+                             CGPoint(x: bgframe.midX - (1 * tileWidth), y: bgframe.maxY * positionScale) ]
         let fromPos = moveFromArray[random(3)]
         let toPos = moveToArray[random(3)]
         messageNode.position = fromPos
+        
         
         self.addChild(messageNode)
         let moveText = SKAction.move(to: toPos, duration: 0.9)
@@ -1212,6 +1583,7 @@ class GameScene: BaseScene {
                                           fadeAway,
                                           removeNode])
         messageNode.run(sequence)
+        
     }
 }
 

@@ -29,22 +29,22 @@ extension GameScene {
         if !state { return }
         switch soundEvent {
         case .beepbeep:
-            playSimpleSound(fileName: SoundEvent.beepbeep.rawValue)
+            playSimpleSound(fileName: "beepbeep.mp3")
             break
         case .biff:
-            playSimpleSound(fileName: SoundEvent.biff.rawValue)
+            playSimpleSound(fileName: "biff.mp3")
             break
         case .yes:
-            playSimpleSound(fileName: SoundEvent.yes.rawValue)
+            playSimpleSound(fileName: "yes.mp3")
             break
         case .good:
-            playSimpleSound(fileName: SoundEvent.good.rawValue)
+            playSimpleSound(fileName: "good.mp3")
             break
         case .great2:
-            playSimpleSound(fileName: SoundEvent.great2.rawValue)
+            playSimpleSound(fileName: "great2.mp3")
             break
         case .error:
-            playSimpleSound(fileName: SoundEvent.error.rawValue)
+            playSimpleSound(fileName: "error.mp3")
             break
         default:
             break

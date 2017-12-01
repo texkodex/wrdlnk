@@ -38,14 +38,14 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
             if view is UIScrollView {
                 view.frame = UIScreen.main.bounds
             } else if view is UIPageControl {
-                view.frame.origin.y = self.view.frame.size.height - 164
+                view.frame.origin.y = self.view.frame.size.height - 190 * layoutRatio.currentHeightScaleFactor
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
         self.dataSource = self
         self.delegate = self
         
@@ -53,8 +53,11 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
             self.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
         
-        self.view.backgroundColor = .white
-        AppTheme.instance.set(for: self.view)
+        self.view.backgroundColor = backgroundColor
+        
+        #if false
+            AppTheme.instance.set(for: self, viewType: "InstructionView")
+        #endif
     }
 
     func lastVC(currentVC: UIViewController) -> UIViewController {
@@ -104,8 +107,8 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
     
     private func setupPageControl() {
         let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = AppTheme.instance.fontColor()
-        appearance.currentPageIndicatorTintColor = AppTheme.instance.backgroundColor()
+        appearance.pageIndicatorTintColor = foregroundColor.withAlphaComponent(0.5)
+        appearance.currentPageIndicatorTintColor = foregroundColor
         appearance.backgroundColor = .clear
     }
     

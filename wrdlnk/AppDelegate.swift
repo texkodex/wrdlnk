@@ -13,6 +13,9 @@ import Facebook
 import Google
 import GoogleMobileAds
 
+let GADMobileAdsAppID = "ca-app-pub-4627466505633159~8389649892"
+let FacebookUrl = "fbXXXXXXXXXXX"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -25,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         firebaseAppOptions()
     
         GIDSignIn.initialize()
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-4627466505633159~8389649892")
+        GADMobileAds.configure(withApplicationID: GADMobileAdsAppID)
         
         self.window?.makeKeyAndVisible()
         return true
@@ -41,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      open url: URL,
                      options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if(url.scheme!.isEqual("fbXXXXXXXXXXX")) {
+        if(url.scheme!.isEqual(FacebookUrl)) {
             return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
             
         } else {
@@ -57,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults: [AppDefinition.InitialDefaults: false,
                        AppDefinition.InitialLogin: false,
              AppDefinition.DefaultBackground: [105.0/255.0, 111.0/255.0, 120.0/255.0, 1.0]])
-        
+       
         let path = Bundle.main.path(forResource: AppDefinition.UserDefaultsTag, ofType: AppDefinition.PropertyList);
         
         if ((path) != nil)

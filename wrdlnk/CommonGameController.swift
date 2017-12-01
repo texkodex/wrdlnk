@@ -41,7 +41,7 @@ class CommonGameController: NSObject, AdditionalProtocols {
         sceneRenderer!.delegate = self
         
         graphOverlay = GraphOverlay(size: scnView.bounds.size)
-        scnView.overlaySKScene = graphOverlay
+        //scnView.overlaySKScene = graphOverlay
         // load the main scene
         
         self.scene = SCNScene() // important

@@ -27,12 +27,11 @@ class MainMenuScene: BaseScene {
     let settings = SKLabelNode(text: "Game Settings")
     let gameSettingsButton = ButtonNode(imageNamed: "pdf/settings")
     
-    let purchase = SKLabelNode(text: "In App Purchase")
-    let inAppPurchaseButton = ButtonNode(imageNamed: "pdf/purchase")
-    
     let guide = SKLabelNode(text: "Instructions")
     let instructionsButton = ButtonNode(imageNamed: "pdf/info")
 
+    let colorGroup = AppTheme.instance.returnColorGroupByName(sceneName: "LoginScene")
+    
     deinit {
         print("Entering \(#file):: \(#function) at line \(#line)")
         self.removeFromParent()
@@ -44,11 +43,15 @@ class MainMenuScene: BaseScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
+        
+        self.name = "MainMenuScene"
+        
         placeAssets()
         
         initializeButtons()
         setGameLevelTime()
-        AppTheme.instance.set(for: self)
+        
+        AppTheme.instance.set(for: self, sceneType: "SettingScene")
     }
     
     func placeAssets() {
@@ -56,9 +59,10 @@ class MainMenuScene: BaseScene {
         let scaledWidth = size.width * layoutRatio.markWidthScale
         let scaledHeight = size.height * layoutRatio.markHeightScale
         mark.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
-        mark.anchorPoint = CGPoint(x: layoutRatio.markXAnchorPoint, y: layoutRatio.markYAnchorPoiint)
+        mark.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        
         mark.position = CGPoint(x: size.width * layoutRatio.markPositionSizeWidth,
-                                y: size.height * layoutRatio.markPositionSizeHeightFromTop)
+                                y: size.height * layoutRatio.markPositionSizeHeightFromTop - mark.frame.height / 2)
         mark.zPosition = layoutRatio.markZPosition
         addChild(mark)
         
@@ -99,14 +103,7 @@ class MainMenuScene: BaseScene {
                                position: position, frame: base.frame,
                                defaultTexture: "pdf/settings", selectedTexture: "pdf/settings")
         sceneNodeSetup(param: param)
-        
-        position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
-        param = SceneNodeParam(labelNode: purchase, labelNodeName: "purchase",
-                               buttonNode: inAppPurchaseButton, spriteNodeName: "InAppPurchase",
-                               position: position, frame: base.frame,
-                               defaultTexture: "pdf/purchase", selectedTexture: "pdf/purchase")
-        sceneNodeSetup(param: param)
-        
+    
         position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
         param = SceneNodeParam(labelNode: guide, labelNodeName: "guide",
                                buttonNode: instructionsButton, spriteNodeName: "Instructions",
@@ -128,10 +125,7 @@ class MainMenuScene: BaseScene {
         
         state = AppDefinition.defaults.bool(forKey: preferenceSettingsMainEnabledKey)
         state ? enableButton(button: gameSettingsButton, isSelected: state, focus: true) : enableButton(button: gameSettingsButton, isSelected: state)
-        
-        state = AppDefinition.defaults.bool(forKey: preferenceInAppPurchaseEnabledKey)
-        state ? enableButton(button: inAppPurchaseButton, isSelected: state, focus: true) : enableButton(button: inAppPurchaseButton, isSelected: state)
-        
+    
         state = AppDefinition.defaults.bool(forKey: preferenceInstructionsEnabledKey)
         state ? enableButton(button: instructionsButton, isSelected: state, focus: true) : enableButton(button: instructionsButton, isSelected: state)
     }

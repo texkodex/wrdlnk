@@ -9,34 +9,105 @@
 import UIKit
 
 class WalkThroughOneViewController: UIViewController {
-    
-    @IBOutlet weak var walkthroughImage: UIImageView!
-    
-    @IBOutlet weak var backgroundView: UIView!
-    
-    @IBOutlet weak var mainTitleLabel: UILabel!
-    
-    @IBOutlet weak var infoImage: UIImageView!
-    
-    @IBOutlet weak var firstSubTitleLabel: UILabel!
-    
-    @IBOutlet weak var secondSubTitleLabel: UILabel!
-    
-    @IBOutlet weak var horizontalLineImage: UIImageView!
-    
-    @IBOutlet weak var nextPageLabel: UILabel!
+    var mark: UIImageView!
+    var backgroundView: UIView!
+    var mainTitleLabel: UILabel!
+    var infoImageView: UIImageView!
+    var firstSubTitleLabel: UILabel!
+    var secondSubTitleLabel: UILabel!
+    var horizontalineImage: UIImageView!
+    var nextPageLabel: UILabel!
     
     var imageFileName:String!
     var infoImageFileName:String!
     var horizontalineImageFileName:String!
-    var pageIndex:Int!
     var keyViewDictionary = [String:String]()
     var contentPlist:[[String:String]] = []
     var contentList:NSArray!
     
+    
     deinit {
         self.removeFromParentViewController()
         self.view?.removeFromSuperview()
+    }
+    
+    func createWalkthroughImage(name: String) -> UIImageView {
+        let _imageView = UIImageView()
+        let _image = UIImage(named: name)?.imageWithColor(foregroundColor)
+        _imageView.image = _image
+        _imageView.contentMode = .scaleAspectFill
+        _imageView.translatesAutoresizingMaskIntoConstraints = false
+        return _imageView
+    }
+    
+    func createBackgroundView() -> UIView {
+        let _view = UIView()
+        _view.backgroundColor = backgroundColor
+        _view.layer.cornerRadius = 0
+        _view.layer.masksToBounds = true
+        _view.translatesAutoresizingMaskIntoConstraints = false
+        return _view
+    }
+    
+    func createMainTitleLabel(name: String) -> UILabel {
+        let _label = UILabel()
+        _label.text = name
+        _label.font = UIFont.systemFont(ofSize: 26)
+        _label.textColor = foregroundColor
+        _label.textAlignment = .center
+        _label.translatesAutoresizingMaskIntoConstraints = false
+        return _label
+    }
+    
+    func createInfoImage(name: String) -> UIImageView {
+        let _imageView = UIImageView()
+        let _image = resizeImageForFile(infoImageFileName: name)
+        _imageView.image = _image
+        _imageView.contentMode = .scaleAspectFill
+        _imageView.translatesAutoresizingMaskIntoConstraints = false
+        return _imageView
+    }
+    
+    func createFirstSubTitleLabel(name: String) -> UILabel {
+        let _label = UILabel()
+        _label.text = name
+        _label.font = UIFont.systemFont(ofSize: 14)
+        _label.numberOfLines = 5
+        _label.textAlignment = .center
+        _label.textColor = foregroundColor
+        _label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        _label.translatesAutoresizingMaskIntoConstraints = false
+        return _label
+    }
+    
+    func createSecondSubTitleLabel(name: String) -> UILabel {
+        let _label = UILabel()
+        _label.text = name
+        _label.font = UIFont.systemFont(ofSize: 13)
+        _label.numberOfLines = 2
+        _label.textAlignment = .center
+        _label.textColor = foregroundColor
+        _label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        _label.translatesAutoresizingMaskIntoConstraints = false
+        return _label
+    }
+    
+    func createHorizontalLineImage(name: String) -> UIImageView {
+        let _imageView = UIImageView()
+        let _image = UIImage(named: name)
+        _imageView.image = _image
+        _imageView.contentMode = .scaleAspectFill
+        _imageView.translatesAutoresizingMaskIntoConstraints = false
+        return _imageView
+    }
+    
+    func createNextPageLabel(name: String) ->  UILabel {
+        let _label = UILabel()
+        _label.text = name
+        _label.font = UIFont.boldSystemFont(ofSize: 14)
+        _label.textColor = foregroundColor
+        _label.translatesAutoresizingMaskIntoConstraints = false
+        return _label
     }
     
     override func viewDidLoad() {
@@ -46,69 +117,84 @@ class WalkThroughOneViewController: UIViewController {
         self.contentPlist = NSArray(contentsOfFile:path!) as! [[String:String]]
         
         self.keyViewDictionary = self.contentPlist[0]
-        self.imageFileName = fullTextureName(self.keyViewDictionary["page_icon1"]!)
-        walkthroughImage.image = UIImage(named:self.imageFileName)
-        self.mainTitleLabel.text = (self.keyViewDictionary["main_title_text"]!)
-        self.infoImageFileName = self.keyViewDictionary["info_image_filename"]!
-        self.infoImage.image = resizeImageForFile(infoImageFileName: self.infoImageFileName)
-        self.firstSubTitleLabel.text = (self.keyViewDictionary["sub_title1_text"]!)
-        self.secondSubTitleLabel.text = (self.keyViewDictionary["sub_title2_text"]!)
-        self.horizontalineImageFileName = "choose-location-dividing-line"
-        horizontalLineImage.image = UIImage(named:self.horizontalineImageFileName)
-        self.nextPageLabel.text = (self.keyViewDictionary["next_page_text"]!)
+        backgroundView = createBackgroundView()
+        mark = createWalkthroughImage(name: self.keyViewDictionary["page_icon1"]!)
+        mainTitleLabel = createMainTitleLabel(name:self.keyViewDictionary["main_title_text"]!)
+        infoImageView = createInfoImage(name: self.keyViewDictionary["info_image_filename"]!)
+        firstSubTitleLabel = createFirstSubTitleLabel(name: self.keyViewDictionary["sub_title1_text"]!)
+        secondSubTitleLabel = createSecondSubTitleLabel(name: self.keyViewDictionary["sub_title2_text"]!)
+        horizontalineImage = createHorizontalLineImage(name: "choose-location-dividing-line")
+        nextPageLabel = createNextPageLabel(name: self.keyViewDictionary["next_page_text"]!)
         
-        AppTheme.instance.set(for: self.view)
+        #if false
+            AppTheme.instance.set(for: self, viewType: "InstructionView")
+        #endif
     }
 
+    func setupMarkView() {
+        mark.topAnchor.constraint(equalTo: self.view.topAnchor, constant: layoutRatio.defaultScreenHeight * layoutRatio.markHeightScale * layoutRatio.currentHeightScaleFactor).isActive = true
+        mark.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+    
+        mark.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        mark.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setupMainTitleLabel() {
+        mainTitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        mainTitleLabel.topAnchor.constraint(equalTo: mark.bottomAnchor).isActive = true
+        mainTitleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        mainTitleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    func setupInfoImageView() {
+        infoImageView.topAnchor.constraint(equalTo: mainTitleLabel.bottomAnchor, constant: 20).isActive = true
+        infoImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        
+        infoImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.25).isActive = true
+        infoImageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.3).isActive = true
+    }
+    
+    func setupFirstSubTitleLabel() {
+        firstSubTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        firstSubTitleLabel.topAnchor.constraint(equalTo: infoImageView.bottomAnchor).isActive = true
+        firstSubTitleLabel.widthAnchor.constraint(equalToConstant: 270).isActive = true
+        firstSubTitleLabel.heightAnchor.constraint(equalToConstant: 80).isActive = true
+    }
+    
+    func setupSecondSubTitleLabel() {
+        secondSubTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        secondSubTitleLabel.topAnchor.constraint(equalTo: firstSubTitleLabel.bottomAnchor).isActive = true
+        secondSubTitleLabel.widthAnchor.constraint(equalToConstant: 270).isActive = true
+        secondSubTitleLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    }
+    
+    func setupHorizontalineImage() {
+        let pageControl = self.parent?.view.subviews.filter{ $0 is UIPageControl }.first! as! UIPageControl
+        horizontalineImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        horizontalineImage.topAnchor.constraint(equalTo: pageControl.bottomAnchor).isActive = true
+        horizontalineImage.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 60).isActive = true
+        horizontalineImage.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        let pageControl = self.parent?.view.subviews.filter{ $0 is UIPageControl }.first! as! UIPageControl
-        // layout constraint
-        var viewBindingsDict = [String: Any]()
-        viewBindingsDict["walkthroughImage"] = walkthroughImage
-        viewBindingsDict["backgroundView"] = backgroundView
-        viewBindingsDict["mainTitleLabel"] = mainTitleLabel
-        viewBindingsDict["infoImage"] = infoImage
-        viewBindingsDict["firstSubTitleLabel"] = firstSubTitleLabel
-        viewBindingsDict["secondSubTitleLabel"] = secondSubTitleLabel
-        viewBindingsDict["horizontalLineImage"] = horizontalLineImage
-        viewBindingsDict["nextPageLabel"] = nextPageLabel
-        viewBindingsDict["pageControl"] = pageControl
+        view.backgroundColor = backgroundColor
         
-        walkthroughImage.translatesAutoresizingMaskIntoConstraints = false
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        mainTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        infoImage.translatesAutoresizingMaskIntoConstraints = false
-        firstSubTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        secondSubTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        horizontalLineImage.translatesAutoresizingMaskIntoConstraints = false
-        nextPageLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(mark)
+        self.view.addSubview(mainTitleLabel)
+        self.view.addSubview(infoImageView)
+        self.view.addSubview(firstSubTitleLabel)
+        self.view.addSubview(secondSubTitleLabel)
+        self.view.addSubview(horizontalineImage)
         
-        let margins = view.layoutMarginsGuide
-        
-        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(-4)-[walkthroughImage(>=76)]", options: [], metrics: nil, views: viewBindingsDict)
-            walkthroughImage.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
-        backgroundView.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
-       constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[walkthroughImage(>=76)]-[backgroundView(>=542@20)]-40-|", options: [], metrics: nil, views: viewBindingsDict))
-        
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-16-[backgroundView(>=305@20)]-16-|", options: [.alignAllCenterX], metrics: nil, views: viewBindingsDict))
-        mainTitleLabel.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
-
-        infoImage.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
-
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[walkthroughImage(>=76)]-30-[mainTitleLabel]-20-[infoImage]-[firstSubTitleLabel]-2-[secondSubTitleLabel]", options: [], metrics: nil, views: viewBindingsDict))
-        
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[firstSubTitleLabel]-32-|", options: [], metrics: nil, views: viewBindingsDict))
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[secondSubTitleLabel]-32-|", options: [], metrics: nil, views: viewBindingsDict))
-        
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[pageControl]-[horizontalLineImage]-[nextPageLabel]", options: [], metrics: nil, views: viewBindingsDict))
-
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[horizontalLineImage]-32-|", options: [], metrics: nil, views: viewBindingsDict))
-
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[nextPageLabel]-32-|", options: [], metrics: nil, views: viewBindingsDict))
-        
-        NSLayoutConstraint.activate(constraints)
+    
+        setupMarkView()
+        setupMainTitleLabel()
+        setupInfoImageView()
+        setupFirstSubTitleLabel()
+        setupSecondSubTitleLabel()
+        setupHorizontalineImage()
     }
 
     @IBAction func nextPageButton(sender: AnyObject) {

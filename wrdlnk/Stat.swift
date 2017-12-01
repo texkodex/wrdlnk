@@ -122,6 +122,8 @@ struct StatData {
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let LiveDataArchiveURL = DocumentsDirectory.appendingPathComponent(StorageForStatItem)
     
+    let queue = DispatchQueue(label: "com.teknowsys.statdata.queue")
+    
     var filePath: String {
         let manager = FileManager.default
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
@@ -139,16 +141,18 @@ struct StatData {
     static let sharedInstance = StatData()
     
     private init() {
-        if debugInfo {
-            self.purge()
-        }
-        if info.initialize { return }
-        
-        if AppDefinition.defaults.keyExist(key: preferenceGameStatKey)
-            && AppDefinition.defaults.bool(forKey: preferenceGameStatKey) {
-            if self.isEmpty() {
-                loadData()
-                info.initialize = true
+        queue.sync {
+            if debugInfo {
+                self.purge()
+            }
+            if info.initialize { return }
+            
+            if AppDefinition.defaults.keyExist(key: preferenceGameStatKey)
+                && AppDefinition.defaults.bool(forKey: preferenceGameStatKey) {
+                if self.isEmpty() {
+                    loadData()
+                    info.initialize = true
+                }
             }
         }
     }
@@ -180,7 +184,6 @@ struct StatData {
     }
     
     fileprivate mutating func loadData() {
-        if info.initialize { return }
         guard let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Data else { return }
         do {
             let decoder = JSONDecoder()
@@ -215,9 +218,11 @@ extension StatData {
     }
     
     mutating func push(element: Stat) {
-        prune()
-        unique()
-        info.statQueue.push(value: element)
+        queue.sync {
+            prune()
+            unique()
+            info.statQueue.push(value: element)
+        }
     }
     
     mutating func pop() -> Stat? {
@@ -269,7 +274,7 @@ extension StatData {
 
 class StatDataBox {
     private var statDataInstance: StatData!
-    let queue = DispatchQueue(label: "com.teknowsys.statdata.queue")
+    let queue = DispatchQueue(label: "com.teknowsys.statdatabox.queue")
     
     static var sharedInstance = StatDataBox()
     

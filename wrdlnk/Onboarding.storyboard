@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eid-F9-rOG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eid-F9-rOG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,67 +28,9 @@
                     <view key="view" contentMode="scaleToFill" id="j2x-dK-fin">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view alpha="0.10000000000000001" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="background_view" translatesAutoresizingMaskIntoConstraints="NO" id="1hb-1z-h7j" userLabel="background_view">
-                                <rect key="frame" x="0.0" y="0.0" width="340" height="542"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="first_image_view" image="apple-icon-76x76" translatesAutoresizingMaskIntoConstraints="NO" id="YRS-7L-pie" userLabel="first_image_view">
-                                <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="deviceRGB"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="main_title_text_label" text="WELCOME TO WRDLNK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ea2-ws-Isf" userLabel="main_title_text_label">
-                                <rect key="frame" x="0.0" y="0.0" width="260" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="0.85019958019256592" green="0.31334084272384644" blue="0.20470108091831207" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="info_image" translatesAutoresizingMaskIntoConstraints="NO" id="kIX-sX-EYk" userLabel="info_image">
-                                <rect key="frame" x="0.0" y="269" width="170" height="270"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="text_sub_title1_label" text="IN WRDLNK YOUR CHALLENGE IS TO FIND THE RELATED WORDS IN A GRID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8K-0y-qSK" userLabel="text_sub_title1_label">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="text_sub_title2_label" text="THIS IS HOW IT WORKS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xi-9Y-OdZ" userLabel="text_sub_title2_label">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="horizontal_line_image" translatesAutoresizingMaskIntoConstraints="NO" id="4TF-e8-PZn" userLabel="horizontal_line_image">
-                                <rect key="frame" x="0.0" y="0.0" width="290" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="next_page_label" text="FIND OUT MORE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eeh-TX-ZbD" userLabel="next_page_label">
-                                <rect key="frame" x="0.0" y="0.0" width="130" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="deviceRGB"/>
                     </view>
-                    <connections>
-                        <outlet property="backgroundView" destination="1hb-1z-h7j" id="pce-71-joW"/>
-                        <outlet property="firstSubTitleLabel" destination="Y8K-0y-qSK" id="hgJ-zl-TQ7"/>
-                        <outlet property="horizontalLineImage" destination="4TF-e8-PZn" id="RAb-P2-KjS"/>
-                        <outlet property="infoImage" destination="kIX-sX-EYk" id="Vhs-5U-Swy"/>
-                        <outlet property="mainTitleLabel" destination="ea2-ws-Isf" id="9yA-H1-J2J"/>
-                        <outlet property="nextPageLabel" destination="Eeh-TX-ZbD" id="M5k-2M-W1v"/>
-                        <outlet property="secondSubTitleLabel" destination="3xi-9Y-OdZ" id="XY8-nC-oa0"/>
-                        <outlet property="walkthroughImage" destination="YRS-7L-pie" id="DYb-EE-JB3"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S9Z-oE-hA2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -105,66 +47,9 @@
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="WalkThroughTwoViewController" id="yX4-re-F8Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view alpha="0.10000000000000001" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="background_view" translatesAutoresizingMaskIntoConstraints="NO" id="BqL-dh-ThY" userLabel="background_view">
-                                <rect key="frame" x="0.0" y="0.0" width="340" height="542"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="first_image_view" image="apple-icon-76x76" translatesAutoresizingMaskIntoConstraints="NO" id="lVf-My-YtY" userLabel="first_image_view">
-                                <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="main_title_text_label" text="WELCOME TO WRDLNK 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3y-nc-5tS" userLabel="main_title_text_label">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="0.85019958019999997" green="0.31334084270000001" blue="0.2047010809" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="info_image" translatesAutoresizingMaskIntoConstraints="NO" id="kJk-2W-uGg" userLabel="info_image">
-                                <rect key="frame" x="0.0" y="0.0" width="170" height="270"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="text_sub_title1_label" text="IN WRDLNK YOUR CHALLENGE IS TO FIND THE RELATED WORDS IN A GRID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wap-FR-IvZ" userLabel="text_sub_title1_label">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="text_sub_title2_label" text="THIS IS HOW IT WORKS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXg-2f-ofE" userLabel="text_sub_title2_label">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="20.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="horizontal_line_image" translatesAutoresizingMaskIntoConstraints="NO" id="d4j-uJ-2zs" userLabel="horizontal_line_image">
-                                <rect key="frame" x="0.0" y="0.0" width="290" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="next_page_label" text="FIND OUT MORE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcH-lG-K7z" userLabel="next_page_label">
-                                <rect key="frame" x="0.0" y="0.0" width="129.5" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="deviceRGB"/>
                     </view>
-                    <connections>
-                        <outlet property="backgroundView" destination="BqL-dh-ThY" id="IUg-Yi-4B3"/>
-                        <outlet property="firstSubTitleLabel" destination="Wap-FR-IvZ" id="dq0-iO-0Om"/>
-                        <outlet property="horizontalLineImage" destination="d4j-uJ-2zs" id="JML-Dj-UaP"/>
-                        <outlet property="infoImage" destination="kJk-2W-uGg" id="oZL-Ka-Nuf"/>
-                        <outlet property="mainTitleLabel" destination="v3y-nc-5tS" id="wuz-i8-46u"/>
-                        <outlet property="nextPageLabel" destination="GcH-lG-K7z" id="FAO-dO-atp"/>
-                        <outlet property="secondSubTitleLabel" destination="SXg-2f-ofE" id="6dz-dn-Ezi"/>
-                        <outlet property="walkthroughImage" destination="lVf-My-YtY" id="icR-XY-7YW"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YSl-JM-YGM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -181,65 +66,8 @@
                     <view key="view" contentMode="scaleToFill" id="nCp-an-NhN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view alpha="0.10000000000000001" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="background_view" translatesAutoresizingMaskIntoConstraints="NO" id="7F2-k3-NPY" userLabel="background_view">
-                                <rect key="frame" x="0.0" y="0.0" width="340" height="542"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="first_image_view" image="apple-icon-76x76" translatesAutoresizingMaskIntoConstraints="NO" id="v4b-hJ-Zd7" userLabel="first_image_view">
-                                <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="main_title_text_label" text="WELCOME TO WRDLNK 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWm-KB-TBg" userLabel="main_title_text_label">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="0.85019958019999997" green="0.31334084270000001" blue="0.2047010809" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="info_image" translatesAutoresizingMaskIntoConstraints="NO" id="Y04-U9-mTC" userLabel="info_image">
-                                <rect key="frame" x="0.0" y="0.0" width="170" height="270"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="text_sub_title1_label" text="IN WRDLNK YOUR CHALLENGE IS TO FIND THE RELATED WORDS IN A GRID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omd-OI-paa" userLabel="text_sub_title1_label">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="text_sub_title2_label" text="THIS IS HOW IT WORKS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEZ-wP-Y0Z" userLabel="text_sub_title2_label">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="horizontal_line_image" translatesAutoresizingMaskIntoConstraints="NO" id="GDS-lD-Cdz" userLabel="horizontal_line_image">
-                                <rect key="frame" x="0.0" y="0.0" width="290" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="next_page_label" text="FIND OUT MORE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jf-wu-nGP" userLabel="next_page_label">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="deviceRGB"/>
                     </view>
-                    <connections>
-                        <outlet property="backgroundView" destination="7F2-k3-NPY" id="d7D-GO-Q33"/>
-                        <outlet property="firstSubTitleLabel" destination="Omd-OI-paa" id="b59-F0-xex"/>
-                        <outlet property="horizontalLineImage" destination="GDS-lD-Cdz" id="d1E-2H-Gdf"/>
-                        <outlet property="infoImage" destination="Y04-U9-mTC" id="hB0-ua-QYn"/>
-                        <outlet property="mainTitleLabel" destination="HWm-KB-TBg" id="sPd-ZJ-BtF"/>
-                        <outlet property="nextPageLabel" destination="8jf-wu-nGP" id="GTU-0g-oxX"/>
-                        <outlet property="secondSubTitleLabel" destination="jEZ-wP-Y0Z" id="s1D-xc-ydN"/>
-                        <outlet property="walkthroughImage" destination="v4b-hJ-Zd7" id="a6v-2R-7AV"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dm2-wi-Mh2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -256,84 +84,12 @@
                     <view key="view" contentMode="scaleToFill" id="177-2s-BTa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view alpha="0.10000000000000001" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="background_view" translatesAutoresizingMaskIntoConstraints="NO" id="HrJ-Kq-jqV" userLabel="background_view">
-                                <rect key="frame" x="0.0" y="0.0" width="340" height="542"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="first_image_view" image="apple-icon-76x76" translatesAutoresizingMaskIntoConstraints="NO" id="yMh-9e-ZZc" userLabel="first_image_view">
-                                <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="main_title_text_label" text="WELCOME TO WRDLNK 4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COb-RD-ycW" userLabel="main_title_text_label">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="0.85019958019999997" green="0.31334084270000001" blue="0.2047010809" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="info_image" translatesAutoresizingMaskIntoConstraints="NO" id="dwx-dc-JPF" userLabel="info_image">
-                                <rect key="frame" x="0.0" y="0.0" width="170" height="270"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="text_sub_title1_label" text="IN WRDLNK YOUR CHALLENGE IS TO FIND THE RELATED WORDS IN A GRID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wfv-l5-8jz" userLabel="text_sub_title1_label">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="text_sub_title2_label" text="THIS IS HOW IT WORKS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Asp-yP-QfU" userLabel="text_sub_title2_label">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="horizontal_line_image" translatesAutoresizingMaskIntoConstraints="NO" id="yMh-mz-GPc" userLabel="horizontal_line_image">
-                                <rect key="frame" x="0.0" y="0.0" width="290" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="next_page_label" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OfZ-58-9lP" userLabel="next_page_label">
-                                <rect key="frame" x="0.0" y="0.0" width="4" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="next_page_button" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKR-2P-6QJ" userLabel="next_page_button">
-                                <rect key="frame" x="0.0" y="0.0" width="180" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="doneButtonTappedWithSender:" destination="kfk-cf-zqZ" eventType="touchUpInside" id="YVT-jr-sqK"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="deviceRGB"/>
                     </view>
-                    <connections>
-                        <outlet property="backgroundView" destination="HrJ-Kq-jqV" id="yP9-w5-hGc"/>
-                        <outlet property="enterButton" destination="DKR-2P-6QJ" id="3o8-Ms-thP"/>
-                        <outlet property="firstSubTitleLabel" destination="Wfv-l5-8jz" id="ufh-RG-L1H"/>
-                        <outlet property="horizontalLineImage" destination="yMh-mz-GPc" id="F5N-YW-5ba"/>
-                        <outlet property="infoImage" destination="dwx-dc-JPF" id="WTo-PW-gU1"/>
-                        <outlet property="mainTitleLabel" destination="COb-RD-ycW" id="qtm-ci-vZq"/>
-                        <outlet property="nextPageLabel" destination="OfZ-58-9lP" id="U56-my-uBF"/>
-                        <outlet property="secondSubTitleLabel" destination="Asp-yP-QfU" id="nGf-Xk-J1O"/>
-                        <outlet property="walkthroughImage" destination="yMh-9e-ZZc" id="dYZ-U5-6TQ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9qV-Uu-Lf5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3238" y="9"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="apple-icon-76x76" width="76" height="76"/>
-    </resources>
 </document>

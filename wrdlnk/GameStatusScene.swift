@@ -38,11 +38,13 @@ class GameStatusScene: BaseScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
+        self.name = "GameScene" // Temporary
+        
         placeAssets()
         
         
         initializeButtons()
-        AppTheme.instance.set(for: self)
+        AppTheme.instance.set(for: self, sceneType: "SettingScene")
     }
 
     func placeAssets() {

@@ -88,19 +88,19 @@ enum ButtonIdentifier: String {
         case .moreInfo:
             return fullTextureName("MoreInfo")
         case .soundSwitch:
-            return fullTextureName("soundOn")
+            return fullTextureName("pdf/volume")
         case .scoreSwitch:
-            return fullTextureName("scoreOn")
+            return fullTextureName("pdf/award")
         case .timerSwitch:
-            return fullTextureName("timerOn")
+            return fullTextureName("pdf/clock")
         case .nightModeSwitch:
-            return fullTextureName("nightModeOn")
+            return fullTextureName("pdf/moon")
         case .pastelSwitch:
-            return fullTextureName("pastelOn")
+            return fullTextureName("pdf/droplet")
         case .colorBlindSwitch:
-            return fullTextureName("colorBlindOn")
+            return fullTextureName("pdf/eye")
         case .signUpSwitch:
-            return fullTextureName("signUpOn")
+            return fullTextureName("pdf/user")
         case .enterGame:
             return fullTextureName("enterOn")
         case .startNewGame:
@@ -151,19 +151,19 @@ enum ButtonIdentifier: String {
         case .moreInfo:
             return fullTextureName("MoreInfo")
         case .soundSwitch:
-            return fullTextureName("soundOff")
+            return fullTextureName("pdf/volume-x")
         case .scoreSwitch:
-            return fullTextureName("scoreOff")
+            return fullTextureName("pdf/award")
         case .timerSwitch:
-            return fullTextureName("timerOff")
+            return fullTextureName("pdf/clock")
         case .nightModeSwitch:
-            return fullTextureName("nightModeOff")
+            return fullTextureName("pdf/moon")
         case .pastelSwitch:
-            return fullTextureName("pastelOff")
+            return fullTextureName("pdf/droplet")
         case .colorBlindSwitch:
-            return fullTextureName("colorBlindOff")
+            return fullTextureName("pdf/eye")
         case .signUpSwitch:
-            return fullTextureName("signUpOff")
+            return fullTextureName("pdf/user")
         case .enterGame:
             return fullTextureName("enterOn")
         case .startNewGame:

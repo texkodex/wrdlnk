@@ -24,6 +24,12 @@ enum SceneType {
     case Overlay
 }
 
+extension String {
+    func substring(_ from: Int) -> String {
+        let start = index(startIndex, offsetBy: from)
+        return String(self[start ..< endIndex])
+    }
+}
 
 extension UIView {
     func resizeView()-> CGAffineTransform {
@@ -43,6 +49,18 @@ extension UIView {
             transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         }
         return transform
+    }
+}
+
+extension UIImage {
+    func imageWithColor(_ color: UIColor) -> UIImage? {
+        var image = withRenderingMode(.alwaysTemplate)
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        color.set()
+        image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        image = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return image
     }
 }
 

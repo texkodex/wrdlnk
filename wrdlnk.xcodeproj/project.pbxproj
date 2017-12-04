@@ -31,12 +31,6 @@
 		CC1C64C91F44B47300A9E5C8 /* AwardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64C81F44B47300A9E5C8 /* AwardScene.swift */; };
 		CC1C64CE1F46B92400A9E5C8 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64CD1F46B92400A9E5C8 /* AppTheme.swift */; };
 		CC1EA8D51FB7C0D6001520FD /* CommonGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1EA8D41FB7C0D6001520FD /* CommonGameController.swift */; };
-		CC24C2761F966DEB000C5B29 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C2691F96697D000C5B29 /* GoogleSignIn.framework */; };
-		CC24C2771F966DF8000C5B29 /* GoogleAuthUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C26A1F96698B000C5B29 /* GoogleAuthUtilities.framework */; };
-		CC24C2781F966E0D000C5B29 /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C26C1F96698B000C5B29 /* GoogleAppUtilities.framework */; };
-		CC24C2791F966E42000C5B29 /* GoogleNetworkingUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C26B1F96698B000C5B29 /* GoogleNetworkingUtilities.framework */; };
-		CC24C27A1F966E46000C5B29 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C26D1F9669B3000C5B29 /* GoogleSymbolUtilities.framework */; };
-		CC24C27B1F966E49000C5B29 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C26E1F9669B3000C5B29 /* GoogleUtilities.framework */; };
 		CC24C27C1F966E8B000C5B29 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC13D0CC1F8DB7A200FC51C6 /* AddressBook.framework */; };
 		CC24C27D1F967F0E000C5B29 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC3A56E1F8D444E00530461 /* SafariServices.framework */; };
 		CC24C27E1F967F6B000C5B29 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC13D0D01F8DB7DF00FC51C6 /* libz.tbd */; };
@@ -95,6 +89,10 @@
 		CC8BE42D1F04481900CDB4BB /* DefinitionScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC8BE42C1F04481800CDB4BB /* DefinitionScene.sks */; };
 		CC8BE42F1F044CBE00CDB4BB /* DefinitionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE42E1F044CBE00CDB4BB /* DefinitionScene.swift */; };
 		CC9445BD1FD525AD00D6522E /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9445BC1FD525AD00D6522E /* GoogleSignIn.framework */; };
+		CC9445C21FD5268000D6522E /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9445BE1FD5268000D6522E /* GoogleSymbolUtilities.framework */; };
+		CC9445C31FD5268000D6522E /* GoogleAuthUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9445BF1FD5268000D6522E /* GoogleAuthUtilities.framework */; };
+		CC9445C41FD5268000D6522E /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9445C01FD5268000D6522E /* GoogleAppUtilities.framework */; };
+		CC9445C51FD5268000D6522E /* GoogleNetworkingUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9445C11FD5268000D6522E /* GoogleNetworkingUtilities.framework */; };
 		CC95F9FF1F3A3F1700E55483 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F9FE1F3A3F1700E55483 /* MainMenuScene.swift */; };
 		CC95FA011F41D95B00E55483 /* WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95FA001F41D95B00E55483 /* WordList.swift */; };
 		CC9610971FB0CC64005EC5C1 /* Tile+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9610961FB0CC64005EC5C1 /* Tile+Extensions.swift */; };
@@ -107,10 +105,6 @@
 		CCAD36271EE0CAE3001C6AFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCAD36251EE0CAE3001C6AFE /* LaunchScreen.storyboard */; };
 		CCAD36321EE0CAE3001C6AFE /* wrdlnkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAD36311EE0CAE3001C6AFE /* wrdlnkTests.swift */; };
 		CCAD363D1EE0CAE3001C6AFE /* wrdlnkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAD363C1EE0CAE3001C6AFE /* wrdlnkUITests.swift */; };
-		CCCCAFA61FD4A44D00ECB2C8 /* GoogleAuthUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCAFA11FD4A44D00ECB2C8 /* GoogleAuthUtilities.framework */; };
-		CCCCAFA71FD4A44D00ECB2C8 /* GoogleNetworkingUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCAFA21FD4A44D00ECB2C8 /* GoogleNetworkingUtilities.framework */; };
-		CCCCAFA91FD4A44D00ECB2C8 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCAFA41FD4A44D00ECB2C8 /* GoogleSymbolUtilities.framework */; };
-		CCCCAFAA1FD4A44D00ECB2C8 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCAFA51FD4A44D00ECB2C8 /* GoogleUtilities.framework */; };
 		CCCE42731F917C46005F01D4 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE42721F917C46005F01D4 /* Array+Extensions.swift */; };
 		CCD90CE11F83EB2800C81D98 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD90CE01F83EB2800C81D98 /* UIApplication+Extension.swift */; };
 		CCDC23711F200DCE00371F1F /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCDC23701F200DCE00371F1F /* MenuScene.sks */; };
@@ -188,12 +182,6 @@
 		CC1C64CD1F46B92400A9E5C8 /* AppTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		CC1EA8D41FB7C0D6001520FD /* CommonGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonGameController.swift; sourceTree = "<group>"; };
 		CC1EA8D61FB7F15E001520FD /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
-		CC24C2691F96697D000C5B29 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleSignIn.framework; sourceTree = "<group>"; };
-		CC24C26A1F96698B000C5B29 /* GoogleAuthUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAuthUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleAuthUtilities.framework; sourceTree = "<group>"; };
-		CC24C26B1F96698B000C5B29 /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
-		CC24C26C1F96698B000C5B29 /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleAppUtilities.framework; sourceTree = "<group>"; };
-		CC24C26D1F9669B3000C5B29 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
-		CC24C26E1F9669B3000C5B29 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleUtilities.framework; sourceTree = "<group>"; };
 		CC24C27F1F967F9C000C5B29 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		CC2F8E471F18830100463E37 /* PlaySound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 		CC4494CC1F5628A100CB0906 /* wireIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = wireIcon.xcassets; sourceTree = "<group>"; };
@@ -255,6 +243,10 @@
 		CC8BE42C1F04481800CDB4BB /* DefinitionScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DefinitionScene.sks; sourceTree = "<group>"; };
 		CC8BE42E1F044CBE00CDB4BB /* DefinitionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionScene.swift; sourceTree = "<group>"; };
 		CC9445BC1FD525AD00D6522E /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
+		CC9445BE1FD5268000D6522E /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		CC9445BF1FD5268000D6522E /* GoogleAuthUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAuthUtilities.framework; sourceTree = "<group>"; };
+		CC9445C01FD5268000D6522E /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppUtilities.framework; sourceTree = "<group>"; };
+		CC9445C11FD5268000D6522E /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
 		CC95F9FE1F3A3F1700E55483 /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		CC95FA001F41D95B00E55483 /* WordList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordList.swift; sourceTree = "<group>"; };
 		CC9610961FB0CC64005EC5C1 /* Tile+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tile+Extensions.swift"; sourceTree = "<group>"; };
@@ -276,10 +268,6 @@
 		CCC3A5641F8D299700530461 /* Google.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Google.h; sourceTree = "<group>"; };
 		CCC3A56E1F8D444E00530461 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		CCC3A5701F8D446900530461 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		CCCCAFA11FD4A44D00ECB2C8 /* GoogleAuthUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAuthUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleAuthUtilities.framework; sourceTree = "<group>"; };
-		CCCCAFA21FD4A44D00ECB2C8 /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
-		CCCCAFA41FD4A44D00ECB2C8 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
-		CCCCAFA51FD4A44D00ECB2C8 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleUtilities.framework; sourceTree = "<group>"; };
 		CCCE42721F917C46005F01D4 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		CCD90CE01F83EB2800C81D98 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		CCDC23701F200DCE00371F1F /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
@@ -321,21 +309,15 @@
 			files = (
 				CC5BF9B91FBB129E0095BEAD /* GoogleMobileAds.framework in Frameworks */,
 				CC24C2801F967F9C000C5B29 /* libc++.tbd in Frameworks */,
+				CC9445C21FD5268000D6522E /* GoogleSymbolUtilities.framework in Frameworks */,
 				CC24C27E1F967F6B000C5B29 /* libz.tbd in Frameworks */,
 				CC24C27C1F966E8B000C5B29 /* AddressBook.framework in Frameworks */,
-				CCCCAFA61FD4A44D00ECB2C8 /* GoogleAuthUtilities.framework in Frameworks */,
 				CC24C27D1F967F0E000C5B29 /* SafariServices.framework in Frameworks */,
-				CC24C2761F966DEB000C5B29 /* GoogleSignIn.framework in Frameworks */,
-				CC24C2781F966E0D000C5B29 /* GoogleAppUtilities.framework in Frameworks */,
-				CC24C2771F966DF8000C5B29 /* GoogleAuthUtilities.framework in Frameworks */,
-				CC24C2791F966E42000C5B29 /* GoogleNetworkingUtilities.framework in Frameworks */,
-				CC24C27A1F966E46000C5B29 /* GoogleSymbolUtilities.framework in Frameworks */,
-				CC24C27B1F966E49000C5B29 /* GoogleUtilities.framework in Frameworks */,
 				CC6F27851F8693580099F7A3 /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				CC80F5561F87CB7600BCD702 /* GTMSessionFetcher.framework in Frameworks */,
+				CC9445C51FD5268000D6522E /* GoogleNetworkingUtilities.framework in Frameworks */,
 				CC9445BD1FD525AD00D6522E /* GoogleSignIn.framework in Frameworks */,
 				CC182F4A1F896CAE00EE5DA9 /* FBSDKShareKit.framework in Frameworks */,
-				CCCCAFA91FD4A44D00ECB2C8 /* GoogleSymbolUtilities.framework in Frameworks */,
 				CC47B5541F9E9EA100BE5DB8 /* StoreKit.framework in Frameworks */,
 				CC6F27841F8693580099F7A3 /* FirebaseCore.framework in Frameworks */,
 				CC182F441F896C7D00EE5DA9 /* Bolts.framework in Frameworks */,
@@ -348,9 +330,9 @@
 				CC6F27881F8693580099F7A3 /* GoogleToolboxForMac.framework in Frameworks */,
 				CC80F5551F87CB7600BCD702 /* FirebaseAuth.framework in Frameworks */,
 				CC182F501F89748F00EE5DA9 /* TwitterKit.framework in Frameworks */,
-				CCCCAFA71FD4A44D00ECB2C8 /* GoogleNetworkingUtilities.framework in Frameworks */,
-				CCCCAFAA1FD4A44D00ECB2C8 /* GoogleUtilities.framework in Frameworks */,
+				CC9445C31FD5268000D6522E /* GoogleAuthUtilities.framework in Frameworks */,
 				CC182F4E1F89746F00EE5DA9 /* TwitterCore.framework in Frameworks */,
+				CC9445C41FD5268000D6522E /* GoogleAppUtilities.framework in Frameworks */,
 				CC6F27831F8693580099F7A3 /* FirebaseAnalytics.framework in Frameworks */,
 				CC6F27861F8693580099F7A3 /* FirebaseInstanceID.framework in Frameworks */,
 			);
@@ -748,7 +730,7 @@
 		CCC3A5651F8D302B00530461 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				CC24C2691F96697D000C5B29 /* GoogleSignIn.framework */,
+				CC9445BC1FD525AD00D6522E /* GoogleSignIn.framework */,
 			);
 			name = SignIn;
 			sourceTree = "<group>";
@@ -756,16 +738,10 @@
 		CCC3A5661F8D30B000530461 /* SignInDependencies */ = {
 			isa = PBXGroup;
 			children = (
-				CC9445BC1FD525AD00D6522E /* GoogleSignIn.framework */,
-				CCCCAFA11FD4A44D00ECB2C8 /* GoogleAuthUtilities.framework */,
-				CCCCAFA21FD4A44D00ECB2C8 /* GoogleNetworkingUtilities.framework */,
-				CCCCAFA41FD4A44D00ECB2C8 /* GoogleSymbolUtilities.framework */,
-				CCCCAFA51FD4A44D00ECB2C8 /* GoogleUtilities.framework */,
-				CC24C26C1F96698B000C5B29 /* GoogleAppUtilities.framework */,
-				CC24C26A1F96698B000C5B29 /* GoogleAuthUtilities.framework */,
-				CC24C26B1F96698B000C5B29 /* GoogleNetworkingUtilities.framework */,
-				CC24C26D1F9669B3000C5B29 /* GoogleSymbolUtilities.framework */,
-				CC24C26E1F9669B3000C5B29 /* GoogleUtilities.framework */,
+				CC9445C01FD5268000D6522E /* GoogleAppUtilities.framework */,
+				CC9445BF1FD5268000D6522E /* GoogleAuthUtilities.framework */,
+				CC9445C11FD5268000D6522E /* GoogleNetworkingUtilities.framework */,
+				CC9445BE1FD5268000D6522E /* GoogleSymbolUtilities.framework */,
 			);
 			name = SignInDependencies;
 			sourceTree = "<group>";

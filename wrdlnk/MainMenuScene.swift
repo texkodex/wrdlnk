@@ -11,6 +11,7 @@ import GameplayKit
 
 class MainMenuScene: BaseScene {
     
+    
     let mark = SKSpriteNode(imageNamed: "pdf/mark")
     let base = SKSpriteNode(imageNamed: "pdf/base")
     

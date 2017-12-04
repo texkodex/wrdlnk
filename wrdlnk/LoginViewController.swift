@@ -29,7 +29,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     
     let markImageView: UIImageView = {
         let _imageView = UIImageView()
-        let _image = UIImage(named: "pdf/mark")
+        let _image = UIImage(named: "pdf/mark")?.imageWithColor(colorGroupOneLoginScene.markfillColor)
         _imageView.image = _image
         _imageView.contentMode = .scaleAspectFill
         _imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -100,6 +100,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     lazy var yesButton: UIButton = {
         let _button = UIButton(type: .system)
         let _imageView = UIImageView(image: UIImage(named: "pdf/yes"))
+        _button.frame =  CGRect(x: 0, y: 0, width: 46, height: 46)
+        _imageView.center = CGPoint(x: _button.center.x, y: _button.center.y)
+        _button.backgroundColor = colorGroupOneLoginScene.yesFill
         _button.layer.cornerRadius = 4
         _button.layer.masksToBounds = true
         _button.translatesAutoresizingMaskIntoConstraints = false
@@ -331,15 +334,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         googleButton.heightAnchor.constraint(equalToConstant: layoutRatio.loginGoogleButtonHeightAnchor).isActive = true
     }
 
-
     func setupGuestButton() {
         guestButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         guestButton.centerYAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: buttonHeight()).isActive = true
         guestButton.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         guestButton.heightAnchor.constraint(equalToConstant: buttonHeight()).isActive = true
     }
-
-    
     
     // MARK: Container view for registration
     func setupBackgroundView() {

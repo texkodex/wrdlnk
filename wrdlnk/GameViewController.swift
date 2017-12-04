@@ -12,8 +12,86 @@ import SpriteKit
 import GameplayKit
 import GoogleMobileAds
 
-class GameViewController: UIViewController, GADBannerViewDelegate {
-   
+/*
+ Use delegation when a view controller needs to change views, do not have the view itself change views, this could cause the view trying to deallocating while the new view is being presented
+ */
+
+protocol TransitionManagerDelegate: class {
+    func startedSceneTransition(name: String?, destination: SceneType, sendingScene: SKScene)
+    func completedSceneTransition(name: String?, destination: SceneType, sendingScene: SKScene)
+}
+
+extension Notification.Name {
+    static let completedTransitionName = NSNotification.Name(rawValue: "CompletedTransition")
+    
+    static let completedNoParamTransitionName = NSNotification.Name(rawValue: "CompletedNoParamTransition")
+}
+
+protocol LaunchSceneDelegate: class {
+    var sceneName: String? { get }
+}
+
+extension  LaunchSceneDelegate {
+    func launchScene(sceneName: String?, controller: GameViewController) {
+        
+        if let scene = GKScene(fileNamed: sceneName!) {
+            
+            // Get the SKScene from the loaded GKScene
+            if let sceneNode = scene.rootNode as! MainMenuScene? {
+                
+                // Set the scale mode to scale to fit the window
+                sceneNode.scaleMode = .aspectFill
+                
+                // Present the scene
+                if let view = controller.view as! SKView? {
+                    
+                    commonGameParam = CommonGameParam(skView: view, controller: controller, scene: sceneNode)
+                    
+                    // Adjust scene size to view bounds
+                    sceneNode.size = view.bounds.size
+                    
+                    let transition = SKTransition.fade(with: controller.view.backgroundColor!, duration: CommonDelaySetting)
+                    view.presentScene(sceneNode, transition: transition)
+                    
+                    
+                    
+                    view.ignoresSiblingOrder = true
+                    #if SHOW_PERFORMANCE
+                        view.showsFPS = true
+                        view.showsNodeCount = true
+                    #endif
+                    controller.removeImageView()
+                    
+                    #if false
+                        initBanner(productionADs: false) // Change for production
+                    #endif
+                }
+            }
+        }
+        
+        
+    }
+}
+protocol FinishedDelegate: class {
+    func cleanup()
+}
+
+extension FinishedDelegate {
+    func mainMenuSceneFinished(scene: MainMenuScene) {
+        scene.willMove(from: scene.view!)
+    }
+    
+    func menuSceneFinished(scene: MenuScene) {
+        scene.willMove(from: scene.view!)
+    }
+    
+    func gameSceneFinished(scene: GameScene) {
+        scene.willMove(from: scene.view!)
+    }
+}
+
+class GameViewController: UIViewController, GADBannerViewDelegate, TransitionManagerDelegate {
+    
     var bannerAdMob: GADBannerView!
     
     let bannerView: GADBannerView = {
@@ -48,9 +126,30 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     deinit {
         print("deinit GameViewController")
         self.removeFromParentViewController()
+        removeNotifcation()
     }
-
     
+    // MARK:- Notification center
+    func setupNotification() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.handle(withNotification:)), name: .completedTransitionName, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.handleNotification), name: .completedNoParamTransitionName, object: nil)
+    }
+    
+    func removeNotifcation() {
+        
+        NotificationCenter.default.removeObserver(self, name: .completedTransitionName, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .completedNoParamTransitionName, object: nil)
+    }
+    
+    @objc func handleNotification() {
+        print("RECEIVED ANY NOTIFICATION")
+    }
+    
+    @objc func handle(withNotification notification : NSNotification) {
+        print("RECEIVED SPECIFIC NOTIFICATION: \(notification)")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,10 +159,14 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         let skView = view as! SKView
         self.view.backgroundColor = backgroundColor
         
-        commonGameParam = CommonGameParam(skView: skView, controller: self)
+        setupNotification()
+        
+        #if false
+            commonGameParam = CommonGameParam(skView: skView, controller: self)
+        #endif
         
         setImageView()
-
+        
         AppDefinition.defaults.set(true, forKey: preferenceMemoryDataFileKey)
         
         if AppDefinition.defaults.keyExist(key: preferenceRemoteDataSiteKey) {
@@ -91,6 +194,44 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         }
     }
     
+    // MARK:- Transition notification methods
+    func startedSceneTransition(name: String?, destination: SceneType, sendingScene: SKScene) {
+        
+        let transDuration = CommonDelaySetting
+        let transition = SKTransition.fade(with: sendingScene.backgroundColor, duration: transDuration)
+        
+        guard let startedTransitionName = name else {
+            print("Started transition called will name unset")
+            return
+        }
+        
+        unowned var scene = SKScene()
+        print("Started transition: \(startedTransitionName)")
+        switch destination {
+        case .GameScene:
+            let continueGame = AppDefinition.defaults.bool(forKey: preferenceContinueGameEnabledKey)
+            
+            scene = GameScene(fileNamed: "GameScene")!
+        default:
+            break
+        }
+        scene.size = (view?.bounds.size)!
+        
+        scene.scaleMode = SKSceneScaleMode.aspectFill
+        
+        sendingScene.view!.presentScene(scene, transition: transition)
+        sendingScene.willMove(from: (commonGameParam?.skView)!)
+        sendingScene.removeFromParent()
+    }
+    
+    func completedSceneTransition(name: String?, destination: SceneType, sendingScene: SKScene) {
+        guard let completedTransitionName = name else {
+            print("Started transition called will name unset")
+            return
+        }
+        print("Completed transition: \(completedTransitionName)")
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -109,13 +250,13 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     private func saveData() {
         statData.saveData()
     }
-
+    
     private func loadData() {
         statData.loadData()
     }
     
     func setup() {
-            if let scene = GKScene(fileNamed: "MainMenuScene") {
+        if let scene = GKScene(fileNamed: "MainMenuScene") {
             
             // Get the SKScene from the loaded GKScene
             if let sceneNode = scene.rootNode as! MainMenuScene? {
@@ -126,13 +267,14 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
                 // Present the scene
                 if let view = self.view as! SKView? {
                     
+                    commonGameParam = CommonGameParam(skView: view, controller: self, scene: sceneNode)
                     // Adjust scene size to view bounds
                     sceneNode.size = view.bounds.size
                     
                     let transition = SKTransition.fade(with: self.view.backgroundColor!, duration: CommonDelaySetting)
                     view.presentScene(sceneNode, transition: transition)
                     
-
+                    
                     
                     view.ignoresSiblingOrder = true
                     #if SHOW_PERFORMANCE
@@ -140,12 +282,15 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
                         view.showsNodeCount = true
                     #endif
                     removeImageView()
-                    //initBanner(productionADs: false) // Change for production
+                    
+                    #if false
+                        initBanner(productionADs: false) // Change for production
+                    #endif
                 }
             }
         }
     }
-
+    
     func initBanner(productionADs: Bool) {
         if AppDefinition.defaults.bool(forKey: preferenceAppRemoveADsKey) { return }
         // AdMob setup
@@ -221,7 +366,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     override var shouldAutorotate: Bool {
         return true
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
             return .allButUpsideDown
@@ -234,8 +379,59 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
+    
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+}
+
+extension GameViewController {
+    func transitionToScene(destination: SceneType, sendingScene: SKScene, startNewGame : Bool = false, continueGame: Bool = false) {
+        let transDuration = CommonDelaySetting
+        let transition = SKTransition.fade(with: sendingScene.backgroundColor, duration: transDuration)
+        
+        unowned var scene = SKScene()
+        
+        switch destination {
+        case .GameScene:
+            AppDefinition.defaults.set(startNewGame, forKey: preferenceStartGameEnabledKey)
+            AppDefinition.defaults.set(continueGame, forKey: preferenceContinueGameEnabledKey)
+            scene = GameScene(fileNamed: "GameScene")!
+        case .GameStatus:
+            scene = GameStatusScene(fileNamed: "GameStatusScene")!
+        case .Definition:
+            scene = DefinitionScene(fileNamed: "DefinitionScene")!
+        case .Menu:
+            scene = MenuScene(fileNamed: "MenuScene")!
+        case .MainMenu:
+            scene = MainMenuScene(fileNamed: "MainMenuScene")!
+        case .InAppPurchase:
+            scene = IAPurchaseScene(fileNamed: "IAPurchaseScene")!
+        case .GameAward:
+            scene = IAPurchaseScene(fileNamed: "AwardScene")!
+        case .Instructions:
+            let instructionController = UIViewController()
+            
+            delay(CommonDelaySetting) {
+                instructionController.launchFromStoryboard(name: StoryboardName.Onboarding.rawValue, controller: "WalkThroughPageViewController")
+            }
+            return
+        case .SignUp:
+            let signupController = UIViewController()
+            
+            delay(CommonDelaySetting) {
+                signupController.launchLoginViewController()
+            }
+            return
+        case .Overlay:
+            scene = OverlayScene(fileNamed: "OverlayScene")!
+        }
+        
+        scene.size = (view?.bounds.size)!
+        
+        scene.scaleMode = SKSceneScaleMode.aspectFill
+        
+        sendingScene.view!.presentScene(scene, transition: transition)
+        sendingScene.removeFromParent()
     }
 }

@@ -86,7 +86,7 @@ extension SKNode {
     }
     
     func addHighlightToTile(tile: SKSpriteNode) {
-        let texture = SKTexture(imageNamed: getControlPadPathName())
+        let texture = SKTexture(image: UIImage(named: getControlPadPathName())!)
         let sprite = SKSpriteNode()
         sprite.name = "highlight_\((tile.name)!)"
         sprite.alpha = CGFloat(0.0)

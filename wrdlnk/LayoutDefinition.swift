@@ -436,15 +436,16 @@ extension BaseScene {
         self.addChild(param.labelNode)
         
         param.buttonNode.name = param.spriteNodeName
-        param.buttonNode.defaultTexture = SKTexture(imageNamed: param.defaultTexture)
-        param.buttonNode.selectedTexture = SKTexture(imageNamed: param.selectedTexture)
+        param.buttonNode.defaultTexture = SKTexture(image: UIImage(named: param.defaultTexture)!)
+        param.buttonNode.selectedTexture = SKTexture(image: UIImage(named: param.selectedTexture)!)
+        
         param.buttonNode.buttonIdentifier = ButtonIdentifier(rawValue: param.spriteNodeName)
         param.buttonNode.position = CGPoint(x: param.labelNode.position.x + frame.maxY, y: 0)
         param.buttonNode.anchorPoint = param.anchor // CGPoint(x: 0.5, y: 1.0)
         param.buttonNode.zPosition = param.zposition // 10
         param.labelNode.addChild(param.buttonNode)
         
-        let focusRing = SKSpriteNode(texture: SKTexture(imageNamed: "pdf/focusRing"))
+        let focusRing = SKSpriteNode(texture: SKTexture(image: UIImage(named: "pdf/focusRing")!))
         focusRing.scale(to: CGSize(width: param.buttonNode.size.width + 2.0, height: param.buttonNode.size.height + 2.0))
         focusRing.name = "focusRing"
         focusRing.anchorPoint = CGPoint(x: 0.5, y: 1.0)
@@ -455,15 +456,15 @@ extension BaseScene {
     
     func sceneButtonSetup(param: SceneButtonParam) {
         param.buttonNode.name = param.spriteNodeName
-        param.buttonNode.defaultTexture = SKTexture(imageNamed: param.defaultTexture)
-        param.buttonNode.selectedTexture = SKTexture(imageNamed: param.selectedTexture)
+        param.buttonNode.defaultTexture = SKTexture(image: UIImage(named: param.defaultTexture)!)
+        param.buttonNode.selectedTexture = SKTexture(image: UIImage(named: param.selectedTexture)!)
         param.buttonNode.buttonIdentifier = ButtonIdentifier(rawValue: param.spriteNodeName)
         param.buttonNode.position = param.position
         param.buttonNode.anchorPoint = param.anchor
         param.buttonNode.zPosition = param.zposition
         self.addChild(param.buttonNode)
         
-        let focusRing = SKSpriteNode(texture: SKTexture(imageNamed: "pdf/focusRing"))
+        let focusRing = SKSpriteNode(texture: SKTexture(image: UIImage(named: "pdf/focusRing")!))
         focusRing.scale(to: CGSize(width: param.buttonNode.size.width + 2.0, height: param.buttonNode.size.height + 2.0))
         focusRing.name = "focusRing"
         focusRing.alpha = 0

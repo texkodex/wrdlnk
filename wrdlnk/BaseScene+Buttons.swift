@@ -19,71 +19,108 @@ extension BaseScene: ButtonNodeResponderType {
     func buttonTriggered(button: ButtonNode) {
         print("button.buttonIdentifier!: \(button.buttonIdentifier!)")
         switch button.buttonIdentifier! {
-            case .titleImage:
+        case .titleImage:
+            #if false
                 transitionToScene(destination: SceneType.MainMenu, sendingScene: self)
-            break
-            case .showGraph:
+                break
+            #endif
+        case .showGraph:
+            #if false
                 transitionToScene(destination: SceneType.GameStatus, sendingScene: self)
+            #endif
             break
-            case .provideMeaning:
+        case .provideMeaning:
+            #if false
                 transitionToScene(destination: SceneType.Definition, sendingScene: self)
+            #endif
             break
-            case .appSettings:
+        case .appSettings:
+            #if false
                 transitionToScene(destination: SceneType.Menu, sendingScene: self)
+            #endif
             break
-            case .enterGame:
+        case .enterGame:
+            #if false
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+            #endif
             break
-            case .soundSwitch:
-                toggleAudioSound(button: button)
+        case .soundSwitch:
+            toggleAudioSound(button: button)
             break
-            case .shareSwitch:
-                toggleShareSocial(button: button)
+        case .shareSwitch:
+            toggleShareSocial(button: button)
             break
-            case .scoreSwitch:
-                toggleGameScore(button: button)
+        case .scoreSwitch:
+            toggleGameScore(button: button)
             break
-            case .timerSwitch:
-                toggleGameTimer(button: button)
+        case .timerSwitch:
+            toggleGameTimer(button: button)
             break
-            case .nightModeSwitch:
-                toggleNightMode(button: button)
+        case .nightModeSwitch:
+            toggleNightMode(button: button)
+            #if false
                 transitionToScene(destination: SceneType.Menu, sendingScene: self)
+            #endif
             break
-            case .pastelSwitch:
-                togglePastel(button: button)
+        case .pastelSwitch:
+            togglePastel(button: button)
+            #if false
                 transitionToScene(destination: SceneType.Menu, sendingScene: self)
+            #endif
             break
-            case .colorBlindSwitch:
-                toggleColorBlind(button: button)
+        case .colorBlindSwitch:
+            toggleColorBlind(button: button)
+            #if false
                 transitionToScene(destination: SceneType.Menu, sendingScene: self)
+            #endif
             break
-            case .signUpSwitch:
+        case .signUpSwitch:
+            #if false
                 transitionToScene(destination: SceneType.SignUp, sendingScene: self)
+            #endif
             break
-            case .continueGame, .pdfYes:
-                let continueGame = AppDefinition.defaults.bool(forKey: preferenceContinueGameEnabledKey)
+        case .continueGame, .pdfYes:
+            let continueGame = AppDefinition.defaults.bool(forKey: preferenceContinueGameEnabledKey)
+            transitionManagerDelegate?.startedSceneTransition(name: ButtonIdentifier.continueGame.rawValue, destination:  SceneType.GameScene, sendingScene: self)
+            
+            
+            #if false
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self, continueGame: continueGame)
-            break
-            case .actionYesSwitch:
+                break
+            #endif
+        case .actionYesSwitch:
+            #if false
                 transitionToScene(destination: SceneType.GameScene, sendingScene: self, startNewGame: true)
-            break
-            case .startNewGame :
+                break
+            #endif
+        case .startNewGame :
+            #if false
                 transitionToScene(destination: SceneType.Overlay, sendingScene: self)
-            case .actionNoSwitch:
+            #endif
+        case .actionNoSwitch:
+            #if false
                 transitionToScene(destination: SceneType.MainMenu, sendingScene: self)
+            #endif
             break
-            case .gameAward:
-            transitionToScene(destination: SceneType.GameAward, sendingScene: self)
+        case .gameAward:
+            #if false
+                transitionToScene(destination: SceneType.GameAward, sendingScene: self)
+            #endif
             break
-            case .gameSettings:
+        case .gameSettings:
+            #if false
                 transitionToScene(destination: SceneType.Menu, sendingScene: self)
+            #endif
             break
-            case .inAppPurchase:
+        case .inAppPurchase:
+            #if false
                 transitionToScene(destination: SceneType.InAppPurchase, sendingScene: self)
+            #endif
             break
-            case .instructions:
+        case .instructions:
+            #if false
                 transitionToScene(destination: SceneType.Instructions, sendingScene: self)
+            #endif
             break
         default:
             return

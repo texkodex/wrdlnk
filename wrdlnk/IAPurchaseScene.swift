@@ -76,7 +76,6 @@ class IAPurchaseScene: BaseScene {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         print("Entering \(#file):: \(#function) at line \(#line)")
-        setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
     }
     
     override func update(_ currentTime: TimeInterval) {

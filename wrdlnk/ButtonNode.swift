@@ -271,14 +271,14 @@ class ButtonNode: SKSpriteNode {
         self.buttonIdentifier = buttonIdentifier
         
         if let textureName = buttonIdentifier.defaultTextureName {
-            defaultTexture = SKTexture(imageNamed: textureName)
+            defaultTexture = SKTexture(image: UIImage(named: textureName)!)
         }
         else {
             defaultTexture = texture
         }
         
         if let textureName = buttonIdentifier.selectedTextureName {
-            selectedTexture = SKTexture(imageNamed: textureName)
+            selectedTexture = SKTexture(image: UIImage(named: textureName)!)
         }
         else {
             selectedTexture = texture

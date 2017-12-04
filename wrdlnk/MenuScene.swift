@@ -90,7 +90,7 @@ class MenuScene: BaseScene {
                                                    selectedTexture: "pdf/volume")
         sceneNodeSetup(param: param)
       
-        let volumeTexture = SKTexture(imageNamed: "pdf/volume")
+        let volumeTexture = SKTexture(image: UIImage(named: "pdf/volume")!)
         
         position.y = position.y + size.height * -layoutRatio.labelVerticalSpacing
         param = SceneNodeParam(labelNode: score, labelNodeName: "score",

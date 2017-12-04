@@ -48,7 +48,6 @@ class DefinitionScene: BaseScene {
         print("Entering \(#file):: \(#function) at line \(#line)")
         self.name = "GameScene" // Temporary
         
-        setup(nodeMap: nodeMap, completionHandler: makeVisible(element:node:))
         AppTheme.instance.set(for: self, sceneType: "SettingScene")
     }
     
@@ -137,7 +136,9 @@ class DefinitionScene: BaseScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("Entering \(#file):: \(#function) at line \(#line)")
         wordList.skip()
+        #if false
         transitionToScene(destination: SceneType.GameScene, sendingScene: self)
+        #endif
         self.removeFromParent()
     }
     

@@ -14,10 +14,12 @@ typealias AdditionalProtocols = SCNSceneRendererDelegate
 struct CommonGameParam {
     var skView: SKView?
     var controller: UIViewController?
+    var scene: SKScene?
     
-    init(skView: SKView? = nil, controller: UIViewController? = nil) {
+    init(skView: SKView? = nil, controller: UIViewController? = nil, scene: SKScene? = nil) {
         self.skView = skView
         self.controller =  controller
+        self.scene = scene
     }
 }
 

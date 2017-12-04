@@ -7,10 +7,30 @@
 //
 
 import SpriteKit
-import GameplayKit
-import GameKit
 
+/*
+ I think there were a couple of things that prevented memory of being deallocated. But I solved this memory issue finally. Changes I made:
+ 
+ SKTexture(image: UIImage(named:) -> SKTexture(image:) (when I can't use an atlas)
+ double check all closures and pass weak or unowned self
+ remove all actions, delegates, and child-nodes etc. in willMoveFromView function of the scene
+ remove all components from GKComponentSystem in willMoveFromView function
+ replace all SKAction.playSoundFileNamed with runBlock actions which start AVAudioPlayer
+*/
 
+/*
+ For my part, the main culprit is the SKTexture(image: UIImage(named:), this loads a texture into memory and doesn't deallocate it even if the node is removed from the scene.
+ You have to manually re-remove all nodes from the scene (in whichever function that signals the exit of the actual scene), and then set the scene to nil.
+ 
+ I wrote a small loop-function that just loops through childs and remove every node, after that setting the scene to nil and doing another presentScene: (presenting an empty scene forces the current one to deallocate).
+ This solved my memory leak problems.
+ 
+ If you have a predefined number of nodes, you can reset their textures to an empty image as well.
+ */
+
+/*
+ SKTexture(image: UIImage(named: textureName)!)
+ */
 enum GameSceneState: Int {
     case before = 0
     case play
@@ -101,8 +121,6 @@ protocol GameSceneDelegate: class {
     func toggleSetting(settingName: String?)
 }
 
-
-
 class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGestureRecognizerDelegate, GameSceneDelegate {
     
     var commonGameController: CommonGameController?
@@ -111,7 +129,6 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
     lazy var gameRoot = childNode(withName: "//gameRoot")
     lazy var graphRoot = childNode(withName: "//graphRoot")
     lazy var settingRoot = childNode(withName: "//settingRoot")
-    lazy var soundRoot = SKAudioNode()
     
     let mark = ButtonNode(imageNamed: "pdf/mark")
     
@@ -124,7 +141,7 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
     }
     
     // Sound effects
-    private var beepbeepSound: SKAudioNode!
+    //    private var beepbeepSound: SKAudioNode!
     private var biffSound: SKAudioNode!
     private var yesSound: SKAudioNode!
     private var goodSound: SKAudioNode!
@@ -141,30 +158,37 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
     }
     
     private func loadSounds() {
-        beepbeepSound = SKAudioNode(fileNamed: "beepbeep.mp3")
+        let beepbeepSound = SKAudioNode(fileNamed: "beepbeep")
         beepbeepSound.isPositional = false
+        beepbeepSound.autoplayLooped = false
+        self.addChild(beepbeepSound)
         
-        biffSound = SKAudioNode(fileNamed: "beep.mp3")
-        biffSound.isPositional = false
+        biffSound = SKAudioNode(fileNamed: "beep")
+        //biffSound.isPositional = false
+        //biffSound.autoplayLooped = false
         
-        yesSound = SKAudioNode(fileNamed: "yes.mp3")
-        yesSound.isPositional = false
+        yesSound = SKAudioNode(fileNamed: "yes")
+        //yesSound.isPositional = false
+        //yesSound.autoplayLooped = false
         
-        goodSound = SKAudioNode(fileNamed: "good.mp3")
-        goodSound.isPositional = false
+        goodSound = SKAudioNode(fileNamed: "good")
+        //goodSound.isPositional = false
+        //goodSound.autoplayLooped = false
         
-        great2Sound = SKAudioNode(fileNamed: "great2.mp3")
-        great2Sound.isPositional = false
+        great2Sound = SKAudioNode(fileNamed: "great2")
+        //great2Sound.isPositional = false
+        //great2Sound.autoplayLooped = false
         
-        errorSound = SKAudioNode(fileNamed: "error.mp3")
-        errorSound.isPositional = false
+        errorSound = SKAudioNode(fileNamed: "error")
+        //errorSound.isPositional = false
+        //errorSound.autoplayLooped = false
     }
     
     // MARK:- End of sound setup
     var definitionOff = false {
         didSet {
             let imageName = definitionOff ? "questionOff" : "questionOn"
-            definitionButton?.selectedTexture = SKTexture(imageNamed: imageName)
+            definitionButton?.selectedTexture = SKTexture(image: UIImage(named: imageName)!)
         }
     }
     
@@ -193,8 +217,6 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
             willShowPopScene(newValue)
         }
     }
-    
-    private var graphOverlayNode: GraphOverlay?
     
     // MARK:- Game state
     private var _gameSceneState: GameSceneState = .stop
@@ -238,6 +260,7 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
     weak private var settingOverlayDelegate: SettingOverlayDelegate?
     
     weak private var gameSceneDelegate: GameSceneDelegate?
+    
     
     var resetCounters:Bool {
         get {
@@ -319,6 +342,7 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
         graphOverlayDelegate = nil
         settingOverlayDelegate = nil
         gameSceneDelegate = nil
+        transitionManagerDelegate = nil
         
         preserve()
         
@@ -399,14 +423,15 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         print("Entering \(#file):: \(#function) at line \(#line)")
-        
         self.name = "GameScene"
         
         placeAssets()
         setupCountersAndWords()
         setupGameSceneResources()
         setupHighlight()
+        
         loadSounds()
+     
         setupGraphOverlay()
         setupSettingOverlay()
         
@@ -460,6 +485,27 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
     
     func toggleSetting(settingName: String?) {
         print("Entering \(#file):: \(#function) at line \(#line)")
+    }
+    
+    // MARK:- cleanup in willMoveFromView
+    override func willMove(from view: SKView) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        
+        // cleanup all objects
+        for node in self.children {
+            node.removeAllChildren()
+            node.removeAllActions()
+            node.removeFromParent()
+        }
+        cleanup()
+        sceneCloseNotification()
+    
+    }
+    
+    func sceneCloseNotification() {
+        let filename = (#file as NSString).lastPathComponent
+        let userInfo = ["SceneClose" : "\(String(describing: filename))"]
+        NotificationCenter.default.post(name: .completedTransitionName, object: userInfo)
     }
     
     func removeObservers() {
@@ -704,7 +750,7 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
         scaledWidth = size.width * layoutRatio.buttonGraphWidthScale
         scaledHeight = size.height * layoutRatio.buttonGraphHeightScale
         graphButton.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
-        graphButton.texture = SKTexture(imageNamed: "pdf/scores")
+        graphButton.texture = SKTexture(image: UIImage(named: "pdf/scores")!)
         graphButton.name = "ShowGraph"
         graphButton.position = position
         graphButton.zPosition = 10
@@ -717,7 +763,7 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
         scaledWidth = size.width * layoutRatio.buttonSettingsWidthScale
         scaledHeight = size.height * layoutRatio.buttonSettingsHeightScale
         settingsButton.scale(to: CGSize(width: scaledWidth, height: scaledHeight))
-        settingsButton.texture = SKTexture(imageNamed: "pdf/settings")
+        settingsButton.texture = SKTexture(image: UIImage(named: "pdf/settings")!)
         settingsButton.name = "GameSettings"
         settingsButton.position = position
         settingsButton.zPosition = 10
@@ -896,7 +942,9 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
     }
     
     override func transitionReloadScene(scene: SKScene, continueGame: Bool = true) {
+        #if false
         transitionToScene(destination: SceneType.GameScene, sendingScene: scene, continueGame: continueGame)
+        #endif
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -1270,7 +1318,9 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
             //}
         } else {
             unhighlightAllExcept(tileNameList: [previousNodeName, currentNodeName])
-            playSoundForEvent(soundEvent: .error)
+            #if false
+                playSoundForEvent(soundEvent: .error)
+            #endif
         }
     }
     
@@ -1445,7 +1495,9 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
         playerScore += matchLetterValue
         if counters.matchComplete() {
             if (startTime > 0) { playerScore += bonusPoints() }
-            playSoundForEvent(soundEvent: .great2)
+            #if false
+                playSoundForEvent(soundEvent: .great2)
+            #endif
             wordList.setMatchCondition()
             progressSummary()
             
@@ -1459,12 +1511,19 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
                 self.stopAudio(delay: 0.2)
                 self.resetTimer = true
                 AppDefinition.defaults.set(true, forKey: preferenceContinueGameEnabledKey)
-                self.transitionReloadScene(scene: self)
+                #if false
+                    self.transitionReloadScene(scene: self)
+                #endif
             }
             
-            _ = wordList.getWords()
+            #if false
+                _ = wordList.getWords()
+            #endif
+            transitionManagerDelegate?.startedSceneTransition(name: ButtonIdentifier.continueGame.rawValue, destination:  SceneType.GameScene, sendingScene: self)
         } else {
-            playSoundForEvent(soundEvent: .yes)
+            #if false
+                playSoundForEvent(soundEvent: .yes)
+            #endif
             if !wordList.isEmpty() {
                 wordList.clearMatchCondition()
             }
@@ -1539,7 +1598,7 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
         var positionScale:CGFloat!
         var spriteScale: CGFloat!
         var groupAction:[SKAction] = []
-        let texture = SKTexture(imageNamed: fileName!)
+        let texture = SKTexture(image: UIImage(named: fileName!)!)
         let messageNode = SKSpriteNode(texture: texture, size:CGSize(width: texture.size().width, height: texture.size().height))
         messageNode.name = "animatedText"
         messageNode.color = AppTheme.instance.colorFillAndStrokeBoardAndButton(board: false, condition: true).stroke!

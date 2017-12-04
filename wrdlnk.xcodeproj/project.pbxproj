@@ -41,7 +41,6 @@
 		CC24C27D1F967F0E000C5B29 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC3A56E1F8D444E00530461 /* SafariServices.framework */; };
 		CC24C27E1F967F6B000C5B29 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC13D0D01F8DB7DF00FC51C6 /* libz.tbd */; };
 		CC24C2801F967F9C000C5B29 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C27F1F967F9C000C5B29 /* libc++.tbd */; };
-		CC24C2811F96800D000C5B29 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CC24C26F1F9669F0000C5B29 /* GoogleSignIn.bundle */; };
 		CC2F8E481F18830200463E37 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F8E471F18830100463E37 /* PlaySound.swift */; };
 		CC4494CD1F5628A100CB0906 /* wireIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC4494CC1F5628A100CB0906 /* wireIcon.xcassets */; };
 		CC47B5541F9E9EA100BE5DB8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC13D0CE1F8DB7AB00FC51C6 /* StoreKit.framework */; };
@@ -85,6 +84,7 @@
 		CC862B3D1FD12ACE007DD87D /* great.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC862B351FD12ACE007DD87D /* great.mp3 */; };
 		CC862B3E1FD12ACE007DD87D /* awake.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC862B361FD12ACE007DD87D /* awake.mp3 */; };
 		CC862B3F1FD12ACE007DD87D /* beepbeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC862B371FD12ACE007DD87D /* beepbeep.mp3 */; };
+		CC862B431FD24F8D007DD87D /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC862B421FD24F8D007DD87D /* TransitionManager.swift */; };
 		CC8BE4131EEB2D7100CDB4BB /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4121EEB2D7100CDB4BB /* ButtonNode.swift */; };
 		CC8BE4151EEB47F700CDB4BB /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4141EEB47F700CDB4BB /* BaseScene.swift */; };
 		CC8BE4171EEB494900CDB4BB /* BaseScene+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE4161EEB494900CDB4BB /* BaseScene+Buttons.swift */; };
@@ -94,6 +94,7 @@
 		CC8BE4251EF310CC00CDB4BB /* wlink_default.json in Resources */ = {isa = PBXBuildFile; fileRef = CC8BE4241EF310CC00CDB4BB /* wlink_default.json */; };
 		CC8BE42D1F04481900CDB4BB /* DefinitionScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC8BE42C1F04481800CDB4BB /* DefinitionScene.sks */; };
 		CC8BE42F1F044CBE00CDB4BB /* DefinitionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BE42E1F044CBE00CDB4BB /* DefinitionScene.swift */; };
+		CC9445BD1FD525AD00D6522E /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9445BC1FD525AD00D6522E /* GoogleSignIn.framework */; };
 		CC95F9FF1F3A3F1700E55483 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95F9FE1F3A3F1700E55483 /* MainMenuScene.swift */; };
 		CC95FA011F41D95B00E55483 /* WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95FA001F41D95B00E55483 /* WordList.swift */; };
 		CC9610971FB0CC64005EC5C1 /* Tile+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9610961FB0CC64005EC5C1 /* Tile+Extensions.swift */; };
@@ -106,6 +107,10 @@
 		CCAD36271EE0CAE3001C6AFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCAD36251EE0CAE3001C6AFE /* LaunchScreen.storyboard */; };
 		CCAD36321EE0CAE3001C6AFE /* wrdlnkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAD36311EE0CAE3001C6AFE /* wrdlnkTests.swift */; };
 		CCAD363D1EE0CAE3001C6AFE /* wrdlnkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAD363C1EE0CAE3001C6AFE /* wrdlnkUITests.swift */; };
+		CCCCAFA61FD4A44D00ECB2C8 /* GoogleAuthUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCAFA11FD4A44D00ECB2C8 /* GoogleAuthUtilities.framework */; };
+		CCCCAFA71FD4A44D00ECB2C8 /* GoogleNetworkingUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCAFA21FD4A44D00ECB2C8 /* GoogleNetworkingUtilities.framework */; };
+		CCCCAFA91FD4A44D00ECB2C8 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCAFA41FD4A44D00ECB2C8 /* GoogleSymbolUtilities.framework */; };
+		CCCCAFAA1FD4A44D00ECB2C8 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCAFA51FD4A44D00ECB2C8 /* GoogleUtilities.framework */; };
 		CCCE42731F917C46005F01D4 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE42721F917C46005F01D4 /* Array+Extensions.swift */; };
 		CCD90CE11F83EB2800C81D98 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD90CE01F83EB2800C81D98 /* UIApplication+Extension.swift */; };
 		CCDC23711F200DCE00371F1F /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCDC23701F200DCE00371F1F /* MenuScene.sks */; };
@@ -189,7 +194,6 @@
 		CC24C26C1F96698B000C5B29 /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleAppUtilities.framework; sourceTree = "<group>"; };
 		CC24C26D1F9669B3000C5B29 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 		CC24C26E1F9669B3000C5B29 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleUtilities.framework; sourceTree = "<group>"; };
-		CC24C26F1F9669F0000C5B29 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleSignIn.bundle; path = ../../sdk/google_signin_sdk_4_0_0/GoogleSignIn.bundle; sourceTree = "<group>"; };
 		CC24C27F1F967F9C000C5B29 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		CC2F8E471F18830100463E37 /* PlaySound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 		CC4494CC1F5628A100CB0906 /* wireIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = wireIcon.xcassets; sourceTree = "<group>"; };
@@ -240,6 +244,7 @@
 		CC862B351FD12ACE007DD87D /* great.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = great.mp3; sourceTree = "<group>"; };
 		CC862B361FD12ACE007DD87D /* awake.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = awake.mp3; sourceTree = "<group>"; };
 		CC862B371FD12ACE007DD87D /* beepbeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beepbeep.mp3; sourceTree = "<group>"; };
+		CC862B421FD24F8D007DD87D /* TransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		CC8BE4121EEB2D7100CDB4BB /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		CC8BE4141EEB47F700CDB4BB /* BaseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
 		CC8BE4161EEB494900CDB4BB /* BaseScene+Buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseScene+Buttons.swift"; sourceTree = "<group>"; };
@@ -249,6 +254,7 @@
 		CC8BE4241EF310CC00CDB4BB /* wlink_default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wlink_default.json; sourceTree = "<group>"; };
 		CC8BE42C1F04481800CDB4BB /* DefinitionScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DefinitionScene.sks; sourceTree = "<group>"; };
 		CC8BE42E1F044CBE00CDB4BB /* DefinitionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionScene.swift; sourceTree = "<group>"; };
+		CC9445BC1FD525AD00D6522E /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
 		CC95F9FE1F3A3F1700E55483 /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		CC95FA001F41D95B00E55483 /* WordList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordList.swift; sourceTree = "<group>"; };
 		CC9610961FB0CC64005EC5C1 /* Tile+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tile+Extensions.swift"; sourceTree = "<group>"; };
@@ -270,6 +276,10 @@
 		CCC3A5641F8D299700530461 /* Google.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Google.h; sourceTree = "<group>"; };
 		CCC3A56E1F8D444E00530461 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		CCC3A5701F8D446900530461 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CCCCAFA11FD4A44D00ECB2C8 /* GoogleAuthUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAuthUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleAuthUtilities.framework; sourceTree = "<group>"; };
+		CCCCAFA21FD4A44D00ECB2C8 /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
+		CCCCAFA41FD4A44D00ECB2C8 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		CCCCAFA51FD4A44D00ECB2C8 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = ../../sdk/google_signin_sdk_4_0_0/GoogleUtilities.framework; sourceTree = "<group>"; };
 		CCCE42721F917C46005F01D4 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		CCD90CE01F83EB2800C81D98 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		CCDC23701F200DCE00371F1F /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
@@ -313,6 +323,7 @@
 				CC24C2801F967F9C000C5B29 /* libc++.tbd in Frameworks */,
 				CC24C27E1F967F6B000C5B29 /* libz.tbd in Frameworks */,
 				CC24C27C1F966E8B000C5B29 /* AddressBook.framework in Frameworks */,
+				CCCCAFA61FD4A44D00ECB2C8 /* GoogleAuthUtilities.framework in Frameworks */,
 				CC24C27D1F967F0E000C5B29 /* SafariServices.framework in Frameworks */,
 				CC24C2761F966DEB000C5B29 /* GoogleSignIn.framework in Frameworks */,
 				CC24C2781F966E0D000C5B29 /* GoogleAppUtilities.framework in Frameworks */,
@@ -322,7 +333,9 @@
 				CC24C27B1F966E49000C5B29 /* GoogleUtilities.framework in Frameworks */,
 				CC6F27851F8693580099F7A3 /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				CC80F5561F87CB7600BCD702 /* GTMSessionFetcher.framework in Frameworks */,
+				CC9445BD1FD525AD00D6522E /* GoogleSignIn.framework in Frameworks */,
 				CC182F4A1F896CAE00EE5DA9 /* FBSDKShareKit.framework in Frameworks */,
+				CCCCAFA91FD4A44D00ECB2C8 /* GoogleSymbolUtilities.framework in Frameworks */,
 				CC47B5541F9E9EA100BE5DB8 /* StoreKit.framework in Frameworks */,
 				CC6F27841F8693580099F7A3 /* FirebaseCore.framework in Frameworks */,
 				CC182F441F896C7D00EE5DA9 /* Bolts.framework in Frameworks */,
@@ -335,6 +348,8 @@
 				CC6F27881F8693580099F7A3 /* GoogleToolboxForMac.framework in Frameworks */,
 				CC80F5551F87CB7600BCD702 /* FirebaseAuth.framework in Frameworks */,
 				CC182F501F89748F00EE5DA9 /* TwitterKit.framework in Frameworks */,
+				CCCCAFA71FD4A44D00ECB2C8 /* GoogleNetworkingUtilities.framework in Frameworks */,
+				CCCCAFAA1FD4A44D00ECB2C8 /* GoogleUtilities.framework in Frameworks */,
 				CC182F4E1F89746F00EE5DA9 /* TwitterCore.framework in Frameworks */,
 				CC6F27831F8693580099F7A3 /* FirebaseAnalytics.framework in Frameworks */,
 				CC6F27861F8693580099F7A3 /* FirebaseInstanceID.framework in Frameworks */,
@@ -491,7 +506,6 @@
 			isa = PBXGroup;
 			children = (
 				CCC3A5641F8D299700530461 /* Google.h */,
-				CC24C26F1F9669F0000C5B29 /* GoogleSignIn.bundle */,
 				CC13D0C91F8DB40D00FC51C6 /* Etc */,
 				CCC3A5651F8D302B00530461 /* SignIn */,
 				CCC3A5661F8D30B000530461 /* SignInDependencies */,
@@ -669,6 +683,7 @@
 				CC5D16DF1F8034C200414E8A /* SocialMediaManager.swift */,
 				CC6F27751F8419C30099F7A3 /* LoginViewController.swift */,
 				CC182F3D1F880DCD00EE5DA9 /* LogoutViewController.swift */,
+				CC862B421FD24F8D007DD87D /* TransitionManager.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -741,6 +756,11 @@
 		CCC3A5661F8D30B000530461 /* SignInDependencies */ = {
 			isa = PBXGroup;
 			children = (
+				CC9445BC1FD525AD00D6522E /* GoogleSignIn.framework */,
+				CCCCAFA11FD4A44D00ECB2C8 /* GoogleAuthUtilities.framework */,
+				CCCCAFA21FD4A44D00ECB2C8 /* GoogleNetworkingUtilities.framework */,
+				CCCCAFA41FD4A44D00ECB2C8 /* GoogleSymbolUtilities.framework */,
+				CCCCAFA51FD4A44D00ECB2C8 /* GoogleUtilities.framework */,
 				CC24C26C1F96698B000C5B29 /* GoogleAppUtilities.framework */,
 				CC24C26A1F96698B000C5B29 /* GoogleAuthUtilities.framework */,
 				CC24C26B1F96698B000C5B29 /* GoogleNetworkingUtilities.framework */,
@@ -928,7 +948,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC24C2811F96800D000C5B29 /* GoogleSignIn.bundle in Resources */,
 				CC862B391FD12ACE007DD87D /* biff.mp3 in Resources */,
 				CC862B3F1FD12ACE007DD87D /* beepbeep.mp3 in Resources */,
 				CCE07C001FABF09700DBE56F /* MainMenuScene.sks in Resources */,
@@ -1028,6 +1047,7 @@
 				CC5BF9C81FBCD89B0095BEAD /* GeneralAssetLibrary.swift in Sources */,
 				CCD90CE11F83EB2800C81D98 /* UIApplication+Extension.swift in Sources */,
 				CC0D0F461FBF66AC009B50C9 /* LittleBits.swift in Sources */,
+				CC862B431FD24F8D007DD87D /* TransitionManager.swift in Sources */,
 				CC8BE4191EEB4AA600CDB4BB /* BaseScene+Focus.swift in Sources */,
 				CCDEA3D61F36BF1C0046C82D /* WalkThroughTwoViewController.swift in Sources */,
 				CC182F3E1F880DCD00EE5DA9 /* LogoutViewController.swift in Sources */,
@@ -1222,6 +1242,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = B8FBKBQS3V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1249,6 +1270,8 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "${SRCROOT}";
+				USE_HEADERMAP = YES;
 				WARNING_LDFLAGS = "-v";
 			};
 			name = Debug;
@@ -1259,6 +1282,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = B8FBKBQS3V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1285,6 +1309,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = YES;
 				WARNING_LDFLAGS = "-v";
 			};
 			name = Release;

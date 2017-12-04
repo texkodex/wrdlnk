@@ -9,7 +9,8 @@
 import UIKit
 import SpriteKit
 
-class BaseScene: SKScene {
+class BaseScene: SKScene, TransitionManagerDelegate {
+    weak var transitionManagerDelegate: GameViewController?
     
     var backgroundNode: SKNode? {
         return nil
@@ -49,10 +50,22 @@ class BaseScene: SKScene {
     
     var buttons = [ButtonNode]()
     
+    deinit {
+        self.removeAllChildren()
+        self.removeAllActions()
+        self.removeFromParent()
+        transitionManagerDelegate = nil
+    }
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        transitionManagerDelegate = commonGameParam?.controller as! GameViewController
         buttons = findAllButtonsInScene()
         resetFocus()
+    }
+    
+    override func willMove(from view: SKView) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
     }
     
     override func didChangeSize(_ oldSize: CGSize) {
@@ -63,4 +76,13 @@ class BaseScene: SKScene {
         //transitionToScene(destination: SceneType.GameScene, sendingScene: scene)
     }
     
+    //MARK: Scene Transition delegate
+    func startedSceneTransition(name: String?, destination: SceneType, sendingScene: SKScene) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+        transitionManagerDelegate?.startedSceneTransition(name: name, destination: destination, sendingScene: self)
+    }
+    
+    func completedSceneTransition(name: String?, destination: SceneType, sendingScene: SKScene) {
+        print("Entering \(#file):: \(#function) at line \(#line)")
+    }
 }

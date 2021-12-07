@@ -74,7 +74,7 @@ class MenuScene: BaseScene {
         
         base.name = layoutRatio.baseName
         base.scale(to: CGSize(width: size.width * layoutRatio.baseScaleWidth, height: size.height * layoutRatio.baseScaleHeight))
-        base.anchorPoint = CGPoint(x: layoutRatio.baseXAnchorPoint, y: layoutRatio.baseYAnchorPoiint)
+        base.anchorPoint = CGPoint(x: layoutRatio.baseXAnchorPoint, y: layoutRatio.baseXAnchorPoint)
         base.position = CGPoint(x: size.width * layoutRatio.basePositionSizeWidth, y: size.height * layoutRatio.basePositionSizeHeight)
         base.zPosition = layoutRatio.baseZPosition
         addChild(base)

@@ -503,8 +503,8 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
     }
     
     func sceneCloseNotification() {
-        let filename = (#file as NSString).lastPathComponent
-        let userInfo = ["SceneClose" : "\(String(describing: filename))"]
+        let filename = (#file as NSString).deletingPathExtension
+        let userInfo = ["SceneClose" : "\(filename)"]
         NotificationCenter.default.post(name: .completedTransitionName, object: userInfo)
     }
     

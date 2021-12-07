@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 import Facebook
-import Google
+//import Google
 import GoogleMobileAds
 
 let GADMobileAdsAppID = "ca-app-pub-4627466505633159~8389649892"

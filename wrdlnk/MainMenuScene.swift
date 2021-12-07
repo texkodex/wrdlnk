@@ -69,7 +69,7 @@ class MainMenuScene: BaseScene {
         
         base.name = layoutRatio.baseName
         base.scale(to: CGSize(width: size.width * layoutRatio.baseScaleWidth, height: size.height * layoutRatio.baseScaleHeightWithSixRows))
-        base.anchorPoint = CGPoint(x: layoutRatio.baseXAnchorPoint, y: layoutRatio.baseYAnchorPoiint)
+        base.anchorPoint = CGPoint(x: layoutRatio.baseXAnchorPoint, y: layoutRatio.baseYAnchorPoint)
         base.position = CGPoint(x: size.width * layoutRatio.basePositionSizeWidth, y: size.height * layoutRatio.basePositionSizeHeight)
         base.zPosition = layoutRatio.baseZPosition
         base.isHidden = true

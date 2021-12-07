@@ -1,0 +1,9 @@
+//
+//  Debug.xcconfig
+//  wrdlnk
+//
+//  Created by sparkle on 12/5/17.
+//  Copyright © 2017 teknowsys. All rights reserved.
+//
+
+TEST_API_KEY=222debug333

@@ -80,7 +80,7 @@ struct LayoutRatio {
     // base has anchorPoint = CGPoint(x: 0.5, y: 1.0)
     let baseName = "base"
     let baseXAnchorPoint = CGFloat(0.5)
-    let baseYAnchorPoiint = CGFloat(1.0)
+    let baseYAnchorPoint = CGFloat(1.0)
     let baseScaleWidth = CGFloat(0.7874)
     let baseScaleHeight = CGFloat(0.581)
     let baseScaleHeightLarge = CGFloat(0.8581)

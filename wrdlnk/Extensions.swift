@@ -115,13 +115,13 @@ extension Array where Element : Hashable {
 public extension Collection {
     func shuffled() -> [Iterator.Element] {
         var array = Array(self)
-        array.shuffle()
+        array.shuffleArray()
         return array
     }
 }
 
-public extension MutableCollection where Index == Int, IndexDistance == Int {
-    mutating func shuffle() {
+public extension MutableCollection where Index == Int {
+    mutating func shuffleArray() {
         guard count > 1 else { return }
         
         for i in 0..<count - 1 {

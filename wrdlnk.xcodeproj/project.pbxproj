@@ -11,7 +11,6 @@
 		AE39F6A91EE10C6B00D362C1 /* GameStatusScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AE39F6A81EE10C6B00D362C1 /* GameStatusScene.sks */; };
 		CC0D0F421FBF2577009B50C9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC0D0F411FBF2576009B50C9 /* GameScene.sks */; };
 		CC0D0F441FBF5083009B50C9 /* VectorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0D0F431FBF5083009B50C9 /* VectorMessages.swift */; };
-		CC0D0F461FBF66AC009B50C9 /* LittleBits.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0D0F451FBF66AC009B50C9 /* LittleBits.swift */; };
 		CC0D0F4A1FC4D138009B50C9 /* SettingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0D0F491FC4D138009B50C9 /* SettingOverlay.swift */; };
 		CC0D0F4C1FC87FB2009B50C9 /* OverlayTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0D0F4B1FC87FB2009B50C9 /* OverlayTapGestureRecognizer.swift */; };
 		CC1148EA1F3841FC00F64550 /* WalkThroughLastPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1148E91F3841FC00F64550 /* WalkThroughLastPageViewController.swift */; };
@@ -31,7 +30,6 @@
 		CC1C64C91F44B47300A9E5C8 /* AwardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64C81F44B47300A9E5C8 /* AwardScene.swift */; };
 		CC1C64CE1F46B92400A9E5C8 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C64CD1F46B92400A9E5C8 /* AppTheme.swift */; };
 		CC1EA8D51FB7C0D6001520FD /* CommonGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1EA8D41FB7C0D6001520FD /* CommonGameController.swift */; };
-		CC24C27C1F966E8B000C5B29 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC13D0CC1F8DB7A200FC51C6 /* AddressBook.framework */; };
 		CC24C27D1F967F0E000C5B29 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC3A56E1F8D444E00530461 /* SafariServices.framework */; };
 		CC24C27E1F967F6B000C5B29 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC13D0D01F8DB7DF00FC51C6 /* libz.tbd */; };
 		CC24C2801F967F9C000C5B29 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC24C27F1F967F9C000C5B29 /* libc++.tbd */; };
@@ -107,6 +105,8 @@
 		CCAD36321EE0CAE3001C6AFE /* wrdlnkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAD36311EE0CAE3001C6AFE /* wrdlnkTests.swift */; };
 		CCAD363D1EE0CAE3001C6AFE /* wrdlnkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAD363C1EE0CAE3001C6AFE /* wrdlnkUITests.swift */; };
 		CCCE42731F917C46005F01D4 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE42721F917C46005F01D4 /* Array+Extensions.swift */; };
+		CCCE77A3276002EA0031AC9F /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCE77A2276002EA0031AC9F /* Contacts.framework */; };
+		CCCE77A42760071B0031AC9F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC13D0CC1F8DB7A200FC51C6 /* AddressBook.framework */; };
 		CCD90CE11F83EB2800C81D98 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD90CE01F83EB2800C81D98 /* UIApplication+Extension.swift */; };
 		CCDC23711F200DCE00371F1F /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCDC23701F200DCE00371F1F /* MenuScene.sks */; };
 		CCDC23731F200E3700371F1F /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDC23721F200E3700371F1F /* MenuScene.swift */; };
@@ -155,7 +155,6 @@
 		AE39F6A81EE10C6B00D362C1 /* GameStatusScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStatusScene.sks; sourceTree = "<group>"; };
 		CC0D0F411FBF2576009B50C9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		CC0D0F431FBF5083009B50C9 /* VectorMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorMessages.swift; sourceTree = "<group>"; };
-		CC0D0F451FBF66AC009B50C9 /* LittleBits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LittleBits.swift; sourceTree = "<group>"; };
 		CC0D0F491FC4D138009B50C9 /* SettingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingOverlay.swift; sourceTree = "<group>"; };
 		CC0D0F4B1FC87FB2009B50C9 /* OverlayTapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayTapGestureRecognizer.swift; sourceTree = "<group>"; };
 		CC1148E91F3841FC00F64550 /* WalkThroughLastPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkThroughLastPageViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +272,7 @@
 		CCC3A56E1F8D444E00530461 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		CCC3A5701F8D446900530461 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CCCE42721F917C46005F01D4 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		CCCE77A2276002EA0031AC9F /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		CCD90CE01F83EB2800C81D98 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		CCDC23701F200DCE00371F1F /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		CCDC23721F200E3700371F1F /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
@@ -311,17 +311,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCCE77A42760071B0031AC9F /* AddressBook.framework in Frameworks */,
 				CC5BF9B91FBB129E0095BEAD /* GoogleMobileAds.framework in Frameworks */,
 				CCA0CAF11FE87AFF0009A9AF /* GoogleUtilities.framework in Frameworks */,
 				CC24C2801F967F9C000C5B29 /* libc++.tbd in Frameworks */,
 				CC24C27E1F967F6B000C5B29 /* libz.tbd in Frameworks */,
-				CC24C27C1F966E8B000C5B29 /* AddressBook.framework in Frameworks */,
 				CCA0CAEC1FE87AF50009A9AF /* GoogleAuthUtilities.framework in Frameworks */,
 				CC24C27D1F967F0E000C5B29 /* SafariServices.framework in Frameworks */,
 				CC6F27851F8693580099F7A3 /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				CC80F5561F87CB7600BCD702 /* GTMSessionFetcher.framework in Frameworks */,
 				CCA0CAE71FE87ABA0009A9AF /* GoogleSignIn.framework in Frameworks */,
 				CC182F4A1F896CAE00EE5DA9 /* FBSDKShareKit.framework in Frameworks */,
+				CCCE77A3276002EA0031AC9F /* Contacts.framework in Frameworks */,
 				CCA0CAEF1FE87AF50009A9AF /* GoogleSymbolUtilities.framework in Frameworks */,
 				CC47B5541F9E9EA100BE5DB8 /* StoreKit.framework in Frameworks */,
 				CC6F27841F8693580099F7A3 /* FirebaseCore.framework in Frameworks */,
@@ -765,6 +766,7 @@
 		CCC3A56D1F8D444D00530461 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CCCE77A2276002EA0031AC9F /* Contacts.framework */,
 				CC5BF9B81FBAE3690095BEAD /* GameplayKit.framework */,
 				CC1EA8D61FB7F15E001520FD /* SceneKit.framework */,
 				CC47B5581F9FA30500BE5DB8 /* Foundation.framework */,
@@ -819,7 +821,6 @@
 				CCEB14C91F9481F100985641 /* ProcessTile.swift */,
 				CC4991F81FAE147300D74034 /* LayoutDefinition.swift */,
 				CC9610961FB0CC64005EC5C1 /* Tile+Extensions.swift */,
-				CC0D0F451FBF66AC009B50C9 /* LittleBits.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -887,7 +888,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1310;
 				ORGANIZATIONNAME = teknowsys;
 				TargetAttributes = {
 					CCAD36121EE0CAE3001C6AFE = {
@@ -917,7 +918,7 @@
 			};
 			buildConfigurationList = CCAD360E1EE0CAE3001C6AFE /* Build configuration list for PBXProject "wrdlnk" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -1038,7 +1039,6 @@
 				CC0D0F4C1FC87FB2009B50C9 /* OverlayTapGestureRecognizer.swift in Sources */,
 				CC5BF9C81FBCD89B0095BEAD /* GeneralAssetLibrary.swift in Sources */,
 				CCD90CE11F83EB2800C81D98 /* UIApplication+Extension.swift in Sources */,
-				CC0D0F461FBF66AC009B50C9 /* LittleBits.swift in Sources */,
 				CC862B431FD24F8D007DD87D /* TransitionManager.swift in Sources */,
 				CC8BE4191EEB4AA600CDB4BB /* BaseScene+Focus.swift in Sources */,
 				CCDEA3D61F36BF1C0046C82D /* WalkThroughTwoViewController.swift in Sources */,
@@ -1126,6 +1126,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1133,8 +1134,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1159,7 +1162,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1194,7 +1197,7 @@
 					"/Users/sparkle/Documents/dev/code/swift/sdk/GoogleMobileAdsSdkiOS-7.24.1",
 				);
 				INFOPLIST_FILE = wrdlnk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					/Users/sparkle/Documents/dev/code/swift/sdk/google_signin_sdk_4_0_0,
@@ -1261,6 +1264,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1268,8 +1272,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1294,7 +1300,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1324,6 +1330,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1331,8 +1338,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1351,7 +1360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
@@ -1385,7 +1394,7 @@
 					"/Users/sparkle/Documents/dev/code/swift/sdk/GoogleMobileAdsSdkiOS-7.24.1",
 				);
 				INFOPLIST_FILE = wrdlnk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					/Users/sparkle/Documents/dev/code/swift/sdk/google_signin_sdk_4_0_0,
@@ -1426,7 +1435,7 @@
 					"/Users/sparkle/Documents/dev/code/swift/sdk/GoogleMobileAdsSdkiOS-7.24.1",
 				);
 				INFOPLIST_FILE = wrdlnk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					/Users/sparkle/Documents/dev/code/swift/sdk/google_signin_sdk_4_0_0,

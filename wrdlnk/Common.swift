@@ -24,14 +24,14 @@ let kRippleMagnitudeMultiplier: CGFloat = 0.025
 
 // MARK: - Extensions
 public extension UIColor {
-    public class func splashPrimaryColor()->UIColor {
+    class func splashPrimaryColor()->UIColor {
         struct C {
             static var c : UIColor = UIColor(red: 251/255, green: 231/255, blue: 230/255, alpha: 1.0)
         }
         return C.c
     }
     
-    public class func splashSecondaryColor()->UIColor {
+    class func splashSecondaryColor()->UIColor {
         struct C {
             static var c : UIColor = UIColor(red: 252/255, green: 13/255, blue: 27/255, alpha: 0.1)
         }

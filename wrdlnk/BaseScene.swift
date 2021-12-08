@@ -59,7 +59,7 @@ class BaseScene: SKScene, TransitionManagerDelegate {
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
-        transitionManagerDelegate = commonGameParam?.controller as! GameViewController
+        transitionManagerDelegate = (commonGameParam?.controller as? GameViewController)
         buttons = findAllButtonsInScene()
         resetFocus()
     }

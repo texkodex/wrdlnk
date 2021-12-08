@@ -240,12 +240,6 @@ class AwardScene: BaseScene {
     }
     
     private func initializeButtons() {
-        if false {
-            enableButton(button: shareButton)
-        } else {
-            disableButton(button: shareButton)
-        }
-        
         enableButton(button: mark)
     }
     

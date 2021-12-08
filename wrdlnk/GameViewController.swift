@@ -390,7 +390,7 @@ extension GameViewController {
         let transDuration = CommonDelaySetting
         let transition = SKTransition.fade(with: sendingScene.backgroundColor, duration: transDuration)
         
-        unowned var scene = SKScene()
+        var scene = SKScene()
         
         switch destination {
         case .GameScene:

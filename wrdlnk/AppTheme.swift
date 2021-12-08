@@ -1005,7 +1005,6 @@ class AppTheme {
                 viewNode.graphButton.color = SettingOneScene.iconFillColor
                 viewNode.graphButton.colorBlendFactor = 1
             }  else if view.name == "DefinitionScene" {
-                let viewNode = view as! DefinitionScene
                 view.backgroundColor = SettingOneScene.backgroundColor
                 
             } else if view.name == "GameStatusScene" {
@@ -1015,13 +1014,10 @@ class AppTheme {
                 viewNode.mark.colorBlendFactor = 1
                 
             } else if view.name == "IAPurchaseScene" {
-                let viewNode = view as! IAPurchaseScene
                 view.backgroundColor = SettingOneScene.backgroundColor
                 
             } else if view.name == "OverlayScene" {
-                let viewNode = view as! OverlayScene
                 view.backgroundColor = SettingOneScene.backgroundColor
-                
             }
             break
         case let SettingTwoScene as ColorGroupTwoSettingScene:
@@ -1088,7 +1084,6 @@ class AppTheme {
                 viewNode.graphButton.color = SettingTwoScene.iconFillColor
                 viewNode.graphButton.colorBlendFactor = 1
             }  else if view.name == "DefinitionScene" {
-                let viewNode = view as! DefinitionScene
                 view.backgroundColor = SettingTwoScene.backgroundColor
 
             } else if view.name == "GameStatusScene" {
@@ -1098,11 +1093,9 @@ class AppTheme {
                 viewNode.mark.colorBlendFactor = 1
                 
             } else if view.name == "IAPurchaseScene" {
-                let viewNode = view as! IAPurchaseScene
                 view.backgroundColor = SettingTwoScene.backgroundColor
 
             } else if view.name == "OverlayScene" {
-                let viewNode = view as! OverlayScene
                 view.backgroundColor = SettingTwoScene.backgroundColor
 
             }
@@ -1171,7 +1164,6 @@ class AppTheme {
                 viewNode.graphButton.color = SettingThreeScene.iconFillColor
                 viewNode.graphButton.colorBlendFactor = 1
             }  else if view.name == "DefinitionScene" {
-                let viewNode = view as! DefinitionScene
                 view.backgroundColor = SettingThreeScene.backgroundColor
                 
             } else if view.name == "GameStatusScene" {
@@ -1181,11 +1173,9 @@ class AppTheme {
                 viewNode.mark.colorBlendFactor = 1
                 
             } else if view.name == "IAPurchaseScene" {
-                let viewNode = view as! IAPurchaseScene
                 view.backgroundColor = SettingThreeScene.backgroundColor
                 
             } else if view.name == "OverlayScene" {
-                let viewNode = view as! OverlayScene
                 view.backgroundColor = SettingThreeScene.backgroundColor
                 
             }
@@ -1254,7 +1244,6 @@ class AppTheme {
                 viewNode.graphButton.color = SettingFourScene.iconFillColor
                 viewNode.graphButton.colorBlendFactor = 1
             }  else if view.name == "DefinitionScene" {
-                let viewNode = view as! DefinitionScene
                 view.backgroundColor = SettingFourScene.backgroundColor
                 
             } else if view.name == "GameStatusScene" {
@@ -1264,11 +1253,9 @@ class AppTheme {
                 viewNode.mark.colorBlendFactor = 1
                 
             } else if view.name == "IAPurchaseScene" {
-                let viewNode = view as! IAPurchaseScene
                 view.backgroundColor = SettingFourScene.backgroundColor
                 
             } else if view.name == "OverlayScene" {
-                let viewNode = view as! OverlayScene
                 view.backgroundColor = SettingFourScene.backgroundColor
                 
             }
@@ -1354,7 +1341,7 @@ class AppTheme {
             break
         default:
             view.backgroundColor = colorGroupOneSettingScene.backgroundColor
-            print("No theme selected for \(view.name)")
+            print("No theme selected for \(String(describing: view.name))")
             break
         }
         

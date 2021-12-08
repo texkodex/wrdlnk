@@ -48,8 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
             
         } else {
-            return GIDSignIn.sharedInstance().handle(url as URL!,
-                                                     sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!,
+            return GIDSignIn.sharedInstance().handle(url as URL,
+                                                     sourceApplication: (options[UIApplicationOpenURLOptionsKey.sourceApplication]) as? String ,
                                                      annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         }
     }

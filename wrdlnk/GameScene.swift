@@ -317,7 +317,7 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
         }
     }
     
-    struct initialize {
+    struct initializeStruct {
         static var doOnce: Bool = false
     }
     
@@ -596,15 +596,15 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
     }
     
     func readyForInit() {
-        initialize.doOnce = false
+        initializeStruct.doOnce = false
     }
     
     func initComplete() {
-        initialize.doOnce = true
+        initializeStruct.doOnce = true
     }
     
     func testIfInit() -> Bool {
-        return !initialize.doOnce
+        return !initializeStruct.doOnce
     }
     
     private func resetForNewGame() {
@@ -778,7 +778,7 @@ class GameScene: BaseScene, GraphOverlayDelegate, SettingOverlayDelegate, UIGest
     func getWordsAndPlace() {
         repeat  {
             if placeBoard() == false {
-                _ = wordList.skip()
+                wordList.skip()
             } else {
                 break
             }

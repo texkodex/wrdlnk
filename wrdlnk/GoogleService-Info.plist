@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>479275272918-u3q9qclriagqiqdjlieo3tiun10tr4ii.apps.googleusercontent.com</string>
+	<string>your-id</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.479275272918-u3q9qclriagqiqdjlieo3tiun10tr4ii</string>
+	<string>your-id</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
@@ -23,6 +23,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:479275272918:ios:53ece51a975c5953</string>
+	<string>your-id</string>
 </dict>
 </plist>

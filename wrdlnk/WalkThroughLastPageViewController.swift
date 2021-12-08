@@ -34,7 +34,7 @@ class WalkThroughLastPageViewController: UIViewController, WalkThroughLastPageVi
     
     deinit {
         delegate = nil
-        self.removeFromParentViewController()
+        self.removeFromParent()
         self.view?.removeFromSuperview()
     }
     

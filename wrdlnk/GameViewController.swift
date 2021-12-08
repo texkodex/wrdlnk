@@ -125,7 +125,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate, TransitionMan
     
     deinit {
         print("deinit GameViewController")
-        self.removeFromParentViewController()
+        self.removeFromParent()
         removeNotifcation()
     }
     

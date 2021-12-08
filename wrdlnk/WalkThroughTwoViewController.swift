@@ -27,7 +27,7 @@ class WalkThroughTwoViewController: UIViewController {
         
         
         deinit {
-            self.removeFromParentViewController()
+            self.removeFromParent()
             self.view?.removeFromSuperview()
         }
         

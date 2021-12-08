@@ -21,10 +21,10 @@ class AppViewController: UIViewController {
     }
 
     private func initialRootViewController() {
-        rootViewController?.willMove(toParentViewController: nil)
-        rootViewController?.removeFromParentViewController()
+        rootViewController?.willMove(toParent: nil)
+        rootViewController?.removeFromParent()
         rootViewController?.view.removeFromSuperview()
-        rootViewController?.didMove(toParentViewController: nil)
+        rootViewController?.didMove(toParent: nil)
     }
     
     private func setSplashViewController() {
@@ -32,10 +32,10 @@ class AppViewController: UIViewController {
         rootViewController = splashViewController
         splashViewController.pulsing = true
         
-        splashViewController.willMove(toParentViewController: self)
-        addChildViewController(splashViewController)
+        splashViewController.willMove(toParent: self)
+        addChild(splashViewController)
         view.addSubview(splashViewController.view)
-        splashViewController.didMove(toParentViewController: self)
+        splashViewController.didMove(toParent: self)
     }
     
     func runSplashScreenViewController() {

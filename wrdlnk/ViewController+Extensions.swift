@@ -67,7 +67,7 @@ extension UIViewController {
                 appDelegate.window!?.rootViewController = vc
                 self.removeSubview(vc: vc, name: name)
                 self.addSubview(vc: vc, name: name, controller: controller)
-                vc.willMove(toParentViewController: self)
+                vc.willMove(toParent: self)
                 
             }
         }
@@ -82,7 +82,7 @@ extension UIViewController {
         let vc = LoginViewController()
         appDelegate.window!?.rootViewController = vc
         DispatchQueue.main.async(){
-            vc.willMove(toParentViewController: self)
+            vc.willMove(toParent: self)
             print("Launched Login ViewController")
         }
     }

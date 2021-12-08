@@ -894,7 +894,7 @@
 					CCAD36121EE0CAE3001C6AFE = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = B8FBKBQS3V;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1310;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -1210,7 +1210,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "wrdlnk/wrdlnk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = "${SRCROOT}";
 				USE_HEADERMAP = YES;
@@ -1407,7 +1407,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "wrdlnk/wrdlnk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = "${SRCROOT}";
 				USE_HEADERMAP = YES;
@@ -1447,7 +1447,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "wrdlnk/wrdlnk-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = "";
 				USE_HEADERMAP = YES;

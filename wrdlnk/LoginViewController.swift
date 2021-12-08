@@ -164,7 +164,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     let emailText: UITextField = {
         let _emailText = UITextField()
         _emailText.attributedPlaceholder = NSAttributedString(string: "explore@wildlands.com",
-                                                              attributes: [NSAttributedStringKey.foregroundColor: foregroundColor])
+                                                              attributes: [NSAttributedString.Key.foregroundColor: foregroundColor])
         _emailText.font = UIFont.systemFont(ofSize: 14)
         _emailText.autocapitalizationType = UITextAutocapitalizationType.none
         _emailText.contentMode = .center
@@ -194,7 +194,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         let _passwordText = UITextField()
         let passwordDots = String(repeating: "\u{25cf}", count: 6)
         _passwordText.attributedPlaceholder = NSAttributedString(string: passwordDots,
-                                                              attributes: [NSAttributedStringKey.foregroundColor: foregroundColor])
+                                                              attributes: [NSAttributedString.Key.foregroundColor: foregroundColor])
         _passwordText.font = UIFont.systemFont(ofSize: 14)
         _passwordText.autocapitalizationType = UITextAutocapitalizationType.none
         _passwordText.isSecureTextEntry = true
@@ -360,7 +360,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     }
     
     deinit {
-        self.removeFromParentViewController()
+        self.removeFromParent()
         self.view?.removeFromSuperview()
     }
     
@@ -556,7 +556,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
 class TextField: UITextField {
     override var placeholder: String? {
         didSet {
-            let placeholderString = NSAttributedString(string: placeholder!, attributes: [NSAttributedStringKey.foregroundColor: UIColor.red])
+            let placeholderString = NSAttributedString(string: placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
             self.attributedPlaceholder = placeholderString
         }
     }

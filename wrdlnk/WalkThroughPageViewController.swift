@@ -69,7 +69,7 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        guard let viewControllerIndex = VCArray.index(of: viewController) else {
+        guard let viewControllerIndex = VCArray.firstIndex(of: viewController) else {
             return nil
         }
         
@@ -92,7 +92,7 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        guard let viewControllerIndex = VCArray.index(of: viewController) else {
+        guard let viewControllerIndex = VCArray.firstIndex(of: viewController) else {
             return nil
         }
         
@@ -119,7 +119,7 @@ class WalkThroughPageViewController: UIPageViewController, UIPageViewControllerD
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         guard let firstViewController = pageViewController.viewControllers?.first,
-            let firstViewControllerIndex = VCArray.index(of: firstViewController) else {
+            let firstViewControllerIndex = VCArray.firstIndex(of: firstViewController) else {
                 return 0
         }
         

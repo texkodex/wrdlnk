@@ -123,7 +123,7 @@ extension AnimatedULogoView {
         // Group
         let groupAnimation = CAAnimationGroup()
         groupAnimation.isRemovedOnCompletion = false
-        groupAnimation.fillMode = kCAFillModeBoth
+        groupAnimation.fillMode = CAMediaTimingFillMode.both
         groupAnimation.beginTime = beginTime
         groupAnimation.repeatCount = Float.infinity
         groupAnimation.duration = kAnimationDuration
@@ -209,7 +209,7 @@ extension AnimatedULogoView {
         backgroundColorAnimation.fromValue = UIColor.white.cgColor
         backgroundColorAnimation.toValue = UIColor.splashPrimaryColor().cgColor
         backgroundColorAnimation.timingFunction = squareLayerTimingFunction
-        backgroundColorAnimation.fillMode = kCAFillModeBoth
+        backgroundColorAnimation.fillMode = CAMediaTimingFillMode.both
         backgroundColorAnimation.beginTime = kAnimationDurationDelay * 2.0 / kAnimationDuration
         backgroundColorAnimation.duration = kAnimationDuration / (kAnimationDuration - kAnimationDurationDelay)
         

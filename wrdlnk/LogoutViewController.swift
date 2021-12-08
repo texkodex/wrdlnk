@@ -54,7 +54,7 @@ class LogoutViewController: UIViewController {
     var containerViewHeightAnchor: NSLayoutConstraint?
 
     deinit {
-        self.removeFromParentViewController()
+        self.removeFromParent()
         self.view?.removeFromSuperview()
     }
     

@@ -63,8 +63,8 @@ extension BaseScene {
     
     func resetFocus() {
         focusedButton = currentlyFocusableButtons.max { lhsButton, rhsButton in
-            let lhsPriority = buttonIdentifiersOrderedByInitialFocusPriority.index(of: lhsButton.buttonIdentifier)!
-            let rhsPriority = buttonIdentifiersOrderedByInitialFocusPriority.index(of: rhsButton.buttonIdentifier)!
+            let lhsPriority = buttonIdentifiersOrderedByInitialFocusPriority.firstIndex(of: lhsButton.buttonIdentifier)!
+            let rhsPriority = buttonIdentifiersOrderedByInitialFocusPriority.firstIndex(of: rhsButton.buttonIdentifier)!
             
             return lhsPriority > rhsPriority
         }
